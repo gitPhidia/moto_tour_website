@@ -1,0 +1,12 @@
+.product-section .description {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.product-section .card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-section .card:hover {
+    transform: translateY(-10px);
+}

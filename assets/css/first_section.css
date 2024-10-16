@@ -1,0 +1,26 @@
+.hero-section {
+   /* background-image: url('/images/section/moto-freestyle.jpg'); /* Remplace 'ton-image.jpg' par le nom de ton image */
+    background-size: cover; /* Couvre toute la section */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Ne répète pas l'image */
+    color: white; /* S'assure que le texte reste blanc */
+}
+
+
+.hero-section h1 {
+    font-size: 3rem; /* Taille du grand titre */
+    font-weight: bold;
+}
+
+.hero-section p {
+    font-size: 1.5rem; /* Taille du texte */
+}
+
+/* Pour ajuster les styles globaux si besoin */
+body {
+    margin: 0; /* Supprime les marges par défaut du body */
+}
+
+.hero-section.small {
+    height: 60vh; /* Hauteur plus petite */
+}

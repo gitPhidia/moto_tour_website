@@ -1,0 +1,16 @@
+/* Style pour la section de transition */
+.transition-section {
+  background-color: #ff971d; /* Couleur orange pour le fond */
+}
+
+/* Bouton personnalisé */
+.transition-section .btn {
+  color: #2C2727; /* Couleur du texte du bouton (bleu primaire Bootstrap) */
+  background-color: #fff; /* Fond du bouton en blanc */
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.transition-section .btn:hover {
+  background-color: #F6F4F4; /* Couleur au survol (orange plus foncé) */
+}

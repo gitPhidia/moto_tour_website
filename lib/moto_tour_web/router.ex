@@ -18,6 +18,8 @@ defmodule MotoTourWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    # Route pour la LiveView Home
+    live "/home", HomeLive
   end
 
   # Other scopes may use custom stacks.

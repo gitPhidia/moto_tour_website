@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :moto_tour, MotoTour.Repo,
   username: "postgres",
-  password: "",
+  password: "pgadmin",
   hostname: "localhost",
   database: "moto_tour_dev",
   port: 5432,

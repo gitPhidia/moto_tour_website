@@ -2,50 +2,49 @@ defmodule MotoTourWeb.Card do
   use Phoenix.Component
 
   def card(assigns) do
-    ~H"""
-      <div class="card h-100" style="background-color: #F6F4F4; width: 25rem; padding: 10px;">
-        <!-- Image Section -->
-        <img src={ @image } class="card-img-top" alt="Image du produit Produit 1">
+  ~H"""
+    <div class="card h-100" style="background-color: #F6F4F4;">
+      <!-- Image Section -->
+      <img src={ @image } class="card-img-top img-fluid" alt="Image du produit Produit 1">
 
-        <!-- Orange Bar Section (Title) -->
-        <div class="card-title-bar text-center py-2" style="background-color: orange; color: white;">
-          <h5 class="card-title m-0" style="font-size: 1.25rem;">Produit 1</h5>
-        </div>
-
-        <!-- Card Body -->
-        <div class="card-body text-left mt-0 " style="padding: 10px; width: 100%;">
-          <div class="row mb-3"> <!-- Row pour la description et le ranking -->
-            <!-- Description Column -->
-            <div class="col-6">
-              <p class="card-text mb-0" style="font-size: 0.9rem; line-height: 1.4;">
-                 <%= render_slot(@description_block) %>
-              </p>
-            </div>
-
-            <!-- Star Ranking Column -->
-            <div class="col-6 d-flex justify-content-end" >
-              <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
-            </div>
-          </div>
-
-          <!-- Row pour le prix et le bouton Réserver -->
-          <div class="row mb-2">
-            <div class="col-6 d-flex align-items-center">
-              <.display_price />
-            </div>
-            <div class="col-6 d-flex justify-content-end">
-                <div>
-                   <a href="#" class="btn btn-success btn-sm" style="font-size: 0.9rem; padding: 6px 12px; border-radius: 0; outline: none; border: none;">
-                     Réserver
-                   </a>
-                </div>
-            </div>
-          </div>
-
-        </div>
+      <!-- Orange Bar Section (Title) -->
+      <div class="card-title-bar text-center py-2" style="background-color: orange; color: white;">
+        <h5 class="card-title m-0" style="font-size: 1.25rem;">Produit 1</h5>
       </div>
-    """
-  end
+
+      <!-- Card Body -->
+      <div class="card-body text-left mt-0">
+        <div class="row mb-3"> <!-- Row pour la description et le ranking -->
+          <!-- Description Column -->
+          <div class="col-12 col-sm-6">
+            <p class="card-text mb-0" style="font-size: 0.9rem; line-height: 1.4;">
+               <%= render_slot(@description_block) %>
+            </p>
+          </div>
+
+          <!-- Star Ranking Column -->
+          <div class="col-12 col-sm-6 d-flex justify-content-end">
+            <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
+          </div>
+        </div>
+
+        <!-- Row pour le prix et le bouton Réserver -->
+        <div class="row mb-2">
+          <div class="col-6 d-flex align-items-center">
+            <.display_price />
+          </div>
+          <div class="col-6 d-flex justify-content-end">
+            <a href="#" class="btn btn-success btn-sm" style="font-size: 0.9rem; padding: 6px 12px; border-radius: 0; outline: none; border: none;">
+              Réserver
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  """
+end
+
 
 
 

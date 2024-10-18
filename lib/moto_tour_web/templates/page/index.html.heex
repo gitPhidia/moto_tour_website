@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-
-<p>haha</p>
-
-
-<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/moto-freestyle.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;"}>
-=======
 <section class="hero-section bg-primary text-white " style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/moto-freestyle.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;background-attachment: fixed;"}>
->>>>>>> 5b9caceceb986cdc8d86b0f110bd0faddace21b5
+
     <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100vh;">
         <div style="margin-top: 250px;"> <!-- Ajout d'un margin-top ici -->
             <h1 class="display-4 mb-4">Bienvenue à Moto Parcours</h1>
@@ -69,212 +62,98 @@
 <section class="product-section py-5">
   <div class="container">
     <!-- Première row : Titre et phrase phare -->
-    <div class="row text-center mb-4">
-    <div class="col-12">
-        <h1 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 3em;">
+    <div class="row text-center mb-4 justify-content-center">
+    <div class="col-10">
+        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
         Voyage organisé à moto ou location de Moto, les routes les plus exotiques s’offrent à vous
-        </h1>
+        </h3>
         <!--<p class="lead">"Découvrez notre sélection de produits phares pour une expérience unique."</p> -->
     </div>
     </div>
 
 
     <!-- Deuxième row : Description -->
-    <div class="row text-center mb-5">
-      <div class="col-12">
+    <div class="row text-center mb-5 justify-content-center">
+      <div class="col-9">
         <p class="description">Nous vous offrons une gamme variée de produits soigneusement sélectionnés pour répondre à toutes vos attentes. Parcourez nos offres et trouvez le produit qui vous correspond le mieux.</p>
       </div>
     </div>
 
   <!-- Troisième row : Grille de produits avec des cards -->
-   <div class="row text-center">
-    <!-- Card 1 -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100" style="background-color: #F6F4F4;">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/1.jpg") } class="card-img-top" alt="Produit 1">
-        <div class="card-body text-center">
-          <div class="row">
-            <div class="column">
-              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6 h-100">
-              <p class="card-text">Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy</p>
-            </div>
-            <div class="col-6">
-              <div class="product-wid-rating" style="color: #ff971d">
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p style="color: #ff971d">1.890,00 €</p>
-            </div>
-          </div>
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Card 2 -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100" style="background-color: #F6F4F4;">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/2.jpg") } class="card-img-top" alt="Produit 1">
-        <div class="card-body text-center">
-          <div class="row">
-            <div class="column">
-              <h5 class="card-title" style="font-weight: bold;">Les 2 lacs en 3 jours</h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6 h-100">
-              <p class="card-text">Antananarivo, Anjozorobe, Mantasoa</p>
-              <br>
-            </div>
-            <div class="col-6">
-              <div class="product-wid-rating" style="color: #ff971d">
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p style="color: #ff971d"> 990,00 €</p>
-            </div>
-          </div>
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100" style="background-color: #F6F4F4;">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/3.jpg") } class="card-img-top" alt="Produit 1">
-        <div class="card-body text-center">
-          <div class="row">
-            <div class="column">
-              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6 h-100">
-              <p class="card-text">Antananarivo, Anjozorobe, Ampefy, Mantasoa, Ambatolampy</p>
-            </div>
-            <div class="col-6">
-              <div class="product-wid-rating" style="color: #ff971d">
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p style="color: #ff971d">1.890,00 €</p>
-            </div>
-          </div>
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100" style="background-color: #F6F4F4;">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/4.jpg") } class="card-img-top" alt="Produit 1">
-        <div class="card-body text-center">
-          <div class="row">
-            <div class="column">
-              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <p class="card-text">Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy</p>
-              <br>
-              <p></p>
-            </div>
-            <div class="col-6">
-              <div class="product-wid-rating" style="color: #ff971d">
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p style="color: #ff971d">1.890,00 €</p>
-            </div>
-          </div>
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100" style="background-color: #F6F4F4;">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/5.jpg") } class="card-img-top" alt="Produit 1">
-        <div class="card-body text-center">
-          <div class="row">
-            <div class="column">
-              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <p class="card-text">Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy</p>
-              <br>
-              <p></p>
-            </div>
-            <div class="col-6">
-              <div class="product-wid-rating" style="color: #ff971d">
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p style="color: #ff971d">1.890,00 €</p>
-            </div>
-          </div>
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100" style="background-color: #F6F4F4;">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/6.jpg") } class="card-img-top" alt="Produit 1">
-          
-        <div class="card-body text-center">
-          <div class="row">
-            <div class="column">
-              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6 h-100">
-              <p class="card-text">Antananarivo, Tuléar, Ambositra, Manakara, Fort-Dauphin, Ranomafana, Lavanono, Itampolo, Anakao</p>
-              <p></p>
-            </div>
-            <div class="col-6">
-              <div class="product-wid-rating" style="color: #ff971d">
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p style="color: #ff971d">1.890,00 €</p>
-            </div>
-          </div>
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
-        </div>
-      </div>
-    </div>
+   <div class="row">
+  <!-- Card 1 -->
+  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+    <.card
+      image={Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg")}
+      rate_count={2}
+      max_rate_count={5}>
+      <:description_block>
+        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
+      </:description_block>
+    </.card>
   </div>
+
+  <!-- Card 2 -->
+  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+    <.card
+      image={Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg")}
+      rate_count={2}
+      max_rate_count={5}>
+      <:description_block>
+        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
+      </:description_block>
+    </.card>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+    <.card
+      image={Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg")}
+      rate_count={2}
+      max_rate_count={5}>
+      <:description_block>
+        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
+      </:description_block>
+    </.card>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+    <.card
+      image={Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg")}
+      rate_count={2}
+      max_rate_count={5}>
+      <:description_block>
+        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
+      </:description_block>
+    </.card>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+    <.card
+      image={Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg")}
+      rate_count={2}
+      max_rate_count={5}>
+      <:description_block>
+        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
+      </:description_block>
+    </.card>
+  </div>
+
+  <!-- Card 6 -->
+  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+    <.card
+      image={Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg")}
+      rate_count={2}
+      max_rate_count={5}>
+      <:description_block>
+        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
+      </:description_block>
+    </.card>
+  </div>
+   </div>
+
 
   <%!-- <div class="container">
     <div class="cardcontainer">

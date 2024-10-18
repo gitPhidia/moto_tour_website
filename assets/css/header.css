@@ -1,16 +1,19 @@
 /* Fond clair pour la navbar */
+/* Fond clair pour la navbar */
 .navbar {
-  background-color: #f9f6f7; /* Couleur de fond de la navbar */
+  background-color: #ffffff; /* Couleur de fond de la navbar */
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Couleur orange au survol des liens */
-.navbar-nav .nav-link:hover {
+.navbar-nav .nav-item:hover {
   color: #ff971d; /* Couleur orange */
 }
 
 /* Couleur des liens par défaut */
-.navbar-nav .nav-link {
-  color: rgb(0, 0, 0); /* Couleur noire pour les liens */
+.navbar-nav .nav-link:hover {
+  color: #ff971d; /* Couleur noire pour les liens */
   transition: color 0.3s ease-in-out;
 }
 

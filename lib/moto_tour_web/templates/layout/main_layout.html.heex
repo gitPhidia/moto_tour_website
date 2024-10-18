@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= csrf_meta_tag() %>
+    <%= live_title_tag assigns[:page_title] || "MyBs", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@socket, "/assets/app.css")}/>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@socket, "/assets/app.js")}></script>
+  </head>
+  
+  <body>
+  
+
+
+    <header>
+       <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+          <!-- Logo -->
+          <a class="navbar-brand" href="/">
+            <img src="/images/logo.png" alt="Logo Moto Parcours" width="50" height="50">
+          </a>
+
+          <!-- Navbar Toggler (for mobile view) -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Navbar Links -->
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#accueil">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#parcours">Parcours</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Section à l'extrême droite -->
+          <div class="navbar-right d-flex align-items-center" style="background-color: #ff971d; padding: 10px;">
+            <span class="text-white">Contactez-nous</span>
+          </div>
+        </div>
+    </nav>
+
+    </header>
+    <div role="main" class="w-100" style="padding-top: 70px; min-height: calc(100vh - 120px);">
+   
+      <%= @inner_content %>
+    </div>
+
+
+  </body>
+</html>

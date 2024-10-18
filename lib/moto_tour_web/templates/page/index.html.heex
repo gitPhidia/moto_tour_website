@@ -1,4 +1,4 @@
-<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/moto-freestyle.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;"}>
+<section class="hero-section bg-primary text-white " style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/moto-freestyle.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;background-attachment: fixed;"}>
     <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100vh;">
         <div style="margin-top: 250px;"> <!-- Ajout d'un margin-top ici -->
             <h1 class="display-4 mb-4">Bienvenue à Moto Parcours</h1>
@@ -13,7 +13,7 @@
     <div class="row text-white">
       <!-- Première colonne : Image -->
       <div class="col-md-4 d-flex justify-content-center align-items-center">
-        <img src="/images/transition-image.jpg" alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
       </div>
 
       <!-- Deuxième colonne : Texte -->
@@ -43,7 +43,7 @@
     <div class="row text-white">
       <!-- Première colonne : Image -->
       <div class="col-md-4 d-flex justify-content-center align-items-center">
-        <img src="/images/transition-image.jpg" alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
       </div>
 
       <!-- Deuxième colonne : Texte -->
@@ -78,82 +78,453 @@
       </div>
     </div>
 
-    <!-- Troisième row : Grille de produits avec des cards -->
+  <!-- Troisième row : Grille de produits avec des cards -->
    <div class="row text-center">
-  <!-- Card 1 -->
-  <div class="col-md-4 mb-4">
-    <div class="card h-100" style="background-color: #F6F4F4;">
-      <img src={ Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg") } class="card-img-top" alt="Produit 1">
-      <div class="card-body text-center">
-        <h5 class="card-title" style="font-weight: bold;">Produit 1</h5>
-        <p class="card-text">Description rapide du produit 1.</p>
-        <a href="#" class="btn" style="background-color: orange; color: white;">En savoir plus</a>
+    <!-- Card 1 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #F6F4F4;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/1.jpg") } class="card-img-top" alt="Produit 1">
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="column">
+              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 h-100">
+              <p class="card-text">Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy</p>
+            </div>
+            <div class="col-6">
+              <div class="product-wid-rating" style="color: #ff971d">
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <p style="color: #ff971d">1.890,00 €</p>
+            </div>
+          </div>
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Card 2 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #F6F4F4;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/2.jpg") } class="card-img-top" alt="Produit 1">
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="column">
+              <h5 class="card-title" style="font-weight: bold;">Les 2 lacs en 3 jours</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 h-100">
+              <p class="card-text">Antananarivo, Anjozorobe, Mantasoa</p>
+              <br>
+            </div>
+            <div class="col-6">
+              <div class="product-wid-rating" style="color: #ff971d">
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <p style="color: #ff971d"> 990,00 €</p>
+            </div>
+          </div>
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #F6F4F4;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/3.jpg") } class="card-img-top" alt="Produit 1">
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="column">
+              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 h-100">
+              <p class="card-text">Antananarivo, Anjozorobe, Ampefy, Mantasoa, Ambatolampy</p>
+            </div>
+            <div class="col-6">
+              <div class="product-wid-rating" style="color: #ff971d">
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <p style="color: #ff971d">1.890,00 €</p>
+            </div>
+          </div>
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #F6F4F4;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/4.jpg") } class="card-img-top" alt="Produit 1">
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="column">
+              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p class="card-text">Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy</p>
+              <br>
+              <p></p>
+            </div>
+            <div class="col-6">
+              <div class="product-wid-rating" style="color: #ff971d">
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <p style="color: #ff971d">1.890,00 €</p>
+            </div>
+          </div>
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #F6F4F4;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/5.jpg") } class="card-img-top" alt="Produit 1">
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="column">
+              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p class="card-text">Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy</p>
+              <br>
+              <p></p>
+            </div>
+            <div class="col-6">
+              <div class="product-wid-rating" style="color: #ff971d">
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <p style="color: #ff971d">1.890,00 €</p>
+            </div>
+          </div>
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #F6F4F4;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/6.jpg") } class="card-img-top" alt="Produit 1">
+          
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="column">
+              <h5 class="card-title" style="font-weight: bold;">Les trois lacs en 6 jours</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 h-100">
+              <p class="card-text">Antananarivo, Tuléar, Ambositra, Manakara, Fort-Dauphin, Ranomafana, Lavanono, Itampolo, Anakao</p>
+              <p></p>
+            </div>
+            <div class="col-6">
+              <div class="product-wid-rating" style="color: #ff971d">
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <p style="color: #ff971d">1.890,00 €</p>
+            </div>
+          </div>
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver maintenant</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Card 2 -->
-  <div class="col-md-4 mb-4">
-    <div class="card h-100" style="background-color: #F6F4F4;">
-      <img src={ Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg") } class="card-img-top" alt="Produit 2">
-      <div class="card-body text-center">
-        <h5 class="card-title" style="font-weight: bold;">Produit 2</h5>
-        <p class="card-text">Description rapide du produit 2.</p>
-        <a href="#" class="btn" style="background-color: orange; color: white;">En savoir plus</a>
+  <%!-- <div class="container">
+    <div class="cardcontainer">
+      <div class="photo">
+          <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500">
+          <div class="photos">Photos</div>
+      </div>
+      <div class="content">
+          <p class="txt4">City Lights In Newyork</p>
+          <p class="txt5">A city that never sleeps</p>
+          <p class="txt2">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling.</p>
+      </div>
+      <div class="footer">
+          <p><a class="waves-effect waves-light btn" href="#">Read More</a><a id="heart"><span class="like"><i class="fab fa-gratipay"></i>Like</span></a></p>
+          <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span class="comments"><i class="fas fa-comments"></i>45 Comments</span></p>
+      </div>
+    </div>
+  </div> --%>
+
+  </div>
+</section>
+
+<section class="transition-section py-5">
+  <div class="container">
+    <div class="row text-white">
+      <!-- Première colonne : Image -->
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
+      </div>
+
+      <!-- Deuxième colonne : Texte -->
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <p class="text-center lead">"Vivez une nouvelle expérience avec nos parcours inoubliables."</p>
+      </div>
+
+      <!-- Troisième colonne : Bouton -->
+     <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
+        <a href="#parcours" class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
+     </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="vc_empty_space" style="height: 30px">
+  <span class="vc_empty_space_inner"></span>
+</div>
+
+<%!-- reservation de circuit --%>
+<%!-- reservation avec image à droite --%>
+<%!-- r1 --%>
+<section class="reservation-section">
+  <div class="container">
+    <div class="row">
+      <!-- Texte -->
+      <div class="col-lg-6 col-md-12 mb-4">
+        <h3>Le sud sauvage</h3>
+        <blockquote>
+          <i class="fa fa-quote-left fa-xs text-secondary"></i> Le <strong>Sud de Madagascar</strong> s’offre à vous : entre ciel et mer, au milieu d’un paysage de bush et de sable semi-désertique, vous découvrirez une culture et une nature à nul autre pareil. Cette descente progressive depuis les <strong>hautes terres</strong> jusqu’aux <strong>côtes de l’est</strong> vous permettra d’apprécier une multitude de paysages et de types de piste : sable, terre, boue ponctueront un parcours difficile mais somptueux.
+          <i class="fa fa-quote-right fa-xs text-secondary"></i>
+        </blockquote>
+        <div><strong>Durée :</strong> 12 jours, dont 10 jours de moto, circuit de 1900 km</div>
+        <div><strong>Type :</strong> Circuit raid enduro</div>
+        <div><strong>Motos recommandées : </strong>KTM 350 – 450</div>
+        <div><strong>Région : </strong>Sud</div>
+        <div><strong>Difficulté :</strong> Moyen à Difficile (moyen en saison sèche et difficile en saison des pluies)</div>
+        <div><strong>A PARTIR DE 3690 €</strong></div>
+      </div>
+
+      <!-- Image -->
+      <div class="col-lg-6 col-md-12">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/1.jpg") } class="img-fluid rounded w-100">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">  
+        <div class="text-center mt-3">
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Card 3 -->
-  <div class="col-md-4 mb-4">
-    <div class="card h-100" style="background-color: #F6F4F4;">
-      <img src={ Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg") } class="card-img-top" alt="Produit 3">
-      <div class="card-body text-center">
-        <h5 class="card-title" style="font-weight: bold;">Produit 3</h5>
-        <p class="card-text">Description rapide du produit 3.</p>
-        <a href="#" class="btn" style="background-color: orange; color: white;">En savoir plus</a>
+  <div class="vc_empty_space" style="height: 30px">
+    <span class="vc_empty_space_inner"></span>
+  </div>
+
+  <%!-- r2 --%>
+  <div class="container">
+    <div class="row">
+      <!-- Image -->
+      <div class="col-lg-6 col-md-12">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/2.jpg") } class="img-fluid rounded w-100">
+      </div>
+      <!-- Texte -->
+      <div class="col-lg-6 col-md-12 mb-4">
+        <h3>Les 2 lacs en 3 jours</h3>
+        <blockquote>
+          <i class="fa fa-quote-left fa-xs text-secondary"></i> circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
+            Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
+            appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.
+          <i class="fa fa-quote-right fa-xs text-secondary"></i>
+        </blockquote>
+        <div><strong>Durée :
+        </strong>3 jours, dont 3 jours de moto, circuit de 450 km</div>
+        <div><strong>Type :</strong> Circuit raid enduro</div>
+        <div><strong>Motos recommandées : </strong>KTM 350 – 450</div>
+        <div><strong>Région : </strong>Hauts plateaux</div>
+        <div><strong>Difficulté :</strong> Difficile à très difficile</div>
+        <div><strong>A PARTIR DE 990 €</strong></div>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-6">  
+    </div>
+      <div class="col-lg-6">  
+        <div class="text-center mt-3">
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Card 4 -->
-  <div class="col-md-4 mb-4">
-    <div class="card h-100" style="background-color: #F6F4F4;">
-      <img src={ Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg") } class="card-img-top" alt="Produit 4">
-      <div class="card-body text-center">
-        <h5 class="card-title" style="font-weight: bold;">Produit 4</h5>
-        <p class="card-text">Description rapide du produit 4.</p>
-        <a href="#" class="btn" style="background-color: orange; color: white;">En savoir plus</a>
-      </div>
-    </div>
+  <div class="vc_empty_space" style="height: 30px">
+    <span class="vc_empty_space_inner"></span>
   </div>
 
-  <!-- Card 5 -->
-  <div class="col-md-4 mb-4">
-    <div class="card h-100" style="background-color: #F6F4F4;">
-      <img src={ Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg") } class="card-img-top" alt="Produit 5">
-      <div class="card-body text-center">
-        <h5 class="card-title" style="font-weight: bold;">Produit 5</h5>
-        <p class="card-text">Description rapide du produit 5.</p>
-        <a href="#" class="btn" style="background-color: orange; color: white;">En savoir plus</a>
-      </div>
+<%!-- r3 --%>
+<div class="container">
+  <div class="row">
+    <!-- Texte -->
+    <div class="col-lg-6 col-md-12 mb-4">
+      <h3>RD 43 en 6 jours</h3>
+      <blockquote>
+        <i class="fa fa-quote-left fa-xs text-secondary"></i>Les hautes terres centrales à votre portée : explorez les hauts plateaux en effectuant le parcours RD 43 en 6 jours. Sur plusieurs kilomètres, les pistes techniques et les zones montagneuses des hauts plateaux vous attendent. Profiter également de ce moment de découverte historique et culturelle, et admirez au guidon de votre moto la beauté de la nature et des paysages. Ne manquez surtout pas de goûter aux spécialités culinaires malgaches en arrivant dans les villes et villages du parcours.
+        <i class="fa fa-quote-right fa-xs text-secondary"></i>
+      </blockquote>
+      <div><strong>Durée :</strong> 6 jours, dont 6 jours de moto, circuit de 900 km</div>
+      <div><strong>Type :</strong> Circuit raid enduro</div>
+      <div><strong>Motos recommandées : </strong>KTM 350 – 450</div>
+      <div><strong>Région : </strong>Hauts plateaux</div>
+      <div><strong>Difficulté :</strong> Moyen à Difficile</div>
+      <div><strong>A PARTIR DE 1890 €</strong></div>
+    </div>
+
+    <!-- Image -->
+    <div class="col-lg-6 col-md-12">
+      <img src={ Routes.static_path(@conn, "/assets/images/section/4.jpg") } class="img-fluid rounded w-100">
     </div>
   </div>
-
-  <!-- Card 6 -->
-  <div class="col-md-4 mb-4">
-    <div class="card h-100" style="background-color: #F6F4F4;">
-      <img src={ Routes.static_path(@conn, "/assets/images/section/motorcycle-rider-offroad-gravel-track.jpg") } class="card-img-top" alt="Produit 6">
-      <div class="card-body text-center">
-        <h5 class="card-title" style="font-weight: bold;">Produit 6</h5>
-        <p class="card-text">Description rapide du produit 6.</p>
-        <a href="#" class="btn" style="background-color: orange; color: white;">En savoir plus</a>
+  <div class="row">
+    <div class="col-lg-6">  
+      <div class="text-center mt-3">
+        <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
       </div>
     </div>
   </div>
 </div>
 
+<div class="vc_empty_space" style="height: 30px">
+  <span class="vc_empty_space_inner"></span>
+</div>
+
+<div class="container">
+    <div class="row">
+      <!-- Image -->
+      <div class="col-lg-6 col-md-12">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/3.jpg") } class="img-fluid rounded w-100">
+      </div>
+      <!-- Texte -->
+      <div class="col-lg-6 col-md-12 mb-4">
+        <h3>La piste des Baobabs</h3>
+        <blockquote>
+          <i class="fa fa-quote-left fa-xs text-secondary"></i> Bienvenue à Madagascar. Nous réservons ce périple de 9 jours aux motards ayant déjà une expérience de la moto tout-terrain.
+           Aucune notion de vitesse dans nos circuits, mais il faut être d’esprit sportif, et avoir un minimum de technique pour apprécier en toute sécurité la piste et les paysages traversés.
+           La variété hors normes de ce parcours Enduro qui part de la capitale Antananarivo située dans les hauts-plateaux, jusqu’aux pistes côtières longeant le <strong> Canal du Mozambique</strong>, justifie les efforts quotidiens. Beau mais pas facile, il faut gérer sur la longueur du circuit les pistes de latérite rouge, tantot dur comme du béton, tantot patinoire si la pluie se mêle de la partie, et les pistes de <strong> sables qui réclament un peu de technique </strong>. C’est ce circuit qui est à l’origine de l’Aventure Malgache qui continue depuis 25 ans…
+          <i class="fa fa-quote-right fa-xs text-secondary"></i>
+        </blockquote>
+        <div><strong>Durée :
+        </strong>11 jours, dont 9 jours de moto, circuit de 1600 km</div>
+        <div><strong>Type :</strong> Circuit raid enduro</div>
+        <div><strong>Motos recommandées : </strong> KTM 350 -450</div>
+        <div><strong>Région : </strong>Ouest</div>
+        <div><strong>Difficulté :</strong> Moyen à Difficile (moyen en saison sèche et difficile en saison des pluies)</div>
+        <div><strong>A PARTIR DE 3390 €</strong></div>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-6">  
+    </div>
+      <div class="col-lg-6">  
+        <div class="text-center mt-3">
+          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div class="vc_empty_space" style="height: 30px">
+    <span class="vc_empty_space_inner"></span>
+  </div>
+
 </section>
 
+<div class="vc_empty_space" style="height: 30px">
+  <span class="vc_empty_space_inner"></span>
+</div>
 
+<footer class="bg-dark text-white pt-4">
+    <div class="container">
+      <div class="row">
+        <!-- Section : Icon -->
+        <div class="col-md-3" style="margin-left:2rem;margin-bottom:2rem">
+          <a class="navbar-brand" href="/">
+            <img src={Routes.static_path(@conn, "/assets/images/section/logo.png")} alt="Logo Moto Parcours" style="transform:scale(2,2);margin-top:2rem">
+          </a>
+        </div>
+
+        <!-- Section : a propos -->
+        <div class="col-md-4">
+          <h5>À propos</h5>
+          <p>Notre équipe franco-malgache, composée de guides moto, mécaniciens spécialisés, vous fera partager leur passion pour ce pays.
+
+            N’attendez pas ! Rejoignez-nous !</p>
+        </div>
+
+        <!-- Section : Contact -->
+        <div class="col-md-4">
+          <h5>Contact</h5>
+          <ul class="list-unstyled">
+            <li><i class="fas fa-map-marker-alt"></i> Ankadifotsy, Làlana Ratsima James
+              Antananarivo – Madagascar
+              Ouvert de 9H à 17H</li>
+            <li><i class="fas fa-phone"></i> +261 [0]32 11 028 52 </li>
+            <li><i class="fas fa-envelope"></i> madatraces@gmail.com </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Section : Réseaux sociaux -->
+      <div class="row mt-3">
+        <div class="col-md-12 text-center">
+          <a href="#" class="text-white me-4"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-white me-4"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white me-4"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <!-- Section : Copyright -->
+      <div class="row mt-2">
+        <div class="col-md-12 text-center">
+          <p>&copy; 2024 Moto tour Madagascar. Tous droits réservés. |
+            <a href="#" class="text-white text-decoration-none">Accueil</a> |
+            <a href="#" class="text-white text-decoration-none">Circuits enduro sport</a> | 
+            <a href="#" class="text-white text-decoration-none">a propos</a> | 
+            <a href="#" class="text-white text-decoration-none">contact</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>

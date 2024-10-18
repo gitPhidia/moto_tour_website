@@ -8,15 +8,19 @@
     <%= live_title_tag assigns[:page_title] || "MyBs", suffix: " · Phoenix Framework" %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+    <%!-- new assets --%>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <%!-- fin --%>
   </head>
   
   <body>
   
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top" style="height:5.5rem;">
   <div class="container-fluid">
     <!-- Logo -->
     <a class="navbar-brand" href="/">
-      <img src="/images/logo.png" alt="Logo Moto Parcours" width="50" height="50">
+      <img src={Routes.static_path(@conn, "/assets/images/section/logo.png")} alt="Logo Moto Parcours" style="transform:scale(1,1.2)" width="150" height="50">
     </a>
 
     <!-- Navbar Toggler (for mobile view) -->
@@ -25,27 +29,25 @@
     </button>
 
     <!-- Navbar Links -->
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
+    <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
+      <ul class="navbar-nav bg-white" style="font-size: 1.1rem;">
+        <li class="nav-item ms-2" >
           <a class="nav-link" href="#accueil">Accueil</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#parcours">Parcours</a>
+        <li class="nav-item ms-2">
+          <a class="nav-link" href="#parcours">Circuits enduro sports</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ms-2">
+          <a class="nav-link" href="#contact">A propos</a>
+        </li>
+        <li class="nav-item ms-2">
           <a class="nav-link" href="#contact">Contact</a>
         </li>
       </ul>
     </div>
 
-    <!-- Section à l'extrême droite -->
-    <div class="navbar-right d-flex align-items-center" style="background-color: #ff971d; padding: 10px;">
-      <span class="text-white">Contactez-nous</span>
-    </div>
   </div>
 </nav>
-
 
 
     <%= @inner_content %>

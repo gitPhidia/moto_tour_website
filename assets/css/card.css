@@ -1,9 +1,66 @@
-.custom-card {
-    background-color: #F6F4F4;
+/* Card container */
+.card {
+  border: none;
+  /*border-radius: 15px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #F6F4F4;
+  overflow: hidden;
 }
 
+/* Image styling */
+.card-img-top {
+  object-fit: cover;
+  height: 200px; /* Ajuste la hauteur de l'image */
+  width: 100%;
+}
 
-.orange-btn {
-    background-color: orange;
-    color: white;
+/* Orange title bar (full width) */
+.card-title-bar {
+  background-color: orange; /* Bar color */
+  color: white;
+  text-align: center;
+  padding: 10px 0; /* Padding to make the text stand out */
+  margin: 0; /* No margin to ensure it's flush with the image */
+}
+
+/* Title style */
+.card-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Description and other content */
+.card-body {
+  padding: 20px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Limite à 3 lignes */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Button style */
+.btn {
+  background-color: #ff8c00;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e67300;
+}
+
+.btn-success:hover {
+  background-color: #218838;
 }

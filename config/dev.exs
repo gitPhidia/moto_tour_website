@@ -3,10 +3,10 @@ import Config
 # Configure your database
 config :moto_tour, MotoTour.Repo,
   username: "postgres",
-  password: "",
+  password: "MGbi@262**",
   hostname: "localhost",
   database: "moto_tour_dev",
-  port: 5432,
+  port: 5433,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

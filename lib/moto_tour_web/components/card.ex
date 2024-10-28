@@ -9,7 +9,7 @@ defmodule MotoTourWeb.Card do
 
       <!-- Orange Bar Section (Title) -->
       <div class="card-title-bar text-center py-2" style="background-color: orange; color: white;">
-        <h5 class="card-title m-0" style="font-size: 1.25rem;">Produit 1</h5>
+        <h5 class="card-title m-0" style="font-size: 1.25rem;">produit 1</h5>
       </div>
 
       <!-- Card Body -->

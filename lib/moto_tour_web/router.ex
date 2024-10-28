@@ -20,6 +20,7 @@ defmodule MotoTourWeb.Router do
     get "/", PageController, :index
     # Route pour la LiveView Home
     live "/home", HomeLive
+    live "/circuit", CircuitLive
   end
 
   # Other scopes may use custom stacks.

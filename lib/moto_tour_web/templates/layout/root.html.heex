@@ -9,20 +9,18 @@
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
     <%!-- new assets --%>
-    <!--
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    !-->
+    <%!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> --%>
     <%!-- fin --%>
   </head>
   
   <body>
   
-<nav class="navbar navbar-expand-lg fixed-top" style="height:5.5rem;">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg fixed-top " style="height:2.5rem;">
+  <div class="container-fluid bg-white">
     <!-- Logo -->
     <a class="navbar-brand" href="/">
-      <img src={Routes.static_path(@conn, "/assets/images/section/logo.png")} alt="Logo Moto Parcours" style="transform:scale(1,1.2)" width="150" height="50">
+      <img src={Routes.static_path(@conn, "/assets/images/section/logo.png")} alt="Logo Moto Parcours" style="transform:scale(1,1)" width="150" height="50">
     </a>
 
     <!-- Navbar Toggler (for mobile view) -->
@@ -32,18 +30,18 @@
 
     <!-- Navbar Links -->
     <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
-      <ul class="navbar-nav bg-white" style="font-size: 1.1rem;">
-        <li class="nav-item ms-2" >
-          <a class="nav-link" href="#accueil">Accueil</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link mb-5" href={Routes.page_path(@conn, :index)} style="height:10px;"><i class="fa fa-home"></i> <strong>ACCEUIL</strong></a>
         </li>
-        <li class="nav-item ms-2">
-          <a class="nav-link" href="#parcours">Circuits enduro sports</a>
+        <li class="nav-item">
+          <a class="nav-link mb-5" href="#contact" style="height:10px;"><i class="fa fa-exclamation"></i> <strong>A PROPOS</strong></a>
         </li>
-        <li class="nav-item ms-2">
-          <a class="nav-link" href="#contact">A propos</a>
+        <li class="nav-item">
+          <a class="nav-link mb-5" href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} style="height:10px;"><i class="fa fa-motorcycle"></i> <strong>CIRCUITS ENDURO SPORTS</strong></a>
         </li>
-        <li class="nav-item ms-2">
-          <a class="nav-link" href="#contact">Contact</a>
+        <li class="nav-item">
+          <a class="nav-link mb-5" href="#contact" style="height:10px;"><i class="fa fa-envelope"></i> <strong>CONTACT</strong></a>
         </li>
       </ul>
     </div>
@@ -53,6 +51,61 @@
 
 
     <%= @inner_content %>
+
+<footer class="bg-dark text-white pt-4">
+    <div class="container">
+      <div class="row">
+        <!-- Section : Icon -->
+        <div class="col-md-4" style="margin-bottom:2rem;transform:scale(1,1)">
+          <a class="navbar-brand" href="/">
+            <img class="img-fluid" src={Routes.static_path(@conn, "/assets/images/section/logo.png")} alt="Logo Moto Parcours" style="width:25rem">
+          </a>
+        </div>
+
+        <!-- Section : a propos -->
+        <div class="col-md-4">
+          <h5>À propos</h5>
+          <p>Notre équipe franco-malgache, composée de guides moto, mécaniciens spécialisés, vous fera partager leur passion pour ce pays.
+
+            N’attendez pas ! Rejoignez-nous !</p>
+        </div>
+
+        <!-- Section : Contact -->
+        <div class="col-md-4">
+          <h5>Contact</h5>
+          <ul class="list-unstyled">
+            <li><i class="fas fa-map-marker-alt"></i> Ankadifotsy, Làlana Ratsima James
+              Antananarivo – Madagascar
+              Ouvert de 9H à 17H</li>
+            <li><i class="fas fa-phone"></i> +261 [0]32 11 028 52 </li>
+            <li><i class="fas fa-envelope"></i> madatraces@gmail.com </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Section : Réseaux sociaux -->
+      <div class="row mt-3">
+        <div class="col-md-12 text-center">
+          <a href="#" class="text-white me-4"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-white me-4"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white me-4"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <!-- Section : Copyright -->
+      <div class="row mt-2">
+        <div class="col-md-12 text-center">
+          <p>&copy; 2024 Moto tour Madagascar. Tous droits réservés. |
+            <a href="#" class="text-white text-decoration-none">Accueil</a> |
+            <a href="#" class="text-white text-decoration-none">Circuits enduro sport</a> | 
+            <a href="#" class="text-white text-decoration-none">a propos</a> | 
+            <a href="#" class="text-white text-decoration-none">contact</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 
   </body>
 </html>

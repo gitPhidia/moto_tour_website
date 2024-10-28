@@ -1,0 +1,72 @@
+.circuitpage{
+    display:inline-block;
+    padding-left:0;
+    margin:20px 0;
+    border-radius:4px;
+}
+.circuitpage>li{
+    display:inline
+}
+.circuitpage>li>button,.circuitpage>li>span{
+    position:relative;
+    float:left;
+    padding:6px 12px;
+    margin-left:-1px;
+    line-height:1.42857143;
+    color:#000000;
+    text-decoration:none;
+    background-color:#fffefe;
+    border:1px solid #d1cece;
+    font-size: 15px;
+}
+.circuitpage>li:first-child>button,.circuitpage>li:first-child>span{
+    margin-left:0;
+    border-top-left-radius:4px;
+    border-bottom-left-radius:4px
+}
+.circuitpage>li:last-child>button,.circuitpage>li:last-child>span{
+    border-top-right-radius:4px;
+    border-bottom-right-radius:4px
+}
+.circuitpage>li>button:hover,.circuitpage>li>span:hover,.circuitpage>li>button:focus,.circuitpage>li>span:focus{
+    color: rgb(255, 255, 255);
+    background-color:orange;
+    border-color:#ddd
+}
+.circuitpage>.active>button,.circuitpage>.active>span,.circuitpage>.active>button:hover,.circuitpage>.active>span:hover,.circuitpage>.active>button:focus,.circuitpage>.active>span:focus{
+    z-index:2;
+    color:orange;
+    cursor:default;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 254)
+}
+.circuitpage>.disabled>span,.circuitpage>.disabled>span:hover,.circuitpage>.disabled>span:focus,.circuitpage>.disabled>button,.circuitpage>.disabled>button:hover,.circuitpage>.disabled>button:focus{
+    color: #fff;
+    cursor:not-allowed;
+    background-color:#fff;
+    border-color:#ddd
+}
+.circuitpage-lg>li>button,.circuitpage-lg>li>span{
+    padding:10px 16px;
+    font-size:18px
+}
+.circuitpage-lg>li:first-child>button,.circuitpage-lg>li:first-child>span{
+    border-top-left-radius:6px;
+    border-bottom-left-radius:6px
+}
+.circuitpage-lg>li:last-child>button,.circuitpage-lg>li:last-child>span{
+    border-top-right-radius:6px;
+    border-bottom-right-radius:6px
+}
+.circuitpage-sm>li>button,.circuitpage-sm>li>span{
+    padding:5px 10px;
+    font-size:12px
+}
+.circuitpage-sm>li:first-child>button,.circuitpage-sm>li:first-child>span{
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px
+}
+.circuitpage-sm>li:last-child>button,.circuitpage-sm>li:last-child>span{
+    border-top-right-radius:3px;
+    border-bottom-right-radius:3px
+}

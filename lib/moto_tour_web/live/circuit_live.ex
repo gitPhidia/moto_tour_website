@@ -1,86 +1,212 @@
 defmodule MotoTourWeb.CircuitLive do
   use Phoenix.LiveView
+  import Phoenix.HTML
   alias MotoTourWeb.Router.Helpers, as: Routes
 
   def mount(_params, _session, socket) do
     # Assignez le chemin de l'image dans l'état du socket
-    {:ok, assign(socket, :selected_card, "card_1")}
+    {:ok, assign(socket, selected_card: "card_1", show_card_second: true, card_content: raw("
+                    <blockquote>
+                      <i class='fa fa-quote-left fa-xs text-secondary'></i> Circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
+                        Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
+                        appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.
+                      <i class='fa fa-quote-right fa-xs text-secondary'></i>
+                    </blockquote>
+                    <p><strong>Destination</strong> :Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy
+                    <p><strong>Durée</strong> : 6 jours, dont 6 jours de moto, circuit de 900 km</p>
+                    <p><strong>Participant</strong> :Illimitée personnes max</p>
+                    <p><strong>Motos recommandées</strong> : KTM 350 – 450</p>
+                    <p><strong>Région</strong> : Hauts plateaux</p>
+                    <p><strong>Difficulté</strong> : Moyen à Difficile</p>
+                    <p><strong>Tarifs</strong> : à partir de 1890 €</p>
+                    <p><strong>Parcours</strong> : journalier</p>
+                    <p><strong>Difficultés</strong> : moyen a difficile</p>
+                      "))}
   end
 
   def handle_event("show_card", %{"card" => card}, socket) do
     {:noreply, assign(socket, :selected_card, card)}
   end
 
+  def handle_event("change_content",  %{"param" => param}, socket) do
+    second_card_content = "<blockquote>
+              <i class='fa fa-quote-left fa-xs text-secondary'></i> circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
+                Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
+                appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.
+              <i class='fa fa-quote-right fa-xs text-secondary'></i>
+            </blockquote>#{param}"
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content))}
+  end
+
   def render(assigns) do
     ~H"""
-      <section class="hero-section bg-primary text-white mb-5" style="background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;background-attachment: fixed;"}>
+     <section class="transition-section py-5">
+        <div class="container mt-5">
+          <div class="row text-white">
+            <!-- Première colonne : Image -->
+            <div class="col-md-2 d-flex justify-content-center align-items-center">
+              <img src={ Routes.static_path(@socket, "/assets/images/section/logo.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
+            </div>
 
-      <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100vh;">
-        <div style="margin-top: 250px;"> <!-- Ajout d'un margin-top ici -->
-          <h1 class="display-4 mb-4">Bienvenue à Moto Parcours</h1>
-          <p class="lead">Des pistes surprenantes, des paysages somptueux,<br> hors du temps et une hospitalité toujours bienveillante.<br> Après 30 ans à sillonner la grande île, c’est toujours avec un grand plaisir que j’accompagne les motards <br> les plus expérimentés comme les novices sur les chemins connus et moins connus de Madagascar.</p>
-          <p class="text-end"><i class="fa fa-quote-right fa-xs text-secondary"></i> <strong> François Serrano </strong> </p>
+            <!-- Deuxième colonne : Texte -->
+            <div class="col-md-8 d-flex justify-content-center align-items-center">
+              <p class="text-center lead"><h5>"Vivez une nouvelle expérience avec nos parcours inoubliables."</h5></p>
+            </div>
 
+          </div>
         </div>
-      </div>
       </section>
 
       <div class="row">
-        <div class="col-md-12">
-          <div class="product-menu text-center">
-            <nav>
+        <div class="col-md-12 h-50">
+          <div class="product-menu text-center d-flex justify-content-center" style="border-bottom: 1px solid #e5e5e5;">
+            <nav class="mb-6">
               <ul class="circuitpage">
-                <li><button phx-click="show_card" phx-value-card="card_1" style="font-size:15px;height:3rem"><strong>Les trois lacs en 6 jours</strong></button></li>
-                <li><button phx-click="show_card" phx-value-card="card_2" style="font-size:15px;height:3rem"><strong>Les 2 lacs en 3 jours</strong></button></li>
-                <li><button phx-click="show_card" phx-value-card="card_3" style="font-size:15px;height:3rem"><strong>RD 43 en 6 jours</strong></button></li>
-                <li><button phx-click="show_card" phx-value-card="card_4" style="font-size:15px;height:3rem"><strong>RD 43 en 3 jours</strong></button></li>
-                <li><button phx-click="show_card" phx-value-card="card_5" style="font-size:15px;height:3rem"><strong>Le sud sauvage</strong></button></li>
-                <li><button phx-click="show_card" phx-value-card="card_6" style="font-size:15px;height:3rem"><strong>La piste des baobabs</strong></button></li>
+                <li><a phx-click="show_card" phx-value-card="card_1" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>Les trois lacs en 6 jours</strong></h6></a></li>
+                <li><a phx-click="show_card" phx-value-card="card_2" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>Les 2 lacs en 3 jours</strong></h6></a></li>
+                <li><a phx-click="show_card" phx-value-card="card_3" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>RD 43 en 6 jours</strong></h6></a></li>
+                <li><a phx-click="show_card" phx-value-card="card_4" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>RD 43 en 3 jours</strong></h6></a></li>
+                <li><a phx-click="show_card" phx-value-card="card_5" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>Le sud sauvage</strong></h6></a></li>
+                <li><a phx-click="show_card" phx-value-card="card_6" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>La piste des baobabs</strong></h6></a></li>
               </ul>
             </nav>
           </div>
         </div>
       </div>
       <%= render_card(assigns) %>
+
+    <div class="container">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="background-color:grey">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src='...' alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src={Routes.static_path(@socket, "/assets/images/section/1.jpg")} alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src={Routes.static_path(@socket, "/assets/images/section/1.jpg")} alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
     """
   end
 
   def render_card(%{selected_card: "card_1"} = assigns) do
     ~H"""
-      <div class="container">
+      <div class="container w-100">
         <div class="row">
-            <h4>Les trois lacs en 6 jours</h4>
+            <h4 class="text-start">Les trois lacs en 6 jours</h4>
+            <!-- <div class="vc_empty_space" style="height: 30px">
+              <span class="vc_empty_space_inner"></span>
+            </div> -->
           <!-- Image -->
-          <div class="col-lg-5 col-md-12">
-            <img src={Routes.static_path(@socket, "/assets/images/section/1.jpg")} class="img-fluid rounded w-100">
-            <blockquote>
-              <i class="fa fa-quote-left fa-xs text-secondary"></i> En quête d’aventure, sillonner les toits de Madagascar avec cet enduro de 6 jours sur les pistes des trois lacs. Ce parcours autour des hauts plateaux vous réservera : plusieurs kilomètres de routes, pistes, terres et boues. En partant de la capitale, découvrez la végétation le long de la RN2. Faites des rencontres avec la population aussi hospitalière, et découvrez les spécialités culinaires locales. Surtout, sur votre moto, profitez des magnifiques paysages, des rizières, cultures en terrasse et de la vue sur les sentiers volcaniques d’Ampefy.
-              <i class="fa fa-quote-right fa-xs text-secondary"></i>
-            </blockquote>
+          <div class="col-lg-4 col-md-12">
+            <div class="container_image d-flex justify-content-end">
+              <img src={Routes.static_path(@socket, "/assets/images/section/1.jpg")} class="img-fluid rounded w-100">
+            </div>
+
+              <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
+                <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
+              </div>
+            <div class="vc_empty_space" style="height: 30px">
+              <span class="vc_empty_space_inner"></span>
+            </div>
           </div>
           <!-- Texte -->
           <div class="col-lg-7 col-md-12 mb-4">
             <div class="product-menu text-center">
-                <nav>
-                    <ul class="circuitpage">
-                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
-                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-euro"></i><br><strong>Tarifs</strong></button></li>
-                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-clock"></i><br><strong>Durée</strong></button></li>
-                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>Sites marquants</strong></button></li>
-                    </ul>
-                </nav>
+              <nav>
+                  <ul class="circuitpage">
+                    <li><button phx-click="change_content" phx-value-param="
+                      <p><strong>Destination</strong> :Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy
+                      <p><strong>Durée</strong> : 6 jours, dont 6 jours de moto, circuit de 900 km</p>
+                      <p><strong>Participant</strong> :Illimitée personnes max</p>
+                      <p><strong>Motos recommandées</strong> : KTM 350 – 450</p>
+                      <p><strong>Région</strong> : Hauts plateaux</p>
+                      <p><strong>Difficulté</strong> : Moyen à Difficile</p>
+                      <p><strong>Tarifs</strong> : à partir de 1890 €</p>
+                      <p><strong>Parcours</strong> : journalier</p>
+                      <p><strong>Difficultés</strong> : moyen a difficile</p>"
+                      style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
+                    <li><button phx-click="change_content" phx-value-param="
+                      <div id='accordion'>
+                        <div class='card'>
+                          <div class='card-header' id='headingOne'>
+                              <div class='row'>
+                                <div class='col-md-11'>
+                                  <a data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+                                    <h6 class='mb-0'>
+                                      jour 0: Antananarivo
+                                    </h6>
+                                  </a>
+                                </div>
+                                <div class='col-md-1 mt-1'>
+                                  <a data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+                                    <i class='fa fa-angle-down' aria-hidden='true'></i>
+                                  </a>
+                                </div>
+                              </div>
+
+                            <div id='collapseOne' class='collapse' aria-labelledby='headingOne' data-parent='#accordion'>
+                              <div class='card-body'>
+                                A votre arrivée à l’aéroport international d’Ivato, vous êtes accueillis et conduits directement à votre hôtel.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class='card'>
+                          <div class='card-header' id='headingOne'>
+                            <div class='row'>
+                              <div class='col-md-11'>
+                                <a data-toggle='collapse' data-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo'>
+                                    <h6 class='mb-0'>
+                                        jour 1: Antananarivo-Ampefy
+                                    </h6>
+                                </a>
+                              </div>
+                              <div class='col-md-1 mt-1'>
+                                <a data-toggle='collapse' data-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo'>
+                                  <i class='fa fa-angle-down' aria-hidden='true'></i>
+                                </a>
+                              </div>
+                            </div>
+
+                            <div id='collapseTwo' class='collapse' aria-labelledby='headingTwo' data-parent='#accordion'>
+                              <div class='card-body'>
+                                Vous partirez de bonne heure de la capitale pour rejoindre le centre de Madagascar. Vous découvrirez les pistes environnant les hauts plateaux, et vous arriverez à Ampefy. Découvrez le lac Itasy ainsi que les sentiers volcaniques de la région.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    " style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
+                    <li><button phx-click="change_content" phx-value-param="parametre_personnalise_5" style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>Sites marquants</strong></button></li>
+                    <li><button phx-click="change_content" phx-value-param="parametre_personnalise_2" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
+                    <li><button phx-click="change_content" phx-value-param="parametre_personnalise_3" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
+                  </ul>
+              </nav>
+            </div>
+            <div class="row mr-4" style="margin-top:5%" phx-show={@show_card_second}>
+              <p>
+                <%= @card_content %>
+              </p>
             </div>
           </div>
         </div>
         <div class="row">
         <div class="col-lg-6">
         </div>
-          <div class="col-lg-6">
-            <div class="text-center mt-3">
-              <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
-            </div>
-          </div>
         </div>
       </div>
 

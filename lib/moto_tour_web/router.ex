@@ -21,6 +21,7 @@ defmodule MotoTourWeb.Router do
     # Route pour la LiveView Home
     live "/home", HomeLive
     live "/circuit", CircuitLive
+    live "/menu_card", MenuCardLive
   end
 
   # Other scopes may use custom stacks.

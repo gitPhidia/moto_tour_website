@@ -2,10 +2,12 @@ defmodule MotoTourWeb.CircuitLive do
   use Phoenix.LiveView
   import Phoenix.HTML
   alias MotoTourWeb.Router.Helpers, as: Routes
+  alias MotoTour.Circuits
 
   def mount(_params, _session, socket) do
     # Assignez le chemin de l'image dans l'état du socket
-    {:ok, assign(socket, selected_card: "card_1", show_card_second: true, card_content: raw("
+    circuits = Circuits.list_circuits()
+    {:ok, assign(socket, selected_card: "card_1", circuits: circuits, show_card_second: true, card_content: raw("
       <blockquote>
       <i class='fa fa-quote-left fa-xs text-secondary'></i> Circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
       Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
@@ -63,12 +65,14 @@ defmodule MotoTourWeb.CircuitLive do
           <div class="product-menu text-center d-flex justify-content-center" style="border-bottom: 1px solid #e5e5e5;">
             <nav class="mb-6">
               <ul class="circuitpage">
-                <li><a phx-click="show_card" phx-value-card="card_1" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>Les trois lacs en 6 jours</strong></h6></a></li>
-                <li><a phx-click="show_card" phx-value-card="card_2" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>Les 2 lacs en 3 jours</strong></h6></a></li>
-                <li><a phx-click="show_card" phx-value-card="card_3" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>RD 43 en 6 jours</strong></h6></a></li>
-                <li><a phx-click="show_card" phx-value-card="card_4" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>RD 43 en 3 jours</strong></h6></a></li>
-                <li><a phx-click="show_card" phx-value-card="card_5" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>Le sud sauvage</strong></h6></a></li>
-                <li><a phx-click="show_card" phx-value-card="card_6" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>La piste des baobabs</strong></h6></a></li>
+                <%= for circuit <- @circuits do %>
+                  <li><button phx-click="show_card" phx-value-card="card_1" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong><%= circuit.nom %></strong></h6></button></li>
+                <%= end %>
+                  <!-- <li><a phx-click="show_card" phx-value-card="card_2" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>Les 2 lacs en 3 jours</strong></h6></a></li>
+                  <li><a phx-click="show_card" phx-value-card="card_3" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>RD 43 en 6 jours</strong></h6></a></li>
+                  <li><a phx-click="show_card" phx-value-card="card_4" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>RD 43 en 3 jours</strong></h6></a></li>
+                  <li><a phx-click="show_card" phx-value-card="card_5" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>Le sud sauvage</strong></h6></a></li>
+                  <li><a phx-click="show_card" phx-value-card="card_6" style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong>La piste des baobabs</strong></h6></a></li> -->
               </ul>
             </nav>
           </div>

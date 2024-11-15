@@ -25,7 +25,7 @@ defmodule MotoTourWeb.Card do
           </div>
 
           <!-- Star Ranking Column -->
-          <div class="col-12 col-sm-6 d-flex justify-content-end">
+          <div class="col-12 col-sm-6 d-flex justify-content-end" style="height:6rem">
             <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
           </div>
         </div>
@@ -51,13 +51,8 @@ end
   defp display_price(assigns)  do
     ~H"""
         <p class="card-price mb-0 test" style="font-size: 1.1rem; font-weight: bold;">
-          <%= @price %> €
+          <%= @price %>,00 €
         </p>
-        <!-- <style>
-          .test  {
-              color: red;
-            }
-        </style> -->
     """
   end
 

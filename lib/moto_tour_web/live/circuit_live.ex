@@ -6,22 +6,23 @@ defmodule MotoTourWeb.CircuitLive do
   def mount(_params, _session, socket) do
     # Assignez le chemin de l'image dans l'état du socket
     {:ok, assign(socket, selected_card: "card_1", show_card_second: true, card_content: raw("
-                    <blockquote>
-                      <i class='fa fa-quote-left fa-xs text-secondary'></i> Circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
-                        Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
-                        appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.
-                      <i class='fa fa-quote-right fa-xs text-secondary'></i>
-                    </blockquote>
-                    <p><strong>Destination</strong> :Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy
-                    <p><strong>Durée</strong> : 6 jours, dont 6 jours de moto, circuit de 900 km</p>
-                    <p><strong>Participant</strong> :Illimitée personnes max</p>
-                    <p><strong>Motos recommandées</strong> : KTM 350 – 450</p>
-                    <p><strong>Région</strong> : Hauts plateaux</p>
-                    <p><strong>Difficulté</strong> : Moyen à Difficile</p>
-                    <p><strong>Tarifs</strong> : à partir de 1890 €</p>
-                    <p><strong>Parcours</strong> : journalier</p>
-                    <p><strong>Difficultés</strong> : moyen a difficile</p>
-                      "))}
+      <blockquote>
+      <i class='fa fa-quote-left fa-xs text-secondary'></i> Circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
+      Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
+      appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.
+      <i class='fa fa-quote-right fa-xs text-secondary'></i>
+      </blockquote>
+      <p><strong>Destination</strong> :Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy
+      <p><strong>Durée</strong> : 6 jours, dont 6 jours de moto, circuit de 900 km</p>
+      <p><strong>Participant</strong> :Illimitée personnes max</p>
+      <p><strong>Motos recommandées</strong> : KTM 350 – 450</p>
+      <p><strong>Région</strong> : Hauts plateaux</p>
+      <p><strong>Difficulté</strong> : Moyen à Difficile</p>
+      <p><strong>Tarifs</strong> : à partir de 1890 €</p>
+      <p><strong>Parcours</strong> : journalier</p>
+      <p><strong>Difficultés</strong> : moyen a difficile</p>
+      "))
+    }
   end
 
   def handle_event("show_card", %{"card" => card}, socket) do

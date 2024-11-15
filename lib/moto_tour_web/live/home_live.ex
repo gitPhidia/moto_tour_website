@@ -21,10 +21,6 @@ defmodule MotoTourWeb.HomeLive do
   def render(assigns) do
     ~H"""
 
-
-
-
-
     <div class="container-fluid mt-5">
     <p>haha</p>
       <div class="row">

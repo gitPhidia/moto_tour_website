@@ -8,7 +8,8 @@ create table circuits (
     difficulté varchar,
     photo varchar,
     details varchar,
-    remarque varchar
+    remarque varchar,
+    desc_card varchar
 );
 
 create table itinéraire (
@@ -18,32 +19,25 @@ create table itinéraire (
     remarque varchar
 );
 
--- create table site (
---     id int,   
---     nom varchar
--- );
-
--- create table site_marquant(
---     id integer,
---     idcircuit integer,
---     idsite integer
--- );
-
 create table (
     id integer,
     nom varchar,
 );
 
+insert into itinéraire (idcircuit,itinéraire,remarque) VALUES (4,'Antananarivo','A votre arrivée à l’aéroport international d’Ivato, vous êtes accueillis et conduits directement à votre hôtel.');
+
 insert into circuits (nom,tarifs, "durée", moto, "difficulté", photo, details, remarque,inserted_at,updated_at)
 	VALUES ('les trois lacs en 6 jours',1890, '6 jours, dont 6 jours de moto, circuit de 900 km', ' KTM 350 – 450', 'Moyen à Difficile', '1.jpg', 
     'Parcours journalier,Région : Hauts plateaux', 'En quête d’aventure, sillonner les toits de Madagascar avec cet enduro de 6 jours sur les pistes des trois lacs. Ce parcours autour des hauts plateaux vous réservera : plusieurs kilomètres de routes, pistes, terres et boues. En partant de la capitale, découvrez la végétation le long de la RN2. Faites des rencontres avec la population aussi hospitalière, et découvrez les spécialités culinaires locales.
-     Surtout, sur votre moto, profitez des magnifiques paysages, des rizières, cultures en terrasse et de la vue sur les sentiers volcaniques d’Ampefy.','15-11-2024','15-11-2024');
+     Surtout, sur votre moto, profitez des magnifiques paysages, des rizières, cultures en terrasse et de la vue sur les sentiers volcaniques d’Ampefy.','15-11-2024','15-11-2024',
+    'Antananarivo, Antsirabe, Anjozorobe, Ampefy, Mantasoa, Ambatolampy');
 
 insert into circuits (nom,tarifs, "durée", moto, "difficulté", photo, details, remarque,inserted_at,updated_at)
 	VALUES ('Les 2 lacs en 3 jours',990, '3 jours, dont 3 jours de moto, circuit de 450 km', '  KTM 350 – 450', ' Difficile à très difficile', '2.jpg', 
     'Parcours journalier,Région : Hauts plateaux', 'circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.
-Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,
-appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.','15-11-2024','15-11-2024');
+    Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,
+    appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.','15-11-2024','15-11-2024',
+    'Antananarivo, Anjozorobe, Mantasoa');
 
 insert into circuits (nom,tarifs, "durée", "difficulté", photo, details, remarque,inserted_at,updated_at)
 	VALUES ('La piste des Baobabs','3390','10 j - 11nuits (09 jours de moto)','Moyen + à Difficile','3.jpg','SITES MARQUANTS :
@@ -79,7 +73,7 @@ Tarif sur base d’un groupe de 10 pilotes incluant : le transfert et l’hôtel
 La variété hors normes de ce parcours Enduro qui part de la capitale Antananarivo située dans les hauts-plateaux, jusqu’aux pistes côtières longeant le Canal du Mozambique, 
 justifie les efforts quotidiens. Beau mais pas facile, il faut gérer sur la longueur du circuit les pistes de latérite rouge, 
 tantot dur comme du béton, tantot patinoire si la pluie se mêle de la partie, et les pistes de sables qui réclament un peu de technique. 
-C’est ce circuit qui est à l’origine de l’Aventure Malgache qui continue depuis 25 ans…','15-11-2024','15-11-2024');
+C’est ce circuit qui est à l’origine de l’Aventure Malgache qui continue depuis 25 ans…','15-11-2024','15-11-2024','Antananarivo, Tuléar, Antsirabe, Morondava, Manja, Andavadoaka');
 
 insert into circuits (nom,tarifs, "durée", "difficulté", photo, details, remarque,inserted_at,updated_at)
 	VALUES ('Le Sud Sauvage',3690,'11 j - 11 nuits (10 jours de moto)','Très Difficile','4.jpg','SITES MARQUANTS :
@@ -117,4 +111,5 @@ Les dépenses personnelles (boissons, pourboires, divers achats)
 Tarif sur base d’un groupe de 10 pilotes incluant : le transfert et l’hôtel à l’arrivé de l’aéroport , 
 l’hébergement en pension complète, la location et le carburant de la moto, le guide Moto Accompagnateur, le 4×4 d’assistance avec son carburant et le vol interne province – Tananarive.',
 'Le Sud de Madagascar s’offre à vous : entre ciel et mer, au milieu d’un paysage de bush et de sable semi-désertique, vous découvrirez une culture et une nature à nul autre pareil. 
-Cette descente progressive depuis les hautes terres jusqu’aux côtes de l’est vous permettra d’apprécier une multitude de paysages et de types de piste : sable, terre, boue ponctueront un parcours difficile mais somptueux.'
+Cette descente progressive depuis les hautes terres jusqu’aux côtes de l’est vous permettra d’apprécier une multitude de paysages et de types de piste : sable, terre, boue ponctueront un parcours difficile mais somptueux.','15-11-2024','15-11-2024',
+' Antananarivo, Tuléar, Ambositra, Manakara, Fort-Dauphin, Ranomafana, Lavanono, Itampolo, Anakao');

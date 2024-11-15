@@ -3,7 +3,8 @@ defmodule MotoTourWeb.PageController do
   alias MotoTour.Circuits
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    circuits = Circuits.list_circuits()
+    render(conn, "index.html", circuits: circuits)
   end
 
   def liste(conn, _params) do

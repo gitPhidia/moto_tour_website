@@ -1,6 +1,8 @@
 defmodule MotoTourWeb.Card do
   use Phoenix.Component
 
+
+
   def card(assigns) do
   ~H"""
     <div class="card h-100" style="background-color: #F6F4F4;">
@@ -9,7 +11,7 @@ defmodule MotoTourWeb.Card do
 
       <!-- Orange Bar Section (Title) -->
       <div class="card-title-bar text-center py-2" style="background-color: orange; color: white;">
-        <h5 class="card-title m-0" style="font-size: 1.25rem;">produit 1</h5>
+        <h5 class="card-title m-0" style="font-size: 1.25rem;"><%= render_slot(@nom_block) %></h5>
       </div>
 
       <!-- Card Body -->
@@ -31,7 +33,7 @@ defmodule MotoTourWeb.Card do
         <!-- Row pour le prix et le bouton Réserver -->
         <div class="row mb-2">
           <div class="col-6 d-flex align-items-center">
-            <.display_price />
+            <.display_price price={@price} />
           </div>
           <div class="col-6 d-flex justify-content-end">
             <a href="#" class="btn btn-success btn-sm" style="font-size: 0.9rem; padding: 6px 12px; border-radius: 0; outline: none; border: none;">
@@ -46,15 +48,16 @@ defmodule MotoTourWeb.Card do
 end
 
 
-
-
-
-
   defp display_price(assigns)  do
     ~H"""
-        <p class="card-price mb-0" style="font-size: 1.1rem; font-weight: bold;">
-                29,99 €
+        <p class="card-price mb-0 test" style="font-size: 1.1rem; font-weight: bold;">
+          <%= @price %> €
         </p>
+        <!-- <style>
+          .test  {
+              color: red;
+            }
+        </style> -->
     """
   end
 

@@ -61,78 +61,24 @@
 
   <!-- Troisième row : Grille de produits avec des cards -->
    <div class="row">
+    <%= for circuit <- @circuits do %>
   <!-- Card 1 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/1.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
+    <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+      <.card
+        image={Routes.static_path(@conn,"/assets/images/section/" <> circuit.photo)}
+        rate_count={2}
+        max_rate_count={5}
+        price={circuit.tarifs}>
+        <:nom_block>
+           <%= circuit.nom %>
+        </:nom_block>
+        <:description_block>
+          <%= circuit.desc_card %>
+        </:description_block>
+      </.card>
+    </div>
+    <% end %>
   </div>
-
-  <!-- Card 2 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/2.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-
-  <!-- Card 3 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/3.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-
-  <!-- Card 4 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/4.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-
-  <!-- Card 5 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/5.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-
-  <!-- Card 6 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/6.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-   </div>
 
   </div>
 </section>

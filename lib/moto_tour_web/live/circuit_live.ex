@@ -75,29 +75,24 @@ defmodule MotoTourWeb.CircuitLive do
       </div>
       <%= render_card(assigns) %>
 
-    <div class="container">
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="background-color:grey">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src='...' alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src={Routes.static_path(@socket, "/assets/images/section/1.jpg")} alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src={Routes.static_path(@socket, "/assets/images/section/1.jpg")} alt="Third slide">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
+      <script>
+        // Initialisation de l'index
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+
+        // Fonction pour changer d'image
+        function moveCarousel(direction) {
+          // Enlève la classe active de l'image actuelle
+          items[currentIndex].classList.remove('active');
+
+          // Calcule le nouvel index
+          currentIndex = (currentIndex + direction + items.length) % items.length;
+
+          // Ajoute la classe active à la nouvelle image
+          items[currentIndex].classList.add('active');
+        }
+      </script>
+
     """
   end
 
@@ -112,7 +107,25 @@ defmodule MotoTourWeb.CircuitLive do
           <!-- Image -->
           <div class="col-lg-4 col-md-12">
             <div class="container_image d-flex justify-content-end">
-              <img src={Routes.static_path(@socket, "/assets/images/section/1.jpg")} class="img-fluid rounded w-100">
+              <div class="carousel-inner">
+                <div id="carousel-item-1" class="carousel-item active">
+                  <img src={Routes.static_path(@socket, "/assets/images/section/1.jpg")} class="d-block w-100" alt="Image 1">
+                </div>
+                <div id="carousel-item-2" class="carousel-item">
+                  <img src={Routes.static_path(@socket, "/assets/images/section/2.jpg")} class="d-block w-100" alt="Image 2">
+                </div>
+                <div id="carousel-item-3" class="carousel-item">
+                  <img src={Routes.static_path(@socket, "/assets/images/section/3.jpg")} class="d-block w-100" alt="Image 3">
+                </div>
+                <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" onclick="moveCarousel(+1)">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
             </div>
 
               <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
@@ -191,7 +204,7 @@ defmodule MotoTourWeb.CircuitLive do
                         </div>
                       </div>
                     " style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                    <li><button phx-click="change_content" phx-value-param="parametre_personnalise_5" style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>Sites marquants</strong></button></li>
+                    <li><button phx-click="change_content" phx-value-param="parametre_personnalise_5" style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>sites marquants</strong></button></li>
                     <li><button phx-click="change_content" phx-value-param="parametre_personnalise_2" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
                     <li><button phx-click="change_content" phx-value-param="parametre_personnalise_3" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
                   </ul>
@@ -401,11 +414,11 @@ defmodule MotoTourWeb.CircuitLive do
             <div class="product-menu text-center">
                 <nav>
                     <ul class="circuitpage">
-                        <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
-                        <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-euro"></i><br><strong>Tarifs</strong></button></li>
-                        <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-clock"></i><br><strong>Durée</strong></button></li>
-                        <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                        <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>Sites marquants</strong></button></li>
+                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
+                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-euro"></i><br><strong>Tarifs</strong></button></li>
+                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-clock"></i><br><strong>Durée</strong></button></li>
+                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
+                      <li><button phx-click="toggle_info" style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>Sites marquants</strong></button></li>
                     </ul>
                 </nav>
             </div>

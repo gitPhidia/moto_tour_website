@@ -18,7 +18,8 @@ defmodule MotoTourWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/liste",  PageController, :liste
+    get "/liste", PageController, :liste
+    get "/propos", PageController, :propos
     # Route pour la LiveView Home
     live "/home", HomeLive
     live "/circuit", CircuitLive

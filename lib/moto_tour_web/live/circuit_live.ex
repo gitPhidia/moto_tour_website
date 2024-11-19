@@ -20,47 +20,132 @@ defmodule MotoTourWeb.CircuitLive do
   def handle_event("show_card", %{"card" => card}, socket) do
     cards= Circuits.single_circuit(card)
     second_card_content_html = function_destination(card)
+    socket = reset_content(socket)
     {:noreply, assign(socket, selected_card: card, circuit: cards, card_content: raw(second_card_content_html))}
   end
 
   # montre les contenue du boutton destination
   def handle_event("change_content",  %{"param" => param}, socket) do
-    second_card_content = Circuits.single_circuit(param)
     second_card_content_html = function_destination(param)
+    socket = reset_content(socket)
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html))}
   end
 
   def handle_event("change_liste",  %{"param" => param}, socket) do
+    second_card_itineraire_html = function_itineraire(param)
+    socket = reset_content(socket)
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_itineraire_html))}
+  end
+
+  def handle_event("change_question",  %{"param" => param}, socket) do
+    socket = reset_content(socket)
+    second_card_html = """
+        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
+          Questions
+        </h3>
+        <p>nom</p>
+        <input type='text'>
+        <p>E-mail</p>
+        <input type='email'>
+        <p>Message</p>
+        <input type='text'>
+        <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
+          <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">envoyer un message</a>
+        </div>
+        """
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
+  end
+
+  def handle_event("change_avis",  %{"param" => param}, socket) do
+    socket = reset_content(socket)
+    second_card_html = """
+        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
+          Rediger un avis
+        </h3>
+        <p>Titre de l’avis</p>
+        <input type='text'>
+        <p>Texte de l'avis</p>
+        <input type='text'>
+        <p>nom</p>
+        <input type='text'>
+        <p>E-mail</p>
+        <input type='email'>
+        <p>Message</p>
+        <input type='text'>
+        <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
+          <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Laisser un avis</a>
+        </div>
+        """
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
+  end
+
+  def handle_event("change_reservation",  %{"param" => param}, socket) do
+    socket = reset_content(socket)
+    second_card_html = """
+        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
+          Faîtes votre réservation
+        </h3>
+        <p>votre nom (obligatoire)</p>
+        <input type='text'>
+        <p>Votre adresse de messagerie (obligatoire)</p>
+        <input type='email'>
+        <p>Votre téléphone (obligatoire)</p>
+        <input type='text'>
+        <p>Nombre participant(s)</p>
+        <input type='number'>
+        <p>Date souhaitée</p>
+        <input type='date'>
+        <p>Besoin supplementaire</p>
+        <input type='text'>
+        <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
+          <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
+        </div>
+        """
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
+  end
+
+  def handle_event("change_remarque",  %{"param" => param}, socket) do
     second_card_content = Circuits.single_circuit(param)
-    second_card_content_html = function_itineraire(param)
+    second_card_content_html =
+      for circuit <- second_card_content do
+        """
+        <p>#{circuit.details}</p>
+        """
+      end
+    |> Enum.join("") # Concatène toutes les chaînes en une seule
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html))}
+  end
+
+  defp reset_content(socket) do
+    assign(socket, card_content: %{}, show_card_second: false)
   end
 
   # concatène les resultats en html
   defp function_itineraire(param) do
-    second_card_content = Itineraires.itineraire_circuit(param)
-    second_card_content_html =
-      for c <- second_card_content do
+    second_card_content = Itineraires.list_itineraire()
+    filtered_content = Enum.filter(second_card_content, fn c -> c.idcircuit == String.to_integer(param) end)
+    second_card_itineraire_html =
+      for c <- filtered_content do
         """
-        <div id='accordion'>
+          <div id='accordion'>
             <div class='card'>
               <div class='card-header' id='headingOne'>
                   <div class='row'>
                     <div class='col-md-11'>
-                      <a data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+                      <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
                         <h6 class='mb-0'>
                           #{c.itineraire}
                         </h6>
                       </a>
                     </div>
                     <div class='col-md-1 mt-1'>
-                      <a data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+                      <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
                         <i class='fa fa-angle-down' aria-hidden='true'></i>
                       </a>
                     </div>
                   </div>
 
-                <div id='collapseOne' class='collapse' aria-labelledby='headingOne' data-parent='#accordion'>
+                <div id='collapse#{c.id}' class='collapse' aria-labelledby='heading#{c.id}' data-parent='#accordion'>
                   <div class='card-body'>
                     #{c.remarque}
                   </div>
@@ -70,9 +155,8 @@ defmodule MotoTourWeb.CircuitLive do
           </div>
         """
       end
-      |> Enum.join("") # Concatène toutes les chaînes en une seule
+    |> Enum.join("") # Concatène toutes les chaînes en une seule
   end
-
 
   # concatène les resultats en html
   defp function_destination(param) do
@@ -88,7 +172,7 @@ defmodule MotoTourWeb.CircuitLive do
         <p><strong>Tarifs</strong> : à partir de #{circuit.tarifs} €</p>
         """
       end
-      |> Enum.join("") # Concatène toutes les chaînes en une seule
+    |> Enum.join("") # Concatène toutes les chaînes en une seule
   end
 
   def render(assigns) do
@@ -142,6 +226,7 @@ defmodule MotoTourWeb.CircuitLive do
           // Ajoute la classe active à la nouvelle image
           items[currentIndex].classList.add('active');
         }
+
       </script>
 
     """
@@ -152,7 +237,7 @@ defmodule MotoTourWeb.CircuitLive do
     <%= for c <- @circuit do %>
       <div class="container w-100">
         <div class="row">
-            <h4 class="text-start"><%= c.nom %></h4>
+            <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;"><%= c.nom %></h4>
           <div class="col-lg-4 col-md-12">
             <div class="container_image d-flex justify-content-end">
               <div class="carousel-inner">
@@ -176,24 +261,25 @@ defmodule MotoTourWeb.CircuitLive do
               </div>
             </div>
 
-              <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
+              <!-- <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
                 <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
-              </div>
+              </div> -->
             <div class="vc_empty_space" style="height: 30px">
               <span class="vc_empty_space_inner"></span>
             </div>
           </div>
           <!-- Texte -->
-          <div class="col-lg-7 col-md-12 mb-4">
+          <div class="col-lg-8 col-md-12 mb-4">
             <div class="product-menu text-center">
               <nav>
                   <ul class="circuitpage">
                     <li><button phx-click="change_content" phx-value-param={c.id}
                       style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
                     <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                    <li><button phx-click="change_content" phx-value-param="parametre_personnalise_5" style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>sites marquants</strong></button></li>
-                    <li><button phx-click="change_content" phx-value-param="parametre_personnalise_2" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
-                    <li><button phx-click="change_content" phx-value-param="parametre_personnalise_3" style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
+                    <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>sites marquants</strong></button></li>
+                    <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
+                    <li><button phx-click="change_avis" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
+                    <li><button phx-click="change_reservation" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-ticket"></i><br><strong>Reservation</strong></button></li>
                   </ul>
               </nav>
             </div>

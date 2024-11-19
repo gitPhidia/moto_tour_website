@@ -24,7 +24,7 @@
 
       <!-- Troisième colonne : Bouton -->
      <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
-        <a href="#parcours" class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
      </div>
     </div>
   </div>
@@ -66,7 +66,7 @@
     <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
       <.card
         image={Routes.static_path(@conn,"/assets/images/section/" <> circuit.photo)}
-        rate_count={2}
+        rate_count={1}
         max_rate_count={5}
         price={circuit.tarifs}>
         <:nom_block>
@@ -98,7 +98,7 @@
 
       <!-- Troisième colonne : Bouton -->
      <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
-        <a href="#parcours" class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
      </div>
     </div>
   </div>
@@ -150,7 +150,7 @@
     <div class="row">
       <div class="col-lg-6">  
         <div class="text-center mt-3">
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
         </div>
       </div>
     </div>
@@ -190,7 +190,7 @@
     </div>
       <div class="col-lg-6">  
         <div class="text-center mt-3">
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
         </div>
       </div>
     </div>
@@ -205,7 +205,7 @@
   <div class="row">
     <!-- Texte -->
     <div class="col-lg-6 col-md-12 mb-4">
-      <h3>RD 43 en 6 jours</h3>
+      <h3>La piste des Baobabs</h3>
       <blockquote>
         <i class="fa fa-quote-left fa-xs text-secondary"></i>Les hautes terres centrales à votre portée : explorez les hauts plateaux en effectuant le parcours RD 43 en 6 jours. Sur plusieurs kilomètres, les pistes techniques et les zones montagneuses des hauts plateaux vous attendent. Profiter également de ce moment de découverte historique et culturelle, et admirez au guidon de votre moto la beauté de la nature et des paysages. Ne manquez surtout pas de goûter aux spécialités culinaires malgaches en arrivant dans les villes et villages du parcours.
         <i class="fa fa-quote-right fa-xs text-secondary"></i>
@@ -226,7 +226,7 @@
   <div class="row">
     <div class="col-lg-6">  
       <div class="text-center mt-3">
-        <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
       </div>
     </div>
   </div>
@@ -265,7 +265,7 @@
     </div>
       <div class="col-lg-6">  
         <div class="text-center mt-3">
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
         </div>
       </div>
     </div>

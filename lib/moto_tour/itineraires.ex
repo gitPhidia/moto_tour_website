@@ -12,7 +12,6 @@ defmodule MotoTour.Itineraires do
 
   def itineraire_circuit(params) do
     liste = Repo.get_by(Itineraire, idcircuit: params)
-    itineraire = [liste]
   end
 
 end

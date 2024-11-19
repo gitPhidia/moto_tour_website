@@ -3,7 +3,8 @@ defmodule MotoTour.Repo.Migrations.CreateCircuits do
 
   def change do
     create table(:circuits) do
-      add :Tarifs, :decimal
+      add :nom, :string
+      add :tarifs, :decimal
       add :durée, :string
       add :participant, :integer
       add :moto, :string
@@ -11,6 +12,7 @@ defmodule MotoTour.Repo.Migrations.CreateCircuits do
       add :photo, :string
       add :details, :string
       add :remarque, :string
+      add :desc_card, :string
 
       timestamps()
     end

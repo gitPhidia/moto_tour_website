@@ -68,7 +68,9 @@
         image={Routes.static_path(@conn,"/assets/images/section/" <> circuit.photo)}
         rate_count={1}
         max_rate_count={5}
-        price={circuit.tarifs}>
+        price={circuit.tarifs}
+        link={Routes.live_path(@conn, MotoTourWeb.CircuitLive)}
+        >
         <:nom_block>
            <%= circuit.nom %>
         </:nom_block>
@@ -171,7 +173,7 @@
       <div class="col-lg-6 col-md-12 mb-4">
         <h3>Les 2 lacs en 3 jours</h3>
         <blockquote>
-          <i class="fa fa-quote-left fa-xs text-secondary"></i> circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
+          <i class="fa fa-quote-left fa-xs text-secondary"></i> Circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
             Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
             appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.
           <i class="fa fa-quote-right fa-xs text-secondary"></i>

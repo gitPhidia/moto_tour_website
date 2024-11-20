@@ -105,6 +105,7 @@ defmodule MotoTourWeb.CircuitLive do
   end
 
   def handle_event("change_remarque",  %{"param" => param}, socket) do
+    socket = reset_content(socket)
     second_card_content = Circuits.single_circuit(param)
     second_card_content_html =
       for circuit <- second_card_content do
@@ -125,37 +126,39 @@ defmodule MotoTourWeb.CircuitLive do
     second_card_content = Itineraires.list_itineraire()
     filtered_content = Enum.filter(second_card_content, fn c -> c.idcircuit == String.to_integer(param) end)
     second_card_itineraire_html =
-      for c <- filtered_content do
+    """
+      <div id='accordion'>
+        #{Enum.map(filtered_content, fn c ->
         """
-          <div id='accordion'>
-            <div class='card'>
-              <div class='card-header' id='headingOne'>
-                  <div class='row'>
-                    <div class='col-md-11'>
-                      <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
-                        <h6 class='mb-0'>
-                          #{c.itineraire}
-                        </h6>
-                      </a>
-                    </div>
-                    <div class='col-md-1 mt-1'>
-                      <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
-                        <i class='fa fa-angle-down' aria-hidden='true'></i>
-                      </a>
-                    </div>
-                  </div>
-
-                <div id='collapse#{c.id}' class='collapse' aria-labelledby='heading#{c.id}' data-parent='#accordion'>
-                  <div class='card-body'>
-                    #{c.remarque}
-                  </div>
+        <div class='card'>
+          <div class='card-header' id='headingOne'>
+              <div class='row'>
+                <div class='col-md-11'>
+                  <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
+                    <h6 class='mb-0'>
+                      #{c.itineraire}
+                    </h6>
+                  </a>
                 </div>
+                <div class='col-md-1 mt-1'>
+                  <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
+                    <i class='fa fa-angle-down' aria-hidden='true'></i>
+                  </a>
+                </div>
+              </div>
+
+            <div id='collapse#{c.id}' class='collapse' aria-labelledby='heading#{c.id}' data-parent='#accordion'>
+              <div class='card-body'>
+                #{c.remarque}
               </div>
             </div>
           </div>
+        </div>
         """
-      end
-    |> Enum.join("") # Concatène toutes les chaînes en une seule
+        end)
+        |> Enum.join("")}
+      </div>
+    """
   end
 
   # concatène les resultats en html
@@ -237,7 +240,12 @@ defmodule MotoTourWeb.CircuitLive do
     <%= for c <- @circuit do %>
       <div class="container w-100">
         <div class="row">
+          <div class="col-md-9">
             <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;"><%= c.nom %></h4>
+          </div>
+          <div class="col-md-3">
+            <h4 class="fw-bold text-primary" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">à partir de <%= c.tarifs %>€</h4>
+          </div>
           <div class="col-lg-4 col-md-12">
             <div class="container_image d-flex justify-content-end">
               <div class="carousel-inner">
@@ -261,9 +269,6 @@ defmodule MotoTourWeb.CircuitLive do
               </div>
             </div>
 
-              <!-- <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
-                <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
-              </div> -->
             <div class="vc_empty_space" style="height: 30px">
               <span class="vc_empty_space_inner"></span>
             </div>

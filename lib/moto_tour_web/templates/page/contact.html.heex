@@ -1,0 +1,52 @@
+<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/dirt-bike-rider-with-his-motorcycle-racing-circuits-adventure.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 60vh; color: white;"}>
+  <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100%;">
+    <div class="text-center">
+        <h1 class="fw-bold" style="color: #ffffff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 3em;">
+            Découvrez nos Offres Spéciales
+        </h1>
+      <p class="lead">"Profitez de nos offres exclusives pour des expériences inoubliables."</p>
+    </div>
+  </div>
+</section>
+<section class="transition-section py-5">
+  <div class="container">
+    <div class="row text-white">
+      <!-- Première colonne : Image -->
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
+      </div>
+
+      <!-- Deuxième colonne : Texte -->
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <p class="text-center lead">"Vivez une nouvelle expérience avec nos parcours inoubliables."</p>
+      </div>
+
+      <!-- Troisième colonne : Bouton -->
+     <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
+     </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+    <p class="lead">Pour réserver un circuit ou pour toute demande d’information, n’hésitez pas à nous contacter, notre équipe se fera un plaisir de vous répondre le plus rapidement possible.
+
+    Vous pouvez nous contacter par mail en remplissant ce formulaire ou en nous téléphonant à un des numéros indiqués sur cette page. Veuillez remplir ce formulaire en complétant tous les champs requis. Nous vous contacterons dès que possible.
+            
+    </p>
+    <p>nom</p>
+    <input type='text'>
+    <p>E-mail</p>
+    <input type='email'>
+    <p>telephone</p>
+    <input type='text'>
+    <p>Message</p>
+    <textarea></textarea>
+    <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
+        <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">envoyer un message</a>
+    </div>
+    <div class="vc_empty_space" style="height: 30px">
+        <span class="vc_empty_space_inner"></span>
+    </div>
+</div>

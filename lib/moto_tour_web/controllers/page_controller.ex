@@ -11,6 +11,10 @@ defmodule MotoTourWeb.PageController do
     render(conn, "propos.html")
   end
 
+  def contact(conn, _params) do
+    render(conn, "contact.html")
+  end
+
   def liste(conn, _params) do
     circuits = Circuits.list_circuits()
     # Passer les produits au template

@@ -11,7 +11,7 @@ defmodule MotoTourWeb.Card do
 
       <!-- Orange Bar Section (Title) -->
       <div class="card-title-bar text-center py-2" style="background-color: orange; color: white;">
-        <h5 class="card-title m-0" style="font-size: 1.25rem;"><%= render_slot(@nom_block) %></h5>
+        <h5 class="card-title m-0" style="font-size: 1.25rem;"><a href={@link}><%= render_slot(@nom_block) %></a></h5>
       </div>
 
       <!-- Card Body -->
@@ -36,7 +36,7 @@ defmodule MotoTourWeb.Card do
             <.display_price price={@price} />
           </div>
           <div class="col-6 d-flex justify-content-end">
-            <a href="#" class="btn btn-success btn-sm" style="font-size: 0.9rem; padding: 6px 12px; border-radius: 0; outline: none; border: none;">
+            <a href={@link} class="btn btn-success btn-sm" style="font-size: 0.9rem; padding: 6px 12px; border-radius: 0; outline: none; border: none;">
               Réserver
             </a>
           </div>

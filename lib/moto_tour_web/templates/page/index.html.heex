@@ -63,7 +63,7 @@
    <div class="row">
     <%= for circuit <- @circuits do %>
   <!-- Card 1 -->
-    <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+    <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto align-items-start">
       <.card
         image={Routes.static_path(@conn,"/assets/images/section/" <> circuit.photo)}
         rate_count={1}

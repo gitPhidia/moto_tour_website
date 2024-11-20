@@ -244,19 +244,19 @@ defmodule MotoTourWeb.CircuitLive do
             <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;"><%= c.nom %></h4>
           </div>
           <div class="col-md-3">
-            <h4 class="fw-bold text-primary" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">à partir de <%= c.tarifs %>€</h4>
+            <h4 class="fw-bold text-success" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">à partir de <%= c.tarifs %>€</h4>
           </div>
           <div class="col-lg-4 col-md-12">
             <div class="container_image d-flex justify-content-end">
               <div class="carousel-inner">
                 <div id="carousel-item-1" class="carousel-item active">
-                  <img src={Routes.static_path(@socket, "/assets/images/section/" <> c.photo)} class="d-block w-100" alt="Image 1">
+                  <img src={Routes.static_path(@socket, "/assets/images/section/" <> c.photo)} class="img-fluid rounded w-100" alt="Image 1">
                 </div>
                 <div id="carousel-item-2" class="carousel-item">
-                  <img src={Routes.static_path(@socket, "/assets/images/section/2.jpg")} class="d-block w-100" alt="Image 2">
+                  <img src={Routes.static_path(@socket, "/assets/images/section/2.jpg")} class="img-fluid rounded w-100" alt="Image 2">
                 </div>
                 <div id="carousel-item-3" class="carousel-item">
-                  <img src={Routes.static_path(@socket, "/assets/images/section/3.jpg")} class="d-block w-100" alt="Image 3">
+                  <img src={Routes.static_path(@socket, "/assets/images/section/3.jpg")} class="img-fluid rounded w-100" alt="Image 3">
                 </div>
                 <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>

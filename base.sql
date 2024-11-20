@@ -20,10 +20,6 @@ create table itinéraire (
     remarque varchar
 );
 
-create table (
-    id integer,
-    nom varchar,
-);
 
 insert into itineraires (idcircuit,itineraire,remarque,inserted_at,updated_at) VALUES (1,'Antananarivo','A votre arrivée à l’aéroport international d’Ivato, vous êtes accueillis et conduits directement à votre hôtel.','18-11-2021','18-11-2024');
 insert into itineraires (idcircuit,itineraire,remarque,inserted_at,updated_at) VALUES (1,'Jour 1 : Antananarivo – Ampefy : 221 km','Vous partirez de bonne heure de la capitale pour rejoindre le centre de Madagascar. Vous découvrirez les pistes environnant les hauts plateaux, et vous arriverez à Ampefy. Découvrez le lac Itasy ainsi que les sentiers volcaniques de la région.','18-11-2024','18-11-2024');

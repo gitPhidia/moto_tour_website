@@ -2,10 +2,9 @@
 
     <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100vh;">
         <div style="margin-top: 250px;"> <!-- Ajout d'un margin-top ici -->
-            <h1 class="display-4 mb-4">Bienvenue à Moto Parcours</h1>
-            <p class="lead">Des pistes surprenantes, des paysages somptueux,<br> hors du temps et une hospitalité toujours bienveillante.<br> Après 30 ans à sillonner la grande île, c’est toujours avec un grand plaisir que j’accompagne les motards <br> les plus expérimentés comme les novices sur les chemins connus et moins connus de Madagascar.</p>
-            <p class="text-end"><i class="fa fa-quote-right fa-xs text-secondary"></i> <strong> François Serrano </strong> </p>
-
+          <h1 class="display-4 mb-4">Bienvenue à Moto Parcours</h1>
+          <p class="lead">Des pistes surprenantes, des paysages somptueux,<br> hors du temps et une hospitalité toujours bienveillante.<br> Après 30 ans à sillonner la grande île, c’est toujours avec un grand plaisir que j’accompagne les motards <br> les plus expérimentés comme les novices sur les chemins connus et moins connus de Madagascar.</p>
+          <p class="text-end"><i class="fa fa-quote-right fa-xs text-secondary"></i> <strong> François Serrano </strong> </p>
         </div>
     </div>
 </section>
@@ -24,7 +23,7 @@
 
       <!-- Troisième colonne : Bouton -->
      <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
-        <a href="#parcours" class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
      </div>
     </div>
   </div>
@@ -39,38 +38,16 @@
     </div>
   </div>
 </section>
-<section class="transition-section py-5">
-  <div class="container">
-    <div class="row text-white">
-      <!-- Première colonne : Image -->
-      <div class="col-md-4 d-flex justify-content-center align-items-center">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
-      </div>
-
-      <!-- Deuxième colonne : Texte -->
-      <div class="col-md-4 d-flex justify-content-center align-items-center">
-        <p class="text-center lead">Circuits moto et voyages moto avec guide et assistance sur les routes de Madagascar.</p>
-      </div>
-
-      <!-- Troisième colonne : Bouton -->
-     <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
-        <a href="#parcours" class="btn btn-light btn-lg rounded-pill fs-6">Contactez-nous !</a>
-     </div>
-    </div>
-  </div>
-</section>
 <section class="product-section py-5">
   <div class="container">
     <!-- Première row : Titre et phrase phare -->
     <div class="row text-center mb-4 justify-content-center">
-    <div class="col-10">
+      <div class="col-10">
         <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
         Voyage organisé à moto ou location de Moto, les routes les plus exotiques s’offrent à vous
         </h3>
-        <!--<p class="lead">"Découvrez notre sélection de produits phares pour une expérience unique."</p> -->
+      </div>
     </div>
-    </div>
-
 
     <!-- Deuxième row : Description -->
     <div class="row text-center mb-5 justify-content-center">
@@ -81,78 +58,26 @@
 
   <!-- Troisième row : Grille de produits avec des cards -->
    <div class="row">
+    <%= for circuit <- @circuits do %>
   <!-- Card 1 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/1.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
+    <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto align-items-start">
+      <.card
+        image={Routes.static_path(@conn,"/assets/images/section/" <> circuit.photo)}
+        rate_count={1}
+        max_rate_count={5}
+        price={circuit.tarifs}
+        link={Routes.live_path(@conn, MotoTourWeb.CircuitLive)}
+        >
+        <:nom_block>
+           <%= circuit.nom %>
+        </:nom_block>
+        <:description_block>
+          <%= circuit.desc_card %>
+        </:description_block>
+      </.card>
+    </div>
+    <% end %>
   </div>
-
-  <!-- Card 2 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/2.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-
-  <!-- Card 3 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/3.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-
-  <!-- Card 4 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/4.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-
-  <!-- Card 5 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/5.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-
-  <!-- Card 6 -->
-  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-    <.card
-      image={Routes.static_path(@conn, "/assets/images/section/6.jpg")}
-      rate_count={2}
-      max_rate_count={5}>
-      <:description_block>
-        Description rapide du produit 1. Cette description peut être plus longue et s'adaptera sans perturber l'alignement.
-      </:description_block>
-    </.card>
-  </div>
-   </div>
 
   </div>
 </section>
@@ -172,7 +97,7 @@
 
       <!-- Troisième colonne : Bouton -->
      <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
-        <a href="#parcours" class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
      </div>
     </div>
   </div>
@@ -195,9 +120,9 @@
     </div>
   </div>
 
-<%!-- reservation de circuit --%>
-<%!-- reservation avec image à droite --%>
-<%!-- r1 --%>
+<!-- reservation de circuit -->
+<!-- reservation avec image à droite -->
+<!-- r1 -->
 <section class="reservation-section">
   <div class="container">
     <div class="row">
@@ -224,7 +149,7 @@
     <div class="row">
       <div class="col-lg-6">  
         <div class="text-center mt-3">
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
         </div>
       </div>
     </div>
@@ -234,7 +159,7 @@
     <span class="vc_empty_space_inner"></span>
   </div>
 
-  <%!-- r2 --%>
+  <!-- r2 -->
   <div class="container">
     <div class="row">
       <!-- Image -->
@@ -245,7 +170,7 @@
       <div class="col-lg-6 col-md-12 mb-4">
         <h3>Les 2 lacs en 3 jours</h3>
         <blockquote>
-          <i class="fa fa-quote-left fa-xs text-secondary"></i> circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
+          <i class="fa fa-quote-left fa-xs text-secondary"></i> Circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
             Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
             appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.
           <i class="fa fa-quote-right fa-xs text-secondary"></i>
@@ -264,7 +189,7 @@
     </div>
       <div class="col-lg-6">  
         <div class="text-center mt-3">
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
         </div>
       </div>
     </div>
@@ -274,12 +199,12 @@
     <span class="vc_empty_space_inner"></span>
   </div>
 
-<%!-- r3 --%>
+<!-- r3 -->
 <div class="container">
   <div class="row">
     <!-- Texte -->
     <div class="col-lg-6 col-md-12 mb-4">
-      <h3>RD 43 en 6 jours</h3>
+      <h3>La piste des Baobabs</h3>
       <blockquote>
         <i class="fa fa-quote-left fa-xs text-secondary"></i>Les hautes terres centrales à votre portée : explorez les hauts plateaux en effectuant le parcours RD 43 en 6 jours. Sur plusieurs kilomètres, les pistes techniques et les zones montagneuses des hauts plateaux vous attendent. Profiter également de ce moment de découverte historique et culturelle, et admirez au guidon de votre moto la beauté de la nature et des paysages. Ne manquez surtout pas de goûter aux spécialités culinaires malgaches en arrivant dans les villes et villages du parcours.
         <i class="fa fa-quote-right fa-xs text-secondary"></i>
@@ -300,7 +225,7 @@
   <div class="row">
     <div class="col-lg-6">  
       <div class="text-center mt-3">
-        <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
       </div>
     </div>
   </div>
@@ -339,7 +264,7 @@
     </div>
       <div class="col-lg-6">  
         <div class="text-center mt-3">
-          <a href="#" class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
+          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
         </div>
       </div>
     </div>
@@ -354,3 +279,4 @@
 <div class="vc_empty_space" style="height: 30px">
   <span class="vc_empty_space_inner"></span>
 </div>
+

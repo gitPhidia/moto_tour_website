@@ -18,9 +18,13 @@ defmodule MotoTourWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/liste", PageController, :liste
+    get "/propos", PageController, :propos
+    get "/contact", PageController, :contact
     # Route pour la LiveView Home
     live "/home", HomeLive
     live "/circuit", CircuitLive
+    live "/menu_card", MenuCardLive
   end
 
   # Other scopes may use custom stacks.

@@ -183,12 +183,12 @@ defmodule MotoTourWeb.CircuitLive do
      <section class="transition-section py-5">
         <div class="container mt-5">
           <div class="row text-white">
-            <!-- Première colonne : Image -->
+            <!--Première colonne : Image -->
             <div class="col-md-2 d-flex justify-content-center align-items-center">
               <img src={ Routes.static_path(@socket, "/assets/images/section/logo.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
             </div>
 
-            <!-- Deuxième colonne : Texte -->
+            <!--Deuxième colonne : Texte -->
             <div class="col-md-8 d-flex justify-content-center align-items-center">
               <p class="text-center lead"><h5>"Vivez une nouvelle expérience avec nos parcours inoubliables."</h5></p>
             </div>
@@ -210,27 +210,8 @@ defmodule MotoTourWeb.CircuitLive do
           </div>
         </div>
       </div>
+
       <%= render_card(assigns) %>
-
-      <!-- script js pour le carousel des images -->
-      <script>
-        // Initialisation de l'index
-        let currentIndex = 0;
-        const items = document.querySelectorAll('.carousel-item');
-
-        // Fonction pour changer d'image
-        function moveCarousel(direction) {
-          // Enlève la classe active de l'image actuelle
-          items[currentIndex].classList.remove('active');
-
-          // Calcule le nouvel index
-          currentIndex = (currentIndex + direction + items.length) % items.length;
-
-          // Ajoute la classe active à la nouvelle image
-          items[currentIndex].classList.add('active');
-        }
-
-      </script>
 
     """
   end

@@ -7,6 +7,10 @@ defmodule MotoTourWeb.PageController do
     render(conn, "index.html", circuits: circuits)
   end
 
+  def menu(conn, _params) do
+    render(conn, "dashboard.html")
+  end
+
   def propos(conn, _params) do
     render(conn, "propos.html")
   end

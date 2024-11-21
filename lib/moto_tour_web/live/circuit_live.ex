@@ -277,15 +277,15 @@ defmodule MotoTourWeb.CircuitLive do
           <div class="col-lg-8 col-md-12 mb-4">
             <div class="product-menu text-center">
               <nav>
-                  <ul class="circuitpage">
-                    <li><button phx-click="change_content" phx-value-param={c.id}
-                      style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
-                    <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                    <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fas fa-map-marker-alt"></i><br><strong>sites marquants</strong></button></li>
-                    <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
-                    <li><button phx-click="change_avis" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
-                    <li><button phx-click="change_reservation" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-ticket"></i><br><strong>Reservation</strong></button></li>
-                  </ul>
+                <ul class="circuitpage">
+                  <li><button phx-click="change_content" phx-value-param={c.id}
+                    style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
+                  <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
+                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Programme de Voyage</strong></button></li>
+                  <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
+                  <li><button phx-click="change_avis" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
+                  <li><button phx-click="change_reservation" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-ticket"></i><br><strong>Reservation</strong></button></li>
+                </ul>
               </nav>
             </div>
             <div class="row mr-4" style="margin-top:5%" phx-show={@show_card_second}>

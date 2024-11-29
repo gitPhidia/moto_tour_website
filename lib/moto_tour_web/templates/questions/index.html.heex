@@ -1,0 +1,32 @@
+<h1>Listing Question</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Idcircuit</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Message</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for questions <- @question do %>
+      <tr>
+        <td><%= questions.idcircuit %></td>
+        <td><%= questions.nom %></td>
+        <td><%= questions.email %></td>
+        <td><%= questions.message %></td>
+
+        <td>
+          <span><%= link "Show", to: Routes.questions_path(@conn, :show, questions) %></span>
+          <span><%= link "Edit", to: Routes.questions_path(@conn, :edit, questions) %></span>
+          <span><%= link "Delete", to: Routes.questions_path(@conn, :delete, questions), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Questions", to: Routes.questions_path(@conn, :new) %></span>

@@ -24,7 +24,6 @@ defmodule MotoTourWeb.Router do
     plug :fetch_session
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug MotoTourWeb.Plugs.RequireAdmin
   end
 
   # scope "/admin", MotoTourWeb.Admin do
@@ -85,23 +84,31 @@ defmodule MotoTourWeb.Router do
   scope "/", MotoTourWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
+  end
+
+  scope "/", MotoTourWeb do
+    pipe_through [:browser, :require_authenticated_user, :admin]
+
+    # get "/menu", PageController, :menu
+    live "/menu", BackLive
+    get "/ajout_circuit", CircuitsController, :ajoutc
+    post "/save_circuit", CircuitsController, :create
+
+    get "/index", ReservationController, :index
+
+    resources "/question", QuestionsController, only: [:new, :create, :index, :show, :edit, :delete, :update]
+    get "/circuit_enduro", PageController, :bcircuit
+    get "/users/settings", UserSettingsController, :edit
+    put "/users/settings", UserSettingsController, :update
+    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+    get "/users/register", UserRegistrationController, :new
+    post "/users/register", UserRegistrationController, :create
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
-  end
-
-  scope "/", MotoTourWeb do
-    pipe_through [:require_authenticated_user, :admin]
-
-    get "/menu", PageController, :menu
-    get "/users/settings", UserSettingsController, :edit
-    put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
   scope "/", MotoTourWeb do

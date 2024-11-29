@@ -12,8 +12,7 @@ defmodule MotoTourWeb.CircuitLive do
     first_circuit = List.first(circuits)
     # transorme les resultat en html,voir la foncrion function
     second_card_content_html = function_destination(first_circuit.id)
-    {:ok, assign(socket, selected_card: [first_circuit.id], circuit: [first_circuit], circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html))
-    }
+    {:ok, assign(socket, selected_card: [first_circuit.id], circuit: [first_circuit], circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html)) }
   end
 
   # montre la card: l'image et le tab de destination
@@ -31,12 +30,14 @@ defmodule MotoTourWeb.CircuitLive do
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html))}
   end
 
+  # montre la liste des itineraire
   def handle_event("change_liste",  %{"param" => param}, socket) do
     second_card_itineraire_html = function_itineraire(param)
     socket = reset_content(socket)
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_itineraire_html))}
   end
 
+  # handle event pour le boutton question
   def handle_event("change_question",  %{"param" => param}, socket) do
     socket = reset_content(socket)
     second_card_html = """
@@ -56,22 +57,23 @@ defmodule MotoTourWeb.CircuitLive do
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
   end
 
+  # H E pour le boutton avis
   def handle_event("change_avis",  %{"param" => param}, socket) do
     socket = reset_content(socket)
     second_card_html = """
         <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
           Rediger un avis
         </h3>
-        <p>Titre de l’avis</p>
-        <input type='text'>
-        <p>Texte de l'avis</p>
-        <input type='text'>
-        <p>nom</p>
-        <input type='text'>
-        <p>E-mail</p>
-        <input type='email'>
-        <p>Message</p>
-        <input type='text'>
+          <p>Titre de l’avis</p>
+          <input type='text'>
+          <p>Texte de l'avis</p>
+          <input type='text'>
+          <p>nom</p>
+          <input type='text'>
+          <p>E-mail</p>
+          <input type='email'>
+          <p>Message</p>
+          <input type='text'>
         <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
           <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Laisser un avis</a>
         </div>
@@ -79,24 +81,25 @@ defmodule MotoTourWeb.CircuitLive do
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
   end
 
+  # H E pour le boutton reservation
   def handle_event("change_reservation",  %{"param" => param}, socket) do
     socket = reset_content(socket)
     second_card_html = """
         <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
           Faîtes votre réservation
         </h3>
-        <p>votre nom (obligatoire)</p>
-        <input type='text'>
-        <p>Votre adresse de messagerie (obligatoire)</p>
-        <input type='email'>
-        <p>Votre téléphone (obligatoire)</p>
-        <input type='text'>
-        <p>Nombre participant(s)</p>
-        <input type='number'>
-        <p>Date souhaitée</p>
-        <input type='date'>
-        <p>Besoin supplementaire</p>
-        <input type='text'>
+          <p>votre nom (obligatoire)</p>
+          <input type='text'>
+          <p>Votre adresse de messagerie (obligatoire)</p>
+          <input type='email'>
+          <p>Votre téléphone (obligatoire)</p>
+          <input type='text'>
+          <p>Nombre participant(s)</p>
+          <input type='number'>
+          <p>Date souhaitée</p>
+          <input type='date'>
+          <p>Besoin supplementaire</p>
+          <input type='text'>
         <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
           <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
         </div>
@@ -104,6 +107,7 @@ defmodule MotoTourWeb.CircuitLive do
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
   end
 
+  # H E pour le boutton programme de voyage
   def handle_event("change_remarque",  %{"param" => param}, socket) do
     socket = reset_content(socket)
     second_card_content = Circuits.single_circuit(param)
@@ -197,6 +201,7 @@ defmodule MotoTourWeb.CircuitLive do
         </div>
       </section>
 
+      <!-- liste des crircuits -->
       <div class="row">
         <div class="col-md-12 h-50">
           <div class="product-menu text-center d-flex justify-content-center" style="border-bottom: 1px solid #e5e5e5;">
@@ -210,23 +215,30 @@ defmodule MotoTourWeb.CircuitLive do
           </div>
         </div>
       </div>
+      <!-- fin -->
 
       <%= render_card(assigns) %>
 
     """
   end
 
+  # rendue de chaque cricuit par rapport a la base de donnée
   def render_card(%{selected_card: card} = assigns) do
     ~H"""
     <%= for c <- @circuit do %>
       <div class="container w-100">
         <div class="row">
+
+          <!-- titre & prix -->
           <div class="col-md-9">
             <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;"><%= c.nom %></h4>
           </div>
           <div class="col-md-3">
             <h4 class="fw-bold text-success" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">à partir de <%= c.tarifs %>€</h4>
           </div>
+          <!-- titre -->
+
+          <!-- html image carousel -->
           <div class="col-lg-4 col-md-12">
             <div class="container_image d-flex justify-content-end">
               <div class="carousel-inner">
@@ -249,13 +261,18 @@ defmodule MotoTourWeb.CircuitLive do
                 </button>
               </div>
             </div>
-
+            <!-- empty space -->
             <div class="vc_empty_space" style="height: 30px">
               <span class="vc_empty_space_inner"></span>
             </div>
+            <!-- fin -->
           </div>
-          <!-- Texte -->
+          <!-- fin du carousel -->
+
+          <!-- deuxieme partie du card -->
           <div class="col-lg-8 col-md-12 mb-4">
+
+            <!-- liste des boutton pour chaque card -->
             <div class="product-menu text-center">
               <nav>
                 <ul class="circuitpage">
@@ -269,21 +286,25 @@ defmodule MotoTourWeb.CircuitLive do
                 </ul>
               </nav>
             </div>
+            <!-- fin du liste -->
+
             <div class="row mr-4" style="margin-top:5%" phx-show={@show_card_second}>
               <p>
+              <!-- affichage du quote pour chaque circuit -->
               <blockquote>
                 <i class='fa fa-quote-left fa-xs text-secondary'></i>
                   <%= c.remarque %>
                 <i class='fa fa-quote-right fa-xs text-secondary'></i>
               </blockquote>
+              <!-- fin du quote -->
+
+              <!-- affichage des élements selectionné dans la liste de boutton -->
                 <%= @card_content %>
+              <!-- fin -->
               </p>
             </div>
           </div>
-        </div>
-        <div class="row">
-        <div class="col-lg-6">
-        </div>
+          <!-- fin de la deuxieme partie -->
         </div>
       </div>
     <%= end %>

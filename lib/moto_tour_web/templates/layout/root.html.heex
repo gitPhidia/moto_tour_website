@@ -40,18 +40,13 @@
         </li>
         <li class="nav-item">
           <a class="nav-link mb-5" href={Routes.page_path(@conn, :contact)} style="height:10px;"><i class="fa fa-envelope"></i> <strong>CONTACT</strong></a>
-        </li> 
-        <%= link "Se déconnecter", 
-          to: Routes.user_session_path(@conn, :delete), 
-          method: :delete, 
-          data: [confirm: "Êtes-vous sûr de vouloir vous déconnecter ?"], 
-          class: "btn btn-danger" %>
-        
+        </li>
       </ul>
     </div>
 
+      <%= render "_user_menu.html", assigns %>
+        
   </div>
-  <%= render "_user_menu.html", assigns %>
 </nav>
 
 

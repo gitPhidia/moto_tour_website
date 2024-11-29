@@ -41,10 +41,11 @@
         <li class="nav-item">
           <a class="nav-link mb-5" href={Routes.page_path(@conn, :contact)} style="height:10px;"><i class="fa fa-envelope"></i> <strong>CONTACT</strong></a>
         </li>
-        
       </ul>
     </div>
 
+      <%= render "_user_menu.html", assigns %>
+        
   </div>
 </nav>
 

@@ -318,3 +318,7 @@ SELECT c0."id", c0."nom", c0."participant", c0."details", c0."tarifs", c0."duré
     </ul>
   </section>
 </div>
+
+mix phx.gen.schema Reservation 
+insert into reservations (idcircuit,nom,email,telephone,participant,date_res,besoin,archivage,validation,inserted_at,updated_at) VALUES (1,'phidia','fanambyrahari@gmail.com','0329492964',4,'25-11-2024','besoin',0,0,'25-11-2024','25-11-2024');
+insert into reservations (idcircuit,nom,email,telephone,participant,date_res,besoin,archivage,validation,inserted_at,updated_at) VALUES (1,'phidia','fanambyrahari@gmail.com','0329492964',4,'25-11-2024','besoin',0,0,'25-11-2024','25-11-2024');

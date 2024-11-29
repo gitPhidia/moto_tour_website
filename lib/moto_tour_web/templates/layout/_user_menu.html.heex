@@ -1,0 +1,10 @@
+<ul>
+<%= if @current_user do %>
+  <li><%= @current_user.email %></li>
+  <li><a href={Routes.live_path(@conn, MotoTourWeb.BackLive)} style="color:blue">dashboard</a></li>
+  <li><a href={Routes.user_settings_path(@conn, :edit)} style="color:blue">Settings</a></li>
+  <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, style: "color: blue;" %></li>
+<% else %>
+  <li><a href={Routes.user_session_path(@conn, :new)} style="color:blue">log in</a></li>
+<% end %>
+</ul>

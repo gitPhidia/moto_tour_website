@@ -1,0 +1,28 @@
+<h1>Show Questions</h1>
+
+<ul>
+
+  <li>
+    <strong>Idcircuit:</strong>
+    <%= @questions.idcircuit %>
+  </li>
+
+  <li>
+    <strong>Nom:</strong>
+    <%= @questions.nom %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @questions.email %>
+  </li>
+
+  <li>
+    <strong>Message:</strong>
+    <%= @questions.message %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.questions_path(@conn, :edit, @questions) %></span> |
+<span><%= link "Back", to: Routes.questions_path(@conn, :index) %></span>

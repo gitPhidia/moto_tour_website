@@ -13,6 +13,7 @@ defmodule MotoTour.Circuit do
     field :photo, :string
     field :remarque, :string
     field :desc_card, :string
+    has_many :reservations, MotoTour.Reservation, foreign_key: :idcircuit
 
     timestamps()
   end

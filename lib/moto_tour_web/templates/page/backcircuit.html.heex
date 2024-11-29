@@ -41,7 +41,7 @@
                   <td><%= c.moto %></td>
                   <td><%= c.difficulté %></td>
                   <td><%= c.inserted_at %></td>
-                  <td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-archive"></i></button></td>
+                  <td><a href={Routes.circuits_path(@conn, :edit, c.id)}><button><i class="fa fa-pencil"></i></button></a><button><i class="fa fa-archive"></i></button></td>
                 </tr>
 
                   <!-- Modal -->
@@ -49,10 +49,10 @@
                     <div class="modal-dialog">
                       <div class="modal-content" style="width:800px">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Titre du Modal</h5>
+                          <h5 class="modal-title" id="exampleModalLabel"><%= c.nom %></h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <h6>citcuit "quote"</h6>
+                        <h6>remarque sur le circuit</h6>
                         <div class="modal-body">
                           "<%= c.remarque%>"
                         </div>

@@ -91,10 +91,11 @@ defmodule MotoTourWeb.Router do
   scope "/", MotoTourWeb do
     pipe_through [:browser, :require_authenticated_user, :admin]
 
-    # get "/menu", PageController, :menu
     live "/menu", BackLive
     get "/ajout_circuit", CircuitsController, :ajoutc
     post "/save_circuit", CircuitsController, :create
+    get "/edit/:id", CircuitsController, :edit
+    put "/update", CircuitsController, :update
 
     get "/index", ReservationController, :index
 

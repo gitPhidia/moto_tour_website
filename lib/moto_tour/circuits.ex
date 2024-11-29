@@ -11,6 +11,14 @@ defmodule MotoTour.Circuits do
     circuit = [single]
   end
 
+  def get_circuit!(id), do: Repo.get!(Circuit, id)
+
+  def update_circuit(%Circuit{} = circuit, attrs) do
+    circuit
+    |> Circuit.changeset(attrs)
+    |> Repo.update()
+  end
+
   def create_circuit(attrs \\ %{}) do
     %Circuit{}
     |> Circuit.changeset(attrs)

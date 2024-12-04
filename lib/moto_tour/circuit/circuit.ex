@@ -4,7 +4,7 @@ defmodule MotoTour.Circuit do
 
   schema "circuits" do
     field :nom, :string
-    field :participant, :integer
+    field :participant, :string
     field :details, :string
     field :tarifs, :decimal
     field :durée, :string

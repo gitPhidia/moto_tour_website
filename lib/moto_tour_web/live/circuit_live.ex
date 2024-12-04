@@ -84,7 +84,8 @@ defmodule MotoTourWeb.CircuitLive do
   # H E pour le boutton reservation
   def handle_event("change_reservation",  %{"param" => param}, socket) do
     socket = reset_content(socket)
-    second_card_html = """
+    second_card_html =
+      """
         <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
           Faîtes votre réservation
         </h3>
@@ -103,7 +104,7 @@ defmodule MotoTourWeb.CircuitLive do
         <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
           <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
         </div>
-        """
+      """
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
   end
 

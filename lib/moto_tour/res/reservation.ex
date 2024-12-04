@@ -11,6 +11,7 @@ defmodule MotoTour.Reservation do
     field :besoin, :string
     field :archivage, :integer
     field :validation, :integer
+    field :status, :string
     belongs_to :circuit, MotoTour.Circuit, foreign_key: :idcircuit
 
     timestamps()
@@ -19,7 +20,7 @@ defmodule MotoTour.Reservation do
   @doc false
   def changeset(reservation, attrs) do
     reservation
-    |> cast(attrs, [:idcircuit, :nom, :email, :telephone, :participant, :date_res, :besoin, :archivage, :validation])
-    |> validate_required([:idcircuit, :nom, :email, :telephone, :participant, :date_res, :besoin, :archivage, :validation])
+    |> cast(attrs, [:idcircuit, :nom, :email, :telephone, :participant, :date_res, :besoin, :archivage, :validation, :status])
+    |> validate_required([:idcircuit, :nom, :email, :telephone, :participant, :date_res, :besoin, :archivage, :validation, :status])
   end
 end

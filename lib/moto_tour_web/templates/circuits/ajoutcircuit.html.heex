@@ -1,6 +1,6 @@
 <h1>Ajouter un Circuit</h1>
 <%= form_for @changeset, Routes.circuits_path(@conn, :create), fn f -> %>
- <%= if @changeset.action do %>
+  <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
@@ -8,7 +8,7 @@
   <label>Nom du circuit</label>
   <%= text_input f, :nom %>
 
-  <label>La descriptions sur les cartes</label>
+  <label>La descriptions sur la cartes</label>
   <%= text_input f, :desc_card %>
 
   <label>Tarifs</label>
@@ -34,12 +34,6 @@
 
   <label>photo</label>
   <%= text_input f, :photo %>
-
-  <!-- <label>inserted_at</label>
-  <%= text_input f, :inserted_at %>
-
-  <label>updated_at</label>
-  <%= text_input f, :updated_at %> -->
 
   <%= submit "Enregistrer" %>
 <% end %>

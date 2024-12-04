@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <%!-- <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"> --%>
 
     <title>Dashboard</title>
 
@@ -15,7 +16,7 @@
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href={Routes.page_path(@conn, :index)}> moto tour dashboard</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href={Routes.page_path(@conn, :index)}> moto tour site</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %>
@@ -53,14 +54,19 @@
                   Questions posés
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="#">
                   Message
+                </a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link" href={Routes.photo_path(@conn, :index)}>
+                  Photo
                 </a>
               </li>
             </ul>
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Page</span>
             </h6>
             <ul class="nav flex-column mb-2" style="border: 1px solid #e5e5e5;">
@@ -83,8 +89,8 @@
                 <a class="nav-link" href="#">
                   Contat
                 </a>
-              </li>
-            </ul>
+              </li> 
+            </ul>-->
           </div>
         </nav>
         <div class="col-md-10 mt-8">
@@ -100,8 +106,5 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
   </body>
 </html>

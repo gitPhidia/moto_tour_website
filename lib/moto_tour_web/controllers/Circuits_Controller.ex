@@ -33,23 +33,33 @@ defmodule MotoTourWeb.CircuitsController do
     end
   end
 
-  def update(conn, %{"id" => id, "Circuit" => circuit_params}) do
+  def update(conn, %{"id" => id, "circuit" => circuit_params}) do
     circuit = Circuits.get_circuit!(id)
 
-    case Circuit.update_circuit(circuit, circuit_params) do
+    # case Circuit.update_circuit(circuit, circuit_params) do
+    case Circuit.changeset(circuit, circuit_params) |> Repo.update() do
       {:ok, circuit} ->
         conn
         |> put_flash(:info, "Circuit updated successfully.")
         |> redirect(to: Routes.circuits_path(conn, :edit, id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", circuit: circuit, changeset: changeset)
+        render(conn, "editcircuit.html", circuit: circuit, changeset: changeset)
     end
   end
 
   def edit(conn, %{"id" => id}) do
     circuit = Circuits.get_circuit!(id)
-    changeset = Circuits.change_circuit(circuit)
-    render(conn, "edit.html", circuit: circuit, changeset: changeset)
+    changeset = Circuits.change_circuit(circuit, %{})
+    render(conn, "editcircuit.html", circuit: circuit, changeset: changeset)
+  end
+
+  def delete(conn, %{"id" => id}) do
+    circuit = Circuits.get_circuit!(id)
+    {:ok, _circuit} = Circuits.delete_circuit(circuit)
+
+    conn
+    |> put_flash(:info, "circuit deleted successfully.")
+    |> redirect(to: Routes.circuits_path(conn, :index))
   end
 end

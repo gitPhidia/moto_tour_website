@@ -28,6 +28,7 @@
                   <th>date de reservation</th>
                   <th>difficulté</th>
                   <th>date de creation</th>
+                  <th>description sur la card</th>
                   <th>action</th>
                 </tr>
               </thead>
@@ -36,12 +37,13 @@
               <%= for c <- @circuit do %>
                 <tr>
                   <td><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}><%= c.nom %></a></td>
-                  <td><%= c.tarifs %> €</td>
-                  <td><%= c.participant %></td>
+                  <td style="width: 100px"><%= c.tarifs %> €</td>
+                  <td><%= if c.participant == nil, do: "illimité", else: c.participant %></td>
                   <td><%= c.moto %></td>
                   <td><%= c.difficulté %></td>
                   <td><%= c.inserted_at %></td>
-                  <td><a href={Routes.circuits_path(@conn, :edit, c.id)}><button><i class="fa fa-pencil"></i></button></a><button><i class="fa fa-archive"></i></button></td>
+                  <td style="width: 200px"><%= c.desc_card %></td>
+                  <td><a href={Routes.circuits_path(@conn, :edit, c.id)}><button><i class="fa fa-pencil"></i></button></a><button><i class="fa fa-trash"></i></button></td>
                 </tr>
 
                   <!-- Modal -->
@@ -56,6 +58,7 @@
                         <div class="modal-body">
                           "<%= c.remarque%>"
                         </div>
+                        <h6>Photo</h6>
                         <h6>prestation</h6>
                         <div class="modal-body">
                           <%= raw(c.details) %>

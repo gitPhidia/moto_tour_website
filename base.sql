@@ -1,24 +1,3 @@
-create table circuits (
-    id int,
-    nom varchar,
-    tarifs float,
-    duree varchar,
-    participant int,
-    moto varchar,
-    difficulté varchar,
-    photo varchar,
-    details varchar,
-    remarque varchar,
-    desc_card varchar,
-    idutilisateur int
-);
-
-create table itinéraire (
-    id int,
-    idcircuit int,
-    itinéraire varchar,
-    remarque varchar
-);
 
 
 insert into itineraires (idcircuit,itineraire,remarque,inserted_at,updated_at) VALUES (1,'Antananarivo','A votre arrivée à l’aéroport international d’Ivato, vous êtes accueillis et conduits directement à votre hôtel.','18-11-2021','18-11-2024');
@@ -322,3 +301,5 @@ SELECT c0."id", c0."nom", c0."participant", c0."details", c0."tarifs", c0."duré
 mix phx.gen.schema Reservation 
 insert into reservations (idcircuit,nom,email,telephone,participant,date_res,besoin,archivage,validation,inserted_at,updated_at) VALUES (1,'phidia','fanambyrahari@gmail.com','0329492964',4,'25-11-2024','besoin',0,0,'25-11-2024','25-11-2024');
 insert into reservations (idcircuit,nom,email,telephone,participant,date_res,besoin,archivage,validation,inserted_at,updated_at) VALUES (1,'phidia','fanambyrahari@gmail.com','0329492964',4,'25-11-2024','besoin',0,0,'25-11-2024','25-11-2024');
+
+mix phx.gen.html Image Photo photos nom:string idcircuit:integer

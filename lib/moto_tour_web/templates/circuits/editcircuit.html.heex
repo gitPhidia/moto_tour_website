@@ -1,0 +1,44 @@
+
+<%= form_for @changeset, Routes.circuits_path(@conn, :update, @circuit), [method: :put], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :desc_card %>
+  <%= text_input f, :desc_card %>
+  <%= error_tag f, :desc_card %>
+
+  <%= label f, :nom %>
+  <%= text_input f, :nom %>
+  <%= error_tag f, :nom %>
+
+  <%= label f, :durée %>
+  <%= text_input f, :durée %>
+  <%= error_tag f, :durée %>
+
+  <%= label f, :participant %>
+  <%= text_input f, :participant %>
+  <%= error_tag f, :participant %>
+
+  <%= label f, :difficulté %>
+  <%= text_input f, :difficulté %>
+  <%= error_tag f, :difficulté %>
+
+  <%= label f, :photo %>
+  <%= text_input f, :photo %>
+  <%= error_tag f, :photo %>
+
+  <%= label f, :remarque %>
+  <%= text_input f, :remarque %>
+  <%= error_tag f, :remarque %>
+
+  <%= label f, :details %>
+  <%= textarea f, :details %>
+  <%= error_tag f, :details %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

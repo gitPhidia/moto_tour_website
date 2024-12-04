@@ -303,3 +303,4 @@ insert into reservations (idcircuit,nom,email,telephone,participant,date_res,bes
 insert into reservations (idcircuit,nom,email,telephone,participant,date_res,besoin,archivage,validation,inserted_at,updated_at) VALUES (1,'phidia','fanambyrahari@gmail.com','0329492964',4,'25-11-2024','besoin',0,0,'25-11-2024','25-11-2024');
 
 mix phx.gen.html Image Photo photos nom:string idcircuit:integer
+mix phx.gen.html Voyage Itineraire itineraires 

@@ -3,9 +3,9 @@ defmodule MotoTour.Itineraire do
   import Ecto.Changeset
 
   schema "itineraires" do
-    field :idcircuit, :integer
     field :itineraire, :string
     field :remarque, :string
+    belongs_to :circuit, MotoTour.Circuit, foreign_key: :idcircuit
 
     timestamps()
   end

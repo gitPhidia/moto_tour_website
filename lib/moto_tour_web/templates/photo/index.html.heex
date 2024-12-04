@@ -1,5 +1,7 @@
 <h1>Listing Photos</h1>
 
+<span><%= link "Nouvelle Photo", to: Routes.photo_path(@conn, :new) %></span>
+
 <table>
   <thead>
     <tr>
@@ -19,7 +21,7 @@
 
       <td>
         <span><%= link "Show", to: Routes.photo_path(@conn, :show, photo.id) %></span>
-        <span><%= link "Edit", to: Routes.photo_path(@conn, :edit, photo.id) %></span>
+        <!-- <span><%= link "Edit", to: Routes.photo_path(@conn, :edit, photo.id) %></span> -->
         <span><%= link "Delete", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
@@ -27,4 +29,3 @@
   </tbody>
 </table>
 
-<span><%= link "New Photo", to: Routes.photo_path(@conn, :new) %></span>

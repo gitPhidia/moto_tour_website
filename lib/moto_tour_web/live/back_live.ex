@@ -101,8 +101,7 @@ defmodule MotoTourWeb.BackLive do
                         <div class="modal-body">
                           "<%= c.remarque%>"
                         </div>
-                        <h6>Photo</h6>
-                        
+
                         <h6>prestation</h6>
                         <div class="modal-body">
                           <%= raw(c.details) %>

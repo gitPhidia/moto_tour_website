@@ -102,6 +102,10 @@ defmodule MotoTourWeb.Router do
     # reservation
     get "/index", ReservationController, :index
 
+    # itineraire
+    get "/itineraire/:id", ItineraireController, :liste
+    get "/itineraire", ItineraireController, :index
+
     # photo
     resources "/photo", PhotoController, only: [:new, :create, :index, :show, :edit, :delete, :update]
 

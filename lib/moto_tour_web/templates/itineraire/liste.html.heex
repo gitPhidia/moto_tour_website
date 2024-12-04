@@ -1,0 +1,28 @@
+    <div id='accordion'>
+    <%= for i <- @itineraire do %>
+        <div class='card'>
+          <div class='card-header' id='headingOne'>
+              <div class='row'>
+                <div class='col-md-11'>
+                  <a data-toggle='collapse' data-target={i.id} aria-expanded='true' aria-controls={i.id}>
+                    <h6 class='mb-0'>
+                        <%= i.itineraire %>
+                    </h6>
+                  </a>
+                </div>
+                <div class='col-md-1 mt-1'>
+                  <a data-toggle='collapse' data-target={i.id} aria-expanded='true' aria-controls={i.id}>
+                    <i class='fa fa-angle-down' aria-hidden='true'></i>
+                  </a>
+                </div>
+              </div>
+
+            <div id='collapse#{c.id}' class='collapse' aria-labelledby='heading#{c.id}' data-parent='#accordion'>
+              <div class='card-body'>
+                <%= i.remarque %>
+              </div>
+            </div>
+          </div>
+        </div>
+    <%= end %>
+    </div>

@@ -58,55 +58,55 @@ defmodule MotoTourWeb.CircuitLive do
   end
 
   # H E pour le boutton avis
-  def handle_event("change_avis",  %{"param" => param}, socket) do
-    socket = reset_content(socket)
-    second_card_html = """
-        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
-          Rediger un avis
-        </h3>
-          <p>Titre de l’avis</p>
-          <input type='text'>
-          <p>Texte de l'avis</p>
-          <input type='text'>
-          <p>nom</p>
-          <input type='text'>
-          <p>E-mail</p>
-          <input type='email'>
-          <p>Message</p>
-          <input type='text'>
-        <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
-          <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Laisser un avis</a>
-        </div>
-        """
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
-  end
+  # def handle_event("change_avis",  %{"param" => param}, socket) do
+  #   socket = reset_content(socket)
+  #   second_card_html = """
+  #       <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
+  #         Rediger un avis
+  #       </h3>
+  #         <p>Titre de l’avis</p>
+  #         <input type='text'>
+  #         <p>Texte de l'avis</p>
+  #         <input type='text'>
+  #         <p>nom</p>
+  #         <input type='text'>
+  #         <p>E-mail</p>
+  #         <input type='email'>
+  #         <p>Message</p>
+  #         <input type='text'>
+  #       <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
+  #         <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Laisser un avis</a>
+  #       </div>
+  #       """
+  #   {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
+  # end
 
   # H E pour le boutton reservation
-  def handle_event("change_reservation",  %{"param" => param}, socket) do
-    socket = reset_content(socket)
-    second_card_html =
-      """
-        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
-          Faîtes votre réservation
-        </h3>
-          <p>votre nom (obligatoire)</p>
-          <input type='text'>
-          <p>Votre adresse de messagerie (obligatoire)</p>
-          <input type='email'>
-          <p>Votre téléphone (obligatoire)</p>
-          <input type='text'>
-          <p>Nombre participant(s)</p>
-          <input type='number'>
-          <p>Date souhaitée</p>
-          <input type='date'>
-          <p>Besoin supplementaire</p>
-          <input type='text'>
-        <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
-          <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
-        </div>
-      """
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
-  end
+  # def handle_event("change_reservation",  %{"param" => param}, socket) do
+  #   socket = reset_content(socket)
+  #   second_card_html =
+  #     """
+  #       <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
+  #         Faîtes votre réservation
+  #       </h3>
+  #         <p>votre nom (obligatoire)</p>
+  #         <input type='text'>
+  #         <p>Votre adresse de messagerie (obligatoire)</p>
+  #         <input type='email'>
+  #         <p>Votre téléphone (obligatoire)</p>
+  #         <input type='text'>
+  #         <p>Nombre participant(s)</p>
+  #         <input type='number'>
+  #         <p>Date souhaitée</p>
+  #         <input type='date'>
+  #         <p>Besoin supplementaire</p>
+  #         <input type='text'>
+  #       <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
+  #         <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
+  #       </div>
+  #     """
+  #   {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
+  # end
 
   # H E pour le boutton programme de voyage
   def handle_event("change_remarque",  %{"param" => param}, socket) do
@@ -282,8 +282,8 @@ defmodule MotoTourWeb.CircuitLive do
                   <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
                   <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Programme de Voyage</strong></button></li>
                   <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
-                  <li><button phx-click="change_avis" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
-                  <li><button phx-click="change_reservation" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-ticket"></i><br><strong>Reservation</strong></button></li>
+                  <!-- <li><button phx-click="change_avis" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
+                  <li><button phx-click="change_reservation" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-ticket"></i><br><strong>Reservation</strong></button></li> -->
                 </ul>
               </nav>
             </div>

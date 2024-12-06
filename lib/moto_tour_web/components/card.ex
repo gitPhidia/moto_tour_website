@@ -35,11 +35,11 @@ defmodule MotoTourWeb.Card do
           <div class="col-6 d-flex align-items-center">
             <.display_price price={@price} />
           </div>
-          <div class="col-6 d-flex justify-content-end">
+          <!-- <div class="col-6 d-flex justify-content-end">
             <a href={@link} class="btn btn-success btn-sm" style="font-size: 0.9rem; padding: 6px 12px; border-radius: 0; outline: none; border: none;">
               Réserver
             </a>
-          </div>
+          </div> -->
         </div>
 
       </div>

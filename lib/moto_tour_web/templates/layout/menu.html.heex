@@ -6,7 +6,7 @@
     <meta name="author" content="">
     <!-- <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"> -->
 
-    <title>Dashboard</title>
+    <title>Tableau de bord</title>
 
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "MyBs", suffix: " · Phoenix Framework" %>
@@ -19,7 +19,7 @@
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href={Routes.page_path(@conn, :index)}> moto tour site</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %>
+          <%= link "Déconnexion", to: Routes.user_session_path(@conn, :delete), method: :delete %>
         </li>
       </ul>
     </nav>
@@ -31,7 +31,7 @@
             <ul class="nav flex-column" style="border: 1px solid #e5e5e5;">
               <li class="nav-item">
                 <a class="nav-link active" href={Routes.live_path(@conn, MotoTourWeb.BackLive)}>
-                  dashboard <span class="sr-only">(current)</span>
+                  Tableau de bord <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -51,17 +51,12 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href={Routes.questions_path(@conn, :index)}>
-                  Questions posés
+                  Questions posées
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Message
-                </a>
-              </li> -->
               <li class="nav-item">
                 <a class="nav-link" href={Routes.photo_path(@conn, :index)}>
-                  Photo
+                  Photos
                 </a>
               </li>
             </ul>

@@ -1,4 +1,4 @@
-<h1>Reset password</h1>
+<h1>Réinitialiser le mot de passe</h1>
 
 <.form let={f} for={@changeset} action={Routes.user_reset_password_path(@conn, :update, @token)}>
   <%= if @changeset.action do %>
@@ -7,20 +7,20 @@
     </div>
   <% end %>
 
-  <%= label f, :password, "New password" %>
+  <%= label f, :password, "Nouveau mot de passe" %>
   <%= password_input f, :password, required: true %>
   <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation, "Confirm new password" %>
+  <%= label f, :password_confirmation, "Confirmez le nouveau mot de passe" %>
   <%= password_input f, :password_confirmation, required: true %>
   <%= error_tag f, :password_confirmation %>
 
   <div>
-    <%= submit "Reset password" %>
+    <%= submit "Confirmer" %>
   </div>
 </.form>
 
 <p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
+  <%= link "Inscription", to: Routes.user_registration_path(@conn, :new) %> |
+  <%= link "Connexion", to: Routes.user_session_path(@conn, :new) %>
 </p>

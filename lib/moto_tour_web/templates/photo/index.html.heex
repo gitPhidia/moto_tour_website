@@ -20,9 +20,9 @@
       <td style="width: 300px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
 
       <td>
-        <span><%= link "Show", to: Routes.photo_path(@conn, :show, photo.id) %></span>
+        <span><%= link "détail", to: Routes.photo_path(@conn, :show, photo.id) %></span>
         <!-- <span><%= link "Edit", to: Routes.photo_path(@conn, :edit, photo.id) %></span> -->
-        <span><%= link "Delete", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
 <% end %>

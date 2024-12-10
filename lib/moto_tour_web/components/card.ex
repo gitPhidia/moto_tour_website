@@ -18,7 +18,7 @@ defmodule MotoTourWeb.Card do
       <div class="card-body text-left mt-0">
         <!-- Star Ranking Column -->
         <div class="col-lg-12 col-sm-6 d-flex justify-content-center" style="height:3rem">
-          difficulté: <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
+          <span class="mt-2">difficulté:</span> <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
         </div>
         <div class="row mb-3"> <!-- Row pour la description et le ranking -->
           <!-- Description Column -->

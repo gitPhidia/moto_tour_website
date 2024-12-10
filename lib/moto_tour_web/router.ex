@@ -11,6 +11,7 @@ defmodule MotoTourWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug Plug.CSRFProtection
   end
 
   pipeline :api do
@@ -119,6 +120,7 @@ defmodule MotoTourWeb.Router do
     get "/phoot_edit/:id", PhotoController, :edit
     put "/photo_maj", PhotoController, :update
     delete "/photo_del/:id", PhotoController, :delete
+    post "/update-checkboxes", PhotoController, :principal
 
     resources "/question", QuestionsController, only: [:new, :create, :index, :show, :edit, :delete, :update]
     get "/circuit_enduro", PageController, :bcircuit

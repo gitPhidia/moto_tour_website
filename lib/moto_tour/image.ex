@@ -58,6 +58,23 @@ defmodule MotoTour.Image do
     liste = Repo.all(from p in Photo, where: p.idcircuit == ^params)
   end
 
+  def get_principal_photos do
+    query =
+      from p in Photo,
+        join: c in Circuit, on: c.id == p.idcircuit,
+        where: p.principal == true,
+        select: %{
+          id: p.id,
+          idcircuit: c.id,
+          circuit_nom: c.nom,
+          tarifs: c.tarifs,
+          desc_card: c.desc_card,
+          difficulté: c.difficulté,
+          nom: p.nom,
+          photo: p.photo
+        }
+    results = Repo.all(query)
+  end
   @doc """
   Creates a photo.
 

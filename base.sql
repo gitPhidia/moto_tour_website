@@ -379,3 +379,5 @@ ADD COLUMN  <data_type> [options];
 
 ALTER TABLE circuits
 ALTER COLUMN difficulté TYPE integer
+
+ALTER TABLE photos ALTER COLUMN principal TYPE boolean USING principal::boolean

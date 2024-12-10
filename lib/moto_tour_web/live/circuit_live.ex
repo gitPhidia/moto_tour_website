@@ -258,12 +258,6 @@ defmodule MotoTourWeb.CircuitLive do
                     <img src={Routes.static_path(@socket, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1">
                   </div>
                 <%= end %>
-                <!-- <div id="carousel-item-2" class="carousel-item">
-                  <img src={Routes.static_path(@socket, "/assets/images/section/2.jpg")} class="img-fluid rounded w-100" alt="Image 2">
-                </div>
-                <div id="carousel-item-3" class="carousel-item">
-                  <img src={Routes.static_path(@socket, "/assets/images/section/3.jpg")} class="img-fluid rounded w-100" alt="Image 3">
-                </div> -->
                 <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>

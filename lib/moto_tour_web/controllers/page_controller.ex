@@ -3,9 +3,11 @@ defmodule MotoTourWeb.PageController do
   alias MotoTour.{Repo,Circuit}
   alias MotoTour.Circuits
   alias MotoTour.Reservations
+  alias MotoTour.Image
 
   def index(conn, _params) do
-    circuits = Circuits.list_circuits()
+    # circuits = Circuits.list_circuits()
+    circuits = Image.get_principal_photos()
     render(conn, "index.html", circuits: circuits)
   end
 

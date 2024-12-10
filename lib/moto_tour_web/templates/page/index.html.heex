@@ -28,18 +28,21 @@
     </div>
   </div>
 </section>
-<!-- <section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/dirt-bike-rider-with-his-motorcycle-racing-circuits-adventure.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 60vh; color: white;"}>
-  <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100%;">
-    <div class="text-center">
-        <h1 class="fw-bold" style="color: #ffffff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 3em;">
-            Découvrez nos Offres Spéciales
-        </h1>
-      <p class="lead">"Profitez de nos offres exclusives pour des expériences inoubliables."</p>
-    </div>
-  </div>
-</section> -->
+
+
 <section class="product-section py-5">
   <div class="container">
+
+    <div class="container_image d-flex justify-content-center">
+      <div class="carousel-inner" style="trasform: scale(1.5);width: 80rem;">
+        <%= for {p, index} <- Enum.with_index(@circuits, 1) do %>
+          <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
+            <img src={Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1">
+          </div>
+        <%= end %>
+      </div>
+    </div>
+
     <!-- Première row : Titre et phrase phare -->
     <div class="row text-center mb-4 justify-content-center">
       <div class="col-10">
@@ -69,7 +72,7 @@
         link={Routes.live_path(@conn, MotoTourWeb.CircuitLive, id: circuit.id)}
         >
         <:nom_block>
-           <%= circuit.nom %>
+           <%= circuit.circuit_nom %>
         </:nom_block>
         <:description_block>
           <%= circuit.desc_card %>
@@ -124,3 +127,72 @@
   <span class="vc_empty_space_inner"></span>
 </div>
 
+<script>
+      function moveCarousel(direction) {
+      // Récupère tous les éléments du carrousel
+      const items = document.querySelectorAll('.carousel-item');
+
+      // Trouve l'élément actif actuel
+      const activeItem = document.querySelector('.carousel-item.active');
+
+      // Trouve l'index de l'élément actif
+      const activeIndex = Array.from(items).indexOf(activeItem);
+
+      // Détermine le nouvel index
+      let newIndex = activeIndex + direction;
+
+      // Gestion des limites (boucle infinie)
+      if (newIndex < 0) {
+        newIndex = items.length - 1; // Aller au dernier élément
+      } else if (newIndex >= items.length) {
+        newIndex = 0; // Revenir au premier élément
+      }
+
+      // Change la classe active
+      activeItem.classList.remove('active');
+      items[newIndex].classList.add('active');
+    }
+
+    let carouselInterval; // Référence à l'intervalle
+
+    function moveCarousel(direction) {
+      const items = document.querySelectorAll('.carousel-item');
+      const activeItem = document.querySelector('.carousel-item.active');
+      const activeIndex = Array.from(items).indexOf(activeItem);
+      let newIndex = activeIndex + direction;
+
+      // Gestion des limites (boucle infinie)
+      if (newIndex < 0) {
+        newIndex = items.length - 1;
+      } else if (newIndex >= items.length) {
+        newIndex = 0;
+      }
+
+      activeItem.classList.remove('active');
+      items[newIndex].classList.add('active');
+    }
+
+    function startCarousel(interval = 4000) {
+      // Démarre un diaporama automatique toutes les `interval` millisecondes
+      carouselInterval = setInterval(() => {
+        moveCarousel(1); // Avance d'une image
+      }, interval);
+    }
+
+    function stopCarousel() {
+      // Arrête le diaporama automatique
+      clearInterval(carouselInterval);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startCarousel(); // Lance le diaporama au chargement de la page
+
+      // Ajoute une pause au survol du carrousel
+      const carousel = document.querySelector('.carousel');
+      if (carousel) {
+        carousel.addEventListener('mouseover', stopCarousel);
+        carousel.addEventListener('mouseout', () => startCarousel());
+      }
+    });
+
+    </script>

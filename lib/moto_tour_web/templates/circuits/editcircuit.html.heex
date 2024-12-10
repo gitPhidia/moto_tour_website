@@ -1,4 +1,7 @@
-
+<h5>Modifier un Circuit 
+<a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter un Circuit</a>
+<a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
+<a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h5>
 <%= form_for @changeset, Routes.circuits_path(@conn, :update, @circuit), [method: :put], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
@@ -6,43 +9,58 @@
     </div>
   <% end %>
 
-  <%= label f, :desc_card %>
-  <%= text_input f, :desc_card %>
-  <%= error_tag f, :desc_card %>
+    <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, une erreur s'est produite!</p>
+    </div>
+  <% end %>
 
-  <%= label f, :nom %>
-  <%= text_input f, :nom %>
-  <%= error_tag f, :nom %>
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">Nom du circuit:</label>
+    <%= text_input f, :nom %>
+  </div>
 
-  <%= label f, :tarifs %>
-  <%= text_input f, :tarifs %>
-  <%= error_tag f, :tarifs %>
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">La descriptions sur la cartes</label>
+    <%= text_input f, :desc_card %>
+  </div>
 
-  <%= label f, :durée %>
-  <%= text_input f, :durée %>
-  <%= error_tag f, :durée %>
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">Tarifs</label>
+    <%= text_input f, :tarifs %>
+  </div>
 
-  <%= label f, :participant %>
-  <%= text_input f, :participant %>
-  <%= error_tag f, :participant %>
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">La durée du circuit</label>
+    <%= text_input f, :durée %>
+  </div>
 
-  <%= label f, :difficulté %>
-  <%= text_input f, :difficulté %>
-  <%= error_tag f, :difficulté %>
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">nombre de participant maximum</label>
+    <%= text_input f, :participant %>
+  </div>
 
-  <%= label f, :photo %>
-  <%= text_input f, :photo %>
-  <%= error_tag f, :photo %>
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">Les moto disponnible pour ce circuit</label>
+    <%= text_input f, :moto %>
+  </div>
 
-  <%= label f, :remarque %>
-  <%= text_input f, :remarque %>
-  <%= error_tag f, :remarque %>
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">La difficulté du circuit</label>
+    <%= number_input f, :difficulté %>
+  </div>
 
-  <%= label f, :details %>
-  <%= textarea f, :details %>
-  <%= error_tag f, :details %>
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">Vos remarque sur ce circuit</label>
+    <%= text_input f, :remarque %>
+  </div>
+
+  <div class="form-group" style="display: flex; align-items: center;">
+    <label style="width: 300px;">Les prestations et site marquant, si il y en a</label>
+    <%= textarea f, :details, style: "flex: 1;height: 150px;" %>
+  </div>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Enregistrer", style: "flex: 1;margin-left:90%;margin-top: 10px;" %>
   </div>
 <% end %>

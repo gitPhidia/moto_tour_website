@@ -42,6 +42,7 @@ defmodule MotoTourWeb.Router do
     # Route pour la LiveView Home
     live "/home", HomeLive
     live "/circuit", CircuitLive
+    live "/circuit/:id", CircuitLive
     live "/menu_card", MenuCardLive
   end
 
@@ -92,7 +93,8 @@ defmodule MotoTourWeb.Router do
     pipe_through [:browser, :require_authenticated_user, :admin]
 
     # circuit
-    live "/menu", BackLive
+    # live "/menu", BackLive
+    get "/menu", PageController, :bcircuit
     get "/ajout_circuit", CircuitsController, :ajoutc
     post "/save_circuit", CircuitsController, :create
     get "/edit/:id", CircuitsController, :edit
@@ -108,7 +110,15 @@ defmodule MotoTourWeb.Router do
     get "/itineraire/:id", ItineraireController, :ajout
 
     # photo
-    resources "/photo", PhotoController, only: [:new, :create, :index, :show, :edit, :delete, :update]
+    # resources "/photo", PhotoController, [:new, :create, :index, :show, :edit, :delete, :update]
+    get "/photo/:id", PhotoController, :detail
+    get "/photo_new", PhotoController, :new
+    post "/save_photo", PhotoController, :create
+    get "/index_photo", PhotoController, :index
+    get "/photo_show/:id", PhotoController, :show
+    get "/phoot_edit/:id", PhotoController, :edit
+    put "/photo_maj", PhotoController, :update
+    delete "/photo_del/:id", PhotoController, :delete
 
     resources "/question", QuestionsController, only: [:new, :create, :index, :show, :edit, :delete, :update]
     get "/circuit_enduro", PageController, :bcircuit

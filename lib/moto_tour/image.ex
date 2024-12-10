@@ -54,6 +54,10 @@ defmodule MotoTour.Image do
   """
   def get_photo!(id), do: Repo.get!(Photo, id)
 
+  def get_photo_circuit(params) do
+    liste = Repo.all(from p in Photo, where: p.idcircuit == ^params)
+  end
+
   @doc """
   Creates a photo.
 

@@ -1,4 +1,4 @@
-<section class="hero-section bg-primary text-white mb-5" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/moto-freestyle.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;background-attachment: fixed;"}>
+<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/circuit_image/IMG_6984.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;background-attachment: fixed;"}>
 
     <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100vh;">
         <div style="margin-top: 250px;"> <!-- Ajout d'un margin-top ici -->
@@ -8,7 +8,7 @@
         </div>
     </div>
 </section>
-<section class="transition-section py-5">
+<section class="transition-section py-4">
   <div class="container">
     <div class="row text-white">
       <!-- Première colonne : Image -->
@@ -28,7 +28,7 @@
     </div>
   </div>
 </section>
-<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/dirt-bike-rider-with-his-motorcycle-racing-circuits-adventure.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 60vh; color: white;"}>
+<!-- <section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/dirt-bike-rider-with-his-motorcycle-racing-circuits-adventure.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 60vh; color: white;"}>
   <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100%;">
     <div class="text-center">
         <h1 class="fw-bold" style="color: #ffffff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 3em;">
@@ -37,7 +37,7 @@
       <p class="lead">"Profitez de nos offres exclusives pour des expériences inoubliables."</p>
     </div>
   </div>
-</section>
+</section> -->
 <section class="product-section py-5">
   <div class="container">
     <!-- Première row : Titre et phrase phare -->
@@ -60,13 +60,13 @@
    <div class="row">
     <%= for circuit <- @circuits do %>
   <!-- Card 1 -->
-    <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto align-items-start">
+    <div class="col-lg-4 mb-4 align-items-start">
       <.card
         image={Routes.static_path(@conn,"/assets/images/section/" <> circuit.photo)}
-        rate_count={1}
+        rate_count={circuit.difficulté}
         max_rate_count={5}
         price={circuit.tarifs}
-        link={Routes.live_path(@conn, MotoTourWeb.CircuitLive)}
+        link={Routes.live_path(@conn, MotoTourWeb.CircuitLive, id: circuit.id)}
         >
         <:nom_block>
            <%= circuit.nom %>

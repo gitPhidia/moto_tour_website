@@ -9,12 +9,17 @@ defmodule MotoTourWeb.PhotoController do
   import Ecto.Query
 
   def index(conn, _params) do
-    photos = Image._image()
-    render(conn, "index.html", photos: photos)
+    # photos = Image._image()
+    circuit = Circuits.list_circuits()
+    render(conn, "tableau.html", circuits: circuit)
+  end
+
+  def detail(conn,  %{"id" => id}) do
+    photo = Image.get_photo_circuit(id)
+    render(conn, "index.html", photos: photo)
   end
 
   def new(conn, _params) do
-    # cir = Repo.all(Circuit)
     query = from c in Circuit,
       select: %{ id: c.id, nom: c.nom}
     cir = Repo.all(query)
@@ -61,9 +66,6 @@ defmodule MotoTourWeb.PhotoController do
       |> put_flash(:error, "Erreur inattendue : #{inspect(e)}")
       |> redirect(to: Routes.photo_path(conn, :new))
   end
-
-
-
 
   def show(conn, %{"id" => id}) do
     photo = Image.get_photo!(id)

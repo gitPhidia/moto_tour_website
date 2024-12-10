@@ -5,8 +5,8 @@ defmodule MotoTour.Image.Photo do
 
   schema "photos" do
     field :nom, :string
-    # field :photo, MotoTour.Uploader.Type
     field :photo, :string
+    field :principal, :boolean
     belongs_to :circuit, MotoTour.Circuit, foreign_key: :idcircuit
 
     timestamps()
@@ -15,7 +15,7 @@ defmodule MotoTour.Image.Photo do
   @doc false
   def changeset(photo, attrs) do
     photo
-    |> cast(attrs, [:nom, :idcircuit, :photo])
+    |> cast(attrs, [:nom, :idcircuit, :photo, :principal])
     |> validate_required([:photo])
     |> cast_attachments(attrs, [:photo])
 

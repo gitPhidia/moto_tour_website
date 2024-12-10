@@ -1,4 +1,4 @@
-<h1>Listing Photos</h1>
+<h1>Liste des Photos</h1>
 
 <span><%= link "Nouvelle Photo", to: Routes.photo_path(@conn, :new) %></span>
 
@@ -6,26 +6,23 @@
   <thead>
     <tr>
       <th>Nom</th>
-      <th>circuit</th>
-      <th>photo</th>
+      <th>Photo</th>
+      <th>Action</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for photo <- @photos do %>
+  <%= for photo <- @photos do %>
     <tr>
       <td><%= photo.nom %></td>
-      <td><%= photo.circuit_nom %></td>
-      <td style="width: 300px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
+      <td style="width: 400px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
 
-      <td>
-        <span><%= link "détail", to: Routes.photo_path(@conn, :show, photo.id) %></span>
-        <!-- <span><%= link "Edit", to: Routes.photo_path(@conn, :edit, photo.id) %></span> -->
+      <td style="width: 300px">
         <span><%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
-<% end %>
+  <% end %>
   </tbody>
 </table>
 

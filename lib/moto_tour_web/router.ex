@@ -101,6 +101,7 @@ defmodule MotoTourWeb.Router do
     get "/edit/:id", CircuitsController, :edit
     put "/update/:id", CircuitsController, :update
     delete "/delete/:id", CircuitsController, :delete
+    get "/deshboard", CircuitsController, :deshboard
 
     # reservation
     get "/index", ReservationController, :index

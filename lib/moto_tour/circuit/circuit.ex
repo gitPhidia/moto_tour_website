@@ -6,7 +6,7 @@ defmodule MotoTour.Circuit do
     field :nom, :string
     field :participant, :string
     field :details, :string
-    field :tarifs, :decimal
+    field :tarifs, :string
     field :durée, :string
     field :moto, :string
     field :difficulté, :integer

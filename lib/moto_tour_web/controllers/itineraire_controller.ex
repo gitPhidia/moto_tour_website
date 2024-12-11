@@ -4,6 +4,7 @@ defmodule MotoTourWeb.ItineraireController do
   alias MotoTour.Circuits
   alias MotoTour.Itineraires
   alias MotoTour.Itineraire
+  import Ecto.Query
 
   def index(conn, _params) do
     circuits = Repo.all(Circuit)
@@ -20,7 +21,11 @@ defmodule MotoTourWeb.ItineraireController do
   end
 
   def ajout(conn, _params) do
+    query = from c in Circuit,
+      select: %{ id: c.id, nom: c.nom}
+    cir = Repo.all(query)
+    circuits_options = Enum.map(cir, fn c -> {c.nom, c.id} end)
     changeset = Itineraires.change_itineraire(%Itineraire{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", circuits: circuits_options, changeset: changeset)
   end
 end

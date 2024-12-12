@@ -193,8 +193,8 @@ defmodule MotoTourWeb.CircuitLive do
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section py-5" style="height:130px;">
-        <div class="container" style="margin-top:20px;">
+     <section class="transition-section py-5" style="height:12rem;">
+        <div class="container mt-5" style="height:10rem;">
           <div class="row text-white">
             <!--Première colonne : Image -->
             <div class="col-md-2 d-flex justify-content-center align-items-center">

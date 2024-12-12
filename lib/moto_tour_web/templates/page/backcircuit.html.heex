@@ -31,8 +31,8 @@
                   <th>participant</th>
                   <th>moto disponnible</th>
                   <th>difficulté</th>
-                  <th>date de creation</th>
-                  <th>description sur la card</th>
+                  <th>date de création</th>
+                  <th>déscription sur la carte</th>
                   <th>action</th>
                 </tr>
               </thead>
@@ -47,7 +47,7 @@
                   <td><%= c.difficulté %></td>
                   <td style="width: 100px"><%= c.inserted_at %></td>
                   <td style="width: 200px"><%= c.desc_card %></td>
-                  <td style="width: 250px">
+                  <td style="width: 250px;">
                     <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> 
                     <button class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="supprimer le circuit"><i class="fa fa-trash"></i></button>
                     <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, c.id)}><i class="fa fa-picture-o"></i></a>

@@ -17,9 +17,8 @@
     <tbody>
     <%= for photo <- @photos do %>
       <tr>
-        <td><%= photo.nom %><%= photo.id %></td>
+        <td style="width: 250px"><%= photo.nom %></td>
         <td style="width: 250px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
-
         <td style="width: 100px">
           <span><%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "Are you sure?"] %></span>
           

@@ -30,3 +30,15 @@
   font-weight: bold; /* Texte en gras si souhaité */
   padding: 0 15px; /* Ajoute un peu d'espace autour du texte */
 }
+
+
+.header {
+  transition: all 0.5s;
+  z-index: 997;
+  height: 60px;
+  box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+  background-color: #e7e7e7;
+  padding-left: 20px;
+  /* Toggle Sidebar Button */
+  /* Search Bar */
+}

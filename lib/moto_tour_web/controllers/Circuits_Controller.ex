@@ -11,6 +11,10 @@ defmodule MotoTourWeb.CircuitsController do
     render(conn, "liste.html", circuits: circuits)
   end
 
+  def deshboard(conn, _params) do
+    render(conn, "dashboard.html")
+  end
+
   def bcircuit(conn, _params) do
     cir = Circuits.list_circuits()
     render(conn, "backcircuit.html", circuit: cir)

@@ -9,12 +9,17 @@ defmodule MotoTourWeb.PhotoController do
   import Ecto.Query
 
   def index(conn, _params) do
-    photos = Image._image()
-    render(conn, "index.html", photos: photos)
+    # photos = Image._image()
+    circuit = Circuits.list_circuits()
+    render(conn, "tableau.html", circuits: circuit)
+  end
+
+  def detail(conn,  %{"id" => id}) do
+    photo = Image.get_photo_circuit(id)
+    render(conn, "index.html", photos: photo)
   end
 
   def new(conn, _params) do
-    # cir = Repo.all(Circuit)
     query = from c in Circuit,
       select: %{ id: c.id, nom: c.nom}
     cir = Repo.all(query)
@@ -28,8 +33,8 @@ defmodule MotoTourWeb.PhotoController do
     upload_path = Path.join([upload_dir, filename])
 
     # Vérifications
-    IO.inspect(temp_path, label: "Chemin temporaire")
-    IO.inspect(upload_path, label: "Chemin cible")
+    # IO.inspect(temp_path, label: "Chemin temporaire")
+    # IO.inspect(upload_path, label: "Chemin cible")
 
     # File.mkdir_p!(upload_dir)
 
@@ -61,9 +66,6 @@ defmodule MotoTourWeb.PhotoController do
       |> put_flash(:error, "Erreur inattendue : #{inspect(e)}")
       |> redirect(to: Routes.photo_path(conn, :new))
   end
-
-
-
 
   def show(conn, %{"id" => id}) do
     photo = Image.get_photo!(id)
@@ -97,5 +99,27 @@ defmodule MotoTourWeb.PhotoController do
     conn
     |> put_flash(:info, "Photo deleted successfully.")
     |> redirect(to: Routes.photo_path(conn, :index))
+  end
+
+  def principal(conn, %{"checkboxes" => checkboxes_params}) do
+    import Ecto.Query, only: [from: 2]
+
+    Repo.transaction(fn ->
+
+      # Activer la photo sélectionnée
+      Enum.each(checkboxes_params, fn %{"id" => id, "idcircuit" => idcircuit, "principal" => principal} ->
+        id = String.to_integer(id)
+        principal = principal == true
+        idcircuit = String.to_integer(idcircuit)
+        # Désactiver toutes les photos
+        Repo.update_all(from(p in Photo, where: p.idcircuit == ^idcircuit), set: [principal: false])
+
+        # if principal do
+          Repo.update_all(from(p in Photo, where: p.id == ^id), set: [principal: true])
+        # end
+      end)
+    end)
+
+    json(conn, %{status: "success", message: "Mise à jour réussie"})
   end
 end

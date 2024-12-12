@@ -14,4 +14,8 @@ defmodule MotoTour.Itineraires do
     liste = Repo.get_by(Itineraire, idcircuit: params)
   end
 
+  def change_itineraire(%Itineraire{} = itineraire, attrs \\ %{}) do
+    Itineraire.changeset(itineraire, attrs)
+  end
+
 end

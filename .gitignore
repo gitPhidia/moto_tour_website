@@ -34,3 +34,4 @@ npm-debug.log
 
 config/
 config/dev.exs
+/config

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"> -->
+    <meta name="csrf-token" content={Plug.CSRFProtection.get_csrf_token()}>
 
     <title>Tableau de bord</title>
 
@@ -15,77 +15,43 @@
 </head>
 
   <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href={Routes.page_path(@conn, :index)}> moto tour site</a>
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+      <a class="navbar-brand col-sm-3 col-md-11 mr-0" href={Routes.page_path(@conn, :index)}> moto tour site</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <%= link "Déconnexion", to: Routes.user_session_path(@conn, :delete), method: :delete %>
         </li>
       </ul>
-    </nav>
+    </header>
 
     <div class="container-fluid">
-      <div class="row">
+      <div class="row mt-5">
         <nav class="col-md-2 d-none d-md-block sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column" style="border: 1px solid #e5e5e5;">
-              <li class="nav-item">
-                <a class="nav-link active" href={Routes.live_path(@conn, MotoTourWeb.BackLive)}>
-                  Tableau de bord <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href={Routes.reservation_path(@conn, :index)}>
-                  Réservation
-                </a>
-              </li>
+          <div class="sidebar-sticky card info-card sales-card">
+            <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link" href={Routes.page_path(@conn, :bcircuit)}>
                   Circuit enduro
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href={Routes.itineraire_path(@conn, :index)}>
                   Itineraire
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" href={Routes.questions_path(@conn, :index)}>
                   Questions posées
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href={Routes.photo_path(@conn, :index)}>
                   Photos
                 </a>
-              </li>
+              </li> -->
             </ul>
 
-            <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Page</span>
-            </h6>
-            <ul class="nav flex-column mb-2" style="border: 1px solid #e5e5e5;">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Acceuil
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Circuit enduro
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  A propos
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Contat
-                </a>
-              </li> 
-            </ul>-->
           </div>
         </nav>
         <div class="col-md-10 mt-8">

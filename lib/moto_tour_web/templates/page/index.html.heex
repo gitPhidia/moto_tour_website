@@ -1,45 +1,50 @@
-<section class="hero-section bg-primary text-white mb-5" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/moto-freestyle.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;background-attachment: fixed;"}>
+<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/circuit_image/IMG_6984.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;background-attachment: fixed;"}>
 
     <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100vh;">
         <div style="margin-top: 250px;"> <!-- Ajout d'un margin-top ici -->
-          <h1 class="display-4 mb-4">Bienvenue à Moto Parcours</h1>
-          <p class="lead">Des pistes surprenantes, des paysages somptueux,<br> hors du temps et une hospitalité toujours bienveillante.<br> Après 30 ans à sillonner la grande île, c’est toujours avec un grand plaisir que j’accompagne les motards <br> les plus expérimentés comme les novices sur les chemins connus et moins connus de Madagascar.</p>
+          <h1 class="display-4 mb-4">Bienvenue à Madagascar</h1>
+          <p class="lead">"Un pays hors du temps, des pistes surprenantes, des paysages somptueux, spectaculaires, et une hospitalité toujours bienveillante.
+          <br> Après 30 ans à sillonner la Grande Ile, c'est toujours avec le même plaisir et la même passion, 
+          <br> que j'accompagne les motards de tous horizons à la découverte de Madagascar."</p>
           <p class="text-end"><i class="fa fa-quote-right fa-xs text-secondary"></i> <strong> François Serrano </strong> </p>
         </div>
     </div>
 </section>
-<section class="transition-section py-5">
+<section class="transition-section py-4">
   <div class="container">
     <div class="row text-white">
       <!-- Première colonne : Image -->
-      <div class="col-md-4 d-flex justify-content-center align-items-center">
+      <div class="col-md-2 d-flex justify-content-center align-items-center">
         <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
       </div>
 
       <!-- Deuxième colonne : Texte -->
-      <div class="col-md-4 d-flex justify-content-center align-items-center">
-        <p class="text-center lead">"Vivez une nouvelle expérience avec nos parcours inoubliables."</p>
+      <div class="col-md-7 d-flex justify-content-center align-items-center">
+        <p class="text-center lead"><h5>"MADAGASCAR THE LAST ADVENTURE LAND"</h5></p>
       </div>
 
       <!-- Troisième colonne : Bouton -->
-     <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
+     <div class="col-md-3 d-flex justify-content-center align-items-center fw-normal">
         <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
      </div>
     </div>
   </div>
 </section>
-<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/dirt-bike-rider-with-his-motorcycle-racing-circuits-adventure.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 60vh; color: white;"}>
-  <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100%;">
-    <div class="text-center">
-        <h1 class="fw-bold" style="color: #ffffff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 3em;">
-            Découvrez nos Offres Spéciales
-        </h1>
-      <p class="lead">"Profitez de nos offres exclusives pour des expériences inoubliables."</p>
-    </div>
-  </div>
-</section>
+
+
 <section class="product-section py-5">
   <div class="container">
+
+    <div class="container_image d-flex justify-content-center">
+      <div class="carousel-inner" style="trasform: scale(1.5);width: 80rem;">
+        <%= for {p, index} <- Enum.with_index(@circuits, 1) do %>
+          <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
+            <img src={Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1">
+          </div>
+        <%= end %>
+      </div>
+    </div>
+
     <!-- Première row : Titre et phrase phare -->
     <div class="row text-center mb-4 justify-content-center">
       <div class="col-10">
@@ -60,16 +65,16 @@
    <div class="row">
     <%= for circuit <- @circuits do %>
   <!-- Card 1 -->
-    <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto align-items-start">
+    <div class="col-lg-4 mb-4 align-items-start">
       <.card
         image={Routes.static_path(@conn,"/assets/images/section/" <> circuit.photo)}
-        rate_count={1}
+        rate_count={circuit.difficulté}
         max_rate_count={5}
         price={circuit.tarifs}
-        link={Routes.live_path(@conn, MotoTourWeb.CircuitLive)}
+        link={Routes.live_path(@conn, MotoTourWeb.CircuitLive, id: circuit.id)}
         >
         <:nom_block>
-           <%= circuit.nom %>
+           <%= circuit.circuit_nom %>
         </:nom_block>
         <:description_block>
           <%= circuit.desc_card %>
@@ -120,163 +125,76 @@
     </div>
   </div>
 
-<!-- reservation de circuit -->
-<!-- reservation avec image à droite -->
-<!-- r1 -->
-<section class="reservation-section">
-  <div class="container">
-    <div class="row">
-      <!-- Texte -->
-      <div class="col-lg-6 col-md-12 mb-4">
-        <h3>Le sud sauvage</h3>
-        <blockquote>
-          <i class="fa fa-quote-left fa-xs text-secondary"></i> Le <strong>Sud de Madagascar</strong> s’offre à vous : entre ciel et mer, au milieu d’un paysage de bush et de sable semi-désertique, vous découvrirez une culture et une nature à nul autre pareil. Cette descente progressive depuis les <strong>hautes terres</strong> jusqu’aux <strong>côtes de l’est</strong> vous permettra d’apprécier une multitude de paysages et de types de piste : sable, terre, boue ponctueront un parcours difficile mais somptueux.
-          <i class="fa fa-quote-right fa-xs text-secondary"></i>
-        </blockquote>
-        <div><strong>Durée :</strong> 12 jours, dont 10 jours de moto, circuit de 1900 km</div>
-        <div><strong>Type :</strong> Circuit raid enduro</div>
-        <div><strong>Motos recommandées : </strong>KTM 350 – 450</div>
-        <div><strong>Région : </strong>Sud</div>
-        <div><strong>Difficulté :</strong> Moyen à Difficile (moyen en saison sèche et difficile en saison des pluies)</div>
-        <div><strong>A PARTIR DE 3690 €</strong></div>
-      </div>
-
-      <!-- Image -->
-      <div class="col-lg-6 col-md-12">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/1.jpg") } class="img-fluid rounded w-100">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6">  
-        <div class="text-center mt-3">
-          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="vc_empty_space" style="height: 30px">
-    <span class="vc_empty_space_inner"></span>
-  </div>
-
-  <!-- r2 -->
-  <div class="container">
-    <div class="row">
-      <!-- Image -->
-      <div class="col-lg-6 col-md-12">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/2.jpg") } class="img-fluid rounded w-100">
-      </div>
-      <!-- Texte -->
-      <div class="col-lg-6 col-md-12 mb-4">
-        <h3>Les 2 lacs en 3 jours</h3>
-        <blockquote>
-          <i class="fa fa-quote-left fa-xs text-secondary"></i> Circuit sur les pistes des deux lacs en trois jours sera une grande aventure et des difficultés destinées aux enduristes confirmés.<br>
-            Prendre la route pour arriver au bord du lac de Tsiazompaniry, le plus grand lac barrage du pays, puis continuer vers l’Est pour visiter le célèbre lac de Mantasoa et le village,<br>
-            appréciez chaque instant en découvrant les multiples facettes des hauts plateaux. Pendant ce circuit, vous serez servis par la beauté des paysages naturelles des hautes terres.
-          <i class="fa fa-quote-right fa-xs text-secondary"></i>
-        </blockquote>
-        <div><strong>Durée :
-        </strong>3 jours, dont 3 jours de moto, circuit de 450 km</div>
-        <div><strong>Type :</strong> Circuit raid enduro</div>
-        <div><strong>Motos recommandées : </strong>KTM 350 – 450</div>
-        <div><strong>Région : </strong>Hauts plateaux</div>
-        <div><strong>Difficulté :</strong> Difficile à très difficile</div>
-        <div><strong>A PARTIR DE 990 €</strong></div>
-      </div>
-    </div>
-    <div class="row">
-    <div class="col-lg-6">  
-    </div>
-      <div class="col-lg-6">  
-        <div class="text-center mt-3">
-          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="vc_empty_space" style="height: 30px">
-    <span class="vc_empty_space_inner"></span>
-  </div>
-
-<!-- r3 -->
-<div class="container">
-  <div class="row">
-    <!-- Texte -->
-    <div class="col-lg-6 col-md-12 mb-4">
-      <h3>La piste des Baobabs</h3>
-      <blockquote>
-        <i class="fa fa-quote-left fa-xs text-secondary"></i>Les hautes terres centrales à votre portée : explorez les hauts plateaux en effectuant le parcours RD 43 en 6 jours. Sur plusieurs kilomètres, les pistes techniques et les zones montagneuses des hauts plateaux vous attendent. Profiter également de ce moment de découverte historique et culturelle, et admirez au guidon de votre moto la beauté de la nature et des paysages. Ne manquez surtout pas de goûter aux spécialités culinaires malgaches en arrivant dans les villes et villages du parcours.
-        <i class="fa fa-quote-right fa-xs text-secondary"></i>
-      </blockquote>
-      <div><strong>Durée :</strong> 6 jours, dont 6 jours de moto, circuit de 900 km</div>
-      <div><strong>Type :</strong> Circuit raid enduro</div>
-      <div><strong>Motos recommandées : </strong>KTM 350 – 450</div>
-      <div><strong>Région : </strong>Hauts plateaux</div>
-      <div><strong>Difficulté :</strong> Moyen à Difficile</div>
-      <div><strong>A PARTIR DE 1890 €</strong></div>
-    </div>
-
-    <!-- Image -->
-    <div class="col-lg-6 col-md-12">
-      <img src={ Routes.static_path(@conn, "/assets/images/section/4.jpg") } class="img-fluid rounded w-100">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6">  
-      <div class="text-center mt-3">
-        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="vc_empty_space" style="height: 30px">
   <span class="vc_empty_space_inner"></span>
 </div>
 
-<div class="container">
-    <div class="row">
-      <!-- Image -->
-      <div class="col-lg-6 col-md-12">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/3.jpg") } class="img-fluid rounded w-100">
-      </div>
-      <!-- Texte -->
-      <div class="col-lg-6 col-md-12 mb-4">
-        <h3>La piste des Baobabs</h3>
-        <blockquote>
-          <i class="fa fa-quote-left fa-xs text-secondary"></i> Bienvenue à Madagascar. Nous réservons ce périple de 9 jours aux motards ayant déjà une expérience de la moto tout-terrain.
-           Aucune notion de vitesse dans nos circuits, mais il faut être d’esprit sportif, et avoir un minimum de technique pour apprécier en toute sécurité la piste et les paysages traversés.
-           La variété hors normes de ce parcours Enduro qui part de la capitale Antananarivo située dans les hauts-plateaux, jusqu’aux pistes côtières longeant le <strong> Canal du Mozambique</strong>, justifie les efforts quotidiens. Beau mais pas facile, il faut gérer sur la longueur du circuit les pistes de latérite rouge, tantot dur comme du béton, tantot patinoire si la pluie se mêle de la partie, et les pistes de <strong> sables qui réclament un peu de technique </strong>. C’est ce circuit qui est à l’origine de l’Aventure Malgache qui continue depuis 25 ans…
-          <i class="fa fa-quote-right fa-xs text-secondary"></i>
-        </blockquote>
-        <div><strong>Durée :
-        </strong>11 jours, dont 9 jours de moto, circuit de 1600 km</div>
-        <div><strong>Type :</strong> Circuit raid enduro</div>
-        <div><strong>Motos recommandées : </strong> KTM 350 -450</div>
-        <div><strong>Région : </strong>Ouest</div>
-        <div><strong>Difficulté :</strong> Moyen à Difficile (moyen en saison sèche et difficile en saison des pluies)</div>
-        <div><strong>A PARTIR DE 3390 €</strong></div>
-      </div>
-    </div>
-    <div class="row">
-    <div class="col-lg-6">  
-    </div>
-      <div class="col-lg-6">  
-        <div class="text-center mt-3">
-          <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn" style="background-color: orange; color: white;">Reserver ce circuit</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<script>
+      function moveCarousel(direction) {
+      // Récupère tous les éléments du carrousel
+      const items = document.querySelectorAll('.carousel-item');
 
-  <div class="vc_empty_space" style="height: 30px">
-    <span class="vc_empty_space_inner"></span>
-  </div>
+      // Trouve l'élément actif actuel
+      const activeItem = document.querySelector('.carousel-item.active');
 
-</section>
+      // Trouve l'index de l'élément actif
+      const activeIndex = Array.from(items).indexOf(activeItem);
 
-<div class="vc_empty_space" style="height: 30px">
-  <span class="vc_empty_space_inner"></span>
-</div>
+      // Détermine le nouvel index
+      let newIndex = activeIndex + direction;
 
+      // Gestion des limites (boucle infinie)
+      if (newIndex < 0) {
+        newIndex = items.length - 1; // Aller au dernier élément
+      } else if (newIndex >= items.length) {
+        newIndex = 0; // Revenir au premier élément
+      }
+
+      // Change la classe active
+      activeItem.classList.remove('active');
+      items[newIndex].classList.add('active');
+    }
+
+    let carouselInterval; // Référence à l'intervalle
+
+    function moveCarousel(direction) {
+      const items = document.querySelectorAll('.carousel-item');
+      const activeItem = document.querySelector('.carousel-item.active');
+      const activeIndex = Array.from(items).indexOf(activeItem);
+      let newIndex = activeIndex + direction;
+
+      // Gestion des limites (boucle infinie)
+      if (newIndex < 0) {
+        newIndex = items.length - 1;
+      } else if (newIndex >= items.length) {
+        newIndex = 0;
+      }
+
+      activeItem.classList.remove('active');
+      items[newIndex].classList.add('active');
+    }
+
+    function startCarousel(interval = 4000) {
+      // Démarre un diaporama automatique toutes les `interval` millisecondes
+      carouselInterval = setInterval(() => {
+        moveCarousel(1); // Avance d'une image
+      }, interval);
+    }
+
+    function stopCarousel() {
+      // Arrête le diaporama automatique
+      clearInterval(carouselInterval);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startCarousel(); // Lance le diaporama au chargement de la page
+
+      // Ajoute une pause au survol du carrousel
+      const carousel = document.querySelector('.carousel');
+      if (carousel) {
+        carousel.addEventListener('mouseover', stopCarousel);
+        carousel.addEventListener('mouseout', () => startCarousel());
+      }
+    });
+
+    </script>

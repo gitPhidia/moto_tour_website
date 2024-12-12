@@ -376,3 +376,8 @@ ALTER TABLE circuits
 ADD COLUMN desc_card TYPE text
 ALTER TABLE circuits
 ADD COLUMN  <data_type> [options];
+
+ALTER TABLE circuits
+ALTER COLUMN difficulté TYPE integer
+
+ALTER TABLE photos ALTER COLUMN principal TYPE boolean USING principal::boolean

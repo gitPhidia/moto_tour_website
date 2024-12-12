@@ -4,6 +4,7 @@ defmodule MotoTourWeb.CircuitLive do
   alias MotoTourWeb.Router.Helpers, as: Routes
   alias MotoTour.Circuits
   alias MotoTour.Itineraires
+  alias MotoTour.Image
 
   def mount(_params, _session, socket) do
     # Assignez le chemin de l'image dans l'état du socket
@@ -12,7 +13,65 @@ defmodule MotoTourWeb.CircuitLive do
     first_circuit = List.first(circuits)
     # transorme les resultat en html,voir la foncrion function
     second_card_content_html = function_destination(first_circuit.id)
-    {:ok, assign(socket, selected_card: [first_circuit.id], circuit: [first_circuit], circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html)) }
+    # prend les photos de chaque circuit
+    photo = Image.get_photo_circuit(first_circuit.id)
+    {:ok, assign(socket, selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html)) }
+  end
+
+  def handle_param(%{"id" => id}, socket) do
+    circuits = Circuits.list_circuits()
+    circuit = Circuits.get_circuit!(id)
+
+    # Appelle la fonction pour générer le contenu HTML
+    second_card_content_html = function_destination(id)
+
+    # Assigne les données au socket
+    {:noreply,
+     assign(socket,
+       selected_card: [circuit.id],
+       circuit: [circuit],
+       circuits: circuits,
+       show_card_second: true,
+       card_content: raw(second_card_content_html)
+     )}
+  end
+
+  def handle_event("change_photo",  %{"param" => param}, socket) do
+    socket = reset_content(socket)
+    photo = Image.get_photo_circuit(param)
+    second_card_html =
+      """
+        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
+          Photos
+        </h3>
+        #{Enum.map(photo, fn p ->
+        """
+          <div class="col-lg-3 col-md-5 mt-2 col-xs-6 thumb">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+              data-image="/assets/images/section/circuit_image/#{p.photo}"
+              data-target="#image-gallery#{p.id}">
+              <img src="/assets/images/section/circuit_image/#{p.photo}" class="img-fluid rounded w-100" alt="Image 1">
+            </a>
+          </div>
+
+          <div class="modal fade" id="image-gallery#{p.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content align-items-end">
+                  <h4 class="modal-title" id="image-gallery-title"></h4>
+                  <button type="button" class="btn-close close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span>
+                  </button>
+                  <div class="modal-body">
+                    <img id="image-gallery-image" class="img-responsive col-md-12" src="/assets/images/section/circuit_image/#{p.photo}">
+                  </div>
+                </div>
+            </div>
+          </div>
+        """
+        end)
+        |> Enum.join("")}
+      """
+      # Retourner le tuple {:noreply, socket} avec l'assignement
+      {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
   end
 
   # montre la card: l'image et le tab de destination
@@ -20,7 +79,8 @@ defmodule MotoTourWeb.CircuitLive do
     cards= Circuits.single_circuit(card)
     second_card_content_html = function_destination(card)
     socket = reset_content(socket)
-    {:noreply, assign(socket, selected_card: card, circuit: cards, card_content: raw(second_card_content_html))}
+    photo = Image.get_photo_circuit(card)
+    {:noreply, assign(socket, selected_card: card, photo: photo, circuit: cards, card_content: raw(second_card_content_html))}
   end
 
   # montre les contenue du boutton destination
@@ -40,7 +100,8 @@ defmodule MotoTourWeb.CircuitLive do
   # handle event pour le boutton question
   def handle_event("change_question",  %{"param" => param}, socket) do
     socket = reset_content(socket)
-    second_card_html = """
+    second_card_html =
+      """
         <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
           Questions
         </h3>
@@ -54,57 +115,6 @@ defmodule MotoTourWeb.CircuitLive do
           <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">envoyer un message</a>
         </div>
         """
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
-  end
-
-  # H E pour le boutton avis
-  def handle_event("change_avis",  %{"param" => param}, socket) do
-    socket = reset_content(socket)
-    second_card_html = """
-        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
-          Rediger un avis
-        </h3>
-          <p>Titre de l’avis</p>
-          <input type='text'>
-          <p>Texte de l'avis</p>
-          <input type='text'>
-          <p>nom</p>
-          <input type='text'>
-          <p>E-mail</p>
-          <input type='email'>
-          <p>Message</p>
-          <input type='text'>
-        <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
-          <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Laisser un avis</a>
-        </div>
-        """
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
-  end
-
-  # H E pour le boutton reservation
-  def handle_event("change_reservation",  %{"param" => param}, socket) do
-    socket = reset_content(socket)
-    second_card_html =
-      """
-        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
-          Faîtes votre réservation
-        </h3>
-          <p>votre nom (obligatoire)</p>
-          <input type='text'>
-          <p>Votre adresse de messagerie (obligatoire)</p>
-          <input type='email'>
-          <p>Votre téléphone (obligatoire)</p>
-          <input type='text'>
-          <p>Nombre participant(s)</p>
-          <input type='number'>
-          <p>Date souhaitée</p>
-          <input type='date'>
-          <p>Besoin supplementaire</p>
-          <input type='text'>
-        <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
-          <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">Réserver ce circuit</a>
-        </div>
-      """
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
   end
 
@@ -243,15 +253,11 @@ defmodule MotoTourWeb.CircuitLive do
           <div class="col-lg-4 col-md-12">
             <div class="container_image d-flex justify-content-end">
               <div class="carousel-inner">
-                <div id="carousel-item-1" class="carousel-item active">
-                  <img src={Routes.static_path(@socket, "/assets/images/section/" <> c.photo)} class="img-fluid rounded w-100" alt="Image 1">
-                </div>
-                <div id="carousel-item-2" class="carousel-item">
-                  <img src={Routes.static_path(@socket, "/assets/images/section/2.jpg")} class="img-fluid rounded w-100" alt="Image 2">
-                </div>
-                <div id="carousel-item-3" class="carousel-item">
-                  <img src={Routes.static_path(@socket, "/assets/images/section/3.jpg")} class="img-fluid rounded w-100" alt="Image 3">
-                </div>
+                <%= for {p, index} <- Enum.with_index(@photo, 1) do %>
+                  <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
+                    <img src={Routes.static_path(@socket, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1">
+                  </div>
+                <%= end %>
                 <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
@@ -282,8 +288,7 @@ defmodule MotoTourWeb.CircuitLive do
                   <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
                   <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Programme de Voyage</strong></button></li>
                   <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
-                  <li><button phx-click="change_avis" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-comment"></i><br><strong>Avis</strong></button></li>
-                  <li><button phx-click="change_reservation" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-ticket"></i><br><strong>Reservation</strong></button></li>
+                  <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
                 </ul>
               </nav>
             </div>
@@ -308,9 +313,79 @@ defmodule MotoTourWeb.CircuitLive do
           <!-- fin de la deuxieme partie -->
         </div>
       </div>
+
+      <script>
+      function moveCarousel(direction) {
+      // Récupère tous les éléments du carrousel
+      const items = document.querySelectorAll('.carousel-item');
+
+      // Trouve l'élément actif actuel
+      const activeItem = document.querySelector('.carousel-item.active');
+
+      // Trouve l'index de l'élément actif
+      const activeIndex = Array.from(items).indexOf(activeItem);
+
+      // Détermine le nouvel index
+      let newIndex = activeIndex + direction;
+
+      // Gestion des limites (boucle infinie)
+      if (newIndex < 0) {
+        newIndex = items.length - 1; // Aller au dernier élément
+      } else if (newIndex >= items.length) {
+        newIndex = 0; // Revenir au premier élément
+      }
+
+      // Change la classe active
+      activeItem.classList.remove('active');
+      items[newIndex].classList.add('active');
+    }
+
+    let carouselInterval; // Référence à l'intervalle
+
+    function moveCarousel(direction) {
+      const items = document.querySelectorAll('.carousel-item');
+      const activeItem = document.querySelector('.carousel-item.active');
+      const activeIndex = Array.from(items).indexOf(activeItem);
+      let newIndex = activeIndex + direction;
+
+      // Gestion des limites (boucle infinie)
+      if (newIndex < 0) {
+        newIndex = items.length - 1;
+      } else if (newIndex >= items.length) {
+        newIndex = 0;
+      }
+
+      activeItem.classList.remove('active');
+      items[newIndex].classList.add('active');
+    }
+
+    function startCarousel(interval = 4000) {
+      // Démarre un diaporama automatique toutes les `interval` millisecondes
+      carouselInterval = setInterval(() => {
+        moveCarousel(1); // Avance d'une image
+      }, interval);
+    }
+
+    function stopCarousel() {
+      // Arrête le diaporama automatique
+      clearInterval(carouselInterval);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startCarousel(); // Lance le diaporama au chargement de la page
+
+      // Ajoute une pause au survol du carrousel
+      const carousel = document.querySelector('.carousel');
+      if (carousel) {
+        carousel.addEventListener('mouseover', stopCarousel);
+        carousel.addEventListener('mouseout', () => startCarousel());
+      }
+    });
+
+    </script>
+
     <%= end %>
     """
   end
-
 
 end

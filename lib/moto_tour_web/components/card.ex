@@ -68,7 +68,7 @@ end
         <!-- il faut s'assurer que rate_count ne depasse pas max_rate_count !-->
         <%= if(@rate_count < @max_rating_count) do %>
           <%= for _ <- (min(@rate_count, @max_rating_count) + 1)..@max_rating_count do %>
-          <img src="/assets/images/section/hot-pepper.svg" alt="Hot Pepper" style="width: 24px; height: 24px; opacity: 0.3;">
+          <img src="/assets/images/section/circuit_image/hot-pepper.svg" alt="Hot Pepper" style="width: 24px; height: 24px; opacity: 0.3;">
           <% end %>
         <% end %>
       </div>

@@ -28,4 +28,16 @@ defmodule MotoTourWeb.ItineraireController do
     changeset = Itineraires.change_itineraire(%Itineraire{})
     render(conn, "new.html", circuits: circuits_options, changeset: changeset)
   end
+
+  def create(conn, %{"itineraire" => itineraire}) do
+    case Itineraires.create_itineraire(itineraire) do
+      {:ok, itineraire} ->
+        conn
+        |> put_flash(:info, "itineraire ajouter.")
+        |> redirect(to: Routes.itineraire_path(conn, :ajout, itineraire.id))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
 end

@@ -1,5 +1,5 @@
 <h5>Ajouter un Circuit 
-<a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
+<a class="btn" href={Routes.photo_path(@conn, :new)}><i class="fa fa-picture-o"></i> photo</a> 
 <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h5>
 <%= form_for @changeset, Routes.circuits_path(@conn, :create), fn f -> %>
   <%= if @changeset.action do %>

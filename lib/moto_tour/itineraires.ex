@@ -18,4 +18,10 @@ defmodule MotoTour.Itineraires do
     Itineraire.changeset(itineraire, attrs)
   end
 
+  def create_itineraire(attrs \\ %{}) do
+    %Itineraire{}
+    |> Itineraire.changeset(attrs)
+    |> Repo.insert()
+  end
+
 end

@@ -18,9 +18,8 @@ defmodule MotoTourWeb.Card do
       <div class="card-body text-left mt-0">
         <!-- Star Ranking Column -->
         <div class="col-lg-12 col-sm-6 d-flex justify-content-center" style="height:3rem">
-          <span class="mt-2">difficulté:</span> <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
+          <span class="mt-2"></span> <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
         </div>
-        <div class="row mb-3"> <!-- Row pour la description et le ranking -->
           <!-- Description Column -->
           <div class="col-lg-12 col-sm-6">
             <p class="card-text mb-0" style="font-size: 0.9rem; line-height: 1.4;height: 4rem;">
@@ -28,11 +27,9 @@ defmodule MotoTourWeb.Card do
             </p>
           </div>
 
-        </div>
-
         <!-- Row pour le prix et le bouton Réserver -->
         <div class="row mb-2">
-          <div class="col-lg-12 d-flex text-align-center align-items-center">
+          <div class="col-lg-12 d-flex text-align-end align-items-end">
             <.display_price price={@price} />
           </div>
           <!-- <div class="col-6 d-flex justify-content-end">
@@ -50,7 +47,7 @@ end
 
   defp display_price(assigns)  do
     ~H"""
-        <p class="card-price mb-0 test" style="font-size: 1.7rem; font-weight: bold;">
+        <p class="card-price mb-0 test d-flex text-align-end align-items-end" style="font-size: 1.7rem; font-weight: bold;margin-left:40%;">
           <%= @price %>,00 €
         </p>
     """

@@ -47,8 +47,12 @@
                   <td><%= c.difficulté %></td>
                   <td style="width: 100px"><%= c.inserted_at %></td>
                   <td style="width: 200px"><%= c.desc_card %></td>
-                  <td style="width: 250px"><a class="btn" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> <button class="btn"><i class="fa fa-trash"></i></button>
-                  <a class="btn" href={Routes.photo_path(@conn, :detail, c.id)}><i class="fa fa-picture-o"></i></a><a class="btn" href={Routes.itineraire_path(@conn, :liste, c.id)}><i class="fa fa-road"></i></a></td>
+                  <td style="width: 250px">
+                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> 
+                    <button class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="supprimer le circuit"><i class="fa fa-trash"></i></button>
+                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, c.id)}><i class="fa fa-picture-o"></i></a>
+                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, c.id)}><i class="fa fa-road"></i></a>
+                    </td>
                 </tr>
 
                   <!-- Modal -->

@@ -186,8 +186,6 @@ defmodule MotoTourWeb.CircuitLive do
         <p><strong>Durée</strong> : #{circuit.durée}</p>
         <p><strong>Participant</strong> : #{circuit.participant}</p>
         <p><strong>Motos disponnible</strong> : #{circuit.moto}</p>
-        <p><strong>Difficulté</strong> : #{circuit.difficulté}</p>
-        <p><strong>Tarifs</strong> : à partir de #{circuit.tarifs} €</p>
         """
       end
     |> Enum.join("") # Concatène toutes les chaînes en une seule
@@ -195,8 +193,8 @@ defmodule MotoTourWeb.CircuitLive do
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section py-5">
-        <div class="container mt-5">
+     <section class="transition-section py-5" style="height:130px;">
+        <div class="container" style="margin-top:20px;">
           <div class="row text-white">
             <!--Première colonne : Image -->
             <div class="col-md-2 d-flex justify-content-center align-items-center">
@@ -204,7 +202,7 @@ defmodule MotoTourWeb.CircuitLive do
             </div>
 
             <!--Deuxième colonne : Texte -->
-            <div class="col-md-8 d-flex justify-content-center align-items-center">
+            <div class="col-md-10 d-flex justify-content-center align-items-center">
               <p class="text-center lead"><h5>"Vivez une nouvelle expérience avec nos parcours inoubliables."</h5></p>
             </div>
 
@@ -241,8 +239,19 @@ defmodule MotoTourWeb.CircuitLive do
         <div class="row">
 
           <!-- titre & prix -->
-          <div class="col-md-9">
+          <div class="col-md-5">
             <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;"><%= c.nom %></h4>
+          </div>
+          <div class="col-md-4">
+            <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
+            <%= for i <- 1..5 do %>
+              <%= if i <= c.difficulté do %>
+                🌶️
+              <% else %>
+                <img src="/assets/images/section/circuit_image/hot-pepper.svg" alt="Hot Pepper" style="width: 32px; height: 32px; opacity: 0.3;">
+              <% end %>
+            <% end %>
+            </h4>
           </div>
           <div class="col-md-3">
             <h4 class="fw-bold text-success" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">à partir de <%= c.tarifs %>€</h4>
@@ -286,7 +295,7 @@ defmodule MotoTourWeb.CircuitLive do
                   <li><button phx-click="change_content" phx-value-param={c.id}
                     style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
                   <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Programme de Voyage</strong></button></li>
+                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Préstations et sites marquant</strong></button></li>
                   <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
                   <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
                 </ul>

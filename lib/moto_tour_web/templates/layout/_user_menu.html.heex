@@ -2,7 +2,7 @@
 <%= if @current_user do %>
   <li style="margin-top: 10px;"><%= @current_user.email %></li>
   <li style="margin-top: 10px;"><a href={Routes.page_path(@conn, :bcircuit)} style="color:blue">Tableau de bord</a></li>
-  <li style="margin-top: 10px;"><a href={Routes.user_settings_path(@conn, :edit)} style="color:blue">Paramètre</a></li>
+  <li style="margin-top: 10px;"><a href={Routes.user_settings_path(@conn, :edit)} style="color:blue">Paramètres</a></li>
   <li style="margin-top: 10px;"><%= link "Déconnexion", to: Routes.user_session_path(@conn, :delete), method: :delete, style: "color: blue;" %></li>
 <% else %>
   <li style="margin-top: 10px;"><a href={Routes.user_session_path(@conn, :new)} style="color:blue">Connexion</a></li>

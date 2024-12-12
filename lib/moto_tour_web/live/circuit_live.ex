@@ -184,8 +184,8 @@ defmodule MotoTourWeb.CircuitLive do
         """
         <p><strong>Destination</strong> : #{circuit.desc_card}</p>
         <p><strong>Durée</strong> : #{circuit.durée}</p>
-        <p><strong>Participant</strong> : Illimitée personnes max</p>
-        <p><strong>Motos recommandées</strong> : #{circuit.moto}</p>
+        <p><strong>Participant</strong> : #{circuit.participant}</p>
+        <p><strong>Motos disponnible</strong> : #{circuit.moto}</p>
         <p><strong>Difficulté</strong> : #{circuit.difficulté}</p>
         <p><strong>Tarifs</strong> : à partir de #{circuit.tarifs} €</p>
         """

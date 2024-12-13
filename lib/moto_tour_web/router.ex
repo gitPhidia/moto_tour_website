@@ -109,8 +109,10 @@ defmodule MotoTourWeb.Router do
     # itineraire
     get "/itineraire/:id", ItineraireController, :liste
     get "/itineraire", ItineraireController, :index
+    get "/itineraire_edit/:id", ItineraireController, :edit
     get "/itineraire_ajout", ItineraireController, :ajout
     post "/itineraire_create", ItineraireController, :create
+    put "/itineraire_up", ItineraireController, :update
 
     # photo
     # resources "/photo", PhotoController, [:new, :create, :index, :show, :edit, :delete, :update]

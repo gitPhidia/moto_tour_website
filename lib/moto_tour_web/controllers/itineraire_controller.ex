@@ -34,10 +34,31 @@ defmodule MotoTourWeb.ItineraireController do
       {:ok, itineraire} ->
         conn
         |> put_flash(:info, "itineraire ajouter.")
-        |> redirect(to: Routes.itineraire_path(conn, :ajout, itineraire.id))
+        |> redirect(to: Routes.itineraire_path(conn, :ajout))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  def edit(conn, %{"id" => id}) do
+    itineraire = Itineraires.single_itineraire(id)
+    changeset = Itineraires.change_itineraire(itineraire, %{})
+    render(conn, "edit.html", itineraire: itineraire, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "itineraire" => itineraire_params}) do
+    itineraire = Itineraire.single_itineraire(id)
+
+    # case Circuit.update_circuit(circuit, circuit_params) do
+    case Itineraire.changeset(itineraire, itineraire_params) |> Repo.update() do
+      {:ok, itineraire} ->
+        conn
+        |> put_flash(:info, "Itineraire mis a jour.")
+        |> redirect(to: Routes.circuits_path(conn, :edit, id))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", itineraire: itineraire, changeset: changeset)
     end
   end
 end

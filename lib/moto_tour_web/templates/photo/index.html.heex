@@ -3,7 +3,7 @@
 <a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
 <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h1>
 
-  <span><%= link "Nouvelle Photo", to: Routes.photo_path(@conn, :new) %></span>
+  <span><%= link "Nouvelle photo", to: Routes.photo_path(@conn, :new) %></span>
 
   <table>
     <thead>
@@ -20,7 +20,7 @@
         <td style="width: 250px"><%= photo.nom %></td>
         <td style="width: 250px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
         <td style="width: 100px">
-          <span><%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "Are you sure?"] %></span>
+          <span><%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "vous êtes sûr?"] %></span>
           
         </td>
         <td style="width: 15rem">

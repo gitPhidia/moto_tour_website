@@ -3,11 +3,6 @@
 <a class="btn" href={Routes.photo_path(@conn, :new)}><i class="fa fa-picture-o"></i> photo</a> 
 <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h5>
 <%= form_for @changeset, Routes.circuits_path(@conn, :update, @circuit), [method: :put], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
 
     <%= if @changeset.action do %>
     <div class="alert alert-danger">
@@ -23,7 +18,7 @@
     </div>
 
     <div class="form-group" style="display: flex; align-items: center;">
-      <label style="width: 300px;">La descriptions sur la cartes</label>
+      <label style="width: 300px;">La description sur la carte</label>
       <%= text_input f, :desc_card %>
     </div>
 
@@ -38,12 +33,12 @@
     </div>
 
     <div class="form-group" style="display: flex; align-items: center;">
-      <label style="width: 300px;">nombre de participant maximum</label>
+      <label style="width: 300px;">Nombre de participants</label>
       <%= text_input f, :participant %>
     </div>
 
     <div class="form-group" style="display: flex; align-items: center;">
-      <label style="width: 300px;">Les moto disponnible pour ce circuit</label>
+      <label style="width: 300px;">Les moto disponibles pour ce circuit</label>
       <%= text_input f, :moto %>
     </div>
 
@@ -55,7 +50,7 @@
 
   <div class="col-6">
     <div class="form-group" style="display: flex; align-items: center;">
-      <label style="width: 150px;">Vos remarque sur ce circuit</label>
+      <label style="width: 150px;">Vos remarques sur ce circuit</label>
       <%= textarea f, :remarque, style: "flex: 1;height: 200px;" %>
     </div>
 

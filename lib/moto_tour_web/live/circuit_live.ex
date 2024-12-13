@@ -184,8 +184,8 @@ defmodule MotoTourWeb.CircuitLive do
         """
         <p><strong>Destination</strong> : #{circuit.desc_card}</p>
         <p><strong>Durée</strong> : #{circuit.durée}</p>
-        <p><strong>Participant</strong> : #{circuit.participant}</p>
-        <p><strong>Motos disponnible</strong> : #{circuit.moto}</p>
+        <p><strong>nombre de Participants</strong> : #{circuit.participant}</p>
+        <p><strong>Moto disponibles</strong> : #{circuit.moto}</p>
         """
       end
     |> Enum.join("") # Concatène toutes les chaînes en une seule
@@ -295,7 +295,7 @@ defmodule MotoTourWeb.CircuitLive do
                   <li><button phx-click="change_content" phx-value-param={c.id}
                     style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
                   <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Préstations et sites marquant</strong></button></li>
+                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Préstations et sites marquants</strong></button></li>
                   <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
                   <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
                 </ul>

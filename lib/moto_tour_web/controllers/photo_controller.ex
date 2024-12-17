@@ -28,36 +28,59 @@ defmodule MotoTourWeb.PhotoController do
     render(conn, "new.html", changeset: changeset, circuit: circuit_options)
   end
 
-  def create(conn, %{"photo" => %{"nom" => nom, "idcircuit" => idcircuit, "photo" => %Plug.Upload{path: temp_path, filename: filename}}}) do
+  def create(conn, %{"photo" => photo_params}) do
     upload_dir = "priv/static/assets/images/section/circuit_image"
-    upload_path = Path.join([upload_dir, filename])
 
-    # Vérifications
-    # IO.inspect(temp_path, label: "Chemin temporaire")
-    # IO.inspect(upload_path, label: "Chemin cible")
+    # Extraire les champs avec des valeurs par défaut pour éviter les erreurs
+    nom = Map.get(photo_params, "nom", "")
+    idcircuit = Map.get(photo_params, "idcircuit", "")
+    photo = Map.get(photo_params, "photo", nil)
 
-    # File.mkdir_p!(upload_dir)
+    # Vérification des champs vides
+    cond do
+      nom == "" or idcircuit == "" or is_nil(photo) ->
+        conn
+        |> put_flash(:error, "Tous les champs sont obligatoires.")
+        |> redirect(to: Routes.photo_path(conn, :new))
 
-    case File.cp(temp_path, upload_path) do
-      :ok ->
+      not is_map(photo) or not Map.has_key?(photo, :path) or not Map.has_key?(photo, :filename) ->
+        conn
+        |> put_flash(:error, "Le fichier photo est invalide.")
+        |> redirect(to: Routes.photo_path(conn, :new))
+
+      true ->
+        # Si les champs sont valides, on procède au traitement
+        %Plug.Upload{path: temp_path, filename: filename} = photo
+        upload_path = Path.join([upload_dir, filename])
+
+        # Créer un changeset pour validation
         changeset = Photo.changeset(%Photo{}, %{nom: nom, idcircuit: idcircuit, photo: filename})
 
-        case Repo.insert(changeset) do
-          {:ok, _photo} ->
-            conn
-            |> put_flash(:info, "Photo uploadée avec succès !")
-            |> redirect(to: Routes.photo_path(conn, :new))
+        if changeset.valid? do
+          case File.cp(temp_path, upload_path) do
+            :ok ->
+              case Repo.insert(changeset) do
+                {:ok, _photo} ->
+                  conn
+                  |> put_flash(:info, "Photo uploadée avec succès !")
+                  |> redirect(to: Routes.photo_path(conn, :new))
 
-          {:error, changeset} ->
-            conn
-            |> put_flash(:error, "Erreur lors de l'enregistrement de la photo.")
-            |> render("new.html", changeset: changeset)
+                {:error, changeset} ->
+                  conn
+                  |> put_flash(:error, "Erreur lors de l'enregistrement de la photo.")
+                  |> render("new.html", changeset: changeset)
+              end
+
+            {:error, reason} ->
+              conn
+              |> put_flash(:error, "Erreur lors de la copie du fichier : #{reason}")
+              |> redirect(to: Routes.photo_path(conn, :new))
+          end
+        else
+          conn
+          |> put_flash(:error, "Certains champs sont invalides. Veuillez les vérifier.")
+          |> render("new.html", changeset: changeset)
         end
-
-      {:error, reason} ->
-        conn
-        |> put_flash(:error, "Erreur lors de la copie du fichier : #{reason}")
-        |> redirect(to: Routes.photo_path(conn, :new))
     end
   rescue
     e in RuntimeError ->
@@ -66,6 +89,48 @@ defmodule MotoTourWeb.PhotoController do
       |> put_flash(:error, "Erreur inattendue : #{inspect(e)}")
       |> redirect(to: Routes.photo_path(conn, :new))
   end
+
+
+  # def create(conn, %{"photo" => %{"nom" => nom, "idcircuit" => idcircuit, "photo" => %Plug.Upload{path: temp_path, filename: filename}}}) do
+  #   upload_dir = "priv/static/assets/images/section/circuit_image"
+  #   upload_path = Path.join([upload_dir, filename])
+  #   changeset = Photo.changeset(%Photo{}, %{nom: nom, idcircuit: idcircuit, photo: filename})
+
+  #   # File.mkdir_p!(upload_dir)
+
+  #   if changeset.valid? do
+  #     case File.cp(temp_path, upload_path) do
+  #       :ok ->
+
+  #         case Repo.insert(changeset) do
+  #           {:ok, _photo} ->
+  #             conn
+  #             |> put_flash(:info, "Photo uploadée avec succès !")
+  #             |> redirect(to: Routes.photo_path(conn, :new))
+
+  #           {:error, changeset} ->
+  #             conn
+  #             |> put_flash(:error, "Erreur lors de l'enregistrement de la photo.")
+  #             |> render("new.html", changeset: changeset)
+  #         end
+
+  #       {:error, reason} ->
+  #         conn
+  #         |> put_flash(:error, "Erreur lors de la copie du fichier : #{reason}")
+  #         |> redirect(to: Routes.photo_path(conn, :new))
+  #     end
+  #   else
+  #     conn
+  #     |> put_flash(:error, "Certains champs sont vides. Veuillez les remplir ")
+  #     |> redirect(to: Routes.photo_path(conn, :new))
+  #   end
+  # rescue
+  #   e in RuntimeError ->
+  #     IO.inspect(e, label: "Erreur")
+  #     conn
+  #     |> put_flash(:error, "Erreur inattendue : #{inspect(e)}")
+  #     |> redirect(to: Routes.photo_path(conn, :new))
+  # end
 
   def show(conn, %{"id" => id}) do
     photo = Image.get_photo!(id)

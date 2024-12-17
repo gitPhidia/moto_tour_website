@@ -1,36 +1,38 @@
-<h1>Nouvelle photo 
-  <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter un Circuit</a> 
-  <a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
-  <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h1>
-<a href={Routes.photo_path(@conn, :index)}>Retour</a>
+<div class="container">
+  <h1>Nouvelle photo 
+    <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter un Circuit</a> 
+    <a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
+    <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h1>
+    <a href={Routes.photo_path(@conn, :index)}>Retour</a>
 
-<%= form_for @changeset, Routes.photo_path(@conn, :create), [multipart: true], fn f -> %>
+  <%= form_for @changeset, Routes.photo_path(@conn, :create), [multipart: true], fn f -> %>
 
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, une erreur s'est produite!</p>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, une erreur s'est produite!</p>
+      </div>
+    <% end %>
+
+  <div class="form-group" style="display: flex; align-items: center;">
+    <%= label f, :nom %>
+    <%= text_input f, :nom %>
+    <%= error_tag f, :nom %>
+  </div>
+
+  <div class="form-group" style="display: flex; align-items: center;">
+    <%= label f, :nom, "Circuits" %>
+    <%= select f, :idcircuit, @circuit, prompt: "Sélectionnez un circuit", style: "display: block;" %>
+    <%= error_tag f, :nom %>
+  </div>
+
+  <div class="form-group" style="display: flex; align-items: center;" style="margin-top:20px">
+    <%= label f, :photo %>
+    <%= file_input f, :photo %>
+    <%= error_tag f, :photo %>
+  </div>
+
+    <div style="margin-top:20px">
+      <%= submit "Upload", style: "flex: 1;margin-left:90%;margin-top: 10px;" %>
     </div>
   <% end %>
-
-<div class="form-group" style="display: flex; align-items: center;">
-  <%= label f, :nom %>
-  <%= text_input f, :nom %>
-  <%= error_tag f, :nom %>
 </div>
-
-<div class="form-group" style="display: flex; align-items: center;">
-  <%= label f, :nom, "Circuits" %>
-  <%= select f, :idcircuit, @circuit, prompt: "Sélectionnez un circuit", style: "display: block;" %>
-  <%= error_tag f, :nom %>
-</div>
-
-<div class="form-group" style="display: flex; align-items: center;" style="margin-top:20px">
-  <%= label f, :photo %>
-  <%= file_input f, :photo %>
-  <%= error_tag f, :photo %>
-</div>
-
-  <div style="margin-top:20px">
-    <%= submit "Upload", style: "flex: 1;margin-left:90%;margin-top: 10px;" %>
-  </div>
-<% end %>

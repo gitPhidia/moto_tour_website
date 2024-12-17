@@ -3,9 +3,6 @@
 
       <div class="card info-card sales-card">
         <main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Tableau de bord</h1>
-          </div>
             
             <h3>Ajouter <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> un Circuit</a> 
             <a class="btn" href={Routes.photo_path(@conn, :new)}><i class="fa fa-plus"></i> ajouter une photo</a> 
@@ -29,16 +26,16 @@
 
               <%= for c <- @circuit do %>
                 <tr>
-                  <td style="width: 200px"><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}><%= c.nom %></a></td>
+                  <td style="width: 150px"><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}><%= c.nom %></a></td>
                   <td style="width: 100px"><%= c.tarifs %> €</td>
                   <td><%= if c.participant == nil, do: "illimité", else: c.participant %></td>
                   <td><%= c.moto %></td>
                   <td><%= c.difficulté %></td>
                   <td style="width: 100px"><%= c.inserted_at %></td>
                   <td style="width: 200px"><%= c.desc_card %></td>
-                  <td style="width: 250px;">
+                  <td style="width: 300px;">
                     <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> 
-                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="supprimer le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-trash"></i></a>
+                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="archiver le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-archive"></i></a>
                     <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, c.id)}><i class="fa fa-picture-o"></i></a>
                     <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, c.id)}><i class="fa fa-road"></i></a>
                   </td>

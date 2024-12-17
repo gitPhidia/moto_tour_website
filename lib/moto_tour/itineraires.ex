@@ -7,7 +7,7 @@ defmodule MotoTour.Itineraires do
 
   def single_itineraire(params) do
     single = Repo.get_by(Itineraire, id: params)
-    itineraire = [single]
+    # itineraire = [single]
   end
 
   def itineraire_circuit(params) do
@@ -18,4 +18,13 @@ defmodule MotoTour.Itineraires do
     Itineraire.changeset(itineraire, attrs)
   end
 
+  def create_itineraire(attrs \\ %{}) do
+    %Itineraire{}
+    |> Itineraire.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def delete_itineraire(%Itineraire{} = itineraire) do
+    Repo.delete(itineraire)
+  end
 end

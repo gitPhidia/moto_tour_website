@@ -42,3 +42,75 @@
   /* Toggle Sidebar Button */
   /* Search Bar */
 }
+
+
+
+/* responsive pour l'iphone */
+.hero-section {
+  background-attachment: fixed; /* Maintient l'effet de parallaxe */
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    background-attachment: scroll; /* Évite des problèmes sur les petits écrans */
+    background-position: center center; /* Réajuste la position de l'image */
+    height: auto; /* Permet à la hauteur de s'adapter */
+    padding: 20px;
+  }
+
+  .hero-section div {
+    margin-top: 150px; /* Réduit l'espacement */
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section {
+    background-size: contain; /* Montre l'image complète dans un espace réduit */
+    padding: 10px;
+  }
+
+  .hero-section div {
+    margin-top: 100px; /* Ajustement supplémentaire pour les très petits écrans */
+  }
+}
+
+
+.hero-section {
+  background-size: cover; /* Ajuste l'image pour couvrir tout le conteneur */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* Occupe toute la hauteur de l'écran */
+}
+
+@media (max-width: 768px) { /* Tablettes et petits écrans */
+  .hero-section {
+    height: auto; /* Permet à la hauteur de s'ajuster au contenu */
+    background-attachment: scroll; /* Désactive l'effet de parallaxe */
+  }
+
+  .hero-section div {
+    margin-top: 150px; /* Réduit l'espacement sur mobile */
+  }
+}
+
+@media (max-width: 576px) { /* iPhone et petits appareils */
+  .hero-section {
+    background-size: contain; /* Affiche l'image entière si elle est trop grande */
+    padding: 20px; /* Ajoute un peu d'espace autour du contenu */
+  }
+
+  .hero-section div {
+    margin-top: 100px; /* Réduit encore plus pour les très petits écrans */
+    text-align: center; /* Centre le texte pour une meilleure lisibilité */
+  }
+
+  .hero-section h1 {
+    font-size: 1.8rem; /* Diminue la taille du titre */
+  }
+
+  .hero-section p {
+    font-size: 1rem; /* Diminue la taille du texte */
+  }
+}
+
+

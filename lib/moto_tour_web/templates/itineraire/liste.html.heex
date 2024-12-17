@@ -1,15 +1,20 @@
+<div class="mt-5">
 <a class="btn" href={Routes.itineraire_path(@conn, :ajout)}><i class="fa fa-plus"></i> ajouter</a>
     <div id='accordion'>
     <%= for i <- @itineraire do %>
         <div class='card'>
           <div class='card-header' id='headingOne'>
               <div class='row'>
-                <div class='col-md-11'>
+                <div class='col-md-9'>
                   <a data-toggle='collapse' data-target={"#collapse#{i.id}"} aria-expanded='true' aria-controls={"collapse#{i.id}"}>
                     <h6 class='mb-0'>
                         <%= i.itineraire %>
                     </h6>
                   </a>
+                </div>
+                <div class='col-md-2 mt-1'>
+                  <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier l'itineraire" href={Routes.itineraire_path(@conn, :edit, i.id)}><i class="fa fa-pencil"></i></a>
+                  <span><%= link "Supprimer", to: Routes.itineraire_path(@conn, :delete, i.id), method: :delete, data: [confirm: "vous êtes sûr?"], class: "btn" %></span>
                 </div>
                 <div class='col-md-1 mt-1'>
                   <a data-toggle='collapse' data-target={"#collapse#{i.id}"} aria-expanded='true' aria-controls={"collapse#{i.id}"}>
@@ -27,3 +32,4 @@
         </div>
     <%= end %>
     </div>
+</div>

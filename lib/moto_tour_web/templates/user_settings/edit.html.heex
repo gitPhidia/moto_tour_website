@@ -20,7 +20,7 @@
     <%= error_tag f, :current_password %>
 
     <div>
-      <%= submit "Change email" %>
+      <%= submit "Changer l'email" %>
     </div>
   </.form>
 
@@ -35,7 +35,7 @@
 
     <%= hidden_input f, :action, name: "action", value: "update_password" %>
 
-    <%= label f, :password, "New password" %>
+    <%= label f, :password, "Nouveau mot de passe" %>
     <%= password_input f, :password, required: true %>
     <%= error_tag f, :password %>
 
@@ -48,7 +48,7 @@
     <%= error_tag f, :current_password %>
 
     <div>
-      <%= submit "Change password" %>
+      <%= submit "Changer le mot de passe" %>
     </div>
   </.form>
 

@@ -1,15 +1,16 @@
-<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/circuit_image/IMG_6984.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;background-attachment: fixed;"}>
-
-    <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100vh;">
-        <div style="margin-top: 250px;"> <!-- Ajout d'un margin-top ici -->
-          <h1 class="display-4 mb-4">Bienvenue à Madagascar</h1>
-          <p class="lead">"Un pays hors du temps, des pistes surprenantes, des paysages somptueux, spectaculaires, et une hospitalité toujours bienveillante.
-          <br> Après 30 ans à sillonner la Grande Ile, c'est toujours avec le même plaisir et la même passion, 
-          <br> que j'accompagne les motards de tous horizons à la découverte de Madagascar."</p>
-          <p class="text-end"><i class="fa fa-quote-right fa-xs text-secondary"></i> <strong> François Serrano </strong> </p>
-        </div>
-    </div>
+<section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/circuit_image/IMG_6984.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;"}>
+  <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100%;">
+      <div style="margin-top: 250px; padding: 20px;"> <!-- Ajout de padding pour petits écrans -->
+        <h1 class="display-4 mb-4">Bienvenue à Madagascar</h1>
+        <p class="lead">"Un pays hors du temps, des pistes surprenantes, des paysages somptueux, spectaculaires, et une hospitalité toujours bienveillante.
+        <br> Après 30 ans à sillonner la Grande Ile, c'est toujours avec le même plaisir et la même passion, 
+        <br> que j'accompagne les motards de tous horizons à la découverte de Madagascar."</p>
+        <p class="text-end"><i class="fa fa-quote-left fa-xs text-secondary"></i> <strong> François Serrano </strong> <i class="fa fa-quote-right fa-xs text-secondary"></i> </p>
+      </div>
+  </div>
 </section>
+
+
 <section class="transition-section py-4">
   <div class="container">
     <div class="row text-white">
@@ -25,7 +26,7 @@
 
       <!-- Troisième colonne : Bouton -->
      <div class="col-md-3 d-flex justify-content-center align-items-center fw-normal">
-        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos circuits</a>
      </div>
     </div>
   </div>
@@ -49,7 +50,7 @@
     <div class="row text-center mb-4 justify-content-center">
       <div class="col-10">
         <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
-        Voyage organisé à moto ou location de Moto, les routes les plus exotiques s’offrent à vous
+        Voyage organisé à moto ou location de moto, les routes les plus exotiques s’offrent à vous
         </h3>
       </div>
     </div>
@@ -67,7 +68,7 @@
   <!-- Card 1 -->
     <div class="col-lg-4 mb-4 align-items-start">
       <.card
-        image={Routes.static_path(@conn,"/assets/images/section/" <> circuit.photo)}
+        image={Routes.static_path(@conn,"/assets/images/section/circuit_image/" <> circuit.photo)}
         rate_count={circuit.difficulté}
         max_rate_count={5}
         price={circuit.tarifs}
@@ -102,7 +103,7 @@
 
       <!-- Troisième colonne : Bouton -->
      <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
-        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos parcours</a>
+        <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos circuits</a>
      </div>
     </div>
   </div>
@@ -121,7 +122,7 @@
   <!-- Deuxième row : Description -->
   <div class="row text-center mb-5 justify-content-center">
     <div class="col-9">
-      <p class="description">La faible densité du réseau routier à créé un réseau de piste hors du commun. Grand comme la France et la Belgique réuni, chaque ville, chaque village est connecté par une piste ou un sentier de plusieurs centaines de kilomètres. Avec 5000 km de côte et 7 sommets de plus de 2000 m d’altitude, Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir… Donc oui Madagascar est à la moto  ce que Hawaï est au surf :<strong> un pur Spot</strong> !</p>
+      <p class="description">La faible densité du réseau routier a créé un réseau de piste hors du commun. Grand comme la France et la Belgique réunies, chaque ville, chaque village est connecté par une piste ou un sentier de plusieurs centaines de kilomètres. Avec 5000 km de côte et 7 sommets de plus de 2000 m d’altitude, Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir… Donc oui Madagascar est à la moto  ce que Hawaï est au surf :<strong> un pur Spot</strong> !</p>
     </div>
   </div>
 

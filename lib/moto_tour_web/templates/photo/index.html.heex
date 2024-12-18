@@ -1,99 +1,100 @@
-<div class="card info-card sales-card">
-  <h1>Liste des Photos<a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter un Circuit</a>
-<a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
-<a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h1>
 
-  <span><%= link "Nouvelle photo", to: Routes.photo_path(@conn, :new) %></span>
+  <div class="card info-card sales-card w-75 mt-2" style="margin-left:10%;">
+    <h1>Liste des Photos<a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter un Circuit</a>
+    <a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
+    <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h1>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Photo</th>
-        <th>Action</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-    <%= for photo <- @photos do %>
-      <tr>
-        <td style="width: 250px"><%= photo.nom %></td>
-        <td style="width: 250px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
-        <td style="width: 100px">
-          <span><%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "vous êtes sûr?"] %></span>
-          
-        </td>
-        <td style="width: 15rem">
-          <div>
-            <label for={"scale_#{photo.id}"}><input type="checkbox" 
-              id={"scale_#{photo.id}"} 
-              name="scales" 
-              class="scale-checkbox" 
-              data-id-circuit={photo.idcircuit}
-              onclick="toggleCheckboxes(this); updateCheckboxValues();" />
-            Principal</label>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+    <span><%= link "Nouvelle photo", to: Routes.photo_path(@conn, :new) %></span>
 
-  <script>
-    function toggleCheckboxes(clickedCheckbox) {
-    // Sélectionner tous les checkboxes avec la classe "scale-checkbox"
-    const checkboxes = document.querySelectorAll('.scale-checkbox');
-    checkboxes.forEach(checkbox => {
-      // Désactiver tous les autres checkboxes
-      if (checkbox !== clickedCheckbox) {
-        checkbox.checked = false;
-      }
-    });
-  }
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Photo</th>
+          <th>Action</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <%= for photo <- @photos do %>
+        <tr>
+          <td style="width: 250px"><%= photo.nom %></td>
+          <td style="width: 250px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
+          <td style="width: 100px">
+            <span><%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "vous êtes sûr?"] %></span>
+            
+          </td>
+          <td style="width: 15rem">
+            <div>
+              <label for={"scale_#{photo.id}"}><input type="checkbox" 
+                id={"scale_#{photo.id}"} 
+                name="scales" 
+                class="scale-checkbox" 
+                data-id-circuit={photo.idcircuit}
+                onclick="toggleCheckboxes(this); updateCheckboxValues();" />
+              Principal</label>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-  function getCsrfToken() {
-    // Récupérer le token CSRF du meta tag
-    const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-    return csrfToken;
-  }
+    <script>
+      function toggleCheckboxes(clickedCheckbox) {
+      // Sélectionner tous les checkboxes avec la classe "scale-checkbox"
+      const checkboxes = document.querySelectorAll('.scale-checkbox');
+      checkboxes.forEach(checkbox => {
+        // Désactiver tous les autres checkboxes
+        if (checkbox !== clickedCheckbox) {
+          checkbox.checked = false;
+        }
+      });
+    }
 
-  function updateCheckboxValues() {
-    // Identifier la checkbox cliquée
-    const clickedCheckbox = document.querySelector('.scale-checkbox:checked'); // Seule la checkbox cochée sera envoyée
+    function getCsrfToken() {
+      // Récupérer le token CSRF du meta tag
+      const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+      return csrfToken;
+    }
 
-    if (!clickedCheckbox) return; // Si aucune checkbox n'est cochée, ne rien faire
+    function updateCheckboxValues() {
+      // Identifier la checkbox cliquée
+      const clickedCheckbox = document.querySelector('.scale-checkbox:checked'); // Seule la checkbox cochée sera envoyée
 
-    // Extraire les données de la checkbox sélectionnée
-    const data = [{
-      id: clickedCheckbox.id.split('_')[1], // Extraire l'ID dynamique (après "scale_")
-      idcircuit: clickedCheckbox.getAttribute('data-id-circuit'), // Récupérer l'id_circuit
-      principal: clickedCheckbox.checked // Statut du checkbox
-    }];
+      if (!clickedCheckbox) return; // Si aucune checkbox n'est cochée, ne rien faire
 
-    // Envoyer les données au serveur via AJAX
-    fetch('/update-checkboxes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-csrf-token': getCsrfToken() // Assurez-vous d'inclure le jeton CSRF
-      },
-      body: JSON.stringify({ checkboxes: data }) // Inclure les données collectées
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Erreur lors de la mise à jour des données');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Mise à jour réussie :', data);
-      alert('Les données ont été mises à jour avec succès');
-    })
-    .catch(error => {
-      console.error('Erreur AJAX :', error);
-      alert('Une erreur est survenue lors de la mise à jour.');
-    });
-  }
+      // Extraire les données de la checkbox sélectionnée
+      const data = [{
+        id: clickedCheckbox.id.split('_')[1], // Extraire l'ID dynamique (après "scale_")
+        idcircuit: clickedCheckbox.getAttribute('data-id-circuit'), // Récupérer l'id_circuit
+        principal: clickedCheckbox.checked // Statut du checkbox
+      }];
 
-  </script>
-</div>
+      // Envoyer les données au serveur via AJAX
+      fetch('/update-checkboxes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-csrf-token': getCsrfToken() // Assurez-vous d'inclure le jeton CSRF
+        },
+        body: JSON.stringify({ checkboxes: data }) // Inclure les données collectées
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors de la mise à jour des données');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Mise à jour réussie :', data);
+        alert('Les données ont été mises à jour avec succès');
+      })
+      .catch(error => {
+        console.error('Erreur AJAX :', error);
+        alert('Une erreur est survenue lors de la mise à jour.');
+      });
+    }
+
+    </script>
+  </div>

@@ -48,6 +48,11 @@ defmodule MotoTourWeb.PhotoController do
         |> put_flash(:error, "Le fichier photo est invalide.")
         |> redirect(to: Routes.photo_path(conn, :new))
 
+      not valid_extension?(photo.filename) ->
+        conn
+        |> put_flash(:error, "Seuls les fichiers JPEG et PNG sont autorisés.")
+        |> redirect(to: Routes.photo_path(conn, :new))
+
       true ->
         # Si les champs sont valides, on procède au traitement
         %Plug.Upload{path: temp_path, filename: filename} = photo
@@ -90,47 +95,10 @@ defmodule MotoTourWeb.PhotoController do
       |> redirect(to: Routes.photo_path(conn, :new))
   end
 
-
-  # def create(conn, %{"photo" => %{"nom" => nom, "idcircuit" => idcircuit, "photo" => %Plug.Upload{path: temp_path, filename: filename}}}) do
-  #   upload_dir = "priv/static/assets/images/section/circuit_image"
-  #   upload_path = Path.join([upload_dir, filename])
-  #   changeset = Photo.changeset(%Photo{}, %{nom: nom, idcircuit: idcircuit, photo: filename})
-
-  #   # File.mkdir_p!(upload_dir)
-
-  #   if changeset.valid? do
-  #     case File.cp(temp_path, upload_path) do
-  #       :ok ->
-
-  #         case Repo.insert(changeset) do
-  #           {:ok, _photo} ->
-  #             conn
-  #             |> put_flash(:info, "Photo uploadée avec succès !")
-  #             |> redirect(to: Routes.photo_path(conn, :new))
-
-  #           {:error, changeset} ->
-  #             conn
-  #             |> put_flash(:error, "Erreur lors de l'enregistrement de la photo.")
-  #             |> render("new.html", changeset: changeset)
-  #         end
-
-  #       {:error, reason} ->
-  #         conn
-  #         |> put_flash(:error, "Erreur lors de la copie du fichier : #{reason}")
-  #         |> redirect(to: Routes.photo_path(conn, :new))
-  #     end
-  #   else
-  #     conn
-  #     |> put_flash(:error, "Certains champs sont vides. Veuillez les remplir ")
-  #     |> redirect(to: Routes.photo_path(conn, :new))
-  #   end
-  # rescue
-  #   e in RuntimeError ->
-  #     IO.inspect(e, label: "Erreur")
-  #     conn
-  #     |> put_flash(:error, "Erreur inattendue : #{inspect(e)}")
-  #     |> redirect(to: Routes.photo_path(conn, :new))
-  # end
+    # Fonction pour valider les extensions de fichier
+  defp valid_extension?(filename) do
+    String.ends_with?(filename, [".jpg", ".jpeg", ".png"])
+  end
 
   def show(conn, %{"id" => id}) do
     photo = Image.get_photo!(id)
@@ -159,11 +127,12 @@ defmodule MotoTourWeb.PhotoController do
 
   def delete(conn, %{"id" => id}) do
     photo = Image.get_photo!(id)
+    idcircuit = photo.idcircuit
     {:ok, _photo} = Image.delete_photo(photo)
 
     conn
     |> put_flash(:info, "Photo deleted successfully.")
-    |> redirect(to: Routes.photo_path(conn, :index))
+    |> redirect(to: Routes.photo_path(conn, :detail, idcircuit))
   end
 
   def principal(conn, %{"checkboxes" => checkboxes_params}) do

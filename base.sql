@@ -383,3 +383,6 @@ ALTER COLUMN difficulté TYPE integer
 ALTER TABLE photos ALTER COLUMN principal TYPE boolean USING principal::boolean
 
 update circuits set difficulté = 0;
+
+ALTER TABLE circuits
+ADD COLUMN archiver TYPE boolean

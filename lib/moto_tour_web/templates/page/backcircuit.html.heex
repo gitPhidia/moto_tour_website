@@ -1,80 +1,74 @@
-<div>
-    <div class="row">
 
-      <div class="card info-card sales-card">
-        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
-            
-            <h3>Ajouter <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> un Circuit</a> 
-            <a class="btn" href={Routes.photo_path(@conn, :new)}><i class="fa fa-plus"></i> ajouter une photo</a> 
-            <a class="btn" href={Routes.itineraire_path(@conn, :ajout)}><i class="fa fa-plus"></i> ajouter un Itineraire</a></h3>
-            
-          <div class="table-responsive col-12">
-            <table class="table table-striped table-sm" style="border: 1px solid">
-              <thead>
-                <tr>
-                  <th>Nom du circuit</th>
-                  <th>Tarifs</th>
-                  <th>Participants</th>
-                  <th>Moto disponnible</th>
-                  <th>Difficulté</th>
-                  <th>Date de création</th>
-                  <th>Description sur la carte</th>
-                  <th>status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
+  <div class="card info-card sales-card">
+    <main role="main" class="col-md-12">
+        
+        <h3>Ajouter <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> un Circuit</a> 
+        <a class="btn" href={Routes.photo_path(@conn, :new)}><i class="fa fa-plus"></i> ajouter une photo</a> 
+        <a class="btn" href={Routes.itineraire_path(@conn, :ajout)}><i class="fa fa-plus"></i> ajouter un Itineraire</a></h3>
+        
+      <div class="table-responsive col-12">
+        <table class="table table-striped table-sm" style="border: 1px solid">
+          <thead>
+            <tr>
+              <th>Nom du circuit</th>
+              <th>Tarifs</th>
+              <th>Participants</th>
+              <th>Moto disponnible</th>
+              <th>Difficulté</th>
+              <th>Date de création</th>
+              <th>Description sur la carte</th>
+              <th>status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
 
-              <%= for c <- @circuit do %>
-                <tr>
-                  <td style="width: 150px"><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}><%= c.nom %></a></td>
-                  <td style="width: 100px"><%= c.tarifs %> €</td>
-                  <td><%= if c.participant == nil, do: "illimité", else: c.participant %></td>
-                  <td><%= c.moto %></td>
-                  <td><%= c.difficulté %></td>
-                  <td style="width: 100px"><%= c.inserted_at %></td>
-                  <td style="width: 200px"><%= c.desc_card %></td>
-                  <td><%= if c.archiver == true, do: "archiver", else: "non archivé" %></td>
-                  <td style="width: 300px;">
-                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> 
-                    <!-- <a class="btn" id={"scale_#{c.id}"} data-bs-toggle="tooltip" data-bs-placement="top" title="archiver le circuit"><i class="fa fa-archive"></i></a> -->
-                    <span><%= link "archiver", to: Routes.circuits_path(@conn, :archiver, c.id), data: [confirm: "voulez vous archivé ce circuit?"] %></span>
-                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, c.id)}><i class="fa fa-picture-o"></i></a>
-                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, c.id)}><i class="fa fa-road"></i></a>
-                  </td>
-                </tr>
+          <%= for c <- @circuit do %>
+            <tr>
+              <td style="width: 150px"><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}><%= c.nom %></a></td>
+              <td style="width: 100px"><%= c.tarifs %> €</td>
+              <td><%= if c.participant == nil, do: "illimité", else: c.participant %></td>
+              <td><%= c.moto %></td>
+              <td><%= c.difficulté %></td>
+              <td style="width: 100px"><%= c.inserted_at %></td>
+              <td style="width: 200px"><%= c.desc_card %></td>
+              <td><%= if c.archiver == true, do: "archiver", else: "non archivé" %></td>
+              <td style="width: 300px;">
+                <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> 
+                <!-- <a class="btn" id={"scale_#{c.id}"} data-bs-toggle="tooltip" data-bs-placement="top" title="archiver le circuit"><i class="fa fa-archive"></i></a> -->
+                <span><%= link "archiver", to: Routes.circuits_path(@conn, :archiver, c.id), data: [confirm: "voulez vous archivé ce circuit?"], class: "btn" %></span>
+                <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, c.id)}><i class="fa fa-picture-o"></i></a>
+                <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, c.id)}><i class="fa fa-road"></i></a>
+              </td>
+            </tr>
 
-                  <!-- Modal -->
-                  <div class="modal fade" id={"exampleModal#{c.id}"} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content" style="width:800px">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel"><%= c.nom %></h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <h6>Remarque sur le circuit</h6>
-                        <div class="modal-body">
-                          "<%= c.remarque%>"
-                        </div>
-                        <h6>Prestations</h6>
-                        <div class="modal-body">
-                          <%= raw(c.details) %>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        </div>
-                      </div>
+              <!-- Modal -->
+              <div class="modal fade" id={"exampleModal#{c.id}"} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content" style="width:800px">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"><%= c.nom %></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <h6>Remarque sur le circuit</h6>
+                    <div class="modal-body">
+                      "<%= c.remarque%>"
+                    </div>
+                    <h6>Prestations</h6>
+                    <div class="modal-body">
+                      <%= raw(c.details) %>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                     </div>
                   </div>
-                  
-              <%= end %>
-              </tbody>
-            </table>
+                </div>
+              </div>
+              
+          <%= end %>
+          </tbody>
+        </table>
 
-          </div>
-        </main>
       </div>
-    </div>
-    <script>
-  </script>
-</div>
+    </main>
+  </div>

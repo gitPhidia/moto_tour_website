@@ -32,7 +32,7 @@ defmodule MotoTourWeb.PageController do
   end
 
   def bcircuit(conn, _params) do
-    cir = Circuits.list_circuits()
+    cir = Circuits.list_circuits_back()
     render(conn, "backcircuit.html", circuit: cir)
   end
 

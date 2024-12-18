@@ -4,7 +4,11 @@ defmodule MotoTour.Circuits do
 
 
   def list_circuits do
-    from(c in Circuit, where: c.archiver != true)
+    query = from(c in Circuit, where: is_nil(c.archiver) or c.archiver == false)
+    circuits = Repo.all(query)
+  end
+
+  def list_circuits_back do
     circuits = Repo.all(Circuit)
   end
 

@@ -1,8 +1,6 @@
 
-  <div class="card info-card sales-card w-75 mt-2" style="margin-left:10%;">
-    <h1>Liste des Photos<a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter un Circuit</a>
-    <a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
-    <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h1>
+  <div class="container">
+    <h1>Liste des Photos</h1>
 
     <span><%= link "Nouvelle photo", to: Routes.photo_path(@conn, :new) %></span>
 

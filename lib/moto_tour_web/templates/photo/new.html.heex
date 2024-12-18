@@ -1,9 +1,6 @@
 <div class="container mt-5">
-  <h1>Nouvelle photo 
-    <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter un Circuit</a> 
-    <a class="btn" href={Routes.photo_path(@conn, :index)}><i class="fa fa-picture-o"></i> photo</a> 
-    <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h1>
-    <a href={Routes.photo_path(@conn, :index)}>Retour</a>
+  <h1>Nouvelle photo </h1>
+    <!-- <a href={Routes.photo_path(@conn, :index)}>Retour</a> -->
 
   <%= form_for @changeset, Routes.photo_path(@conn, :create), [multipart: true], fn f -> %>
 

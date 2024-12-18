@@ -62,7 +62,7 @@ defmodule MotoTour.Image do
     query =
       from p in Photo,
         join: c in Circuit, on: c.id == p.idcircuit,
-        where: p.principal == true,
+        where: p.principal == true and c.archiver != true,
         select: %{
           id: p.id,
           idcircuit: c.id,

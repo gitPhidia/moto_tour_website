@@ -1,8 +1,10 @@
 defmodule MotoTour.Circuits do
   alias MotoTour.{Repo,Circuit}
+  import Ecto.Query
 
 
   def list_circuits do
+    from(c in Circuit, where: c.archiver != true)
     circuits = Repo.all(Circuit)
   end
 
@@ -31,5 +33,19 @@ defmodule MotoTour.Circuits do
 
   def delete_circuit(%circuit{} = circuit) do
     Repo.delete(circuit)
+  end
+
+  def archivage(id) do
+    # liste = Repo.all(from p in Photo, where: p.idcircuit == ^params)
+    from(c in Circuit, where: c.id == ^id)
+    |> Repo.update_all(set: [archiver: true])
+    # Repo.update(from c in Circuit, where: c.id == ^id, set: [archiver: true])
+  end
+
+  def desarchivage(id) do
+    # liste = Repo.all(from p in Photo, where: p.idcircuit == ^params)
+    from(c in Circuit, where: c.id == ^id)
+    |> Repo.update_all(set: [archiver: false])
+    # Repo.update(from c in Circuit, where: c.id == ^id, set: [archiver: true])
   end
 end

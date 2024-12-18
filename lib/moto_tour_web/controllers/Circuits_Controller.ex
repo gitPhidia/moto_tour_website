@@ -66,4 +66,34 @@ defmodule MotoTourWeb.CircuitsController do
     |> put_flash(:info, "circuit deleted successfully.")
     |> redirect(to: Routes.circuits_path(conn, :index))
   end
+
+  def archiver(conn, %{"id" => id}) do
+    circuit = Circuits.get_circuit!(id)
+    IO.inspect(circuit, label: "Changeset pour render")
+    if circuit.archiver !== true do
+      case Circuits.archivage(circuit.id) do
+        {1, _} -> # {1, nil} est le format de retour de Repo.update_all
+          conn
+          |> put_flash(:info, "Circuit archivé avec succès.")
+          |> redirect(to: Routes.page_path(conn, :bcircuit))
+
+        {0, _} ->
+          conn
+          |> put_flash(:error, "Impossible d'archiver le circuit.")
+          |> redirect(to: Routes.page_path(conn, :bcircuit))
+      end
+    else
+      case Circuits.desarchivage(circuit.id) do
+        {1, _} -> # {1, nil} est le format de retour de Repo.update_all
+          conn
+          |> put_flash(:info, "Circuit desarchivé avec succès.")
+          |> redirect(to: Routes.page_path(conn, :bcircuit))
+
+        {0, _} ->
+          conn
+          |> put_flash(:error, "Impossible de desarchiver le circuit.")
+          |> redirect(to: Routes.page_path(conn, :bcircuit))
+      end
+    end
+  end
 end

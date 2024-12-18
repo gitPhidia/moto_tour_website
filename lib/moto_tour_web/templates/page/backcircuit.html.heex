@@ -19,6 +19,7 @@
                   <th>Difficulté</th>
                   <th>Date de création</th>
                   <th>Description sur la carte</th>
+                  <th>status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -33,9 +34,11 @@
                   <td><%= c.difficulté %></td>
                   <td style="width: 100px"><%= c.inserted_at %></td>
                   <td style="width: 200px"><%= c.desc_card %></td>
+                  <td><%= if c.archiver == true, do: "archiver", else: "non archivé" %></td>
                   <td style="width: 300px;">
                     <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> 
-                    <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="archiver le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-archive"></i></a>
+                    <!-- <a class="btn" id={"scale_#{c.id}"} data-bs-toggle="tooltip" data-bs-placement="top" title="archiver le circuit"><i class="fa fa-archive"></i></a> -->
+                    <span><%= link "archiver", to: Routes.circuits_path(@conn, :archiver, c.id), data: [confirm: "voulez vous archivé ce circuit?"] %></span>
                     <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, c.id)}><i class="fa fa-picture-o"></i></a>
                     <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, c.id)}><i class="fa fa-road"></i></a>
                   </td>
@@ -72,4 +75,6 @@
         </main>
       </div>
     </div>
+    <script>
+  </script>
 </div>

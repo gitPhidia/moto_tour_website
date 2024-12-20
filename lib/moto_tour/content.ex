@@ -101,4 +101,32 @@ defmodule MotoTour.Content do
   def change_questions(%Questions{} = questions, attrs \\ %{}) do
     Questions.changeset(questions, attrs)
   end
+
+  def export_data_to_csv(file_path) do
+    # Exemple : Récupérer des données (remplacez `YourSchema` par votre schéma)
+    data = Repo.all(Questions)
+
+    # Convertir les données en liste de listes
+    csv_content =
+      data
+      |> Enum.map(fn record ->
+        [
+          record.nom,
+          record.email,
+          record.telephone,
+          record.message
+        ]
+      end)
+
+    # Ajouter l'en-tête au CSV
+    csv_content_with_header = [["Nom", "E-mail", "Téléphone", "Message"] | csv_content]
+
+    # Écrire dans le fichier CSV
+    file_path
+    |> File.open([:write], fn file ->
+      csv_content_with_header
+      |> CSV.encode()
+      |> Enum.each(&IO.write(file, &1))
+    end)
+  end
 end

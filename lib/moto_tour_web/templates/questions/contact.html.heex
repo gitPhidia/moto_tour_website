@@ -1,0 +1,44 @@
+
+
+<div class="container" style="margin-top: 50px;">
+    <p class="lead">Pour réserver un circuit ou pour toute demande d’information, n’hésitez pas à nous contacter, notre équipe se fera un plaisir de vous répondre le plus rapidement possible.
+
+    Vous pouvez nous contacter par mail en remplissant ce formulaire ou en nous téléphonant à un des numéros indiqués sur cette page. Veuillez remplir ce formulaire en complétant tous les champs requis. Nous vous contacterons dès que possible.
+    </p>    
+
+    <%= form_for @changeset, Routes.questions_path(@conn, :create), fn f -> %>
+        <!-- Form Group -->
+        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <label for="nom" style="width: 100px;">Nom</label>
+            <%= text_input f, :nom, class: "form-control", style: "flex: 1;" %>
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <label for="email" style="width: 100px;">E-mail</label>
+             <%= email_input f, :email, class: "form-control", style: "flex: 1;" %>
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <label for="telephone" style="width: 100px;">Téléphone</label>
+            <%= text_input f, :telephone, class: "form-control", style: "flex: 1;" %>
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <label for="message" style="width: 100px;">Message</label>
+            <%= textarea f, :message, class: "form-control", style: "flex: 1; height: 150px;" %>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-3">
+            <%= submit "Envoyer un message", class: "btn" %>
+        </div>
+
+        <div class="vc_empty_space" style="height: 30px">
+            <span class="vc_empty_space_inner"></span>
+        </div>
+
+        <div class="vc_empty_space" style="height: 30px">
+            <span class="vc_empty_space_inner"></span>
+        </div>
+    <% end %>
+</div>

@@ -1,31 +1,36 @@
-<h1>Liste des Questions</h1>
+<div class="container">
+  <h1>Liste des Questions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Idcircuit</th>
-      <th>Nom</th>
-      <th>Email</th>
-      <th>Message</th>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group mr-2">
+      <button class="btn btn-sm btn-outline-secondary">Export</button>
+    </div> 
+  </div>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= for questions <- @question do %>
+  <table>
+    <thead>
       <tr>
-        <td><%= questions.idcircuit %></td>
-        <td><%= questions.nom %></td>
-        <td><%= questions.email %></td>
-        <td><%= questions.message %></td>
+        <th>Telephone</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Message</th>
 
-        <td>
-          <span><%= link "Modifier", to: Routes.questions_path(@conn, :edit, questions) %></span>
-          <span><%= link "Supprimer", to: Routes.questions_path(@conn, :delete, questions), method: :delete, data: [confirm: "Are you sure?"] %></span>
-        </td>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <%= for questions <- @question do %>
+        <tr>
+          <td><%= questions.telephone %></td>
+          <td><%= questions.nom %></td>
+          <td><%= questions.email %></td>
+          <td><%= questions.message %></td>
 
-<span><%= link "Nouvelle question", to: Routes.questions_path(@conn, :new) %></span>
+          <td>
+            <span><%= link "Supprimer", to: Routes.questions_path(@conn, :delete, questions), method: :delete, data: [confirm: "Are you sure?"] %></span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -5,6 +5,8 @@ defmodule MotoTourWeb.CircuitLive do
   alias MotoTour.Circuits
   alias MotoTour.Itineraires
   alias MotoTour.Image
+  alias MotoTour.Content
+  alias MotoTour.Content.Questions
 
   def mount(_params, _session, socket) do
     # Assignez le chemin de l'image dans l'état du socket
@@ -102,17 +104,29 @@ defmodule MotoTourWeb.CircuitLive do
     socket = reset_content(socket)
     second_card_html =
       """
-        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
-          Questions
-        </h3>
-        <p>nom</p>
-        <input type='text'>
-        <p>E-mail</p>
-        <input type='email'>
-        <p>Message</p>
-        <input type='text'>
-        <div class="text-center mt-3 position-relative d-flex justify-content-md-center">
-          <a href="#" class="btn btn-responsive" style="background-color: orange; color: white;">envoyer un message</a>
+        <div  class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <label for="nom" style="width: 100px;">Nom</label>
+            <input type="text" id="nom" class="form-control" style="flex: 1;">
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <label for="email" style="width: 100px;">E-mail</label>
+            <input type="email" id="email" class="form-control" style="flex: 1;">
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <label for="telephone" style="width: 100px;">Téléphone</label>
+            <input type="text" id="telephone" class="form-control" style="flex: 1;">
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <label for="message" style="width: 100px;">Message</label>
+            <textarea id="message" class="form-control" style="flex: 1;height: 150px;"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-3">
+            <%= submit "Envoyer un message", class: "btn" %>
         </div>
         """
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
@@ -296,7 +310,7 @@ defmodule MotoTourWeb.CircuitLive do
                     style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
                   <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
                   <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Prestations et sites marquants</strong></button></li>
-                  <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li>
+                  <!-- <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li> -->
                   <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
                 </ul>
               </nav>

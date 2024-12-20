@@ -4,14 +4,14 @@ defmodule MotoTourWeb.QuestionsController do
   alias MotoTour.Content
   alias MotoTour.Content.Questions
 
+  def new(conn, _params) do
+    changeset = Content.change_questions(%Questions{})
+    render(conn, "contact.html", changeset: changeset)
+  end
+
   def index(conn, _params) do
     question = Content.list_question()
     render(conn, "index.html", question: question)
-  end
-
-  def new(conn, _params) do
-    changeset = Content.change_questions(%Questions{})
-    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"questions" => questions_params}) do
@@ -19,10 +19,10 @@ defmodule MotoTourWeb.QuestionsController do
       {:ok, questions} ->
         conn
         |> put_flash(:info, "Questions created successfully.")
-        |> redirect(to: Routes.questions_path(conn, :show, questions))
+        |> redirect(to: Routes.questions_path(conn, :new))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "contact.html", changeset: changeset)
     end
   end
 
@@ -58,5 +58,18 @@ defmodule MotoTourWeb.QuestionsController do
     conn
     |> put_flash(:info, "Questions deleted successfully.")
     |> redirect(to: Routes.questions_path(conn, :index))
+  end
+
+  def download_csv(conn, _params) do
+    file_path = "priv/static/assets/export.csv"
+
+    # Exporter les données
+    Content.export_data_to_csv(file_path)
+
+    # Envoyer le fichier en réponse
+    conn
+    |> put_resp_content_type("text/csv")
+    |> put_resp_header("content-disposition", "attachment; filename=\"export.csv\"")
+    |> send_file(200, file_path)
   end
 end

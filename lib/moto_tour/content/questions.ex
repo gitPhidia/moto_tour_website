@@ -4,9 +4,9 @@ defmodule MotoTour.Content.Questions do
 
   schema "question" do
     field :message, :string
-    field :idcircuit, :integer
     field :nom, :string
     field :email, :string
+    field :telephone, :string
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule MotoTour.Content.Questions do
   @doc false
   def changeset(questions, attrs) do
     questions
-    |> cast(attrs, [:idcircuit, :nom, :email, :message])
-    |> validate_required([:idcircuit, :nom, :email, :message])
+    |> cast(attrs, [ :nom, :email, :message, :telephone])
+    |> validate_required([ :nom, :email, :message, :telephone])
   end
 end

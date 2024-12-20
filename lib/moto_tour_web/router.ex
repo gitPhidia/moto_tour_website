@@ -39,12 +39,14 @@ defmodule MotoTourWeb.Router do
     get "/", PageController, :index
     get "/liste", PageController, :liste
     get "/propos", PageController, :propos
-    get "/contact", PageController, :contact
+
+    resources "/question", QuestionsController, only: [:new, :create]
     # Route pour la LiveView Home
     live "/home", HomeLive
     live "/circuit", CircuitLive
     live "/circuit/:id", CircuitLive
     live "/menu_card", MenuCardLive
+    live "/test", BackLive
   end
 
   # Other scopes may use custom stacks.
@@ -128,7 +130,9 @@ defmodule MotoTourWeb.Router do
     delete "/photo_del/:id", PhotoController, :delete
     post "/update-checkboxes", PhotoController, :principal
 
-    resources "/question", QuestionsController, only: [:new, :create, :index, :show, :edit, :delete, :update]
+    # resources "/question", QuestionsController, only: [:index, :show, :edit, :delete, :update]
+    resources "/question", QuestionsController, only: [:index, :show, :edit, :delete, :update]
+
     get "/circuit_enduro", PageController, :bcircuit
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

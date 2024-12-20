@@ -386,3 +386,6 @@ update circuits set difficulté = 0;
 
 ALTER TABLE circuits
 ADD COLUMN archiver TYPE boolean
+
+ALTER TABLE question
+ADD COLUMN telephone character varying;

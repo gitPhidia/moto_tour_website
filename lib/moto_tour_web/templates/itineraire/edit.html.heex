@@ -1,8 +1,5 @@
-<div class="container">
-  <h5>Modifier un Circuit 
-  <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter un Circuit</a>
-  <a class="btn" href={Routes.photo_path(@conn, :new)}><i class="fa fa-picture-o"></i> photo</a> 
-  <a class="btn" href={Routes.itineraire_path(@conn, :index)}><i class="fa fa-road"></i> Itineraire</a></h5>
+<div class="container mt-4">
+  <h5>Modifier un Circuit</h5>
   <%= form_for @changeset, Routes.itineraire_path(@conn, :update, @itineraire), [method: :put], fn f -> %>
     <a href={Routes.itineraire_path(@conn, :liste, @itineraire.idcircuit)}><h6>Retour</h6></a>
       <%= if @changeset.action do %>

@@ -21,9 +21,9 @@ defmodule MotoTourWeb.PageController do
     render(conn, "propos.html")
   end
 
-  def contact(conn, _params) do
-    render(conn, "contact.html")
-  end
+  # def contact(conn, _params) do
+  #   render(conn, "contact.html")
+  # end
 
   def liste(conn, _params) do
     circuits = Circuits.list_circuits()
@@ -32,7 +32,7 @@ defmodule MotoTourWeb.PageController do
   end
 
   def bcircuit(conn, _params) do
-    cir = Circuits.list_circuits()
+    cir = Circuits.list_circuits_back()
     render(conn, "backcircuit.html", circuit: cir)
   end
 

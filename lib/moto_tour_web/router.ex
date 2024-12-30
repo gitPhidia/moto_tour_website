@@ -47,6 +47,8 @@ defmodule MotoTourWeb.Router do
     live "/circuit/:id", CircuitLive
     live "/menu_card", MenuCardLive
     live "/test", BackLive
+
+    get "/sitemap.xml", SitemapController, :index
   end
 
   # Other scopes may use custom stacks.

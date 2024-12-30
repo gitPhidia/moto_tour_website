@@ -5,14 +5,17 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content={assigns[:meta_description] || "Partez pour un voyage en moto à Madagascar."} />
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "", suffix: " Moto Tour" %>
+    <%= live_title_tag assigns[:page_title] || "", suffix: "Circuit & Location Moto à Madagascar" %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+    <!-- <link rel="preload" href="URL_DE_TA_POLICE" as="font" type="font/woff2" crossorigin="anonymous"> -->
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
 
+    <link rel="icon" sizes="32x32" type="image/png" href={Routes.static_path(@conn, "/assets/images/section/circuit_image/cropped-favicon-mtl-32x32.png")} />
   </head>
   
-  <body>
+<body>
   
 <nav class="navbar navbar-expand-lg fixed-top " style="height:2.5rem;">
   <div class="container-fluid bg-white">

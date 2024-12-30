@@ -47,4 +47,11 @@ defmodule MotoTourWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug MotoTourWeb.Router
+
+  plug Plug.Static,
+  at: "/",
+  from: :moto_tour,
+  gzip: false,
+  headers: %{"cache-control" => "public, max-age=31536000"} # 1 an
+
 end

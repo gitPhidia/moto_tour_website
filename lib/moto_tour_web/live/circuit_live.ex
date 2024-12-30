@@ -17,6 +17,11 @@ defmodule MotoTourWeb.CircuitLive do
     second_card_content_html = function_destination(first_circuit.id)
     # prend les photos de chaque circuit
     photo = Image.get_photo_circuit(first_circuit.id)
+    socket =
+      socket
+      |> assign(:page_title, "circuit")
+      |> assign(:meta_keywords, "moto, tour, voyage")
+      |> assign(:meta_description, "Découvrez nos circuits Moto Tour")
     {:ok, assign(socket, selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html)) }
   end
 

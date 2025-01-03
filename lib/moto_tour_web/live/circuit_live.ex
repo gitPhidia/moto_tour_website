@@ -212,16 +212,16 @@ defmodule MotoTourWeb.CircuitLive do
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section py-5" style="height:12rem;">
-        <div class="container mt-5" style="height:10rem;">
+     <section class="transition-section py-2">
+        <div class="container mt-5">
           <div class="row text-white">
             <!--Première colonne : Image -->
-            <div class="col-md-2 d-flex justify-content-center align-items-center">
+            <!-- <div class="col-md-2 d-flex justify-content-center align-items-center">
               <img src={ Routes.static_path(@socket, "/assets/images/section/logo.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
-            </div>
+            </div> -->
 
             <!--Deuxième colonne : Texte -->
-            <div class="col-md-10 d-flex justify-content-center align-items-center">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
               <p class="text-center lead"><h5>"Vivez une nouvelle expérience avec nos parcours inoubliables."</h5></p>
             </div>
 
@@ -265,9 +265,9 @@ defmodule MotoTourWeb.CircuitLive do
             <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
             <%= for i <- 1..5 do %>
               <%= if i <= c.difficulté do %>
-                🌶️
+              <img src="/assets/images/section/circuit_image/chilli-pepper-icon.svg" alt="Hot Pepper" style="width: 30px; height: 24px;">
               <% else %>
-                <img src="/assets/images/section/circuit_image/hot-pepper.svg" alt="Hot Pepper" style="width: 32px; height: 32px; opacity: 0.3;">
+              <img src="/assets/images/section/circuit_image/chili-vegetable-icon.svg" alt="Hot Pepper" style="width: 30px; height: 24px; opacity: 0.3;">
               <% end %>
             <% end %>
             </h4>
@@ -296,11 +296,6 @@ defmodule MotoTourWeb.CircuitLive do
                 </button>
               </div>
             </div>
-            <!-- empty space -->
-            <div class="vc_empty_space" style="height: 30px">
-              <span class="vc_empty_space_inner"></span>
-            </div>
-            <!-- fin -->
           </div>
           <!-- fin du carousel -->
 
@@ -387,7 +382,7 @@ defmodule MotoTourWeb.CircuitLive do
       items[newIndex].classList.add('active');
     }
 
-    function startCarousel(interval = 4000) {
+    function startCarousel(interval = 10000) {
       // Démarre un diaporama automatique toutes les `interval` millisecondes
       carouselInterval = setInterval(() => {
         moveCarousel(1); // Avance d'une image

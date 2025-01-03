@@ -1,6 +1,6 @@
 <section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/circuit_image/IMG_6984.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;"}>
-  <div class="container-fluid d-flex align-items-center justify-content-center text-start" style="height: 100%;">
-      <div style="margin-top: 250px; padding: 20px;"> <!-- Ajout de padding pour petits écrans -->
+  <div class="container-fluid d-flex align-items-center justify-content-center text-start d-none d-lg-flex" style="height: 100%;">
+      <div style="margin-top: 200px; padding: 20px;"> <!-- Ajout de padding pour petits écrans -->
         <h1 class="display-4 mb-4">Bienvenue à Madagascar</h1>
         <p class="lead">"Un pays hors du temps, des pistes surprenantes, des paysages somptueux, spectaculaires, et une hospitalité toujours bienveillante.
         <br> Après 30 ans à sillonner la Grande Ile, c'est toujours avec le même plaisir et la même passion, 
@@ -11,43 +11,51 @@
 </section>
 
 
-<section class="transition-section py-4">
+<section class="transition-section">
   <div class="container">
     <div class="row text-white">
       <!-- Première colonne : Image -->
       <div class="col-md-2 d-flex justify-content-center align-items-center">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;margin-top:5px;margin-bottom:5px;">
       </div>
 
       <!-- Deuxième colonne : Texte -->
-      <div class="col-md-7 d-flex justify-content-center align-items-center">
-        <p class="text-center lead"><h5>"MADAGASCAR THE LAST ADVENTURE LAND"</h5></p>
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <p class="text-center lead"><h6>"MADAGASCAR THE LAST ADVENTURE LAND"</h6></p>
       </div>
 
       <!-- Troisième colonne : Bouton -->
-     <div class="col-md-3 d-flex justify-content-center align-items-center fw-normal">
+     <div class="col-md-4 d-flex justify-content-center align-items-center fw-normal">
         <a href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} class="btn btn-light btn-lg rounded-pill fs-6">Découvrir nos circuits</a>
      </div>
     </div>
   </div>
 </section>
 
-
-<section class="product-section py-5">
+<section class="product-section">
   <div class="container">
 
     <div class="container_image d-flex justify-content-center">
-      <div class="carousel-inner" style="trasform: scale(1.5);width: 80rem;">
+
+      <div class="carousel-inner" style="width: 80rem;">
         <%= for {p, index} <- Enum.with_index(@circuits, 1) do %>
           <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
             <img src={Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1">
           </div>
         <%= end %>
+        <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" onclick="moveCarousel(+1)">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
 
     <!-- Première row : Titre et phrase phare -->
-    <div class="row text-center mb-4 justify-content-center">
+    <div class="row text-center mb-1 justify-content-center">
       <div class="col-10">
         <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
           Voyage organisé à moto ou location de moto, les routes les plus exotiques s’offrent à vous
@@ -56,14 +64,14 @@
     </div>
 
     <!-- Deuxième row : Description -->
-    <div class="row text-center mb-5 justify-content-center">
+    <div class="row text-center mb-1 justify-content-center">
       <div class="col-9">
         <p class="description" style="font-size:15px;">Nous vous offrons une gamme variée de produits soigneusement sélectionnés pour répondre à toutes vos attentes. Parcourez nos offres et trouvez le produit qui vous correspond le mieux.</p>
       </div>
     </div>
 
   <!-- Troisième row : Grille de produits avec des cards -->
-   <div class="row">
+   <div class="row" style="margin-bottom: 0px;">
     <%= for circuit <- @circuits do %>
   <!-- Card 1 -->
     <div class="col-lg-4 mb-4 align-items-start">
@@ -88,16 +96,16 @@
   </div>
 </section>
 
-<section class="transition-section py-5">
+<section class="transition-section">
   <div class="container">
     <div class="row text-white">
       <!-- Première colonne : Image -->
-      <div class="col-md-4 d-flex justify-content-center align-items-center">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
+      <div class="col-md-2 d-flex justify-content-center align-items-center">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;margin-top:5px;margin-bottom:5px;">
       </div>
 
       <!-- Deuxième colonne : Texte -->
-      <div class="col-md-4 d-flex justify-content-center align-items-center">
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
         <p class="text-center lead">"Vivez une nouvelle expérience avec nos parcours inoubliables."</p>
       </div>
 
@@ -109,26 +117,21 @@
   </div>
 </section>
 
- <div class="row text-center mb-4 justify-content-center">
-  <div class="col-10">
+ <div class="row text-center mb-1 justify-content-center">
+    <div class="col-10">
       <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
       Moto Tour Madagascar
       </h3>
-      <!--<p class="lead">"Découvrez notre sélection de produits phares pour une expérience unique."</p> -->
+    </div>
   </div>
-  </div>
-
 
   <!-- Deuxième row : Description -->
-  <div class="row text-center mb-5 justify-content-center">
+  <div class="row text-center justify-content-center">
     <div class="col-9">
       <p class="description">La faible densité du réseau routier a créé un réseau de piste hors du commun. Grand comme la France et la Belgique réunies, chaque ville, chaque village est connecté par une piste ou un sentier de plusieurs centaines de kilomètres. Avec 5000 km de côte et 7 sommets de plus de 2000 m d’altitude, Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir… Donc oui Madagascar est à la moto  ce que Hawaï est au surf :<strong> un pur Spot</strong> !</p>
     </div>
   </div>
 
-<div class="vc_empty_space" style="height: 30px">
-  <span class="vc_empty_space_inner"></span>
-</div>
 
 <script>
       function moveCarousel(direction) {
@@ -175,7 +178,7 @@
       items[newIndex].classList.add('active');
     }
 
-    function startCarousel(interval = 4000) {
+    function startCarousel(interval = 10000) {
       // Démarre un diaporama automatique toutes les `interval` millisecondes
       carouselInterval = setInterval(() => {
         moveCarousel(1); // Avance d'une image

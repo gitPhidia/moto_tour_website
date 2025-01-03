@@ -33,7 +33,7 @@
 
 /* Description and other content */
 .card-body {
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .card-text {
@@ -63,4 +63,20 @@
 
 .btn-success:hover {
   background-color: #218838;
+}
+
+.carousel-inner { 
+  height: 500px; /* Hauteur fixe du cadre */
+  overflow: hidden; /* Cache les parties des images qui dépassent */
+  display: flex;
+  justify-content: center; /* Centre horizontalement les images */
+  align-items: center; /* Centre verticalement les images */
+  background-color: #cac8c846; /* Couleur de fond par défaut */
+}
+
+.carousel-inner img {
+  max-width: 100%; /* Limite la largeur à 100% du cadre */
+  max-height: 100%; /* Limite la hauteur à 100% du cadre */
+  object-fit: cover; /* Adapte l'image sans la déformer */
+  margin: auto; /* Centre l'image si elle est plus petite */
 }

@@ -17,12 +17,7 @@ defmodule MotoTourWeb.CircuitLive do
     second_card_content_html = function_destination(first_circuit.id)
     # prend les photos de chaque circuit
     photo = Image.get_photo_circuit(first_circuit.id)
-    socket =
-      socket
-      |> assign(:page_title, "circuit")
-      |> assign(:meta_keywords, "moto, tour, voyage")
-      |> assign(:meta_description, "Découvrez nos circuits Moto Tour")
-    {:ok, assign(socket, selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html)) }
+    {:ok, assign(socket, page_title: "Circuit moto enduro sport", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
   end
 
   def handle_param(%{"id" => id}, socket) do
@@ -212,8 +207,8 @@ defmodule MotoTourWeb.CircuitLive do
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section py-2">
-        <div class="container mt-5">
+     <section class="transition-section">
+        <div class="container mt-4">
           <div class="row text-white">
             <!--Première colonne : Image -->
             <!-- <div class="col-md-2 d-flex justify-content-center align-items-center">
@@ -222,7 +217,7 @@ defmodule MotoTourWeb.CircuitLive do
 
             <!--Deuxième colonne : Texte -->
             <div class="col-md-12 d-flex justify-content-center align-items-center">
-              <p class="text-center lead"><h5>"Vivez une nouvelle expérience avec nos parcours inoubliables."</h5></p>
+              <p class="text-center lead"><h1 style="font-size: 1.5rem;">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
             </div>
 
           </div>

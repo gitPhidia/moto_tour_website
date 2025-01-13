@@ -52,7 +52,8 @@ defmodule MotoTour.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:waffle, "~> 1.1"},
       {:waffle_ecto, "~> 0.0.11"},
-      {:csv, "~> 3.0"}
+      {:csv, "~> 3.0"},
+      {:mogrify, "~> 0.9.2"}
     ]
   end
 

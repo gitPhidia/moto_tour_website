@@ -6,7 +6,10 @@ defmodule MotoTourWeb.QuestionsController do
 
   def new(conn, _params) do
     changeset = Content.change_questions(%Questions{})
-    render(conn, "contact.html", changeset: changeset)
+    conn
+      |> assign(:meta_description, "L'équipe Moto Tour Madagascar est à votre disposition via ce formulaire de contact | contact@moto-tour-madagascar.mg")
+      |> assign(:page_title, "Contactez l’équipe de Moto Tour")
+      |> render("contact.html", changeset: changeset)
   end
 
   def index(conn, _params) do

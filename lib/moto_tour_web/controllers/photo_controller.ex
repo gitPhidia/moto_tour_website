@@ -1,5 +1,6 @@
 defmodule MotoTourWeb.PhotoController do
   use MotoTourWeb, :controller
+  alias Mogrify
 
   alias MotoTour.Image
   alias MotoTour.Image.Photo
@@ -95,9 +96,19 @@ defmodule MotoTourWeb.PhotoController do
       |> redirect(to: Routes.photo_path(conn, :new))
   end
 
-    # Fonction pour valider les extensions de fichier
+  # Fonction pour valider les extensions de fichier
   defp valid_extension?(filename) do
     String.ends_with?(filename, [".jpg", ".jpeg", ".png"])
+  end
+
+  def convert_to_webp(input_path, output_path \\ nil) do
+    output_path = output_path || String.replace(input_path, ~r/\.[a-zA-Z]+$/, ".webp")
+
+    Mogrify.open(input_path)
+    |> Mogrify.format("webp")
+    |> Mogrify.save(path: output_path)
+
+    output_path
   end
 
   def show(conn, %{"id" => id}) do

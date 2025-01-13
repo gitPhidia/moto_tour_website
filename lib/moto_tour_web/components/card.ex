@@ -5,11 +5,11 @@ defmodule MotoTourWeb.Card do
   ~H"""
     <div class="card h-100 w-100" style="background-color: #F6F4F4;">
       <!-- Image Section -->
-      <img src={ @image } class="card-img-top img-fluid" alt="Image du produit Produit 1">
+      <img src={ @image } class="card-img-top img-fluid" alt="Image des circuits">
 
       <!-- Orange Bar Section (Title) -->
       <div class="card-title-bar text-center py-2" style="background-color: orange; color: white;">
-        <h5 class="card-title m-0" style="font-size: 1.25rem;"><a href={@link}><%= render_slot(@nom_block) %></a></h5>
+        <h3 class="card-title m-0" style="font-size: 1.25rem;"><a href={@link}><%= render_slot(@nom_block) %></a></h3>
       </div>
 
       <!-- Card Body -->

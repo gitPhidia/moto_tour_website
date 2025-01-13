@@ -2,7 +2,7 @@
   <div class="container-fluid d-flex align-items-center justify-content-center text-start d-none d-lg-flex" style="height: 100%;">
       <div style="margin-top: 200px; padding: 20px;"> <!-- Ajout de padding pour petits écrans -->
         <h1 class="display-4 mb-4">Bienvenue à Madagascar</h1>
-        <p class="lead">"Un pays hors du temps, des pistes surprenantes, des paysages somptueux, spectaculaires, et une hospitalité toujours bienveillante.
+        <p class="lead" rel="preload">"Un pays hors du temps, des pistes surprenantes, des paysages somptueux, spectaculaires, et une hospitalité toujours bienveillante.
         <br> Après 30 ans à sillonner la Grande Ile, c'est toujours avec le même plaisir et la même passion, 
         <br> que j'accompagne les motards de tous horizons à la découverte de Madagascar."</p>
         <p class="text-end"><i class="fa fa-quote-left fa-xs text-secondary"></i> <strong> François Serrano </strong> <i class="fa fa-quote-right fa-xs text-secondary"></i> </p>
@@ -11,17 +11,18 @@
 </section>
 
 
-<section class="transition-section">
+<section itemscope itemtype="https://moto-madagascar.com/circuit" class="transition-section">
   <div class="container">
     <div class="row text-white">
+
       <!-- Première colonne : Image -->
       <div class="col-md-2 d-flex justify-content-center align-items-center">
-        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;margin-top:5px;margin-bottom:5px;">
+        <img src={ Routes.static_path(@conn, "/assets/images/section/ktm.png") } alt="Image des circuits principale" class="img-fluid" style="max-width: 100%; height: auto;margin-top:5px;margin-bottom:5px;">
       </div>
 
       <!-- Deuxième colonne : Texte -->
       <div class="col-md-6 d-flex justify-content-center align-items-center">
-        <p class="text-center lead"><h6>"MADAGASCAR THE LAST ADVENTURE LAND"</h6></p>
+        <p class="text-center lead"><h2 style="font-size: 1.5em;">"MADAGASCAR THE LAST ADVENTURE LAND"</h2></p>
       </div>
 
       <!-- Troisième colonne : Bouton -->
@@ -40,7 +41,7 @@
       <div class="carousel-inner" style="width: 80rem;">
         <%= for {p, index} <- Enum.with_index(@circuits, 1) do %>
           <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
-            <img src={Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1">
+            <img src={Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="couverture des circuits">
           </div>
         <%= end %>
         <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
@@ -57,9 +58,9 @@
     <!-- Première row : Titre et phrase phare -->
     <div class="row text-center mb-1 justify-content-center">
       <div class="col-10">
-        <h3 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
+        <h2 class="fw-bold" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
           Voyage organisé à moto ou location de moto, les routes les plus exotiques s’offrent à vous
-        </h3>
+        </h2>
       </div>
     </div>
 
@@ -71,7 +72,7 @@
     </div>
 
   <!-- Troisième row : Grille de produits avec des cards -->
-   <div class="row" style="margin-bottom: 0px;">
+  <div itemscope class="row" style="margin-bottom: 0px;">
     <%= for circuit <- @circuits do %>
   <!-- Card 1 -->
     <div class="col-lg-4 mb-4 align-items-start">
@@ -131,6 +132,23 @@
       <p class="description">La faible densité du réseau routier a créé un réseau de piste hors du commun. Grand comme la France et la Belgique réunies, chaque ville, chaque village est connecté par une piste ou un sentier de plusieurs centaines de kilomètres. Avec 5000 km de côte et 7 sommets de plus de 2000 m d’altitude, Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir… Donc oui Madagascar est à la moto  ce que Hawaï est au surf :<strong> un pur Spot</strong> !</p>
     </div>
   </div>
+
+
+<style>
+.carousel-inner { 
+  height: 500px; 
+  overflow: hidden;
+  align-items: cover;
+}
+
+.carousel-inner img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  margin: auto;
+  background-color: #cac8c846;
+}
+</style>
 
 
 <script>

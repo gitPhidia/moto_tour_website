@@ -3262,7 +3262,7 @@ table span.badge {
 
 .container {
 	margin: 0 auto;
-	max-width: 1780px;
+	/* max-width: 1780px; */
 	width: 100%
 }
 
@@ -3274,7 +3274,7 @@ table span.badge {
 
 @media only screen and (min-width: 993px) {
 	.container {
-		width: 70%
+		/* width: 70% */
 	}
 }
 
@@ -4510,7 +4510,6 @@ h1 {
 h2 {
 	font-size: 3.56rem;
 	line-height: 110%;
-	margin: 2.3733333333rem 0 1.424rem 0
 }
 
 h3 {

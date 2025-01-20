@@ -2,47 +2,35 @@
   <div class="card info-card sales-card">
     <main role="main" class="col-md-12">
         
-        <h3>Ajouter <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> un Circuit</a> 
-        <a class="btn" href={Routes.photo_path(@conn, :new)}><i class="fa fa-plus"></i> ajouter une photo</a> 
-        <a class="btn" href={Routes.itineraire_path(@conn, :ajout)}><i class="fa fa-plus"></i> ajouter un Itineraire</a></h3>
-        
+
       <div class="table-responsive col-12">
         <table class="table table-striped table-sm" style="border: 1px solid">
           <thead>
             <tr>
-              <th>Nom du circuit</th>
-              <th>Tarifs</th>
-              <th>Participants</th>
-              <th>Moto disponnible</th>
-              <th>Difficulté</th>
-              <th>Date de création</th>
-              <th>Description sur la carte</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th style="text-align: center;">Nom du circuit</th>
+              <th style="text-align: center;">Tarif</th>
+              <th style="text-align: center;">Participants</th>
+              <th style="text-align: center;">Motos disponibles</th>
+              <th style="text-align: center;">Difficulté</th>
+              <th style="text-align: center;">Description sur la carte</th>
+              <th style="text-align: center;">Status</th>
+              <th style="text-align: center;">Action</th>
             </tr>
           </thead>
           <tbody>
 
           <%= for c <- @circuit do %>
             <tr>
-              <td style="width: 150px"><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}><%= c.nom %></a></td>
-              <td style="width: 100px"><%= c.tarifs %> €</td>
-              <td><%= if c.participant == nil, do: "illimité", else: c.participant %></td>
-              <td><%= c.moto %></td>
-              <td><%= c.difficulté %></td>
-              <td style="width: 100px"><%= c.inserted_at %></td>
-              <td style="width: 200px"><%= c.desc_card %></td>
+              <td style="width: 150px;text-align: center;"><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}><%= c.nom %></a></td>
+              <td style="width: 100px;text-align: center;"><%= c.tarifs %> €</td>
+              <td style="text-align: center;"><%= if c.participant == nil, do: "illimité", else: c.participant %></td>
+              <td style="text-align: center;"><%= c.moto %></td>
+              <td style="text-align: center;"><%= c.difficulté %></td>
+              <td style="width: 450px;text-align: center;"><%= c.desc_card %></td>
               <td><%= if c.archiver == true, do: "archiver", else: "non archivé" %></td>
-              <td style="width: 300px;">
-                <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> 
-                <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, c.id)}><i class="fa fa-picture-o"></i></a>
-                <a class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, c.id)}><i class="fa fa-road"></i></a>
-                <a class="btn" 
-                  data-bs-toggle="tooltip" 
-                  data-bs-placement="top" 
-                  title="Archiver le circuit" 
-                  data-confirm="Voulez-vous archiver ce circuit ?" 
-                  href={Routes.circuits_path(@conn, :archiver, c.id)}>
+              <td>
+                <a data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier le circuit" href={Routes.circuits_path(@conn, :edit, c.id)}><i class="fa fa-pencil"></i></a> 
+                <a style="padding: 20px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Archiver le circuit" data-confirm="Voulez-vous archiver ce circuit ?" href={Routes.circuits_path(@conn, :archiver, c.id)}>
                   <i class="fa fa-archive"></i>
                 </a>
               </td>
@@ -74,7 +62,7 @@
           <%= end %>
           </tbody>
         </table>
-
+          <a class="d-flex justify-content-start" href={Routes.circuits_path(@conn, :ajoutc)}><button><i class="fa fa-plus"></i> Ajouter un Circuit</button></a>
       </div>
     </main>
   </div>

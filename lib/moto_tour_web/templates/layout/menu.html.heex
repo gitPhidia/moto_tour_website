@@ -15,15 +15,10 @@
 </head>
 
   <body>
-    <header id="header" class="header fixed-top d-flex align-items-center">
-
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href={Routes.page_path(@conn, :index)}> moto tour site</a>
-      <a class="navbar-brand col-sm-3 col-md-1 mr-0" href={Routes.page_path(@conn, :bcircuit)}>
-        Circuits
-      </a>
-      <a class="navbar-brand col-sm-3 col-md-8 mr-0" href={Routes.questions_path(@conn, :index)}>
-        Questions
-      </a>
+    <header id="header" class="header fixed-top d-flex align-items-center" style="height:30px;">
+      <a class="navbar-brand col-sm-3 col-md-1 mr-0" href={Routes.page_path(@conn, :index)}> Site Moto tour</a>
+      <a class="navbar-brand col-sm-3 col-md-1 mr-0 d-flex justify-content-center " href={Routes.page_path(@conn, :bcircuit)}> Circuits</a>
+      <a class="navbar-brand col-sm-3 col-md-9 mr-0" href={Routes.questions_path(@conn, :index)}> Questions</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <%= link "Déconnexion", to: Routes.user_session_path(@conn, :delete), method: :delete %>
@@ -31,7 +26,7 @@
       </ul>
     </header>
 
-    <div class="section mt-4">
+    <div class="section mt-2">
       <%= @inner_content %>
     </div>
 

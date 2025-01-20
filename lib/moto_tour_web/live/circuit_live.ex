@@ -169,7 +169,7 @@ defmodule MotoTourWeb.CircuitLive do
                     </h6>
                   </a>
                 </div>
-                <div class='col-md-1 mt-1'>
+                <div class='col-md-1'>
                   <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
                     <i class='fa fa-angle-down' aria-hidden='true'></i>
                   </a>
@@ -207,28 +207,21 @@ defmodule MotoTourWeb.CircuitLive do
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section">
-        <div class="container mt-4">
+     <section class="transition-section" style="height:50px;">
+        <div class="container">
           <div class="row text-white">
-            <!--Première colonne : Image -->
-            <!-- <div class="col-md-2 d-flex justify-content-center align-items-center">
-              <img src={ Routes.static_path(@socket, "/assets/images/section/logo.png") } alt="Image de transition" class="img-fluid" style="max-width: 100%; height: auto;">
-            </div> -->
-
-            <!--Deuxième colonne : Texte -->
             <div class="col-md-12 d-flex justify-content-center align-items-center">
-              <p class="text-center lead"><h1 style="font-size: 1.5rem;">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
+              <p class="text-center lead"><h1 style="font-size: 1.5rem;margin-top:20px;">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
             </div>
-
           </div>
         </div>
       </section>
 
       <!-- liste des crircuits -->
-      <div class="row">
-        <div class="col-md-12 h-50">
+      <div class="row" style="height:40px;">
+        <div class="col-md-12">
           <div class="product-menu text-center d-flex justify-content-center" style="border-bottom: 1px solid #e5e5e5;">
-            <nav class="mb-6">
+            <nav>
               <ul class="circuitpage">
                 <%= for circuit <- @circuits do %>
                   <li><button phx-click="show_card" phx-value-card={circuit.id} style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong><%= circuit.nom %></strong></h6></button></li>
@@ -240,13 +233,15 @@ defmodule MotoTourWeb.CircuitLive do
       </div>
       <!-- fin -->
 
-      <%= render_card(assigns) %>
+      <div class="container">
+        <%= render_card(assigns) %>
+      </div>
 
     """
   end
 
   # rendue de chaque cricuit par rapport a la base de donnée
-  def render_card(%{selected_card: card} = assigns) do
+  defp render_card(%{selected_card: card} = assigns) do
     ~H"""
     <%= for c <- @circuit do %>
       <div class="container w-100">
@@ -295,24 +290,22 @@ defmodule MotoTourWeb.CircuitLive do
           <!-- fin du carousel -->
 
           <!-- deuxieme partie du card -->
-          <div class="col-lg-8 col-md-12 mb-4">
+          <div class="col-lg-8 col-md-12">
 
             <!-- liste des boutton pour chaque card -->
             <div class="product-menu text-center">
               <nav>
                 <ul class="circuitpage">
-                  <li><button phx-click="change_content" phx-value-param={c.id}
-                    style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
-                  <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>Prestations et sites marquants</strong></button></li>
-                  <!-- <li><button phx-click="change_question" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-question"></i><br><strong>Questions</strong></button></li> -->
-                  <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:5rem;width:9rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
+                  <li><button phx-click="change_content" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
+                  <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
+                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:4rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>sites marquants</strong></button></li>
+                  <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
                 </ul>
               </nav>
             </div>
             <!-- fin du liste -->
 
-            <div class="row mr-4" style="margin-top:5%" phx-show={@show_card_second}>
+            <div class="row mr-4" style="margin-top:1%" phx-show={@show_card_second}>
               <p>
               <!-- affichage du quote pour chaque circuit -->
               <blockquote>

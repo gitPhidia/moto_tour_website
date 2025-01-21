@@ -17,7 +17,7 @@ defmodule MotoTourWeb.CircuitLive do
     second_card_content_html = function_destination(first_circuit.id)
     # prend les photos de chaque circuit
     photo = Image.get_photo_circuit(first_circuit.id)
-    {:ok, assign(socket, page_title: "Circuit moto enduro sport", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
+    {:ok, assign(socket, page_title: "Circuit & Location Moto à Madagascar", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
   end
 
   def handle_param(%{"id" => id}, socket) do
@@ -207,11 +207,11 @@ defmodule MotoTourWeb.CircuitLive do
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section" style="height:50px;">
+     <section class="transition-section" style="height:50px;margin-top:30px;">
         <div class="container">
           <div class="row text-white">
             <div class="col-md-12 d-flex justify-content-center align-items-center">
-              <p class="text-center lead"><h1 style="font-size: 1.5rem;margin-top:20px;">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
+              <p class="text-center lead"><h1 class="mt-3 fs-4 fs-md-3 fs-lg-2">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
             </div>
           </div>
         </div>
@@ -220,7 +220,7 @@ defmodule MotoTourWeb.CircuitLive do
       <!-- liste des crircuits -->
       <div class="row" style="height:40px;">
         <div class="col-md-12">
-          <div class="product-menu text-center d-flex justify-content-center" style="border-bottom: 1px solid #e5e5e5;">
+        <div class="product-menu text-center d-flex justify-content-center" style="border-bottom: 1px solid #e5e5e5;margin-top:-13px;">
             <nav>
               <ul class="circuitpage">
                 <%= for circuit <- @circuits do %>
@@ -233,9 +233,7 @@ defmodule MotoTourWeb.CircuitLive do
       </div>
       <!-- fin -->
 
-      <div class="container">
         <%= render_card(assigns) %>
-      </div>
 
     """
   end
@@ -245,7 +243,7 @@ defmodule MotoTourWeb.CircuitLive do
     ~H"""
     <%= for c <- @circuit do %>
       <div class="container w-100">
-        <div class="row">
+        <div class="row" style="margin-top: -20px;">
 
           <!-- titre & prix -->
           <div class="col-md-5">
@@ -298,7 +296,7 @@ defmodule MotoTourWeb.CircuitLive do
                 <ul class="circuitpage">
                   <li><button phx-click="change_content" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
                   <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:4rem;width:9rem"><i class="fa fa-calendar"></i><br><strong>sites marquants</strong></button></li>
+                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:4rem;width:10rem"><i class="fa fa-calendar"></i><br><strong>sites marquants</strong></button></li>
                   <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
                 </ul>
               </nav>

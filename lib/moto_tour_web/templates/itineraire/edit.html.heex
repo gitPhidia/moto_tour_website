@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h5>Modifier un Circuit</h5>
+  <h5>Modifier un itineraire</h5>
   <%= form_for @changeset, Routes.itineraire_path(@conn, :update, @itineraire), [method: :put], fn f -> %>
     <a href={Routes.itineraire_path(@conn, :liste, @itineraire.idcircuit)}><h6>Retour</h6></a>
       <%= if @changeset.action do %>

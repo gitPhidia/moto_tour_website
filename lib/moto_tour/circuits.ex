@@ -4,12 +4,13 @@ defmodule MotoTour.Circuits do
 
 
   def list_circuits do
-    query = from(c in Circuit, where: is_nil(c.archiver) or c.archiver == false)
+    query = from(c in Circuit, where: is_nil(c.archiver) or c.archiver == false, order_by: c.id)
     circuits = Repo.all(query)
   end
 
   def list_circuits_back do
-    circuits = Repo.all(Circuit)
+    query = from(c in Circuit, order_by: c.id)
+    circuits = Repo.all(query)
   end
 
   def single_circuit(params) do
@@ -57,9 +58,9 @@ defmodule MotoTour.Circuits do
     query = """
       SELECT * FROM (
           SELECT
-              LAG(id) OVER () AS previous_id,
+              LAG(id) OVER (order by id) AS previous_id,
               id AS current_id,
-              LEAD(id) OVER () AS next_id
+              LEAD(id) OVER (order by id) AS next_id
           FROM circuits
       ) AS subquery
       WHERE current_id = $1

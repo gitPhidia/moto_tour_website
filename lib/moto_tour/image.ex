@@ -77,6 +77,7 @@ defmodule MotoTour.Image do
       from p in Photo,
         join: c in Circuit, on: c.id == p.idcircuit,
         where: p.principal == true and (is_nil(c.archiver) or c.archiver == false),
+        order_by: c.id,
         select: %{
           id: p.id,
           idcircuit: c.id,

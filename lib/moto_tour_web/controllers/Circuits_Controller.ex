@@ -5,7 +5,7 @@ defmodule MotoTourWeb.CircuitsController do
 
   def liste(conn, _params) do
     # Récupérer tous les produits
-    circuits = Repo.all(Circuit)
+    circuits = Circuits.list_circuits()
 
     # Passer les produits au template
     render(conn, "liste.html", circuits: circuits)
@@ -44,7 +44,6 @@ defmodule MotoTourWeb.CircuitsController do
     case Circuit.changeset(circuit, circuit_params) |> Repo.update() do
       {:ok, circuit} ->
         conn
-        |> put_flash(:info, "Circuit updated successfully.")
         |> redirect(to: Routes.circuits_path(conn, :edit, id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -54,7 +53,7 @@ defmodule MotoTourWeb.CircuitsController do
 
   def edit(conn, %{"id" => id}) do
     circuit = Circuits.get_circuit!(id)
-    liste = Repo.all(Circuit)
+    liste = Circuits.list_circuits_back()
     adjacent = Circuits.get_adjacent_circuits(String.to_integer(id))
     changeset = Circuits.change_circuit(circuit, %{})
     render(conn, "editcircuit.html", circuit: circuit, changeset: changeset, id: liste, adjacent: adjacent)

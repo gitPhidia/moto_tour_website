@@ -117,7 +117,7 @@ defmodule MotoTourWeb.Router do
     get "/admin/itineraire/:id", ItineraireController, :liste
     get "/admin/itineraire", ItineraireController, :index
     get "/admin/itineraire_edit/:id", ItineraireController, :edit
-    get "/admin/itineraire_ajout", ItineraireController, :ajout
+    get "/admin/itineraire_ajout/:id", ItineraireController, :ajout
     post "/admin/itineraire_create", ItineraireController, :create
     put "/admin/itineraire_up/:id", ItineraireController, :update
     delete "/admin/itineraire_del/:id", ItineraireController, :delete

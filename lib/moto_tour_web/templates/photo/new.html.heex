@@ -1,6 +1,6 @@
 <div class="container">
   <h5>Nouvelle photo dans <%= @c_nom.circuit_nom %></h5>
-  <a href={Routes.photo_path(@conn, :detail, @id)}>retour</a>
+  <a href={Routes.photo_path(@conn, :detail, @id)}>Retour</a>
 
   <%= form_for @changeset, Routes.photo_path(@conn, :create), [multipart: true], fn f -> %>
 

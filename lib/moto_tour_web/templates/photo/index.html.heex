@@ -1,8 +1,8 @@
 
   <div class="container">
-    <h5>Liste des Photos</h5>
+    <h5>Liste des Photos du circuit <%= @id.circuit_nom %></h5>
 
-    <span><%= link "Nouvelle photo", to: Routes.photo_path(@conn, :new) %></span>
+    <span><%= link "Nouvelle photo", to: Routes.photo_path(@conn, :new, @id.idcircuit) %></span>
 
     <table>
       <thead>

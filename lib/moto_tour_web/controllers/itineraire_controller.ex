@@ -15,42 +15,52 @@ defmodule MotoTourWeb.ItineraireController do
 
   def liste(conn, %{"id" => id}) do
     # itineraire = Itineraires.itineraire_circuit(id)
+    circuit = Circuits.get_circuit!(id)
     second_card_content = Itineraires.list_itineraire()
     filtered_content = Enum.filter(second_card_content, fn c -> c.idcircuit == String.to_integer(id) end)
-    render(conn, "liste.html", itineraire: filtered_content)
+    render(conn, "liste.html", itineraire: filtered_content, circuit: circuit)
   end
 
-  def ajout(conn, _params) do
-    query = from c in Circuit,
-      select: %{ id: c.id, nom: c.nom}
-    cir = Repo.all(query)
-    circuits_options = Enum.map(cir, fn c -> {c.nom, c.id} end)
+  def ajout(conn, %{"id" => id}) do
+    # query = from c in Circuit,
+    #   select: %{ id: c.id, nom: c.nom}
+    # cir = Repo.all(query)
+    circuit = Circuits.get_circuit!(id)
+    # circuits_options = Enum.map(cir, fn c -> {c.nom, c.id} end)
     changeset = Itineraires.change_itineraire(%Itineraire{})
-    render(conn, "new.html", circuits: circuits_options, changeset: changeset)
+    render(conn, "new.html", circuits: circuit, changeset: changeset, id: id)
   end
 
-  def create(conn, %{"itineraire" => itineraire}) do
-    changeset = Itineraires.change_itineraire(%Itineraire{}, itineraire)
+  def create(conn, %{"itineraire" => itineraire_params}) do
+    required_fields = ["idcircuit", "itineraire", "remarque"]
 
-    if changeset.valid? do
-      case Itineraires.create_itineraire(itineraire) do
-        {:ok, itineraire} ->
-          conn
-          |> put_flash(:info, "itineraire ajouter.")
-          |> redirect(to: Routes.itineraire_path(conn, :ajout))
+    # Vérification des champs vides
+    missing_fields = Enum.filter(required_fields, fn field -> Map.get(itineraire_params, field) in [nil, ""] end)
 
-        {:error, %Ecto.Changeset{} = changeset} ->
-          conn
-          |> put_flash(:error, "Une erreur est survenue lors de l'ajout.")
-          |> redirect(to: Routes.itineraire_path(conn, :ajout))
-          # |> render(conn, "new.html", changeset: changeset)
-      end
-    else
-      # Si des champs sont vides, on reste sur la page "new" avec un message d'erreur
+    if missing_fields != [] do
       conn
-      |> put_flash(:error, "Certains champs sont vides. Veuillez les remplir.")
-      |> redirect(to: Routes.itineraire_path(conn, :ajout))
-      # |> render(conn, "new.html", changeset: changeset)
+      |> put_flash(:error, "Les champs suivants sont requis : #{Enum.join(missing_fields, ", ")}.")
+      |> redirect(to: Routes.itineraire_path(conn, :ajout, itineraire_params["idcircuit"]))
+    else
+      changeset = Itineraires.change_itineraire(%Itineraire{}, itineraire_params)
+
+      if changeset.valid? do
+        case Itineraires.create_itineraire(itineraire_params) do
+          {:ok, itineraire} ->
+            conn
+            |> put_flash(:info, "Itinéraire ajouté.")
+            |> redirect(to: Routes.itineraire_path(conn, :ajout, itineraire.idcircuit))
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            conn
+            |> put_flash(:error, "Une erreur est survenue lors de l'ajout.")
+            |> redirect(to: Routes.itineraire_path(conn, :ajout, itineraire_params["idcircuit"]))
+        end
+      else
+        conn
+        |> put_flash(:error, "Certains champs sont invalides.")
+        |> redirect(to: Routes.itineraire_path(conn, :ajout, itineraire_params["idcircuit"]))
+      end
     end
   end
 

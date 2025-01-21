@@ -55,7 +55,21 @@ defmodule MotoTour.Image do
   def get_photo!(id), do: Repo.get!(Photo, id)
 
   def get_photo_circuit(params) do
-    liste = Repo.all(from p in Photo, where: p.idcircuit == ^params)
+    query =
+      from p in Photo,
+        join: c in Circuit, on: c.id == p.idcircuit,
+        where: p.idcircuit == ^params,
+        select: %{
+          id: p.id,
+          idcircuit: c.id,
+          circuit_nom: c.nom,
+          tarifs: c.tarifs,
+          desc_card: c.desc_card,
+          difficulté: c.difficulté,
+          nom: p.nom,
+          photo: p.photo
+        }
+    liste = Repo.all(query)
   end
 
   def get_principal_photos do
@@ -63,6 +77,7 @@ defmodule MotoTour.Image do
       from p in Photo,
         join: c in Circuit, on: c.id == p.idcircuit,
         where: p.principal == true and (is_nil(c.archiver) or c.archiver == false),
+        order_by: c.id,
         select: %{
           id: p.id,
           idcircuit: c.id,

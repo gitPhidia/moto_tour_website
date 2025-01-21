@@ -1,6 +1,6 @@
 <h5>Modifier le circuit <%= @circuit.nom %></h5>
 <a data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, @circuit.id)}><button><i class="fa fa-picture-o"></i> Photos</button></a>
-<a data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, @circuit.id)}><button><i class="fa fa-road"></i> Itinieraires</button></a>
+<a data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, @circuit.id)}><button><i class="fa fa-road"></i> Itineraires</button></a>
 
 <div class="mt-1">
   <%= form_for @changeset, Routes.circuits_path(@conn, :update, @circuit), [method: :put], fn f -> %>

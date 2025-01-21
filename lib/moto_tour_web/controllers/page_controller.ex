@@ -24,7 +24,7 @@ defmodule MotoTourWeb.PageController do
     circuits = Image.get_principal_photos()
     conn
       |> assign(:meta_description, "Découvrez Madagascar à moto à travers des circuits d’enduro sport palpitants, entre paysages sauvages et étendues désertiques.")
-      |> assign(:page_title, "Location et circuits moto à Madagascar | Moto Tour Madagascar")
+      |> assign(:page_title, "Moto Tour Madagascar")
       |> render("index.html", circuits: circuits)
   end
 

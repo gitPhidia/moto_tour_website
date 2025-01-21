@@ -52,4 +52,30 @@ defmodule MotoTour.Circuits do
     |> Repo.update_all(set: [archiver: false])
     # Repo.update(from c in Circuit, where: c.id == ^id, set: [archiver: true])
   end
+
+  def get_adjacent_circuits(id) do
+    query = """
+      SELECT * FROM (
+          SELECT
+              LAG(id) OVER () AS previous_id,
+              id AS current_id,
+              LEAD(id) OVER () AS next_id
+          FROM circuits
+      ) AS subquery
+      WHERE current_id = $1
+    """
+
+    case Ecto.Adapters.SQL.query(Repo, query, [id]) do
+      {:ok, %Postgrex.Result{columns: columns, rows: [row]}} ->
+        # Map the result to a keyword list or map for easier access
+        Enum.zip(columns, row) |> Enum.into(%{})
+
+      {:ok, %Postgrex.Result{rows: []}} ->
+        {:error, "No circuit found with the given id"}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
+
 end

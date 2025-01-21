@@ -54,8 +54,10 @@ defmodule MotoTourWeb.CircuitsController do
 
   def edit(conn, %{"id" => id}) do
     circuit = Circuits.get_circuit!(id)
+    liste = Repo.all(Circuit)
+    adjacent = Circuits.get_adjacent_circuits(String.to_integer(id))
     changeset = Circuits.change_circuit(circuit, %{})
-    render(conn, "editcircuit.html", circuit: circuit, changeset: changeset)
+    render(conn, "editcircuit.html", circuit: circuit, changeset: changeset, id: liste, adjacent: adjacent)
   end
 
   def delete(conn, %{"id" => id}) do

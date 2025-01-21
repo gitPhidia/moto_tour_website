@@ -125,7 +125,7 @@ defmodule MotoTourWeb.Router do
     # photo
     # resources "/photo", PhotoController, [:new, :create, :index, :show, :edit, :delete, :update]
     get "/admin/photo/:id", PhotoController, :detail
-    get "/admin/photo_new", PhotoController, :new
+    get "/admin/photo_new/:id", PhotoController, :new
     post "/admin/save_photo", PhotoController, :create
     get "/admin/index_photo", PhotoController, :index
     get "/admin/photo_show/:id", PhotoController, :show

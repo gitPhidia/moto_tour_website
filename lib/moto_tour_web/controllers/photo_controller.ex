@@ -15,18 +15,21 @@ defmodule MotoTourWeb.PhotoController do
     render(conn, "tableau.html", circuits: circuit)
   end
 
-  def detail(conn,  %{"id" => id}) do
+  def detail(conn, %{"id" => id}) do
     photo = Image.get_photo_circuit(id)
-    render(conn, "index.html", photos: photo)
+    id = List.first(photo)
+    render(conn, "index.html", photos: photo, id: id)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"id" => id}) do
+    photo = Image.get_photo_circuit(id)
+    c_nom = List.first(photo)
     query = from c in Circuit,
       select: %{ id: c.id, nom: c.nom}
     cir = Repo.all(query)
     circuit_options = Enum.map(cir, fn c -> {c.nom, c.id} end)
     changeset = Image.change_photo(%Photo{})
-    render(conn, "new.html", changeset: changeset, circuit: circuit_options)
+    render(conn, "new.html", changeset: changeset, circuit: circuit_options, id: id, c_nom: c_nom)
   end
 
   def create(conn, %{"photo" => photo_params}) do

@@ -5,8 +5,10 @@ defmodule MotoTourWeb.CircuitLive do
   alias MotoTour.Circuits
   alias MotoTour.Itineraires
   alias MotoTour.Image
-  alias MotoTour.Content
-  alias MotoTour.Content.Questions
+  alias MotoTour.Tarif
+  alias MotoTour.Tarifs
+  alias MotoTour.Nontarif
+  alias MotoTour.Nontarifs
 
   def mount(_params, _session, socket) do
     # Assignez le chemin de l'image dans l'état du socket
@@ -72,8 +74,8 @@ defmodule MotoTourWeb.CircuitLive do
         end)
         |> Enum.join("")}
       """
-      # Retourner le tuple {:noreply, socket} avec l'assignement
-      {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
+    # Retourner le tuple {:noreply, socket} avec l'assignement
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
   end
 
   # montre la card: l'image et le tab de destination
@@ -99,39 +101,6 @@ defmodule MotoTourWeb.CircuitLive do
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_itineraire_html))}
   end
 
-  # handle event pour le boutton question
-  def handle_event("change_question",  %{"param" => param}, socket) do
-    socket = reset_content(socket)
-    second_card_html =
-      """
-        <div  class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <label for="nom" style="width: 100px;">Nom</label>
-            <input type="text" id="nom" class="form-control" style="flex: 1;">
-        </div>
-
-        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <label for="email" style="width: 100px;">E-mail</label>
-            <input type="email" id="email" class="form-control" style="flex: 1;">
-        </div>
-
-        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <label for="telephone" style="width: 100px;">Téléphone</label>
-            <input type="text" id="telephone" class="form-control" style="flex: 1;">
-        </div>
-
-        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <label for="message" style="width: 100px;">Message</label>
-            <textarea id="message" class="form-control" style="flex: 1;height: 150px;"></textarea>
-        </div>
-
-        <!-- Submit Button -->
-        <div class="text-center mt-3">
-            <%= submit "Envoyer un message", class: "btn" %>
-        </div>
-        """
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
-  end
-
   # H E pour le boutton programme de voyage
   def handle_event("change_remarque",  %{"param" => param}, socket) do
     socket = reset_content(socket)
@@ -144,6 +113,45 @@ defmodule MotoTourWeb.CircuitLive do
       end
     |> Enum.join("") # Concatène toutes les chaînes en une seule
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html))}
+  end
+
+  def handle_event("change_tarif",  %{"param" => param}, socket) do
+    second_card_content_html = function_tarif(param)
+    socket = reset_content(socket)
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html))}
+  end
+
+  defp function_tarif(param) do
+    second_card_content = Tarifs.list_tarifs(param)
+    second_card_noncontent = Nontarifs.list_nontarifs(param)
+    circuit = Circuits.get_circuit!(param)
+    second_card_content_html =
+      """
+      <h5>TARIF & PRESTATIONS 2025 / à partir de #{circuit.tarifs} €</h5>
+      <section class="lead-text" style="margin-top: -20px;">
+        <h5 class="text-primary">Nos préstations comprennent</h5>
+        <ul class="list-group">
+         #{Enum.map(second_card_content, fn c ->
+          """
+            <li class="list-group-item">#{c.prestation}</li>
+          """
+        end)
+          |> Enum.join("")}
+        </ul>
+      </section>
+
+      <section class="lead-text" style="margin-top: -20px;">
+        <h5 class="text-primary">Nos préstations ne comprennent pas</h5>
+        <ul class="list-group">
+         #{Enum.map(second_card_noncontent, fn c ->
+          """
+            <li class="list-group-item">#{c.prestation}</li>
+          """
+        end)
+          |> Enum.join("")}
+        </ul>
+      </section>
+      """
   end
 
   defp reset_content(socket) do
@@ -337,7 +345,8 @@ defmodule MotoTourWeb.CircuitLive do
                 <ul class="circuitpage">
                   <li><button phx-click="change_content" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
                   <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:4rem;width:10rem"><i class="fa fa-calendar"></i><br><strong>sites marquants</strong></button></li>
+                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:4rem;width:10rem"><i class="fa fa-calendar"></i><br><strong>Sites marquants</strong></button></li>
+                  <li><button phx-click="change_tarif" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-euro-sign"></i><br><strong>Tarifs</strong></button></li>
                   <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
                 </ul>
               </nav>

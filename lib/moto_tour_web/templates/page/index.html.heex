@@ -1,6 +1,6 @@
 <style>
 .carousel-inner {
-  height: 35rem; 
+  height: 45em; 
   overflow: hidden;
   display: flex; /* Utilisation de Flexbox pour centrer l'image */
   align-items: center; /* Centrer verticalement l'image */
@@ -12,21 +12,7 @@
   max-height: 100%; /* Ne pas dépasser la hauteur du conteneur */
   object-fit: contain; /* Garder les proportions de l'image sans la zoomer */
 }
-</style>
-<style>
-.carousel-inner {
-  height: 35rem; 
-  overflow: hidden;
-  display: flex; /* Utilisation de Flexbox pour centrer l'image */
-  align-items: center; /* Centrer verticalement l'image */
-  justify-content: center; /* Centrer horizontalement l'image */
-}
 
-.carousel-inner img {
-  max-width: 100%; /* Ne pas dépasser la largeur du conteneur */
-  max-height: 100%; /* Ne pas dépasser la hauteur du conteneur */
-  object-fit: contain; /* Garder les proportions de l'image sans la zoomer */
-}
 </style>
 <section class="hero-section bg-primary text-white" style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/circuit_image/IMG_6984.jpg") <> "); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; color: white;"}>
   <div class="container-fluid d-flex align-items-center justify-content-center text-start d-none d-lg-flex" style="height: 100%;">
@@ -68,7 +54,7 @@
 
     <div class="container_image ">
 
-      <div class="carousel-inner" style="width: 80rem;">
+      <div class="carousel-inner rounded" style="width: 100%;">
         <%= for {p, index} <- Enum.with_index(@circuits, 1) do %>
           <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
             <img src={Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="couverture des circuits">

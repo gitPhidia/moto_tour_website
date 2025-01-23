@@ -17,7 +17,7 @@ defmodule MotoTourWeb.CircuitLive do
     second_card_content_html = function_destination(first_circuit.id)
     # prend les photos de chaque circuit
     photo = Image.get_photo_circuit(first_circuit.id)
-    {:ok, assign(socket, page_title: "Circuit & Location Moto à Madagascar", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
+    {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
   end
 
   def handle_param(%{"id" => id}, socket) do
@@ -94,7 +94,7 @@ defmodule MotoTourWeb.CircuitLive do
 
   # montre la liste des itineraire
   def handle_event("change_liste",  %{"param" => param}, socket) do
-    second_card_itineraire_html = function_itineraire(param)
+    second_card_itineraire_html = function_itineraire(param, false)
     socket = reset_content(socket)
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_itineraire_html))}
   end
@@ -150,17 +150,58 @@ defmodule MotoTourWeb.CircuitLive do
     assign(socket, card_content: %{}, show_card_second: false)
   end
 
+  def handle_event("toggle_all", _params, socket) do
+    # Alterner la valeur de `collapse_all` entre true et false
+    new_collapse_all = not socket.assigns.collapse_all
+    # Recalculer le HTML avec la nouvelle valeur de `collapse_all`
+    second_card_itineraire_html = function_itineraire(socket.assigns.selected_card, new_collapse_all)
+
+    # Mettre à jour l'état dans le socket
+    {:noreply, assign(socket, collapse_all: new_collapse_all, card_content: raw(second_card_itineraire_html))}
+  end
+
+  def switch(true), do: "checked"
+  def switch(false), do: ""
+
+  def collapse_class(true), do: "collapse show"
+  def collapse_class(false), do: "collapse"
+
   # concatène les resultats en html
-  defp function_itineraire(param) do
+  defp function_itineraire(param, collapse_all) do
+    # Vérifier si param est déjà un entier ou une chaîne
+    param_value =
+      case param do
+        %{"param" => value} -> value  # Si param est une carte, extraire "param"
+        [value] -> value              # Si param est une liste, prendre le premier élément
+        _ -> param                    # Si param est déjà une chaîne ou un entier, le laisser tel quel
+      end
+
+    # Vérifier si param_value est une chaîne et essayer de le convertir en entier
+    param_int =
+      case param_value do
+        value when is_binary(value) ->  # Si value est une chaîne, essayer de le convertir
+          case Integer.parse(value) do
+            {int, _} -> int
+            :error -> 0  # Valeur par défaut si la conversion échoue
+          end
+        _ -> param_value  # Si value est déjà un entier, on le garde tel quel
+      end
+
     second_card_content = Itineraires.list_itineraire()
-    filtered_content = Enum.filter(second_card_content, fn c -> c.idcircuit == String.to_integer(param) end)
+    filtered_content = Enum.filter(second_card_content, fn c -> c.idcircuit == param_int end)
+
     second_card_itineraire_html =
     """
+    <div class="form-check form-switch d-flex justify-content-end">
+      <input phx-click="toggle_all" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" #{switch(collapse_all)} style="height: 20px;width: 40px;">
+      <label class="form-check-label" for="flexSwitchCheckDefault"> Masquer Tout / Afficher</label>
+    </div>
+
       <div id='accordion'>
         #{Enum.map(filtered_content, fn c ->
         """
-        <div class='card'>
-          <div class='card-header' id='headingOne'>
+        <div class='card' id='heading#{c.id}'>
+          <div class='card-header'>
               <div class='row'>
                 <div class='col-md-11'>
                   <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
@@ -176,7 +217,7 @@ defmodule MotoTourWeb.CircuitLive do
                 </div>
               </div>
 
-            <div id='collapse#{c.id}' class='collapse' aria-labelledby='heading#{c.id}' data-parent='#accordion'>
+            <div id='collapse#{c.id}' class='#{collapse_class(collapse_all)}' aria-labelledby='heading#{c.id}' data-parent='#accordion'>
               <div class='card-body'>
                 #{c.remarque}
               </div>
@@ -323,7 +364,8 @@ defmodule MotoTourWeb.CircuitLive do
         </div>
       </div>
 
-      <script>
+    <script>
+
       function moveCarousel(direction) {
       // Récupère tous les éléments du carrousel
       const items = document.querySelectorAll('.carousel-item');

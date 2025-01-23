@@ -147,6 +147,13 @@ defmodule MotoTourWeb.Router do
     post "/admin/users/reset_password", UserResetPasswordController, :create
     get "/admin/users/reset_password/:token", UserResetPasswordController, :edit
     put "/admin/users/reset_password/:token", UserResetPasswordController, :update
+
+    live "/admin/tarif/:id", TarifLive
+    get "/admin/prestation/:id", TarifController, :edit
+    put "/admin/prestation_up/:id", TarifController, :update
+
+    get "/admin/nonprestation/:id", NontarifController, :edit
+    put "/admin/nonprestation_up/:id", NontarifController, :update
   end
 
   scope "/", MotoTourWeb do

@@ -315,7 +315,7 @@ defmodule MotoTourWeb.CircuitLive do
           <!-- titre -->
 
           <!-- html image carousel -->
-          <div class="col-lg-4 col-md-12">
+          <div class="col-lg-4 col-md-12" style="height: 41rem;">
             <div class="container_image d-flex justify-content-end">
               <div class="carousel-inner">
                 <%= for {p, index} <- Enum.with_index(@photo, 1) do %>

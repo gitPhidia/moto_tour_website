@@ -14,6 +14,7 @@ defmodule MotoTour.Circuit do
     field :remarque, :string
     field :desc_card, :string
     field :archiver, :boolean
+    field :assistance, :boolean, default: false
     has_many :reservations, MotoTour.Reservation, foreign_key: :idcircuit, on_delete: :delete_all
 
     timestamps()
@@ -22,7 +23,7 @@ defmodule MotoTour.Circuit do
   @doc false
   def changeset(circuit, attrs) do
     circuit
-    |> cast(attrs, [:nom,:tarifs, :durée, :participant, :moto, :difficulté, :photo, :details, :remarque,:desc_card])
+    |> cast(attrs, [:nom,:tarifs, :durée, :participant, :moto, :difficulté, :photo, :details, :remarque, :desc_card, :assistance])
     |> validate_required([:nom, :tarifs, :durée, :difficulté, :desc_card])
   end
 end

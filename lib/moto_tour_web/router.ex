@@ -38,6 +38,7 @@ defmodule MotoTourWeb.Router do
 
     get "/", PageController, :index
     get "/propos", PageController, :propos
+    live "/circuit/:id", CircuitLive
     live "/circuit", CircuitLive
     get "/robots.txt", PageController, :robots
     resources "/question", QuestionsController, only: [:new, :create]

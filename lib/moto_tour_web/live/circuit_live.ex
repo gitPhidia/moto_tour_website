@@ -2,6 +2,7 @@ defmodule MotoTourWeb.CircuitLive do
   use Phoenix.LiveView
   import Phoenix.HTML
   alias MotoTourWeb.Router.Helpers, as: Routes
+  alias MotoTour.{Repo,Circuit}
   alias MotoTour.Circuits
   alias MotoTour.Itineraires
   alias MotoTour.Image
@@ -9,12 +10,13 @@ defmodule MotoTourWeb.CircuitLive do
   alias MotoTour.Tarifs
   alias MotoTour.Nontarif
   alias MotoTour.Nontarifs
+  alias MotoTour.Nav
 
-  def mount(_params, _session, socket) do
+  def mount(%{"id" => id}, _session, socket) do
+
     # Assignez le chemin de l'image dans l'état du socket
     circuits = Circuits.list_circuits()
-    # prend la premiere enregistrement dans la map de circuits
-    first_circuit = List.first(circuits)
+    first_circuit = Repo.get!(Circuit, id)
     # transorme les resultat en html,voir la foncrion function
     second_card_content_html = function_destination(first_circuit.id)
     # prend les photos de chaque circuit
@@ -22,22 +24,15 @@ defmodule MotoTourWeb.CircuitLive do
     {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
   end
 
-  def handle_param(%{"id" => id}, socket) do
+  def mount(%{}, _session, socket) do
+    # Assignez le chemin de l'image dans l'état du socket
     circuits = Circuits.list_circuits()
-    circuit = Circuits.get_circuit!(id)
-
-    # Appelle la fonction pour générer le contenu HTML
-    second_card_content_html = function_destination(id)
-
-    # Assigne les données au socket
-    {:noreply,
-     assign(socket,
-       selected_card: [circuit.id],
-       circuit: [circuit],
-       circuits: circuits,
-       show_card_second: true,
-       card_content: raw(second_card_content_html)
-     )}
+    first_circuit = List.first(circuits)
+    # transorme les resultat en html,voir la foncrion function
+    second_card_content_html = function_destination(first_circuit.id)
+    # prend les photos de chaque circuit
+    photo = Image.get_photo_circuit(first_circuit.id)
+    {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
   end
 
   def handle_event("change_photo",  %{"param" => param}, socket) do
@@ -50,10 +45,8 @@ defmodule MotoTourWeb.CircuitLive do
         </h3>
         #{Enum.map(photo, fn p ->
         """
-          <div class="col-lg-3 col-md-5 mt-2 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-              data-image="/assets/images/section/circuit_image/#{p.photo}"
-              data-target="#image-gallery#{p.id}">
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-2 thumb">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="/assets/images/section/circuit_image/#{p.photo}" data-target="#image-gallery#{p.id}">
               <img src="/assets/images/section/circuit_image/#{p.photo}" class="img-fluid rounded w-100" alt="Image 1">
             </a>
           </div>
@@ -65,7 +58,7 @@ defmodule MotoTourWeb.CircuitLive do
                   <button type="button" class="btn-close close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span>
                   </button>
                   <div class="modal-body">
-                    <img id="image-gallery-image" class="img-responsive col-md-12" src="/assets/images/section/circuit_image/#{p.photo}">
+                    <img id="image-gallery-image" class="img-fluid col-md-12" src="/assets/images/section/circuit_image/#{p.photo}">
                   </div>
                 </div>
             </div>
@@ -320,7 +313,7 @@ defmodule MotoTourWeb.CircuitLive do
               <div class="carousel-inner">
                 <%= for {p, index} <- Enum.with_index(@photo, 1) do %>
                   <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
-                    <img src={Routes.static_path(@socket, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1">
+                    <img src={Routes.static_path(@socket, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1" style="height: 100%;">
                   </div>
                 <%= end %>
                 <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">

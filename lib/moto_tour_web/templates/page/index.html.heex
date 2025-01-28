@@ -97,7 +97,7 @@
         rate_count={circuit.difficulté}
         max_rate_count={5}
         price={circuit.tarifs}
-        link={Routes.live_path(@conn, MotoTourWeb.CircuitLive, id: circuit.id)}
+        link={Routes.live_path(@conn, MotoTourWeb.CircuitLive, circuit.idcircuit)}
         >
         <:nom_block>
            <%= circuit.circuit_nom %>

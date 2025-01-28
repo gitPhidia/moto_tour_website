@@ -295,9 +295,9 @@ defmodule MotoTourWeb.CircuitLive do
             <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
             <%= for i <- 1..5 do %>
               <%= if i <= c.difficulté do %>
-              <img src="/assets/images/section/circuit_image/chilli-pepper-icon.svg" alt="Hot Pepper" style="width: 30px; height: 24px;">
+              <img src="/assets/images/section/circuit_image/chilli-pepper-icon.svg" alt="Difficulté des circuits" style="width: 30px; height: 24px;">
               <% else %>
-              <img src="/assets/images/section/circuit_image/chili-vegetable-icon.svg" alt="Hot Pepper" style="width: 30px; height: 24px; opacity: 0.3;">
+              <img src="/assets/images/section/circuit_image/chili-vegetable-icon.svg" alt="Difficulté des circuits" style="width: 30px; height: 24px; opacity: 0.3;">
               <% end %>
             <% end %>
             </h4>

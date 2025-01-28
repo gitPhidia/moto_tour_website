@@ -21,7 +21,13 @@ defmodule MotoTourWeb.CircuitLive do
     second_card_content_html = function_destination(first_circuit.id)
     # prend les photos de chaque circuit
     photo = Image.get_photo_circuit(first_circuit.id)
-    {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
+
+    json_ld = circuits |> Enum.map(&build_event_schema/1) |> Jason.encode!()
+    {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar",
+    selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
+    show_card_second: true, card_content: raw(second_card_content_html),
+    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
+    json_ld_schema: json_ld) }
   end
 
   def mount(%{}, _session, socket) do
@@ -32,8 +38,35 @@ defmodule MotoTourWeb.CircuitLive do
     second_card_content_html = function_destination(first_circuit.id)
     # prend les photos de chaque circuit
     photo = Image.get_photo_circuit(first_circuit.id)
-    {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar", selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits, show_card_second: true, card_content: raw(second_card_content_html), meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto") }
+
+    json_ld = circuits |> Enum.map(&build_event_schema/1) |> Jason.encode!()
+    {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar",
+    selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
+    show_card_second: true, card_content: raw(second_card_content_html),
+    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
+    json_ld_schema: json_ld) }
   end
+
+  # Générer un balisage Schema.org pour un circuit donné
+defp build_event_schema(circuit) do
+  %{
+    "@context" => "https://schema.org",
+    "@type" => "Event",
+    "name" => circuit.nom,
+    "location" => %{
+      "@type" => "Place",
+      "name" => circuit.desc_card,
+    },
+    "description" => circuit.desc_card,
+    "offers" => %{
+      "@type" => "Offer",
+      "url" => circuit.id,
+      "price" => circuit.tarifs,
+      "priceCurrency" => "EUR",
+      "availability" => "https://schema.org/InStock"
+    }
+  }
+end
 
   def handle_event("change_photo",  %{"param" => param}, socket) do
     socket = reset_content(socket)
@@ -365,6 +398,12 @@ defmodule MotoTourWeb.CircuitLive do
           <!-- fin de la deuxieme partie -->
         </div>
       </div>
+
+      <%= if @json_ld_schema do %>
+        <script type="application/ld+json">
+          <%= raw @json_ld_schema %>
+        </script>
+      <% end %>
 
     <script>
 

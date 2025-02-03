@@ -1,5 +1,6 @@
 defmodule MotoTour.Itineraires do
   alias MotoTour.{Repo,Itineraire}
+  import Ecto.Query
 
   def list_itineraire do
     itineraire = Repo.all(Itineraire)

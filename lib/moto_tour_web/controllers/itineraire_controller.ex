@@ -32,7 +32,7 @@ defmodule MotoTourWeb.ItineraireController do
   end
 
   def create(conn, %{"itineraire" => itineraire_params}) do
-    required_fields = ["idcircuit", "itineraire", "remarque"]
+    required_fields = ["idcircuit", "remarque"]
 
     # Vérification des champs vides
     missing_fields = Enum.filter(required_fields, fn field -> Map.get(itineraire_params, field) in [nil, ""] end)

@@ -6,7 +6,7 @@ defmodule MotoTour.Itineraire do
     field :jour, :integer
     field :depart, :string
     field :arriver, :string
-    field :distance, :integer
+    field :distance, :string
     field :itineraire, :string
     field :remarque, :string
     belongs_to :circuit, MotoTour.Circuit, foreign_key: :idcircuit

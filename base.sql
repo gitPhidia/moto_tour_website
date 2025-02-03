@@ -389,3 +389,15 @@ ADD COLUMN archiver TYPE boolean
 
 ALTER TABLE question
 ADD COLUMN telephone character varying;
+
+ALTER TABLE itineraires
+ADD COLUMN jour integer;
+ALTER TABLE itineraires
+ADD COLUMN depart character varying;
+ALTER TABLE itineraires
+ADD COLUMN arriver character varying;
+ALTER TABLE itineraires
+ADD COLUMN distance integer;
+
+pg_dump -U nom_utilisateur -h hôte -p port -F c -b -v -f fichier_de_sortie.dump nom_de_la_base
+pg_dump -U postgres -h localhost -p 5433 -f moto_tour_dev.sql moto_tour_dev

@@ -9,8 +9,8 @@ defmodule MotoTourWeb.Card do
         <img src={ @image } class="card-img-top img-fluid" alt="Image des circuits">
 
         <!-- Orange Bar Section (Title) -->
-        <div class="card-title-bar text-center py-1" style="background-color: orange; color: white;">
-          <h3 class="card-title m-0" style="font-size: 1.25rem;font-weight: normal;"><%= render_slot(@nom_block) %></h3>
+        <div class="card-title-bar text-center py-1" style="color: #fff;">
+          <h3 class="card-title m-0" style="font-size: 1.25rem;font-weight: normal; color: #333;"><%= render_slot(@nom_block) %></h3>
         </div>
 
         <!-- Card Body -->
@@ -52,15 +52,15 @@ end
     ~H"""
       <div class="star-rating" style="font-size: 1.5rem; color: gold;">
         <!-- Calculer le nombre d'étoiles pleines à afficher (ne jamais dépasser max_rating_count) -->
-        <%= for _ <- 1..min(@rate_count, @max_rating_count) do %> 
-          <img src="/assets/images/section/circuit_image/chilli-pepper-icon.svg" alt="Difficulté des circuits" style="width: 24px; height: 30px;">
+        <%= for _ <- 1..min(@rate_count, @max_rating_count) do %>
+          <img src="/assets/images/section/circuit_image/chilli-pepper-icon.svg" alt="Difficulté circuits" style="width: 24px; height: 30px;">
         <% end %>
 
         <!-- Affichage des étoiles vides pour compléter jusqu'à max_rating_count -->
         <!-- il faut s'assurer que rate_count ne depasse pas max_rate_count !-->
         <%= if(@rate_count < @max_rating_count) do %>
           <%= for _ <- (min(@rate_count, @max_rating_count) + 1)..@max_rating_count do %>
-          <img src="/assets/images/section/circuit_image/chili-vegetable-icon.svg" alt="Difficulté des circuits" style="width: 24px; height: 30px; opacity: 0.3;">
+          <img src="/assets/images/section/circuit_image/chili-vegetable-icon.svg" alt="Difficulté circuits" style="width: 24px; height: 30px; opacity: 0.3;">
           <% end %>
         <% end %>
       </div>

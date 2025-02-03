@@ -4,12 +4,19 @@
   <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content={assigns[:meta_description] || ""} />
+    
+    <!-- Meta description dynamique -->
+    <meta name="description" content={assigns[:meta_description] || ""}/>
+
+    <!-- Vérification Google -->
     <meta name="google-site-verification" content="P-W0ubGRy46mO6HJ3NbCY1anIV_puaohUaWpWDhrmvg" />
+
+    <!-- CSRF et titre dynamique -->
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "", suffix: "" %>
+
+    <!-- Open Graph (SEO et partage sur réseaux sociaux) -->
     <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Circuits Moto Enduro Sport - Location et circuits moto à Madagascar">
@@ -17,21 +24,22 @@
     <meta property="og:url" content="https://moto-madagascar.com/circuit">
     <meta property="og:site_name" content="Location et circuits moto à Madagascar">
     <meta property="og:image" content="https://moto-madagascar.com/assets/images/section/circuit_image/733575AF-6794-45CF-9537-D31899E1B530.jpeg">
+
+    <!-- Styles et scripts -->
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+
+    <!-- URL Canonique -->
     <link rel="canonical" href="https://moto-madagascar.com/">
-    <link rel="preload" rel="icon" sizes="32x32" type="image/png" href={Routes.static_path(@conn, "/assets/images/section/circuit_image/cropped-favicon-mtl-32x32.png")} />
+
+    <!-- Favicon -->
+    <link rel="icon" sizes="32x32" type="image/png" href={Routes.static_path(@conn, "/assets/images/section/circuit_image/cropped-favicon-mtl-32x32.png")}>
   </head>
   
 <body>
   
 <nav class="navbar navbar-expand-lg fixed-top " style="height:1.2rem;">
   <div class="container-fluid bg-white">
-    <!-- Logo -->
-    <a class="navbar-brand" href="/">
-      <!-- <img rel="preload" src={Routes.static_path(@conn, "/assets/images/section/logo.webp")} alt="Logo Moto Parcours" style="transform:scale(1,1)" width="130" height="30"> -->
-    </a>
-
     <!-- Navbar Toggler (for mobile view) -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -76,7 +84,7 @@
 
         <!-- Section : a propos -->
         <div class="col-md-5">
-          <h5>À propos</h5>
+          <h4 style="font-size: 1.5em;">À propos</h4>
           <p>Notre équipe franco-malgache, composée de guides moto et mécaniciens spécialisés, vous fera partager leur passion pour ce pays.
 
             N’attendez pas !<a href="https://www.facebook.com/MotoTourMada" class="text-white text-decoration-none"><u> Rejoignez-nous !</u></a><br>
@@ -87,7 +95,7 @@
 
         <!-- Section : Contact -->
         <div class="col-md-4">
-          <h5>Contact</h5>
+          <h4 style="font-size: 1.5em;">Contact</h4>
           <ul class="list-unstyled">
             <li><i class="fas fa-map-marker-alt"></i> Ankadifotsy, Làlana Ratsima James
               Antananarivo – Madagascar

@@ -3,7 +3,9 @@ defmodule MotoTour.Itineraires do
   import Ecto.Query
 
   def list_itineraire do
-    itineraire = Repo.all(Itineraire)
+    query = from(c in Itineraire, order_by: c.id)
+    # itineraire = Repo.all(Itineraire)
+    itineraire = Repo.all(query)
   end
 
   def single_itineraire(params) do

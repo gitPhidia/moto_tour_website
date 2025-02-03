@@ -23,38 +23,32 @@ defmodule MotoTourWeb.PageController do
     # circuits = Circuits.list_circuits()
     circuits = Image.get_principal_photos()
 
-    json_ld =
-      circuits
-      |> Enum.map(&build_event_schema/1)
-      |> Jason.encode!()
-
     conn
       |> assign(:meta_description, "Découvrez Madagascar à moto à travers des circuits d’enduro sport palpitants, entre paysages sauvages et étendues désertiques.")
       |> assign(:page_title, "Moto Madagascar")
-      |> assign(:json_ld_schema, json_ld)
       |> render("index.html", circuits: circuits)
   end
 
-  defp build_event_schema(circuit) do
-    %{
-      "@context" => "https://schema.org",
-      "@type" => "Event",
-      "name" => circuit.circuit_nom,
-      "location" => %{
-        "@type" => "Place",
-        "name" => circuit.circuit_nom,
-      },
-      "image" => circuit.photo,
-      "description" => circuit.desc_card,
-      "offers" => %{
-        "@type" => "Offer",
-        "url" => circuit.idcircuit,
-        "price" => circuit.tarifs,
-        "priceCurrency" => "EUR",
-        "availability" => "https://schema.org/InStock"
-      }
-    }
-  end
+  # defp build_event_schema(circuit) do
+  #   %{
+  #     "@context" => "https://schema.org",
+  #     "@type" => "Event",
+  #     "name" => circuit.circuit_nom,
+  #     "location" => %{
+  #       "@type" => "Place",
+  #       "name" => circuit.circuit_nom,
+  #     },
+  #     "image" => circuit.photo,
+  #     "description" => circuit.desc_card,
+  #     "offers" => %{
+  #       "@type" => "Offer",
+  #       "url" => circuit.idcircuit,
+  #       "price" => circuit.tarifs,
+  #       "priceCurrency" => "EUR",
+  #       "availability" => "https://schema.org/InStock"
+  #     }
+  #   }
+  # end
 
 
   def menu(conn, _params) do

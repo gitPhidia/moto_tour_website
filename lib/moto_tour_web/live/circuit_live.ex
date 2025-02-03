@@ -22,12 +22,12 @@ defmodule MotoTourWeb.CircuitLive do
     # prend les photos de chaque circuit
     photo = Image.get_photo_circuit(first_circuit.id)
 
-    json_ld = circuits |> Enum.map(&build_event_schema/1) |> Jason.encode!()
+    # json_ld = circuits |> Enum.map(&build_event_schema/1) |> Jason.encode!()
     {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar",
     selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
     show_card_second: true, card_content: raw(second_card_content_html),
     meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
-    json_ld_schema: json_ld) }
+    id: id) }
   end
 
   def mount(%{}, _session, socket) do
@@ -36,37 +36,37 @@ defmodule MotoTourWeb.CircuitLive do
     first_circuit = List.first(circuits)
     # transorme les resultat en html,voir la foncrion function
     second_card_content_html = function_destination(first_circuit.id)
-    # prend les photos de chaque circuit
+    # prend les photos de chaque circuit+
     photo = Image.get_photo_circuit(first_circuit.id)
 
-    json_ld = circuits |> Enum.map(&build_event_schema/1) |> Jason.encode!()
+    # json_ld = circuits |> Enum.map(&build_event_schema/1) |> Jason.encode!()
     {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar",
     selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
     show_card_second: true, card_content: raw(second_card_content_html),
     meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
-    json_ld_schema: json_ld) }
+    id: Integer.to_string(first_circuit.id)) }
   end
 
   # Générer un balisage Schema.org pour un circuit donné
-defp build_event_schema(circuit) do
-  %{
-    "@context" => "https://schema.org",
-    "@type" => "Event",
-    "name" => circuit.nom,
-    "location" => %{
-      "@type" => "Place",
-      "name" => circuit.desc_card,
-    },
-    "description" => circuit.desc_card,
-    "offers" => %{
-      "@type" => "Offer",
-      "url" => circuit.id,
-      "price" => circuit.tarifs,
-      "priceCurrency" => "EUR",
-      "availability" => "https://schema.org/InStock"
-    }
-  }
-end
+# defp build_event_schema(circuit) do
+#   %{
+#     "@context" => "https://schema.org",
+#     "@type" => "Event",
+#     "name" => circuit.nom,
+#     "location" => %{
+#       "@type" => "Place",
+#       "name" => circuit.desc_card,
+#     },
+#     "description" => circuit.desc_card,
+#     "offers" => %{
+#       "@type" => "Offer",
+#       "url" => circuit.id,
+#       "price" => circuit.tarifs,
+#       "priceCurrency" => "EUR",
+#       "availability" => "https://schema.org/InStock"
+#     }
+#   }
+# end
 
   def handle_event("change_photo",  %{"param" => param}, socket) do
     socket = reset_content(socket)
@@ -110,7 +110,7 @@ end
     second_card_content_html = function_destination(card)
     socket = reset_content(socket)
     photo = Image.get_photo_circuit(card)
-    {:noreply, assign(socket, selected_card: card, photo: photo, circuit: cards, card_content: raw(second_card_content_html))}
+    {:noreply, assign(socket, id: card, selected_card: card, photo: photo, circuit: cards, card_content: raw(second_card_content_html))}
   end
 
   # montre les contenue du boutton destination
@@ -240,7 +240,7 @@ end
                 <div class='col-md-11'>
                   <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
                     <h6 class='mb-0'>
-                      #{c.itineraire}
+                      jour #{c.jour} : #{c.depart} - #{c.arriver} : #{c.distance}km
                     </h6>
                   </a>
                 </div>
@@ -282,24 +282,24 @@ end
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section" style="height:50px;margin-top:30px;">
+     <section class="transition-section d-flex justify-content-center align-items-center mt-5" style="height: 40px;">
         <div class="container">
           <div class="row text-white">
             <div class="col-md-12 d-flex justify-content-center align-items-center">
-              <p class="text-center lead"><h1 class="mt-3 fs-4 fs-md-3 fs-lg-2">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
+              <p class="text-center lead"><h1 style="font-size: 1.5em;">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- liste des crircuits -->
-      <div class="row" style="height:40px;">
-        <div class="col-md-12">
-        <div class="product-menu text-center d-flex justify-content-center" style="border-bottom: 1px solid #e5e5e5;margin-top:-13px;">
-            <nav>
-              <ul class="circuitpage">
+      <div class="row">
+        <div class="col-md-12 mt-1">
+          <div class="product-menu text-center d-flex justify-content-center">
+            <nav aria-label="navigation">
+              <ul class="paginationlink">
                 <%= for circuit <- @circuits do %>
-                  <li><button phx-click="show_card" phx-value-card={circuit.id} style="font-size:15px;height:3rem;border: 1px solid #e5e5e5;"><h6><strong><%= circuit.nom %></strong></h6></button></li>
+                <li class="page-item"><a class={"page-lien #{if circuit.id == String.to_integer(@id), do: "active", else: ""}"} phx-click="show_card" phx-value-card={circuit.id} ><h6><strong><%= circuit.nom %></strong></h6></a></li>
                 <%= end %>
               </ul>
             </nav>
@@ -318,7 +318,7 @@ end
     ~H"""
     <%= for c <- @circuit do %>
       <div class="container w-100">
-        <div class="row" style="margin-top: -20px;">
+        <div class="row">
 
           <!-- titre & prix -->
           <div class="col-md-5">
@@ -336,7 +336,7 @@ end
             </h4>
           </div>
           <div class="col-md-3">
-            <h4 class="fw-bold text-success" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">à partir de <%= c.tarifs %>€</h4>
+            <h4 class="fw-bold text-success" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;height: 20px;">à partir de <%= c.tarifs %>€</h4>
           </div>
           <!-- titre -->
 
@@ -379,7 +379,7 @@ end
             </div>
             <!-- fin du liste -->
 
-            <div class="row mr-4" style="margin-top:1%" phx-show={@show_card_second}>
+            <div class="row mr-4 mt-5" phx-show={@show_card_second}>
               <p>
               <!-- affichage du quote pour chaque circuit -->
               <blockquote>
@@ -398,12 +398,6 @@ end
           <!-- fin de la deuxieme partie -->
         </div>
       </div>
-
-      <%= if @json_ld_schema do %>
-        <script type="application/ld+json">
-          <%= raw @json_ld_schema %>
-        </script>
-      <% end %>
 
     <script>
 

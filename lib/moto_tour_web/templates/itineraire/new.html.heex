@@ -9,13 +9,31 @@
     <% end %>
 
     <div class="form-group" style="display: flex; align-items: center;">
-      <%= label f, :Itineraire %>
-      <%= text_input f, :itineraire, style: "width:90%;margin-left:5%" %>
-      <%= error_tag f, :itineraire %>
-  </div>
+      <%= label f, :jour, style: "width: 50px;" %>
+      <%= number_input f, :jour, style: "width:90%;margin-left:5%" %>
+      <%= error_tag f, :jour %>
+    </div>
+
+    <div class="form-group" style="display: flex; align-items: center;">
+      <%= label f, :depart, style: "width: 50px;" %>
+      <%= text_input f, :depart, style: "width:90%;margin-left:5%" %>
+      <%= error_tag f, :depart %>
+    </div>
+
+    <div class="form-group" style="display: flex; align-items: center;">
+      <%= label f, :arriver, style: "width: 50px;" %>
+      <%= text_input f, :arriver, style: "width:90%;margin-left:5%" %>
+      <%= error_tag f, :arriver %>
+    </div>
+
+    <div class="form-group" style="display: flex; align-items: center;">
+      <%= label f, :distance, style: "width: 50px;" %>
+      <%= number_input f, :distance, style: "width:90%;margin-left:5%" %>
+      <%= error_tag f, :distance %>
+    </div>
 
   <div class="form-group" style="display: flex; align-items: center;">
-      <%= label f, :description %>
+      <%= label f, :description, style: "width: 70px;" %>
       <%= textarea f, :remarque, style: "flex: 1;height: 150px;width:90%;margin-left:3%" %>
       <%= error_tag f, :remarque %>
   </div>

@@ -402,5 +402,8 @@ ADD COLUMN distance integer;
 ALTER TABLE itineraires
 ALTER COLUMN distance TYPE text;
 
+ALTER TABLE itineraires
+ADD COLUMN numero integer;
+
 pg_dump -U nom_utilisateur -h hôte -p port -F c -b -v -f fichier_de_sortie.dump nom_de_la_base
 pg_dump -U postgres -h 51.75.181.183 -p 5433 -f moto_tour_dev.sql moto_tour_dev

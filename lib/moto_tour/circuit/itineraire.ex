@@ -9,6 +9,7 @@ defmodule MotoTour.Itineraire do
     field :distance, :string
     field :itineraire, :string
     field :remarque, :string
+    field :numero, :integer
     belongs_to :circuit, MotoTour.Circuit, foreign_key: :idcircuit
 
     timestamps()
@@ -17,7 +18,7 @@ defmodule MotoTour.Itineraire do
   @doc false
   def changeset(itineraire, attrs) do
     itineraire
-    |> cast(attrs, [:idcircuit, :jour, :depart, :arriver, :itineraire, :remarque, :distance])
+    |> cast(attrs, [:idcircuit, :jour, :depart, :arriver, :itineraire, :remarque, :distance, :numero])
     |> validate_required([:idcircuit, :remarque])
   end
 end

@@ -22,11 +22,7 @@ defmodule MotoTourWeb.ItineraireController do
   end
 
   def ajout(conn, %{"id" => id}) do
-    # query = from c in Circuit,
-    #   select: %{ id: c.id, nom: c.nom}
-    # cir = Repo.all(query)
     circuit = Circuits.get_circuit!(id)
-    # circuits_options = Enum.map(cir, fn c -> {c.nom, c.id} end)
     changeset = Itineraires.change_itineraire(%Itineraire{})
     render(conn, "new.html", circuits: circuit, changeset: changeset, id: id)
   end

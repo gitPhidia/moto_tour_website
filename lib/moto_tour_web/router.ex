@@ -44,14 +44,6 @@ defmodule MotoTourWeb.Router do
     resources "/question", QuestionsController, only: [:new, :create]
     get "/sitemap.xml", PageController, :sitemap
 
-    # get "/liste", PageController, :liste
-    # Route pour la LiveView Home
-    # live "/home", HomeLive
-    # live "/circuit/:id", CircuitLive
-    # live "/menu_card", MenuCardLive
-    # live "/test", BackLive
-    # get "/sitemap.xml", SitemapController, :index
-
   end
 
   # Other scopes may use custom stacks.
@@ -122,6 +114,8 @@ defmodule MotoTourWeb.Router do
     post "/admin/itineraire_create", ItineraireController, :create
     put "/admin/itineraire_up/:id", ItineraireController, :update
     delete "/admin/itineraire_del/:id", ItineraireController, :delete
+    live "/admin/newitineraire/:id", AjoutLive
+    live "/admin/edititineraire/:id", EditLive
 
     # photo
     # resources "/photo", PhotoController, [:new, :create, :index, :show, :edit, :delete, :update]

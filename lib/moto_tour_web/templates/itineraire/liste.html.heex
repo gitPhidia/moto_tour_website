@@ -1,5 +1,5 @@
 <div class="mt-2">
-<h5> Liste des étapes dans le circuit <%= @circuit.nom %> </h5><a href={Routes.live_path(@conn, MotoTourWeb.AjoutLive, @circuit.id)}><button><i class="fa fa-plus"></i> ajouter</button></a>
+<h5> Liste des étapes dans le circuit <%= @circuit.nom %> </h5><a href={Routes.live_path(@conn, MotoTourWeb.AjoutLive, @circuit.id)}><button style="padding: 5px 10px; background-color: #0d6efd; color: white; border: none; border-radius: 5px;"><i class="fa fa-plus"></i> ajouter</button></a>
     <div id='accordion'>
     <%= for i <- @itineraire do %>
         <div class='card'>

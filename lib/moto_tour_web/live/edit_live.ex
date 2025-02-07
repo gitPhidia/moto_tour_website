@@ -55,7 +55,7 @@ defmodule MotoTourWeb.EditLive do
         <input type="hidden" name="idcircuit" value={@itineraire.idcircuit} class="form-control" />
 
         <div class="form-group d-flex align-items-end justify-content-end">
-          <button style="margin-top: 10px; padding: 5px 10px; background-color: blue; color: white; border: none; border-radius: 5px;" type="submit">Enregistrer</button>
+          <button style="margin-top: 10px; padding: 5px 10px; background-color: #0d6efd; color: white; border: none; border-radius: 5px;" type="submit">Enregistrer</button>
         </div>
       </form>
     </div>

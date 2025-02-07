@@ -34,14 +34,14 @@ defmodule MotoTourWeb.TarifLive do
                       value="<%= field.value %>"
                       class="form-control w-75"
                       phx-debounce="500" />
-                      <button type="button" class="rounded" phx-click="remove_field" phx-value-id="<%= field.id %>"><i class="fa fa-minus"></i>
+                      <button type="button" class="rounded" phx-click="remove_field" phx-value-id="<%= field.id %>" style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;"><i class="fa fa-minus"></i>
                       </button>
               </div>
             <% end %>
 
             <div class="form-group">
-              <button type="button" phx-click="add_field"><i class="fa fa-plus"></i> Ajouter un champs</button>
-              <button type="submit">Enregistrer</button>
+              <button type="button" phx-click="add_field" style="padding: 5px 10px; background-color: #0d6efd; color: white; border: none; border-radius: 5px;"><i class="fa fa-plus"></i> Ajouter un champ</button>
+              <button type="submit" style="padding: 5px 10px; background-color: green; color: white; border: none; border-radius: 5px;">Enregistrer</button>
             </div>
           </form>
 
@@ -61,7 +61,7 @@ defmodule MotoTourWeb.TarifLive do
                   <td style="text-align: center;">
                   <a data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier la préstation" href="/admin/prestation/<%= t.id %>"><i class="fa fa-pencil"></i></a>
                   <span>
-                    <button type="button" phx-click="delete_tarif" phx-value-id="<%= t.id %>">
+                    <button type="button" phx-click="delete_tarif" phx-value-id="<%= t.id %>" style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;">
                       Supprimer
                     </button>
                   </span>
@@ -87,13 +87,13 @@ defmodule MotoTourWeb.TarifLive do
                   value="<%= field.value %>"
                   class="form-control w-75"
                   phx-debounce="500" />
-                  <button type="button" class="rounded" phx-click="remove_nfield" phx-value-id="<%= field.id %>"><i class="fa fa-minus"></i></button>
+                  <button type="button" class="rounded" phx-click="remove_nfield" phx-value-id="<%= field.id %>" style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;"><i class="fa fa-minus"></i></button>
               </div>
             <% end %>
 
             <div class="form-group">
-              <button type="button" phx-click="add_nfield"><i class="fa fa-plus"></i> Ajouter un champs</button>
-              <button type="submit">Enregistrer</button>
+              <button type="button" phx-click="add_nfield" style="padding: 5px 10px; background-color: #0d6efd; color: white; border: none; border-radius: 5px;"><i class="fa fa-plus"></i> Ajouter un champ</button>
+              <button type="submit" style="padding: 5px 10px; background-color: green; color: white; border: none; border-radius: 5px;">Enregistrer</button>
             </div>
           </form>
 
@@ -113,7 +113,7 @@ defmodule MotoTourWeb.TarifLive do
                   <td style="text-align: center;">
                   <a data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier la préstation" href="/admin/nonprestation/<%= t.id %>"><i class="fa fa-pencil"></i></a>
                   <span>
-                    <button type="button" phx-click="delete_ntarif" phx-value-id="<%= t.id %>">
+                    <button type="button" phx-click="delete_ntarif" phx-value-id="<%= t.id %>" style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;">
                       Supprimer
                     </button>
                   </span>

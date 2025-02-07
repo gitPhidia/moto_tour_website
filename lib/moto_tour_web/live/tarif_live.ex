@@ -21,7 +21,7 @@ defmodule MotoTourWeb.TarifLive do
 
       <!-- prestation comprise -->
         <div class="col-md-6">
-        <h5>Le tarif de <%= @circuit.nom %> comprend</h5>
+        <h5>Les préstations comprisent pour <%= @circuit.nom %> </h5>
           <form id="tarif-form" phx-submit="submit_tarifs" phx-change="update_fields">
             <!-- Champ caché pour l'ID du circuit -->
             <input type="hidden" name="idcircuit" value="<%= @idcircuit %>" />
@@ -74,7 +74,7 @@ defmodule MotoTourWeb.TarifLive do
 
         <!-- prestation non comprise -->
         <div class="col-md-6">
-        <h5>Le tarif de <%= @circuit.nom %> ne comprend pas</h5>
+        <h5>Les préstations non comprisent pour <%= @circuit.nom %> </h5>
           <form id="tarif-form" phx-submit="submit_ntarifs" phx-change="update_nfields">
             <!-- Champ caché pour l'ID du circuit -->
             <input type="hidden" name="idcircuit" value="<%= @idcircuit %>" />

@@ -153,7 +153,7 @@ defmodule MotoTourWeb.CircuitLive do
     circuit = Circuits.get_circuit!(param)
     second_card_content_html =
       """
-      <h5>TARIF & PRESTATIONS 2025 / à partir de #{circuit.tarifs} €</h5>
+      <h5 class="lead">TARIF & PRESTATIONS 2025 / à partir de #{circuit.tarifs} €</h5>
       <section class="lead-text" style="margin-top: -20px;">
         <h5 class="text-primary">Nos préstations comprennent</h5>
         <ul class="list-group">
@@ -240,7 +240,7 @@ defmodule MotoTourWeb.CircuitLive do
                 <div class='col-md-11'>
                   <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
                     <h6 class='mb-0'>
-                      jour #{c.jour} : #{c.depart} - #{c.arriver} : #{c.distance}km
+                      jour #{c.jour} : #{c.depart} - #{c.arriver} : #{c.distance}
                     </h6>
                   </a>
                 </div>
@@ -282,8 +282,8 @@ defmodule MotoTourWeb.CircuitLive do
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section d-flex justify-content-center align-items-center mt-5" style="height: 40px;">
-        <div class="container">
+     <section class="transition-section d-flex justify-content-center align-items-center mt-4" style="height: 50px;">
+        <div class="container" style="margin-top: 10px;">
           <div class="row text-white">
             <div class="col-md-12 d-flex justify-content-center align-items-center">
               <p class="text-center lead"><h1 style="font-size: 1.5em;">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
@@ -299,7 +299,7 @@ defmodule MotoTourWeb.CircuitLive do
             <nav aria-label="navigation">
               <ul class="paginationlink">
                 <%= for circuit <- @circuits do %>
-                <li class="page-item"><a class={"page-lien #{if circuit.id == String.to_integer(@id), do: "active", else: ""}"} phx-click="show_card" phx-value-card={circuit.id} ><h6><strong><%= circuit.nom %></strong></h6></a></li>
+                <li class="page-item"><a class={"page-lien #{if circuit.id == String.to_integer(@id), do: "active", else: ""}  d-flex align-items-center justify-content-center"} phx-click="show_card" phx-value-card={circuit.id} style="height: 40px;"><h6><strong><%= circuit.nom %></strong></h6></a></li>
                 <%= end %>
               </ul>
             </nav>
@@ -318,7 +318,7 @@ defmodule MotoTourWeb.CircuitLive do
     ~H"""
     <%= for c <- @circuit do %>
       <div class="container w-100">
-        <div class="row">
+        <div class="row" style="margin-top: -10px;">
 
           <!-- titre & prix -->
           <div class="col-md-5">

@@ -45,28 +45,7 @@ defmodule MotoTourWeb.CircuitLive do
     show_card_second: true, card_content: raw(second_card_content_html),
     meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
     id: Integer.to_string(first_circuit.id)) }
-  end
-
-  # Générer un balisage Schema.org pour un circuit donné
-# defp build_event_schema(circuit) do
-#   %{
-#     "@context" => "https://schema.org",
-#     "@type" => "Event",
-#     "name" => circuit.nom,
-#     "location" => %{
-#       "@type" => "Place",
-#       "name" => circuit.desc_card,
-#     },
-#     "description" => circuit.desc_card,
-#     "offers" => %{
-#       "@type" => "Offer",
-#       "url" => circuit.id,
-#       "price" => circuit.tarifs,
-#       "priceCurrency" => "EUR",
-#       "availability" => "https://schema.org/InStock"
-#     }
-#   }
-# end
+end
 
   def handle_event("change_photo",  %{"param" => param}, socket) do
     socket = reset_content(socket)
@@ -134,7 +113,11 @@ defmodule MotoTourWeb.CircuitLive do
     second_card_content_html =
       for circuit <- second_card_content do
         """
-        <p>#{circuit.details}</p>
+        <div class="container_details">
+          <section class="lead-text">
+            #{circuit.details}
+          </section>
+        </div>
         """
       end
     |> Enum.join("") # Concatène toutes les chaînes en une seule
@@ -240,7 +223,7 @@ defmodule MotoTourWeb.CircuitLive do
                 <div class='col-md-11'>
                   <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
                     <h6 class='mb-0'>
-                      jour #{c.jour} : #{c.depart} - #{c.arriver} : #{c.distance}
+                      jour #{c.numero} : #{c.depart} - #{c.arriver} : #{c.distance}
                     </h6>
                   </a>
                 </div>

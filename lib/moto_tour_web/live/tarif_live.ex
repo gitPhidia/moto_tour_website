@@ -21,7 +21,7 @@ defmodule MotoTourWeb.TarifLive do
 
       <!-- prestation comprise -->
         <div class="col-md-6">
-        <h5>Les préstations comprisent pour <%= @circuit.nom %> </h5>
+        <h5>Les prestations comprises pour <%= @circuit.nom %> </h5>
           <form id="tarif-form" phx-submit="submit_tarifs" phx-change="update_fields">
             <!-- Champ caché pour l'ID du circuit -->
             <input type="hidden" name="idcircuit" value="<%= @idcircuit %>" />
@@ -49,17 +49,17 @@ defmodule MotoTourWeb.TarifLive do
             <thead>
                 <tr>
                   <th style="text-align: center;">Numéro</th>
-                  <th style="text-align: center;">Préstation</th>
+                  <th style="text-align: center;">Prestation</th>
                   <th style="text-align: center;">Action</th>
                 </tr>
             </thead>
             <tbody>
-              <%= for {t, index} <- Enum.with_index(@tarif, 1) do %>
+              <%= for t <- @tarif do %>
                 <tr>
-                  <td style="text-align: center;"><%= index %></td>
+                  <td style="text-align: center;"><%= t.index %></td>
                   <td style="text-align: center;"><%= t.prestation %></td>
                   <td style="text-align: center;">
-                  <a data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier la préstation" href="/admin/prestation/<%= t.id %>"><i class="fa fa-pencil"></i></a>
+                  <a href="/admin/prestation/<%= t.id %>"><i class="fa fa-pencil"></i></a>
                   <span>
                     <button type="button" phx-click="delete_tarif" phx-value-id="<%= t.id %>" style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;">
                       Supprimer
@@ -74,7 +74,7 @@ defmodule MotoTourWeb.TarifLive do
 
         <!-- prestation non comprise -->
         <div class="col-md-6">
-        <h5>Les préstations non comprisent pour <%= @circuit.nom %> </h5>
+        <h5>Les prestations non comprises pour <%= @circuit.nom %> </h5>
           <form id="tarif-form" phx-submit="submit_ntarifs" phx-change="update_nfields">
             <!-- Champ caché pour l'ID du circuit -->
             <input type="hidden" name="idcircuit" value="<%= @idcircuit %>" />
@@ -101,17 +101,17 @@ defmodule MotoTourWeb.TarifLive do
             <thead>
                 <tr>
                   <th style="text-align: center;">Numéro</th>
-                  <th style="text-align: center;">Préstation non comprise</th>
+                  <th style="text-align: center;">Prestation non comprise</th>
                   <th style="text-align: center;">Action</th>
                 </tr>
             </thead>
             <tbody>
-              <%= for {t, index} <- Enum.with_index(@nontarif, 1) do %>
+              <%= for t <- @nontarif do %>
                 <tr>
-                  <td style="text-align: center;"><%= index %></td>
+                  <td style="text-align: center;"><%= t.index %></td>
                   <td style="text-align: center;"><%= t.prestation %></td>
                   <td style="text-align: center;">
-                  <a data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier la préstation" href="/admin/nonprestation/<%= t.id %>"><i class="fa fa-pencil"></i></a>
+                  <a href="/admin/nonprestation/<%= t.id %>"><i class="fa fa-pencil"></i></a>
                   <span>
                     <button type="button" phx-click="delete_ntarif" phx-value-id="<%= t.id %>" style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;">
                       Supprimer
@@ -157,10 +157,11 @@ defmodule MotoTourWeb.TarifLive do
   end
 
   def handle_event("submit_tarifs", %{"idcircuit" => idcircuit, "fields" => fields_params}, socket) do
-    Enum.each(fields_params, fn {_, prestation_value} ->
-      %MotoTour.Tarif{}
-      |> MotoTour.Tarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit)})
-      |> Repo.insert()
+    Enum.with_index(fields_params)
+      |>Enum.each(fn {{_, prestation_value}, index} ->
+        %MotoTour.Tarif{}
+        |> MotoTour.Tarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit), index: index + 1 })
+        |> Repo.insert()
     end)
     # Récupérer les tarifs mis à jour
     tarif = Tarifs.list_tarifs(idcircuit)
@@ -214,10 +215,11 @@ defmodule MotoTourWeb.TarifLive do
   end
 
   def handle_event("submit_ntarifs", %{"idcircuit" => idcircuit, "nfields" => fields_params}, socket) do
-    Enum.each(fields_params, fn {_, prestation_value} ->
-      %MotoTour.Nontarif{}
-      |> MotoTour.Nontarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit)})
-      |> Repo.insert()
+    Enum.with_index(fields_params)
+      |>Enum.each(fn {{_, prestation_value}, index} ->
+        %MotoTour.Nontarif{}
+        |> MotoTour.Nontarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit), index: index + 1 })
+        |> Repo.insert()
     end)
     # Récupérer les tarifs mis à jour
     nontarif = Nontarifs.list_nontarifs(idcircuit)

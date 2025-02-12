@@ -9,7 +9,7 @@ defmodule MotoTour.Nontarifs do
   end
 
   def list_nontarifs(id) do
-    query = from(t in Nontarif, where: t.idcircuit == ^id)
+    query = from(t in Nontarif, where: t.idcircuit == ^id, order_by: t.index)
     Repo.all(query)
   end
 

@@ -4,6 +4,7 @@ defmodule MotoTour.Tarif do
 
   schema "tarif" do
     field :prestation, :string
+    field :index, :integer
     belongs_to :circuit, MotoTour.Circuit, foreign_key: :idcircuit
 
     timestamps()
@@ -12,7 +13,7 @@ defmodule MotoTour.Tarif do
   @doc false
   def changeset(tarif, attrs) do
     tarif
-    |> cast(attrs, [:prestation, :idcircuit])
+    |> cast(attrs, [:prestation, :idcircuit, :index])
     |> validate_required([:prestation])
   end
 end

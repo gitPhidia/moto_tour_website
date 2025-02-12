@@ -9,7 +9,7 @@ defmodule MotoTour.Tarifs do
   end
 
   def list_tarifs(id) do
-    query = from(t in Tarif, where: t.idcircuit == ^id)
+    query = from(t in Tarif, where: t.idcircuit == ^id, order_by: t.index)
     Repo.all(query)
   end
 

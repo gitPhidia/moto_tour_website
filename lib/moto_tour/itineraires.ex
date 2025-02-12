@@ -46,4 +46,9 @@ defmodule MotoTour.Itineraires do
     |> Repo.delete_all()
   end
 
+  def etape_par_numero(numero, idcircuit) do
+    query = from(i in Itineraire, where: i.numero == ^numero and i.idcircuit == ^idcircuit)
+    itineraire = Repo.all(query)
+  end
+
 end

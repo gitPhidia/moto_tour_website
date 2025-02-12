@@ -3,7 +3,7 @@ defmodule MotoTourWeb.AjoutLive do
   alias MotoTour.Circuits
   alias MotoTour.Itineraires
   alias MotoTour.Itineraire
-  import Phoenix.HTML.Form
+  alias MotoTour.Repo
   alias MotoTourWeb.Router.Helpers, as: Routes
 
   def mount(%{"id" => id}, _session, socket) do
@@ -17,19 +17,19 @@ defmodule MotoTourWeb.AjoutLive do
   def render(assigns) do
     ~H"""
     <div class="container w-75">
-    <h5>Ajouter un itinéraire <%= @circuits.nom %></h5>
+    <h5>Ajouter une étape dans <%= @circuits.nom %></h5>
     <a href={Routes.itineraire_path(@socket, :liste, @id)}>Retour</a>
 
       <form id="itineraire-form" phx-submit="submit_itineraire">
         <div class="form-group d-flex align-items-center">
-          <label style="width: 130px;">Numéro d’étape</label>
+          <label style="width: 130px;">Jour</label>
           <input type="number" name="numero" class="form-control"/>
         </div>
 
-        <div class="form-group d-flex align-items-center">
+        <!-- <div class="form-group d-flex align-items-center">
           <label style="width: 130px;">Jour</label>
           <input type="number" name="jour" class="form-control" />
-        </div>
+        </div> -->
 
         <div class="form-group d-flex align-items-center">
           <label style="width: 130px;">Lieu de depart</label>
@@ -84,16 +84,20 @@ defmodule MotoTourWeb.AjoutLive do
     # Récupération des paramètres nécessaires
     numero = socket.assigns.numero
     idcircuit = socket.assigns.id
-    jour = socket.assigns.jour
     depart = socket.assigns.depart
     arriver = socket.assigns.arriver
     distance = socket.assigns.distance
     remarque = socket.assigns.remarque
-    itineraire_params = %{numero: numero, idcircuit: idcircuit, jour: jour,
+    itineraire_params = %{numero: numero, idcircuit: idcircuit,
     depart: depart, arriver: arriver, distance: distance, remarque: remarque}
 
     # Suppression des itinéraires existants avec ce numéro
-    Itineraires.supprimer_par_numero(numero, idcircuit)
+    etape = Itineraires.etape_par_numero(numero, idcircuit)
+    |> Enum.each(fn etape ->
+      etape
+      |> Ecto.Changeset.change(numero: nil)
+      |> Repo.update()
+    end)
 
     # Création du nouvel itinéraire
     case Itineraires.create_itineraire(itineraire_params) do
@@ -108,14 +112,13 @@ defmodule MotoTourWeb.AjoutLive do
     end
   end
 
-  def handle_event("submit_itineraire",%{"numero" => numero, "jour" => jour, "depart" => depart,
+  def handle_event("submit_itineraire",%{"numero" => numero, "depart" => depart,
   "arriver" => arriver, "distance" => distance,
   "remarque" => remarque, "idcircuit" => idcircuit}, socket) do
 
     circuit = Circuits.get_circuit!(idcircuit)
     itineraire_params = %{
       numero: parse_integer(numero),
-      jour: parse_integer(jour),
       depart: depart,
       arriver: arriver,
       distance: distance,
@@ -128,7 +131,7 @@ defmodule MotoTourWeb.AjoutLive do
         cond do
           Itineraires.verification(parse_integer(numero), idcircuit) != [] ->
             # Affiche un pop-up en assignant une variable dans le socket
-            {:noreply, assign(socket, show_popup: true, changeset: changeset, id: idcircuit, numero: parse_integer(numero),jour: parse_integer(jour),depart: depart,arriver: arriver,distance: distance,remarque: remarque)}
+            {:noreply, assign(socket, show_popup: true, changeset: changeset, id: idcircuit, numero: parse_integer(numero),depart: depart,arriver: arriver,distance: distance,remarque: remarque)}
 
           Itineraires.verification(parse_integer(numero), idcircuit) == [] ->
             case Itineraires.create_itineraire(itineraire_params) do

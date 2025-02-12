@@ -22,14 +22,14 @@ defmodule MotoTourWeb.EditLive do
 
       <form id="itineraire-form" phx-submit="submit_itineraire">
         <div class="form-group d-flex align-items-center">
-          <label style="width: 130px;">Numéro d’étape</label>
+          <label style="width: 130px;">Jour</label>
           <input type="number" name="numero" class="form-control" value={@itineraire.numero}/>
         </div>
 
-        <div class="form-group d-flex align-items-center">
+        <!--<div class="form-group d-flex align-items-center">
           <label style="width: 130px;">Jour</label>
           <input type="number" name="jour" class="form-control" value={@itineraire.jour} />
-        </div>
+        </div>-->
 
         <div class="form-group d-flex align-items-center">
           <label style="width: 130px;">Lieu de depart</label>
@@ -86,34 +86,39 @@ defmodule MotoTourWeb.EditLive do
     numero = socket.assigns.numero
     idcircuit = socket.assigns.idcircuit
     id = socket.assigns.id
-    jour = socket.assigns.jour
     depart = socket.assigns.depart
     arriver = socket.assigns.arriver
     distance = socket.assigns.distance
     remarque = socket.assigns.remarque
-    itineraire_params = %{numero: numero, idcircuit: idcircuit, jour: jour,
+    itineraire_params = %{numero: numero, idcircuit: idcircuit,
     depart: depart, arriver: arriver, distance: distance, remarque: remarque}
+
     itineraire = Itineraires.single_itineraire(id)
     changeset = Itineraires.change_itineraire(%Itineraire{}, itineraire_params)
     changeset2 = Itineraires.change_itineraire(itineraire, itineraire_params)
 
     # Suppression des itinéraires existants avec ce numéro
-    Itineraires.supprimer_par_numero(numero, idcircuit)
+    etape = Itineraires.etape_par_numero(numero, idcircuit)
+    |> Enum.each(fn etape ->
+      etape
+      |> Ecto.Changeset.change(numero: nil)
+      |> Repo.update()
+    end)
 
     # Création du nouvel itinéraire
     case Repo.update(changeset2) do
       {:ok, itineraire} ->
         {:noreply,
-         socket
-         |> put_flash(:info, "Itinéraire remplacé avec succès!")
-         |> push_redirect(to: "/admin/edititineraire/#{itineraire.id}")}
+        socket
+        |> put_flash(:info, "Itinéraire remplacé avec succès!")
+        |> push_redirect(to: "/admin/edititineraire/#{itineraire.id}")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset, show_popup: false)}
     end
   end
 
-  def handle_event("submit_itineraire",%{"numero" => numero, "jour" => jour, "depart" => depart,
+  def handle_event("submit_itineraire",%{"numero" => numero, "depart" => depart,
   "arriver" => arriver, "distance" => distance,
   "remarque" => remarque, "idcircuit" => idcircuit, "id" => id}, socket) do
 
@@ -122,7 +127,6 @@ defmodule MotoTourWeb.EditLive do
     itineraire_params = %{
       id: parse_integer(id),
       numero: parse_integer(numero),
-      jour: parse_integer(jour),
       depart: depart,
       arriver: arriver,
       distance: distance,
@@ -137,7 +141,7 @@ defmodule MotoTourWeb.EditLive do
         cond do
           Itineraires.verification_edit(parse_integer(numero), idcircuit, id) != [] ->
             # Affiche un pop-up en assignant une variable dans le socket
-            {:noreply, assign(socket, show_popup: true, changeset: changeset, id: id, idcircuit: idcircuit, numero: parse_integer(numero),jour: parse_integer(jour),depart: depart,arriver: arriver,distance: distance,remarque: remarque)}
+            {:noreply, assign(socket, show_popup: true, changeset: changeset, id: id, idcircuit: idcircuit, numero: parse_integer(numero),depart: depart,arriver: arriver,distance: distance,remarque: remarque)}
 
           Itineraires.verification_edit(parse_integer(numero), idcircuit, id) == [] ->
             case Repo.update(changeset2) do

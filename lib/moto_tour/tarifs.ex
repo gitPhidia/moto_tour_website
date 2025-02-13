@@ -13,6 +13,11 @@ defmodule MotoTour.Tarifs do
     Repo.all(query)
   end
 
+  def dernier_tarifs(id) do
+    query = from(t in Tarif, where: t.idcircuit == ^id, order_by: [desc: t.index], limit: 1)
+    Repo.all(query)
+  end
+
   def list_tarifs_idcircuit(id) do
     query = from(t in Tarif, where: t.id == ^id)
     Repo.all(query)

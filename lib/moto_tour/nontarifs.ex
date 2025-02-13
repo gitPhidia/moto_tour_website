@@ -13,6 +13,11 @@ defmodule MotoTour.Nontarifs do
     Repo.all(query)
   end
 
+  def dernier_ntarifs(id) do
+    query = from(t in Nontarif, where: t.idcircuit == ^id, order_by: [desc: t.index], limit: 1)
+    Repo.all(query)
+  end
+
   def list_nontarifs_idcircuit(id) do
     query = from(t in Nontarif, where: t.id == ^id)
     Repo.all(query)

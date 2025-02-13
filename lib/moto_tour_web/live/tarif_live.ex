@@ -157,12 +157,34 @@ defmodule MotoTourWeb.TarifLive do
   end
 
   def handle_event("submit_tarifs", %{"idcircuit" => idcircuit, "fields" => fields_params}, socket) do
-    Enum.with_index(fields_params)
-      |>Enum.each(fn {{_, prestation_value}, index} ->
+    liste = Tarifs.list_tarifs(idcircuit)
+    last = Tarifs.dernier_tarifs(idcircuit) |> List.first()
+    start_index =
+      case last do
+        %MotoTour.Tarif{index: index} -> index  # Si `last` est une structure avec `index`
+        _ -> 0  # Si `last` est `nil` ou mal formaté, on commence à 0
+      end
+    IO.inspect(last, label: "last")
+    IO.inspect(start_index, label: "index")
+    if liste == [] do
+      Enum.with_index(fields_params)
+        |>Enum.each(fn {{_, prestation_value}, index} ->
+          %MotoTour.Tarif{}
+          |> MotoTour.Tarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit), index: index + 1 })
+          |> Repo.insert()
+      end)
+    else
+      Enum.with_index(fields_params, start_index + 1)
+      |> Enum.each(fn {{_, prestation_value}, index} ->
         %MotoTour.Tarif{}
-        |> MotoTour.Tarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit), index: index + 1 })
+        |> MotoTour.Tarif.changeset(%{
+          prestation: prestation_value,
+          idcircuit: String.to_integer(idcircuit),
+          index: index
+        })
         |> Repo.insert()
-    end)
+      end)
+    end
     # Récupérer les tarifs mis à jour
     tarif = Tarifs.list_tarifs(idcircuit)
 
@@ -215,12 +237,39 @@ defmodule MotoTourWeb.TarifLive do
   end
 
   def handle_event("submit_ntarifs", %{"idcircuit" => idcircuit, "nfields" => fields_params}, socket) do
-    Enum.with_index(fields_params)
-      |>Enum.each(fn {{_, prestation_value}, index} ->
+    # Enum.with_index(fields_params)
+    #   |>Enum.each(fn {{_, prestation_value}, index} ->
+    #     %MotoTour.Nontarif{}
+    #     |> MotoTour.Nontarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit), index: index + 1 })
+    #     |> Repo.insert()
+    # end)
+
+    liste = Nontarifs.list_nontarifs(idcircuit)
+    last = Nontarifs.dernier_ntarifs(idcircuit) |> List.first()
+    start_index =
+      case last do
+        %MotoTour.Nontarif{index: index} -> index  # Si `last` est une structure avec `index`
+        _ -> 0  # Si `last` est `nil` ou mal formaté, on commence à 0
+      end
+    if liste == [] do
+      Enum.with_index(fields_params)
+        |>Enum.each(fn {{_, prestation_value}, index} ->
+          %MotoTour.Nontarif{}
+          |> MotoTour.Nontarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit), index: index + 1 })
+          |> Repo.insert()
+      end)
+    else
+      Enum.with_index(fields_params, start_index + 1)
+      |> Enum.each(fn {{_, prestation_value}, index} ->
         %MotoTour.Nontarif{}
-        |> MotoTour.Nontarif.changeset(%{prestation: prestation_value, idcircuit: String.to_integer(idcircuit), index: index + 1 })
+        |> MotoTour.Nontarif.changeset(%{
+          prestation: prestation_value,
+          idcircuit: String.to_integer(idcircuit),
+          index: index
+        })
         |> Repo.insert()
-    end)
+      end)
+    end
     # Récupérer les tarifs mis à jour
     nontarif = Nontarifs.list_nontarifs(idcircuit)
 

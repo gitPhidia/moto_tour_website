@@ -412,3 +412,5 @@ ALTER TABLE tarif
 ADD COLUMN index integer;
 ALTER TABLE nontarif
 ADD COLUMN index integer;
+
+mix phx.gen.schema Videos video lien:string titre:string principal:boolean

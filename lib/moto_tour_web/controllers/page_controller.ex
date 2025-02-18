@@ -29,28 +29,6 @@ defmodule MotoTourWeb.PageController do
       |> render("index.html", circuits: circuits)
   end
 
-  # defp build_event_schema(circuit) do
-  #   %{
-  #     "@context" => "https://schema.org",
-  #     "@type" => "Event",
-  #     "name" => circuit.circuit_nom,
-  #     "location" => %{
-  #       "@type" => "Place",
-  #       "name" => circuit.circuit_nom,
-  #     },
-  #     "image" => circuit.photo,
-  #     "description" => circuit.desc_card,
-  #     "offers" => %{
-  #       "@type" => "Offer",
-  #       "url" => circuit.idcircuit,
-  #       "price" => circuit.tarifs,
-  #       "priceCurrency" => "EUR",
-  #       "availability" => "https://schema.org/InStock"
-  #     }
-  #   }
-  # end
-
-
   def menu(conn, _params) do
     res = Reservations._res()
     cir = Circuits.list_circuits()
@@ -64,6 +42,12 @@ defmodule MotoTourWeb.PageController do
       |> render("propos.html")
   end
 
+  def video(conn, _params) do
+    conn
+      |> assign(:meta_description, "Notre équipe franco-malgache, composée de guides moto, mécaniciens spécialisés, vous fera partager leur passion pour ce pays madagascar . By François Serrano")
+      |> assign(:page_title, "Qui sommes-nous ? L’équipe de Moto Tour Madagascar")
+      |> render("video.html")
+  end
 
   def liste(conn, _params) do
     circuits = Circuits.list_circuits()

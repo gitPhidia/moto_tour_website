@@ -40,6 +40,7 @@ defmodule MotoTourWeb.Router do
     get "/propos", PageController, :propos
     live "/circuit/:id", CircuitLive
     live "/circuit", CircuitLive
+    live "/videolive", VideoLive
     get "/robots.txt", PageController, :robots
     resources "/question", QuestionsController, only: [:new, :create]
     get "/sitemap.xml", PageController, :sitemap
@@ -149,6 +150,13 @@ defmodule MotoTourWeb.Router do
 
     get "/admin/nonprestation/:id", NontarifController, :edit
     put "/admin/nonprestation_up/:id", NontarifController, :update
+
+    get "/admin/video/ajout", VideosController, :ajout
+    post "/admin/video/create", VideosController, :create
+    post "/admin/video/update-checkboxes", VideosController, :principal
+    get "/admin/video_del/:id", VideosController, :supprimer
+    get "/admin/video_edit/:id", VideosController, :edit
+    put "/admin/video_update/:id", VideosController, :update
   end
 
   scope "/", MotoTourWeb do

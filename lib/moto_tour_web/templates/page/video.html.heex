@@ -1,0 +1,42 @@
+
+<script>
+    function changeVideo(videoUrl) {
+        document.getElementById("main-video").src = videoUrl;
+    }
+</script>
+<div class="container">   
+    <!-- Titre du voyage -->
+    <h2 class="text-center mt-5">Aventure en Moto à Madagascar</h2>
+
+    <!-- Description -->
+    <p class="text-center text-muted">
+        Découvrez Madagascar comme jamais auparavant avec une excursion en moto tout-terrain ! 
+        Traversez des paysages spectaculaires, des villages authentiques et vivez une expérience unique.
+    </p>
+
+    <iframe id="main-video" class="content py-2 d-flex justify-content-center text-align-center" title="MADAGASCAR on a KTM350: NOT what I expected! [S7-E93]" 
+    width="1120" height="600" src="https://www.youtube.com/embed/NVmJxH11yJM" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+    <!-- Liste des vidéos -->
+    <div class="row">
+        <div class="col-md-4">
+            <a href="#" onclick="changeVideo('https://www.youtube.com/embed/Qe9k3Fk2xrY')">
+                <img src="https://img.youtube.com/vi/Qe9k3Fk2xrY/0.jpg" class="img-fluid" alt="Vidéo 1">
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="#" onclick="changeVideo('https://www.youtube.com/embed/UrNEjcXqZqk')">
+                <img src="https://img.youtube.com/vi/UrNEjcXqZqk/0.jpg" class="img-fluid" alt="Vidéo 2">
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="#" onclick="changeVideo('https://www.youtube.com/embed/K1AmdELnsQ0')">
+                <img src="https://img.youtube.com/vi/K1AmdELnsQ0/0.jpg" class="img-fluid" alt="Vidéo 3">
+                <i class="bi bi-play-circle-fill play-icon"></i>
+            </a>
+        </div>
+    </div>
+    
+</div>

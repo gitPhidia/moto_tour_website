@@ -92,7 +92,7 @@ defmodule MotoTourWeb.TarifLive do
             <% end %>
 
             <div class="form-group">
-              <button type="button" phx-click="add_nfield" style="padding: 5px 10px; background-color: #0d6efd; color: white; border: none; border-radius: 5px;"><i class="fa fa-plus"></i> Ajouter un champ</button>
+              <button type="button" phx-click="add_nfield" style="padding: 5px 10px; background-color: #0d6efd; color: white; border: none; border-radius: 5px;"><i class="fa fa-plus"></i> Ajouter un champs</button>
               <button type="submit" style="padding: 5px 10px; background-color: green; color: white; border: none; border-radius: 5px;">Enregistrer</button>
             </div>
           </form>

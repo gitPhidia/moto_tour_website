@@ -161,6 +161,7 @@ defmodule MotoTourWeb.TarifLive do
     last = Tarifs.dernier_tarifs(idcircuit) |> List.first()
     start_index =
       case last do
+        %MotoTour.Tarif{index: nil} -> 0  # Si `index` est nil, on met 0
         %MotoTour.Tarif{index: index} -> index  # Si `last` est une structure avec `index`
         _ -> 0  # Si `last` est `nil` ou mal formaté, on commence à 0
       end
@@ -248,6 +249,7 @@ defmodule MotoTourWeb.TarifLive do
     last = Nontarifs.dernier_ntarifs(idcircuit) |> List.first()
     start_index =
       case last do
+        %MotoTour.Nontarif{index: nil} -> 0  # Si `index` est nil, on met 0
         %MotoTour.Nontarif{index: index} -> index  # Si `last` est une structure avec `index`
         _ -> 0  # Si `last` est `nil` ou mal formaté, on commence à 0
       end

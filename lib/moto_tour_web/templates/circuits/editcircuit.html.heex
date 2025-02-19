@@ -3,7 +3,7 @@
     <h5>Modifier le circuit <%= @circuit.nom %></h5>
     <a data-bs-toggle="tooltip" data-bs-placement="top" title="les photos du circuit" href={Routes.photo_path(@conn, :detail, @circuit.id)}><button style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;"><i class="fa fa-picture-o"></i> Photos</button></a>
     <a data-bs-toggle="tooltip" data-bs-placement="top" title="les itineraires du circuit" href={Routes.itineraire_path(@conn, :liste, @circuit.id)}><button style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;"><i class="fa fa-road"></i> Itineraires</button></a>
-    <a data-bs-toggle="tooltip" data-bs-placement="top" title="les tarifs du circuit" href={Routes.live_path(@conn, MotoTourWeb.TarifLive, @circuit.id)}><button style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;"><i class="fa fa-euro-sign"></i> Prestation</button></a>
+    <a data-bs-toggle="tooltip" data-bs-placement="top" title="les prestations du circuit" href={Routes.live_path(@conn, MotoTourWeb.TarifLive, @circuit.id)}><button style="padding: 5px 10px; background-color: grey; color: white; border: none; border-radius: 5px;"><i class="fa fa-euro-sign"></i> Prestation</button></a>
   </div>
   <div class="col-md-6">
 

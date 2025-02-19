@@ -11,13 +11,14 @@ defmodule MotoTourWeb.EditLive do
     itineraires = Itineraires.single_itineraire(id)
     itineraire = %MotoTour.Itineraire{}
     changeset = Itineraire.changeset(itineraire, %{})
-    {:ok, assign(socket, changeset: changeset, id: id, show_popup: false, itineraire: itineraires)}
+    circuit = Circuits.get_circuit!(itineraires.idcircuit)
+    {:ok, assign(socket, changeset: changeset, id: id, show_popup: false, itineraire: itineraires, circuit: circuit)}
   end
 
   def render(assigns) do
     ~H"""
     <div class="container w-75">
-    <h5>Editer une étape</h5>
+    <h5>Editer une étape de <%= @circuit.nom %></h5>
     <a href={Routes.itineraire_path(@socket, :liste, @itineraire.idcircuit)}>Retour</a>
 
       <form id="itineraire-form" phx-submit="submit_itineraire">

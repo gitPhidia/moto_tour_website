@@ -223,7 +223,7 @@ end
                 <div class='col-md-11'>
                   <a data-toggle='collapse' data-target='#collapse#{c.id}' aria-expanded='true' aria-controls='collapse#{c.id}'>
                     <h6 class='mb-0'>
-                      jour #{c.numero} : #{c.depart} - #{c.arriver} : #{c.distance}
+                      jour #{c.numero} : #{c.depart} - #{c.arriver} - #{c.distance}
                     </h6>
                   </a>
                 </div>

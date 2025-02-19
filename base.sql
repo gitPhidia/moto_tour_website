@@ -413,4 +413,7 @@ ADD COLUMN index integer;
 ALTER TABLE nontarif
 ADD COLUMN index integer;
 
+ALTER TABLE video
+ADD COLUMN index integer;
+
 mix phx.gen.schema Videos video lien:string titre:string principal:boolean

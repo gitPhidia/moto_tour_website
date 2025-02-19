@@ -11,7 +11,18 @@ defmodule MotoTourWeb.VideosController do
 
   def create(conn, %{"video" => video_params}) do
     video_id = extract_video_id(video_params["lien"])
-    updated_video_params = Map.put(video_params, "lien", video_id)
+    last = Videos.dernier_index() |> List.first()
+    start_index =
+      case last do
+        %MotoTour.Video{index: nil} -> 1  # Si `index` est nil, on met 0
+        %MotoTour.Video{index: index} -> index + 1  # Si `last` est une structure avec `index`
+        _ -> 0  # Si `last` est `nil` ou mal formaté, on commence à 0
+      end
+    # updated_video_params = Map.put(video_params, "lien", video_id, "index", start_index)
+    updated_video_params =
+      video_params
+      |> Map.put("lien", video_id)
+      |> Map.put("index", start_index)
     case Videos.create_video(updated_video_params) do
       {:ok, video} ->
         conn

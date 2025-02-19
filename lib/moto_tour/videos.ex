@@ -9,7 +9,7 @@ defmodule MotoTour.Videos do
   end
 
   def list_Video() do
-    query = from(t in Video, order_by: t.id)
+    query = from(t in Video, order_by: t.index)
     Repo.all(query)
   end
 
@@ -30,6 +30,11 @@ defmodule MotoTour.Videos do
 
   def delete_video(%Video{} = video) do
     Repo.delete(video)
+  end
+
+  def dernier_index() do
+    query = from(t in Video, order_by: [desc: t.id], limit: 1)
+    Repo.all(query)
   end
 
   def change_video(%Video{} = video, attrs \\ %{}) do

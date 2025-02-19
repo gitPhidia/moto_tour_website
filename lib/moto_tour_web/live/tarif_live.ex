@@ -165,8 +165,6 @@ defmodule MotoTourWeb.TarifLive do
         %MotoTour.Tarif{index: index} -> index  # Si `last` est une structure avec `index`
         _ -> 0  # Si `last` est `nil` ou mal formaté, on commence à 0
       end
-    IO.inspect(last, label: "last")
-    IO.inspect(start_index, label: "index")
     if liste == [] do
       Enum.with_index(fields_params)
         |>Enum.each(fn {{_, prestation_value}, index} ->

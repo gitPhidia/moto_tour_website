@@ -6,6 +6,7 @@ defmodule MotoTour.Video do
     field :lien, :string
     field :titre, :string
     field :principal, :boolean, default: false
+    field :index, :integer
 
     timestamps()
   end
@@ -13,7 +14,7 @@ defmodule MotoTour.Video do
   @doc false
   def changeset(videos, attrs) do
     videos
-    |> cast(attrs, [:lien, :titre, :principal])
+    |> cast(attrs, [:lien, :titre, :principal, :index])
     |> validate_required([:lien, :titre])
   end
 end

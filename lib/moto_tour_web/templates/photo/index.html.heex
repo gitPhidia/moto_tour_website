@@ -15,16 +15,16 @@
       <%= for photo <- @photos do %>
         <tr>
           <td style="width: 250px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
-          <td style="width: 100px">
-            <span><%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "vous êtes sûr?"] %></span>
-          </td>
           <td style="width: 15rem">
             <div>
+            <span>
+            <%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "vous êtes sûr?"], style: "padding: 20px;" %></span>
               <label for={"scale_#{photo.id}"}><input type="checkbox" 
                 id={"scale_#{photo.id}"} 
                 name="scales" 
                 class="scale-checkbox" 
                 data-id-circuit={photo.idcircuit}
+                checked={photo.principal}
                 onclick="toggleCheckboxes(this); updateCheckboxValues();" />
               Principal</label>
             </div>

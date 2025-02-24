@@ -35,7 +35,7 @@ defmodule MotoTour.Image do
           photo: p.photo
         }
 
-    results = Repo.all(query)
+    Repo.all(query)
   end
 
   @doc """
@@ -67,9 +67,10 @@ defmodule MotoTour.Image do
           desc_card: c.desc_card,
           difficulté: c.difficulté,
           nom: p.nom,
-          photo: p.photo
+          photo: p.photo,
+          principal: p.principal
         }
-    liste = Repo.all(query)
+    Repo.all(query)
   end
 
   def get_principal_photos do
@@ -88,7 +89,7 @@ defmodule MotoTour.Image do
           nom: p.nom,
           photo: p.photo
         }
-    results = Repo.all(query)
+    Repo.all(query)
   end
   @doc """
   Creates a photo.

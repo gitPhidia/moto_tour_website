@@ -63,10 +63,10 @@ defmodule MotoTourWeb.VideoLive do
     <div class="section">
         <h1 class="text-center" style="font-size: 1.74rem">Aventure en Moto à Madagascar</h1>
 
-        <p class="text-center text-muted">
-          Découvrez Madagascar comme jamais auparavant avec une excursion en moto tout-terrain !
-          Traversez des paysages spectaculaires, des villages authentiques et vivez une expérience unique.
-        </p>
+      <p class="text-center text-muted">
+        Découvrez Madagascar comme jamais auparavant avec une excursion en moto tout-terrain !
+        Traversez des paysages spectaculaires, des villages authentiques et vivez une expérience unique.
+      </p>
 
         <!-- Vidéo principale -->
         <div class="row">

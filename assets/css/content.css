@@ -2157,7 +2157,7 @@ section {
 
 h1 {
 	font-size: 2em;
-	margin: 0.67em 0
+	/* margin: 0.67em 0 */
 }
 
 figcaption,
@@ -3285,7 +3285,7 @@ table span.badge {
 
 .section {
 	padding-top: 1rem;
-	padding-bottom: 1rem
+	/* padding-bottom: 1rem */
 }
 
 .section.no-pad {
@@ -4504,7 +4504,7 @@ h6 a {
 h1 {
 	font-size: 4.2rem;
 	line-height: 110%;
-	margin: 2.8rem 0 1.68rem 0
+	/* margin: 2.8rem 0 1.68rem 0 */
 }
 
 h2 {

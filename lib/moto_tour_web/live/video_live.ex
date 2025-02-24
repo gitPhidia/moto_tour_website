@@ -13,7 +13,7 @@ defmodule MotoTourWeb.VideoLive do
         _ -> nil                                  # Sinon, retourne nil (aucune vidéo sélectionnée)
       end
 
-    {:ok, assign(socket, videos: videos, selected_video: selected_video)}
+    {:ok, assign(socket, videos: videos, selected_video: selected_video, page_title: "Moto tour Madagascar : Toutes nos vidéos", meta_description: "Découvrez nos vidéos exclusives de Moto Tour Madagascar : des paysages à couper le souffle, des circuits inoubliables et des aventures palpitantes à travers l'île rouge. Vivez l'expérience en images !")}
   end
 
   def render(assigns) do
@@ -61,7 +61,7 @@ defmodule MotoTourWeb.VideoLive do
     }
     </style>
     <div class="section">
-        <h2 class="text-center">Aventure en Moto à Madagascar</h2>
+        <h1 class="text-center" style="font-size: 1.74rem">Aventure en Moto à Madagascar</h1>
 
         <p class="text-center text-muted">
           Découvrez Madagascar comme jamais auparavant avec une excursion en moto tout-terrain !

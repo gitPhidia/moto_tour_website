@@ -2,7 +2,7 @@
   <h5>Ajouter un Circuit 
   <!--<a href={Routes.photo_path(@conn, :new)}><button><i class="fa fa-picture-o"></i> ajouter une photo</button></a> 
   <a href={Routes.itineraire_path(@conn, :ajout)}><button><i class="fa fa-road"></i> ajouter un itineraire</button></a>--></h5>
-  <%= form_for @changeset, Routes.circuits_path(@conn, :create), fn f -> %>
+  <%= form_for @changeset, Routes.circuits_path(@conn, :create), [as: :circuit], fn f -> %>
     <%= if @changeset.action do %>
       <div class="alert alert-danger">
         <p>Oops, une erreur s'est produite!</p>
@@ -14,54 +14,50 @@
     <div class="col-6">
       <div class="form-group" style="display: flex; align-items: center;">
         <label style="width: 150px;">Nom du circuit</label>
-        <%= text_input f, :nom %>
+        <%= text_input f, :nom, value: input_value(f, :nom) %>
       </div>
 
       <div class="form-group" style="display: flex; align-items: center;">
         <label style="width: 150px;">La description sur la carte</label>
-        <%= text_input f, :desc_card %>
+        <%= text_input f, :desc_card, value: input_value(f, :desc_card) %>
       </div>
 
       <div class="form-group" style="display: flex; align-items: center;">
         <label style="width: 150px;">Tarifs</label>
-        <%= text_input f, :tarifs %>
+        <%= text_input f, :tarifs, value: input_value(f, :tarifs) %>
       </div>
 
       <div class="form-group" style="display: flex; align-items: center;">
         <label style="width: 150px;">La durée du circuit</label>
-        <%= text_input f, :durée %>
+        <%= text_input f, :durée, value: input_value(f, :durée) %>
       </div>
 
       <div class="form-group" style="display: flex; align-items: center;">
         <label style="width: 150px;">Nombre de participants</label>
-        <%= text_input f, :participant %>
+        <%= text_input f, :participant, value: input_value(f, :participant) %>
       </div>
 
       <div class="form-group" style="display: flex; align-items: center;">
         <label style="width: 150px;">Les moto disponibles pour ce circuit</label>
-        <%= text_input f, :moto %>
+        <%= text_input f, :moto, value: input_value(f, :moto) %>
       </div>
 
       <div class="form-group" style="display: flex; align-items: center;">
         <label style="width: 150px;">La difficulté du circuit</label>
-        <%= number_input f, :difficulté %>
+        <%= number_input f, :difficulté, min: 1, max: 5, step: 1, value: input_value(f, :difficulté) %>
       </div>
 
-       <!-- <div class="form-group" style="display: flex; align-items: center;">
-        <label style="width: 150px;">Véhicule d'assistance</label>
-        <%= checkbox f, :assistance %>
-      </div> -->
     </div>
 
     <div class="col-6 mt-3">
       <label style="width: 200px;">Vos remarques sur ce circuit</label>
       <div class="form-group" style="display: flex; align-items: center;">
-        <%= textarea f, :remarque, style: "flex: 1;height: 125px;" %>
+        <%= textarea f, :remarque, style: "flex: 1;height: 125px;", value: input_value(f, :remarque) %>
       </div>
 
       <label style="width: 300px;">Sites marquants</label>
       <div class="form-group mt-2" style="display: flex; align-items: center;">
-        <%= textarea f, :details, style: "flex: 1;height: 125px;display: none;" %>
+        <%= textarea f, :details, style: "flex: 1;height: 125px;display: none;", value: input_value(f, :details) %>
       </div>
 
     <div id="editor-container" style="height: 200px;"></div>
@@ -92,6 +88,31 @@
           // Synchroniser Quill avec le textarea lors des modifications
           quill.on('text-change', function() {
               textarea.value = quill.root.innerHTML;
+          });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const form = document.querySelector("form");
+          const inputs = form.querySelectorAll("input, textarea, select");
+
+          // Charger les valeurs sauvegardées depuis le localStorage
+          inputs.forEach((input) => {
+            const savedValue = localStorage.getItem(input.name);
+            if (savedValue) {
+              input.value = savedValue;
+            }
+
+            // Sauvegarder la valeur à chaque modification
+            input.addEventListener("input", () => {
+              localStorage.setItem(input.name, input.value);
+            });
+          });
+
+          // Effacer le stockage local à la soumission du formulaire
+          form.addEventListener("submit", () => {
+            inputs.forEach((input) => {
+              localStorage.removeItem(input.name);
+            });
           });
         });
       </script>  

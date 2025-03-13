@@ -13,7 +13,14 @@ defmodule MotoTourWeb.VideoLive do
         _ -> nil                                  # Sinon, retourne nil (aucune vidéo sélectionnée)
       end
 
-    {:ok, assign(socket, videos: videos, selected_video: selected_video, page_title: "Moto tour Madagascar : Toutes nos vidéos", meta_description: "Découvrez nos vidéos exclusives de Moto Tour Madagascar : des paysages à couper le souffle, des circuits inoubliables et des aventures palpitantes à travers l'île rouge. Vivez l'expérience en images !")}
+    # Filtrer la liste pour exclure la vidéo sélectionnée
+    filtered_videos =
+      case selected_video do
+        nil -> videos  # Si aucune vidéo sélectionnée, ne change rien
+        _ -> Enum.reject(videos, fn video -> video.id == selected_video.id end)
+      end
+
+    {:ok, assign(socket, videos: filtered_videos, selected_video: selected_video, page_title: "Moto tour Madagascar : Toutes nos vidéos", meta_description: "Découvrez nos vidéos exclusives de Moto Tour Madagascar : des paysages à couper le souffle, des circuits inoubliables et des aventures palpitantes à travers l'île rouge. Vivez l'expérience en images !")}
   end
 
   def render(assigns) do
@@ -105,10 +112,17 @@ defmodule MotoTourWeb.VideoLive do
     selected_video = Videos.video_select(video_lien)
     videos = Videos.list_Video()
 
-    if selected_video do
-      remaining_videos = Enum.reject( videos, &(&1.lien == video_lien))
+    # Filtrer la liste pour exclure la vidéo sélectionnée
+    filtered_videos =
+      case selected_video do
+        nil -> videos  # Si aucune vidéo sélectionnée, ne change rien
+        _ -> Enum.reject(videos, fn video -> video.id == selected_video.id end)
+      end
 
-      {:noreply, assign(socket, selected_video: selected_video, videos: [selected_video | remaining_videos])}
+    if selected_video do
+      # remaining_videos = Enum.reject( videos, &(&1.lien == video_lien))
+
+      {:noreply, assign(socket, selected_video: selected_video, videos: filtered_videos)}
     else
       {:noreply, socket}
     end

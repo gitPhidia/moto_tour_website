@@ -4,7 +4,7 @@
 
     <span><%= link "Nouvelle photo", to: Routes.photo_path(@conn, :new, @id.idcircuit) %></span>
 
-    <table>
+    <table class="table table-sm" style="border: 1px solid">
       <thead>
         <tr>
           <th>Photo</th>
@@ -14,8 +14,8 @@
       <tbody>
       <%= for photo <- @photos do %>
         <tr>
-          <td style="width: 250px"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100"></td>
-          <td style="width: 15rem">
+          <td style="width: 20rem"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100" style="height:30rem;"></td>
+          <td style="width: 10rem">
             <div>
             <span>
             <%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "vous êtes sûr?"], style: "padding: 20px;" %></span>

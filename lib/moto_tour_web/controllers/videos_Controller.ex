@@ -23,14 +23,26 @@ defmodule MotoTourWeb.VideosController do
       video_params
       |> Map.put("lien", video_id)
       |> Map.put("index", start_index)
-    case Videos.create_video(updated_video_params) do
-      {:ok, video} ->
-        conn
-        |> put_flash(:info, "video enregistrer.")
-        |> redirect(to: Routes.videos_path(conn, :ajout, video_params))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "ajout.html", changeset: changeset)
+    required_fields = ["lien", "titre"]
+
+      # Vérification des champs vides
+    missing_fields = Enum.filter(required_fields, fn field -> Map.get(video_params, field) in [nil, ""] end)
+
+    if missing_fields != [] do
+      conn
+      |> put_flash(:error, "Les champs suivants sont requis : #{Enum.join(missing_fields, ", ")}.")
+      |> redirect(to: Routes.videos_path(conn, :ajout, video_params))
+    else
+      case Videos.create_video(updated_video_params) do
+        {:ok, video} ->
+          conn
+          |> put_flash(:info, "video enregistrer.")
+          |> redirect(to: Routes.videos_path(conn, :ajout, video_params))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "ajout.html", changeset: changeset)
+      end
     end
   end
 

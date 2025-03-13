@@ -26,7 +26,7 @@ defmodule MotoTourWeb.CircuitLive do
     {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar",
     selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
     show_card_second: true, card_content: raw(second_card_content_html),
-    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
+    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal pour circuit enduro en moto",
     id: id) }
   end
 
@@ -43,7 +43,7 @@ defmodule MotoTourWeb.CircuitLive do
     {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar",
     selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
     show_card_second: true, card_content: raw(second_card_content_html),
-    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
+    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal pour circuit enduro en moto",
     id: Integer.to_string(first_circuit.id)) }
 end
 

@@ -18,8 +18,8 @@
     <!-- Open Graph (SEO et partage sur réseaux sociaux) -->
     <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Circuits Moto Enduro Sport - Location et circuits moto à Madagascar">
-    <meta property="og:description" content="Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto">
+    <meta property="og:title" content={assigns[:meta_titre] || ""}>
+    <meta property="og:description" content="Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal pour circuit enduro en moto">
     <meta property="og:url" content="https://moto-madagascar.com/circuit">
     <meta property="og:site_name" content="Location et circuits moto à Madagascar">
     <meta property="og:image" content="https://moto-madagascar.com/assets/images/section/circuit_image/733575AF-6794-45CF-9537-D31899E1B530.jpeg">
@@ -60,7 +60,7 @@
           <a class="nav-link mb-5" href={Routes.questions_path(@conn, :new)} style="height:10px;"><i class="fa fa-envelope"></i> <strong>Contact</strong></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mb-5" href={Routes.live_path(@conn, MotoTourWeb.VideoLive)} style="height:10px;"><i class="fa fa-video-camera"></i> <strong>Video</strong></a>
+          <a class="nav-link mb-5" href={Routes.live_path(@conn, MotoTourWeb.VideoLive)} style="height:10px;"><i class="fa fa-video-camera"></i> <strong>Vidéos</strong></a>
         </li>
       </ul>
     </div>

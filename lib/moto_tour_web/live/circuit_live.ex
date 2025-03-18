@@ -26,7 +26,7 @@ defmodule MotoTourWeb.CircuitLive do
     {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar",
     selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
     show_card_second: true, card_content: raw(second_card_content_html),
-    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
+    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal pour circuit enduro en moto",
     id: id) }
   end
 
@@ -43,7 +43,7 @@ defmodule MotoTourWeb.CircuitLive do
     {:ok, assign(socket, collapse_all: false, page_title: "Circuit & Location Moto à Madagascar",
     selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
     show_card_second: true, card_content: raw(second_card_content_html),
-    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal au circuit enduro sport en moto",
+    meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal pour circuit enduro en moto",
     id: Integer.to_string(first_circuit.id)) }
 end
 
@@ -254,6 +254,13 @@ end
     second_card_content_html =
       for circuit <- second_card_content do
         """
+          <!-- affichage du quote pour chaque circuit -->
+          <blockquote>
+            <i class='fa fa-quote-left fa-xs text-secondary'></i>
+              #{circuit.remarque}
+            <i class='fa fa-quote-right fa-xs text-secondary'></i>
+          </blockquote>
+          <!-- fin du quote -->
         <p><strong>Destination</strong> : #{circuit.desc_card}</p>
         <p><strong>Durée</strong> : #{circuit.durée}</p>
         <p><strong>Nombre de Participants</strong> : #{circuit.participant}</p>
@@ -364,13 +371,6 @@ end
 
             <div class="row mr-4 mt-5" phx-show={@show_card_second}>
               <p>
-              <!-- affichage du quote pour chaque circuit -->
-              <blockquote>
-                <i class='fa fa-quote-left fa-xs text-secondary'></i>
-                  <%= c.remarque %>
-                <i class='fa fa-quote-right fa-xs text-secondary'></i>
-              </blockquote>
-              <!-- fin du quote -->
 
               <!-- affichage des élements selectionné dans la liste de boutton -->
                 <%= @card_content %>

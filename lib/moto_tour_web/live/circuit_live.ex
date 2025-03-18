@@ -254,6 +254,13 @@ end
     second_card_content_html =
       for circuit <- second_card_content do
         """
+          <!-- affichage du quote pour chaque circuit -->
+          <blockquote>
+            <i class='fa fa-quote-left fa-xs text-secondary'></i>
+              #{circuit.remarque}
+            <i class='fa fa-quote-right fa-xs text-secondary'></i>
+          </blockquote>
+          <!-- fin du quote -->
         <p><strong>Destination</strong> : #{circuit.desc_card}</p>
         <p><strong>Durée</strong> : #{circuit.durée}</p>
         <p><strong>Nombre de Participants</strong> : #{circuit.participant}</p>
@@ -364,13 +371,6 @@ end
 
             <div class="row mr-4 mt-5" phx-show={@show_card_second}>
               <p>
-              <!-- affichage du quote pour chaque circuit -->
-              <blockquote>
-                <i class='fa fa-quote-left fa-xs text-secondary'></i>
-                  <%= c.remarque %>
-                <i class='fa fa-quote-right fa-xs text-secondary'></i>
-              </blockquote>
-              <!-- fin du quote -->
 
               <!-- affichage des élements selectionné dans la liste de boutton -->
                 <%= @card_content %>

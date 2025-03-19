@@ -149,7 +149,7 @@ end
         </ul>
       </section>
 
-      <section class="lead-text" style="margin-top: -20px;">
+      <section class="lead-text" style="margin-top: -10px;">
         <h5 class="text-primary">Nos prestations ne comprennent pas</h5>
         <ul class="list-group">
          #{Enum.map(second_card_noncontent, fn c ->
@@ -272,19 +272,10 @@ end
 
   def render(assigns) do
     ~H"""
-     <section class="transition-section d-flex justify-content-center align-items-center mt-4" style="height: 50px;">
-        <div class="container" style="margin-top: 10px;">
-          <div class="row text-white">
-            <div class="col-md-12 d-flex justify-content-center align-items-center" style="margin-top: 20px;">
-              <p class="text-center lead"><h1 style="font-size: 1.5em;">"Vivez une nouvelle expérience avec nos parcours inoubliables."</h1></p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <!-- liste des crircuits -->
       <div class="row">
-        <div class="col-md-12 mt-1">
+        <div class="col-md-12 mt-md-4 mt-5">
           <div class="product-menu text-center d-flex justify-content-center">
             <nav aria-label="navigation">
               <ul class="paginationlink">

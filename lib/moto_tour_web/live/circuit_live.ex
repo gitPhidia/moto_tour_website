@@ -138,7 +138,7 @@ end
       """
       <h5 class="lead">TARIF & PRESTATIONS 2025 / à partir de #{circuit.tarifs} €</h5>
       <section class="lead-text" style="margin-top: -20px;">
-        <h5 class="text-primary">Nos préstations comprennent</h5>
+        <h5 class="text-primary">Nos prestations comprennent</h5>
         <ul class="list-group">
          #{Enum.map(second_card_content, fn c ->
           """
@@ -150,7 +150,7 @@ end
       </section>
 
       <section class="lead-text" style="margin-top: -20px;">
-        <h5 class="text-primary">Nos préstations ne comprennent pas</h5>
+        <h5 class="text-primary">Nos prestations ne comprennent pas</h5>
         <ul class="list-group">
          #{Enum.map(second_card_noncontent, fn c ->
           """

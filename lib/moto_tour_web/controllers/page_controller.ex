@@ -4,7 +4,7 @@ defmodule MotoTourWeb.PageController do
   alias MotoTour.Circuits
   alias MotoTour.Reservations
   alias MotoTour.Image
-
+  
   def robots(conn, _params) do
     text(conn, """
     User-agent: *
@@ -60,4 +60,5 @@ defmodule MotoTourWeb.PageController do
     cir = Circuits.list_circuits_back()
     render(conn, "backcircuit.html", circuit: cir)
   end
+
 end

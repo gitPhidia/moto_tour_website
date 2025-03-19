@@ -1,7 +1,6 @@
 defmodule MotoTourWeb.VideoLive do
   use Phoenix.LiveView
   alias MotoTour.Videos
-  alias MotoTour.Video
 
   def mount(_params, _session, socket) do
     videos = Videos.list_Video()

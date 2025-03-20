@@ -27,7 +27,7 @@ defmodule MotoTourWeb.CircuitLive do
     selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
     show_card_second: true, card_content: raw(second_card_content_html),
     meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal pour circuit enduro en moto",
-    id: id) }
+    id: id, active_content: 1) }
   end
 
   def mount(%{}, _session, socket) do
@@ -44,7 +44,7 @@ defmodule MotoTourWeb.CircuitLive do
     selected_card: [first_circuit.id], circuit: [first_circuit], photo: photo, circuits: circuits,
     show_card_second: true, card_content: raw(second_card_content_html),
     meta_description: "Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal pour circuit enduro en moto",
-    id: Integer.to_string(first_circuit.id)) }
+    id: Integer.to_string(first_circuit.id), active_content: 1) }
 end
 
   def handle_event("change_photo",  %{"param" => param}, socket) do
@@ -80,7 +80,7 @@ end
         |> Enum.join("")}
       """
     # Retourner le tuple {:noreply, socket} avec l'assignement
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html))}
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html), active_content: 5)}
   end
 
   # montre la card: l'image et le tab de destination
@@ -89,21 +89,21 @@ end
     second_card_content_html = function_destination(card)
     socket = reset_content(socket)
     photo = Image.get_photo_circuit(card)
-    {:noreply, assign(socket, id: card, selected_card: card, photo: photo, circuit: cards, card_content: raw(second_card_content_html))}
+    {:noreply, assign(socket, id: card, selected_card: card, photo: photo, circuit: cards, card_content: raw(second_card_content_html), active_content: 1)}
   end
 
   # montre les contenue du boutton destination
   def handle_event("change_content",  %{"param" => param}, socket) do
     second_card_content_html = function_destination(param)
     socket = reset_content(socket)
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html))}
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html), active_content: 1)}
   end
 
   # montre la liste des itineraire
   def handle_event("change_liste",  %{"param" => param}, socket) do
     second_card_itineraire_html = function_itineraire(param, false)
     socket = reset_content(socket)
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_itineraire_html))}
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_itineraire_html), active_content: 2)}
   end
 
   # H E pour le boutton programme de voyage
@@ -121,13 +121,13 @@ end
         """
       end
     |> Enum.join("") # Concatène toutes les chaînes en une seule
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html))}
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html), active_content: 3)}
   end
 
   def handle_event("change_tarif",  %{"param" => param}, socket) do
     second_card_content_html = function_tarif(param)
     socket = reset_content(socket)
-    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html))}
+    {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_content_html), active_content: 4)}
   end
 
   defp function_tarif(param) do
@@ -280,7 +280,7 @@ end
             <nav aria-label="navigation">
               <ul class="paginationlink">
                 <%= for circuit <- @circuits do %>
-                <li class="page-item"><a class={"page-lien #{if circuit.id == String.to_integer(@id), do: "active", else: ""}  d-flex align-items-center justify-content-center"} phx-click="show_card" phx-value-card={circuit.id} style="height: 40px;"><h6><strong><%= circuit.nom %></strong></h6></a></li>
+                  <li class="page-item"><a class={"page-lien #{if circuit.id == String.to_integer(@id), do: "active", else: ""}  d-flex align-items-center justify-content-center"} phx-click="show_card" phx-value-card={circuit.id} style="height: 40px;"><h6><strong><%= circuit.nom %></strong></h6></a></li>
                 <%= end %>
               </ul>
             </nav>
@@ -350,16 +350,15 @@ end
             <div class="product-menu text-center">
               <nav>
                 <ul class="circuitpage">
-                  <li><button phx-click="change_content" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
-                  <li><button phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                  <li><button phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:4rem;width:10rem"><i class="fa fa-calendar"></i><br><strong>Sites marquants</strong></button></li>
-                  <li><button phx-click="change_tarif" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-euro-sign"></i><br><strong>Tarifs</strong></button></li>
-                  <li><button phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
+                  <li><button class={"page-lien #{if @active_content == 1, do: "active", else: ""}"} phx-click="change_content" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
+                  <li><button class={"page-lien #{if @active_content == 2, do: "active", else: ""}"} phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
+                  <li><button class={"page-lien #{if @active_content == 3, do: "active", else: ""}"} phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:4rem;width:10rem"><i class="fa fa-calendar"></i><br><strong>Sites marquants</strong></button></li>
+                  <li><button class={"page-lien #{if @active_content == 4, do: "active", else: ""}"} phx-click="change_tarif" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-euro-sign"></i><br><strong>Tarifs</strong></button></li>
+                  <li><button class={"page-lien #{if @active_content == 5, do: "active", else: ""}"} phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
                 </ul>
               </nav>
             </div>
             <!-- fin du liste -->
-
             <div class="row mr-4 mt-5" phx-show={@show_card_second}>
               <p>
 
@@ -376,6 +375,7 @@ end
     <script>
 
       function moveCarousel(direction) {
+
       // Récupère tous les éléments du carrousel
       const items = document.querySelectorAll('.carousel-item');
 

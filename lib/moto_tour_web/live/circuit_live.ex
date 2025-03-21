@@ -149,7 +149,7 @@ end
         </ul>
       </section>
 
-      <section class="lead-text" style="margin-top: -10px;">
+      <section class="lead-text">
         <h5 class="text-primary">Nos prestations ne comprennent pas</h5>
         <ul class="list-group">
          #{Enum.map(second_card_noncontent, fn c ->
@@ -299,36 +299,51 @@ end
     ~H"""
     <%= for c <- @circuit do %>
       <div class="container w-100">
-        <div class="row" style="margin-top: -10px;">
+        <div class="row">
 
-          <!-- titre & prix -->
-          <div class="col-md-5">
-            <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;"><%= c.nom %></h4>
-          </div>
-          <div class="col-md-4">
-            <h4 class="fw-bold"  style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;">
-            <%= for i <- 1..5 do %>
-              <%= if i <= c.difficulté do %>
-              <img src="/assets/images/section/circuit_image/chilli-pepper-icon.svg" alt="Difficulté des circuits" style="width: 30px; height: 24px;">
-              <% else %>
-              <img src="/assets/images/section/circuit_image/chili-vegetable-icon.svg" alt="Difficulté des circuits" style="width: 30px; height: 24px; opacity: 0.3;">
-              <% end %>
-            <% end %>
+        <div class="row align-items-center text-center text-md-start">
+
+          <!-- Nom du circuit -->
+          <div class="col-12 col-md-5 mb-md-0">
+            <h4 class="fw-bold fs-5 fs-md-4" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);">
+              <%= c.nom %>
             </h4>
           </div>
-          <div class="col-md-3">
-            <h4 class="fw-bold text-success" style="color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); font-size: 2em;height: 20px;">à partir de <%= c.tarifs %>€</h4>
+
+          <!-- Difficulté du circuit -->
+          <div class="col-12 col-md-4 d-flex justify-content-center justify-content-md-start mb-md-0">
+            <%= for i <- 1..5 do %>
+              <%= if i <= c.difficulté do %>
+                <img src="/assets/images/section/circuit_image/chilli-pepper-icon.svg" alt="Difficulté des circuits" style="width: 28px; height: 22px;">
+              <% else %>
+                <img src="/assets/images/section/circuit_image/chili-vegetable-icon.svg" alt="Difficulté des circuits" style="width: 28px; height: 22px; opacity: 0.3;">
+              <% end %>
+            <% end %>
           </div>
-          <!-- titre -->
+
+          <!-- Tarif -->
+          <div class="col-12 col-md-3">
+            <h4 class="fw-bold text-success fs-5 fs-md-4" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);">
+              À partir de <%= c.tarifs %>€
+            </h4>
+          </div>
+
+        </div>
 
           <!-- html image carousel -->
-          <div class="col-lg-4 col-md-12" style="height: 41rem;">
-            <div class="container_image d-flex justify-content-end">
-              <div class="carousel-inner">
+         <div class="col-lg-4 col-md-12 col-sm-12 col-12" style="margin-top: -2%;">
+            <div class="container_image d-flex justify-content-center">
+              <div class="carousel-inner" style="width: 100%; height: 300px;">
                 <%= for {p, index} <- Enum.with_index(@photo, 1) do %>
-                  <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
-                    <img src={Routes.static_path(@socket, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="Image 1" style="height: 100%;">
-                  </div>
+                  <!-- <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
+                    <img src={Routes.static_path(@socket, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100 d-block" alt={"Image #{index}"} style="height: auto;max-height: 700px; object-fit: contain;">
+                  </div> -->
+                  <div id={"carousel-item-#{index}"} class={"carousel-item rounded #{if index == 1, do: "active", else: ""}"} style={"background-image: url(" <> Routes.static_path(@socket, "/assets/images/section/circuit_image/" <> p.photo) <> ");
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    width: 100%;
+                    height: 300px;border-radius: 50%;"}></div>
                 <%= end %>
                 <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -344,7 +359,7 @@ end
           <!-- fin du carousel -->
 
           <!-- deuxieme partie du card -->
-          <div class="col-lg-8 col-md-12">
+          <%!-- <div class="col-lg-8 col-md-12">
 
             <!-- liste des boutton pour chaque card -->
             <div class="product-menu text-center">
@@ -367,8 +382,68 @@ end
               <!-- fin -->
               </p>
             </div>
-          </div>
+          </div> --%>
           <!-- fin de la deuxieme partie -->
+
+          <!-- Deuxième partie du card -->
+            <div class="col-lg-8 col-md-12" style="margin-top: -2%;">
+
+              <!-- Liste des boutons pour chaque card -->
+              <div class="product-menu">
+                <nav>
+                  <ul class="circuitpage d-flex flex-wrap">
+                    <li>
+                      <button class={"page-lien #{if @active_content == 1, do: "active", else: ""}"}
+                              phx-click="change_content" phx-value-param={c.id}
+                              style="font-size: 14px; height: 3.5rem; width: 8rem;">
+                        <i class="fa fa-map"></i><br><strong>Destination</strong>
+                      </button>
+                    </li>
+                    <li>
+                      <button class={"page-lien #{if @active_content == 2, do: "active", else: ""}"}
+                              phx-click="change_liste" phx-value-param={c.id}
+                              style="font-size: 14px; height: 3.5rem; width: 8rem;">
+                        <i class="fa fa-road"></i><br><strong>Itinéraire</strong>
+                      </button>
+                    </li>
+                    <li>
+                      <button class={"page-lien #{if @active_content == 3, do: "active", else: ""}"}
+                              phx-click="change_remarque" phx-value-param={c.id}
+                              style="font-size: 14px; height: 3.5rem; width: 10rem;">
+                        <i class="fa fa-calendar"></i><br><strong>Sites marquants</strong>
+                      </button>
+                    </li>
+                    <li>
+                      <button class={"page-lien #{if @active_content == 4, do: "active", else: ""}"}
+                              phx-click="change_tarif" phx-value-param={c.id}
+                              style="font-size: 14px; height: 3.5rem; width: 8rem;">
+                        <i class="fa fa-euro-sign"></i><br><strong>Tarifs</strong>
+                      </button>
+                    </li>
+                    <li>
+                      <button class={"page-lien #{if @active_content == 5, do: "active", else: ""}"}
+                              phx-click="change_photo" phx-value-param={c.id}
+                              style="font-size: 14px; height: 3.5rem; width: 8rem;">
+                        <i class="fa fa-picture-o"></i><br><strong>Photos</strong>
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <!-- Fin de la liste des boutons -->
+
+              <!-- Affichage du contenu sélectionné -->
+              <div class="row mr-4 mt-4" phx-show={@show_card_second}>
+                <p>
+                <!-- affichage des élements selectionné dans la liste de boutton -->
+                  <%= @card_content %>
+                <!-- fin -->
+                </p>
+              </div>
+              <!-- Fin de l'affichage du contenu -->
+            </div>
+            <!-- Fin de la deuxième partie -->
+
         </div>
       </div>
 

@@ -36,7 +36,7 @@ defmodule MotoTour.Circuits do
     Circuit.changeset(circuit, attrs)
   end
 
-  def delete_circuit(%circuit{} = circuit) do
+  def delete_circuit(%Circuit{} = circuit) do
     Repo.delete(circuit)
   end
 

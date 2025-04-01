@@ -289,6 +289,7 @@ end
       </div>
       <!-- fin -->
 
+
         <%= render_card(assigns) %>
 
     """
@@ -298,7 +299,7 @@ end
   defp render_card(%{selected_card: card} = assigns) do
     ~H"""
     <%= for c <- @circuit do %>
-      <div class="container w-100">
+      <div class="container">
         <div class="row">
 
         <div class="row align-items-center text-center text-md-start">
@@ -331,7 +332,7 @@ end
         </div>
 
           <!-- html image carousel -->
-         <div class="col-lg-4 col-md-12 col-sm-12 col-12" style="margin-top: -2%;">
+         <div class="col-lg-4 col-md-12 col-sm-12 col-12">
             <div class="container_image d-flex justify-content-center">
               <div class="carousel-inner" style="width: 100%; height: 300px;">
                 <%= for {p, index} <- Enum.with_index(@photo, 1) do %>
@@ -358,78 +359,52 @@ end
           </div>
           <!-- fin du carousel -->
 
-          <!-- deuxieme partie du card -->
-          <%!-- <div class="col-lg-8 col-md-12">
-
-            <!-- liste des boutton pour chaque card -->
-            <div class="product-menu text-center">
-              <nav>
-                <ul class="circuitpage">
-                  <li><button class={"page-lien #{if @active_content == 1, do: "active", else: ""}"} phx-click="change_content" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-map"></i><br><strong>Destination</strong></button></li>
-                  <li><button class={"page-lien #{if @active_content == 2, do: "active", else: ""}"} phx-click="change_liste" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-road"></i><br><strong>Itinéraire</strong></button></li>
-                  <li><button class={"page-lien #{if @active_content == 3, do: "active", else: ""}"} phx-click="change_remarque" phx-value-param={c.id} style="font-size:15px;height:4rem;width:10rem"><i class="fa fa-calendar"></i><br><strong>Sites marquants</strong></button></li>
-                  <li><button class={"page-lien #{if @active_content == 4, do: "active", else: ""}"} phx-click="change_tarif" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-euro-sign"></i><br><strong>Tarifs</strong></button></li>
-                  <li><button class={"page-lien #{if @active_content == 5, do: "active", else: ""}"} phx-click="change_photo" phx-value-param={c.id} style="font-size:15px;height:4rem;width:7rem"><i class="fa fa-picture-o"></i><br><strong>Photos</strong></button></li>
-                </ul>
-              </nav>
-            </div>
-            <!-- fin du liste -->
-            <div class="row mr-4 mt-5" phx-show={@show_card_second}>
-              <p>
-
-              <!-- affichage des élements selectionné dans la liste de boutton -->
-                <%= @card_content %>
-              <!-- fin -->
-              </p>
-            </div>
-          </div> --%>
-          <!-- fin de la deuxieme partie -->
-
           <!-- Deuxième partie du card -->
             <div class="col-lg-8 col-md-12" style="margin-top: -2%;">
 
               <!-- Liste des boutons pour chaque card -->
               <div class="product-menu">
                 <nav>
-                  <ul class="circuitpage d-flex flex-wrap">
+                  <ul class="circuitpage d-flex flex-wrap list-unstyled">
                     <li>
-                      <button class={"page-lien #{if @active_content == 1, do: "active", else: ""}"}
-                              phx-click="change_content" phx-value-param={c.id}
-                              style="font-size: 14px; height: 3.5rem; width: 8rem;">
-                        <i class="fa fa-map"></i><br><strong>Destination</strong>
+                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 1, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                              phx-click="change_content" phx-value-param={c.id}>
+                        <i class="fa fa-map"></i>
+                        <strong>Destination</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien #{if @active_content == 2, do: "active", else: ""}"}
-                              phx-click="change_liste" phx-value-param={c.id}
-                              style="font-size: 14px; height: 3.5rem; width: 8rem;">
-                        <i class="fa fa-road"></i><br><strong>Itinéraire</strong>
+                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 2, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                              phx-click="change_liste" phx-value-param={c.id}>
+                        <i class="fa fa-road"></i>
+                        <strong>Itinéraire</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien #{if @active_content == 3, do: "active", else: ""}"}
-                              phx-click="change_remarque" phx-value-param={c.id}
-                              style="font-size: 14px; height: 3.5rem; width: 10rem;">
-                        <i class="fa fa-calendar"></i><br><strong>Sites marquants</strong>
+                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 3, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                              phx-click="change_remarque" phx-value-param={c.id}>
+                        <i class="fa fa-calendar"></i>
+                        <strong>Sites marquants</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien #{if @active_content == 4, do: "active", else: ""}"}
-                              phx-click="change_tarif" phx-value-param={c.id}
-                              style="font-size: 14px; height: 3.5rem; width: 8rem;">
-                        <i class="fa fa-euro-sign"></i><br><strong>Tarifs</strong>
+                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 4, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                              phx-click="change_tarif" phx-value-param={c.id}>
+                        <i class="fa fa-euro-sign"></i>
+                        <strong>Tarifs</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien #{if @active_content == 5, do: "active", else: ""}"}
-                              phx-click="change_photo" phx-value-param={c.id}
-                              style="font-size: 14px; height: 3.5rem; width: 8rem;">
-                        <i class="fa fa-picture-o"></i><br><strong>Photos</strong>
+                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 5, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                              phx-click="change_photo" phx-value-param={c.id}>
+                        <i class="fa fa-picture-o"></i>
+                        <strong>Photos</strong>
                       </button>
                     </li>
                   </ul>
                 </nav>
               </div>
+
               <!-- Fin de la liste des boutons -->
 
               <!-- Affichage du contenu sélectionné -->

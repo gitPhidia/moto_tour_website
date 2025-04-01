@@ -278,9 +278,14 @@ end
         <div class="col-md-12 mt-md-4 mt-5">
           <div class="product-menu text-center d-flex justify-content-center">
             <nav aria-label="navigation">
-              <ul class="paginationlink">
+              <ul class="paginationlink d-flex flex-wrap justify-content-center">
                 <%= for circuit <- @circuits do %>
-                  <li class="page-item"><a class={"page-lien #{if circuit.id == String.to_integer(@id), do: "active", else: ""}  d-flex align-items-center justify-content-center"} phx-click="show_card" phx-value-card={circuit.id} style="height: 40px;"><h6><strong><%= circuit.nom %></strong></h6></a></li>
+                  <li class="page-item">
+                    <a class={"page-lien d-flex align-items-center justify-content-center #{if circuit.id == String.to_integer(@id), do: "active", else: ""}"}
+                      phx-click="show_card" phx-value-card={circuit.id} style="height: 40px;">
+                      <h6 class="m-0"><strong><%= circuit.nom %></strong></h6>
+                    </a>
+                  </li>
                 <%= end %>
               </ul>
             </nav>

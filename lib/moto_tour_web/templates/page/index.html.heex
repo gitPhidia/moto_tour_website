@@ -56,9 +56,27 @@
 
       <div class="carousel-inner rounded" style="width: 100%;">
         <%= for {p, index} <- Enum.with_index(@circuits, 1) do %>
-          <div id={"carousel-item-#{index}"} class={"carousel-item #{if index == 1, do: "active", else: ""}"}>
-            <img src={Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo)} class="img-fluid rounded w-100" alt="couverture des circuits">
-          </div>
+          <!-- <div id={"carousel-item-#{index}"} 
+              class={"carousel-item rounded #{if index == 1, do: "active", else: ""}"}  
+              style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo) <> ");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100vh;
+                max-height: 1000px;
+                border-radius: 20px;"}>
+          </div> -->
+          <div id={"carousel-item-#{index}"} class={"carousel-item rounded #{if index == 1, do: "active", else: ""}"} style={"background-image: url(" <> Routes.static_path(@conn, "/assets/images/section/circuit_image/" <> p.photo) <> ");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 90vh;
+            min-height: 60vh;
+            max-height: 90vh;
+            border-radius: 20%; /* Réduction du border-radius pour éviter un cercle complet */
+            transition: all 0.3s ease-in-out;"}></div>
         <%= end %>
         <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

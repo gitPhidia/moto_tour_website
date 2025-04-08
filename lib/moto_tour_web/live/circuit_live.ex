@@ -265,6 +265,7 @@ end
         <p><strong>Durée</strong> : #{circuit.durée}</p>
         <p><strong>Nombre de Participants</strong> : #{circuit.participant}</p>
         <p><strong>Moto disponibles</strong> : #{circuit.moto}</p>
+        <p>#{circuit.details}</p>
         """
       end
     |> Enum.join("") # Concatène toutes les chaînes en une seule
@@ -373,37 +374,37 @@ end
               <!-- Liste des boutons pour chaque card -->
               <div class="product-menu">
                 <nav>
-                  <ul class="circuitpage d-flex flex-wrap list-unstyled">
+                  <ul class="circuitpage d-flex justify-content-center list-unstyled">
                     <li>
-                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 1, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 1, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
                               phx-click="change_content" phx-value-param={c.id}>
                         <i class="fa fa-map"></i>
                         <strong>Destination</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 2, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 2, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
                               phx-click="change_liste" phx-value-param={c.id}>
                         <i class="fa fa-road"></i>
                         <strong>Itinéraire</strong>
                       </button>
                     </li>
-                    <li>
-                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 3, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                    <!-- <li>
+                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 3, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
                               phx-click="change_remarque" phx-value-param={c.id}>
                         <i class="fa fa-calendar"></i>
                         <strong>Sites marquants</strong>
                       </button>
-                    </li>
+                    </li> -->
                     <li>
-                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 4, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 4, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
                               phx-click="change_tarif" phx-value-param={c.id}>
                         <i class="fa fa-euro-sign"></i>
                         <strong>Tarifs</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien d-flex flex-column align-items-center justify-content-center #{if @active_content == 5, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 9rem;"
+                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 5, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
                               phx-click="change_photo" phx-value-param={c.id}>
                         <i class="fa fa-picture-o"></i>
                         <strong>Photos</strong>

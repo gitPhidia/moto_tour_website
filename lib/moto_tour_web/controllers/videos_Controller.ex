@@ -23,6 +23,8 @@ defmodule MotoTourWeb.VideosController do
       video_params
       |> Map.put("lien", video_id)
       |> Map.put("index", start_index)
+      |> Map.put("duree", video_params["duree"])
+      |> Map.put("createur", video_params["createur"])
 
     required_fields = ["lien", "titre"]
 

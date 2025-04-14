@@ -90,9 +90,13 @@ defmodule MotoTourWeb.VideoLive do
             <div class="col-12 col-md-5">
               <div class="video-scroll-container">
                 <%= for video <- @videos do %>
-                  <a href="#" phx-click="select_video" phx-value-lien={video.lien} class="d-flex align-items-center mb-2">
+                  <a href="#" phx-click="select_video" phx-value-lien={video.lien} class="d-flex align-items-center mb-2" style="color: black;">
                     <img src={"https://img.youtube.com/vi/#{video.lien}/0.jpg"} class="img-fluid rounded shadow-sm" alt={video.titre} width="200">
-                    <span class="ms-2"><%= video.titre %></span>
+                    <span class="ms-2">
+                      <p><strong><%= video.titre %></strong></p>
+                      <p><%= video.createur %></p>
+                      <p><%= video.duree %> min</p>
+                    </span>
                   </a>
                 <% end %>
               </div>

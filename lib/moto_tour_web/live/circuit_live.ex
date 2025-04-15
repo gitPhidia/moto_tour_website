@@ -265,7 +265,11 @@ end
         <p><strong>Durée</strong> : #{circuit.durée}</p>
         <p><strong>Nombre de Participants</strong> : #{circuit.participant}</p>
         <p><strong>Moto disponibles</strong> : #{circuit.moto}</p>
-        <p>#{circuit.details}</p>
+        <div class="container_details">
+          <section class="lead-text">
+            #{circuit.details}
+          </section>
+        </div>
         """
       end
     |> Enum.join("") # Concatène toutes les chaînes en une seule

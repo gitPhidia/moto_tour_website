@@ -87,20 +87,25 @@ defmodule MotoTourWeb.VideoLive do
           </div>
 
           <!-- Liste des vidéos -->
-            <div class="col-12 col-md-5">
-              <div class="video-scroll-container">
-                <%= for video <- @videos do %>
-                  <a href="#" phx-click="select_video" phx-value-lien={video.lien} class="d-flex align-items-center mb-2" style="color: black;">
-                    <img src={"https://img.youtube.com/vi/#{video.lien}/0.jpg"} class="img-fluid rounded shadow-sm" alt={video.titre} width="200">
-                    <span class="ms-2">
-                      <p><strong><%= video.titre %></strong></p>
-                      <p><%= video.createur %></p>
-                      <p><%= video.duree %> min</p>
-                    </span>
-                  </a>
-                <% end %>
-              </div>
+          <div class="col-12 col-md-5">
+            <div class="video-scroll-container">
+              <%= for video <- @videos do %>
+              <a href="#" phx-click="select_video" phx-value-lien={video.lien} class="text-decoration-none text-dark w-100 d-block mb-3">
+                <div class="d-flex flex-row align-items-start">
+                  <img src={"https://img.youtube.com/vi/#{video.lien}/0.jpg"}
+                      alt={video.titre}
+                      class="rounded shadow-sm me-3"
+                      style="width: 220px; height: auto; flex-shrink: 0;">
+                  <div class="flex-grow-1">
+                    <h2 class="mb-1 fw-bold fs-6"><%= video.titre %></h2>
+                    <p class="mb-1 fs-6"><%= video.createur %></p>
+                    <p class="mb-0 text-muted fs-6"><%= video.duree %> min</p>
+                  </div>
+                </div>
+              </a>
+              <% end %>
             </div>
+          </div>
 
         </div>
 

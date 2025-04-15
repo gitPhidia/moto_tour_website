@@ -384,6 +384,8 @@ ALTER TABLE photos ALTER COLUMN principal TYPE boolean USING principal::boolean
 
 update circuits set difficulté = 0;
 
+update users set email = 'admnmototour@gmail.com' where id = 1;
+
 ALTER TABLE circuits
 ADD COLUMN archiver TYPE boolean
 

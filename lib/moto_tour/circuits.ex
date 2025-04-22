@@ -41,10 +41,8 @@ defmodule MotoTour.Circuits do
   end
 
   def archivage(id) do
-    # liste = Repo.all(from p in Photo, where: p.idcircuit == ^params)
     from(c in Circuit, where: c.id == ^id)
     |> Repo.update_all(set: [archiver: true])
-    # Repo.update(from c in Circuit, where: c.id == ^id, set: [archiver: true])
   end
 
   def desarchivage(id) do

@@ -67,8 +67,12 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            width: 100%;border-radius: 50%;"}>
-            </div>
+            width: 100%;
+            height: 90vh;
+            min-height: 60vh;
+            max-height: 90vh;
+            border-radius: 20%; /* Réduction du border-radius pour éviter un cercle complet */
+            transition: all 0.3s ease-in-out;"}></div>
         <%= end %>
         <button class="carousel-control-prev" type="button" onclick="moveCarousel(-1)">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

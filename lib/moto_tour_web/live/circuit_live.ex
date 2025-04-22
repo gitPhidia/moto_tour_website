@@ -369,6 +369,9 @@ end
           </div>
           <!-- fin du carousel -->
 
+          <!-- deuxieme partie du card -->
+
+
           <!-- Deuxième partie du card -->
             <div class="col-lg-8 col-md-12" style="margin-top: -2%;">
 

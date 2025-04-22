@@ -28,7 +28,7 @@ defmodule MotoTourWeb.Card do
 
           <!-- Row pour le prix et le bouton Réserver -->
           <div class="row">
-            <div class="col-lg-10 d-flex text-align-center align-items-center">
+            <div class="col-lg-12 d-flex text-align-center align-items-center">
               <.display_price price={@price} />
             </div>
           </div>
@@ -42,7 +42,7 @@ end
 
   defp display_price(assigns)  do
     ~H"""
-        <p class="card-price mb-0 test d-flex text-align-end align-items-end" style="font-size: 1.7rem; font-weight: bold;margin-left:40%;">
+        <p class="card-price mb-0 test d-flex text-align-end align-items-end" style="font-size: 1.7rem; font-weight: bold;margin-left:30%;">
           <%= @price %>,00 €
         </p>
     """

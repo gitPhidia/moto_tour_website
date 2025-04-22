@@ -137,7 +137,7 @@ end
     second_card_content_html =
       """
       <h5 class="lead">TARIF & PRESTATIONS 2025 / à partir de #{circuit.tarifs} €</h5>
-      <section class="lead-text" style="margin-top: -20px;">
+      <section class="lead-text" style="margin-top: -10px;">
         <h5 class="text-primary">Nos prestations comprennent</h5>
         <ul class="list-group">
          #{Enum.map(second_card_content, fn c ->
@@ -265,7 +265,11 @@ end
         <p><strong>Durée</strong> : #{circuit.durée}</p>
         <p><strong>Nombre de Participants</strong> : #{circuit.participant}</p>
         <p><strong>Moto disponibles</strong> : #{circuit.moto}</p>
-        <p>#{circuit.details}</p>
+        <div class="container_details">
+          <section class="lead-text">
+            #{circuit.details}
+          </section>
+        </div>
         """
       end
     |> Enum.join("") # Concatène toutes les chaînes en une seule
@@ -305,7 +309,7 @@ end
   defp render_card(%{selected_card: card} = assigns) do
     ~H"""
     <%= for c <- @circuit do %>
-      <div class="container">
+      <div class="container mt-4">
         <div class="row">
 
         <div class="row align-items-center text-center text-md-start">
@@ -386,13 +390,6 @@ end
                         <strong>Itinéraire</strong>
                       </button>
                     </li>
-                    <!-- <li>
-                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 3, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
-                              phx-click="change_remarque" phx-value-param={c.id}>
-                        <i class="fa fa-calendar"></i>
-                        <strong>Sites marquants</strong>
-                      </button>
-                    </li> -->
                     <li>
                       <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 4, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
                               phx-click="change_tarif" phx-value-param={c.id}>
@@ -411,15 +408,11 @@ end
                 </nav>
               </div>
 
-              <!-- Fin de la liste des boutons -->
-
               <!-- Affichage du contenu sélectionné -->
-              <div class="row mr-4 mt-4" phx-show={@show_card_second}>
-                <p>
+              <div class="row mt-1 mt-md-5" phx-show={@show_card_second}>
                 <!-- affichage des élements selectionné dans la liste de boutton -->
                   <%= @card_content %>
                 <!-- fin -->
-                </p>
               </div>
               <!-- Fin de l'affichage du contenu -->
             </div>

@@ -3303,7 +3303,17 @@ table span.badge {
 .row {
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 10px
+	margin-bottom: 5px;
+	/* margin-top: 14px */
+}
+
+@media (max-width: 576px) {
+	.row {
+	  margin-bottom: 6px;
+	  /* margin-top: 8px; */
+	  padding-left: 10px;
+	  padding-right: 10px;
+	}
 }
 
 .row:after {

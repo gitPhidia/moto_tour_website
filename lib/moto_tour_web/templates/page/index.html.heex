@@ -44,7 +44,7 @@
       </div>
 
       <!-- Deuxième colonne : Texte -->
-      <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <div class="col-md-6 d-flex justify-content-center align-items-center text-center">
         <p class="text-center lead"><h2 style="font-size: 1.5em; color: #222;">"Madagascar the last adventure land"</h2></p>
       </div>
 
@@ -108,6 +108,7 @@
         rate_count={circuit.difficulté}
         max_rate_count={5}
         price={circuit.tarifs}
+        duree={circuit.duree}
         link={Routes.live_path(@conn, MotoTourWeb.CircuitLive, circuit.idcircuit)}
         >
         <:nom_block>

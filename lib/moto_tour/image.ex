@@ -87,7 +87,8 @@ defmodule MotoTour.Image do
           desc_card: c.desc_card,
           difficulté: c.difficulté,
           nom: p.nom,
-          photo: p.photo
+          photo: p.photo,
+          duree: c.durée
         }
     Repo.all(query)
   end

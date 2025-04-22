@@ -4,41 +4,51 @@ defmodule MotoTourWeb.Card do
   def card(assigns) do
   ~H"""
     <a href={@link}>
-      <div class="card h-100 w-100" style="background-color: #F6F4F4;">
+      <div class="card h-100 w-100 blog-entry" style="background-color: #F6F4F4;">
         <!-- Image Section -->
-        <img src={ @image } class="card-img-top img-fluid" alt="Image des circuits">
+        <div href={@link} class="d-flex align-items-start card-img-top img-fluid"  style={"background-image: url(" <>  @image <> "); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;"}>
+          <div class="meta-date text-center p-2">
+            <span class="mos">Durée</span>
+            <span class="day"><%= first_two_char(@duree) %></span>
+            <span class="yr">jours</span>
+          </div>
+        </div>
+        <!-- <img src={ @image } class="card-img-top img-fluid" alt="Image des circuits"> -->
 
         <!-- Orange Bar Section (Title) -->
         <div class="card-title-bar text-center py-1" style="color: #fff;">
           <h3 class="card-title m-0" style="font-size: 1.25rem;font-weight: normal; color: #333;"><%= render_slot(@nom_block) %></h3>
         </div>
 
-        <!-- Card Body -->
-        <div class="card-body text-left mt-0">
-          <!-- Star Ranking Column -->
-          <div class="col-lg-12 col-sm-6 d-flex justify-content-center" style="height:3rem">
-            <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
-          </div>
-            <!-- Description Column -->
-            <div class="col-lg-12 col-sm-6">
-              <p class="card-text mb-0 d-flex justify-content-center text-center align-items-center" style="font-size: 0.9rem; line-height: 1.4;height: 4rem;">
-                <%= render_slot(@description_block) %>
-              </p>
+          <!-- Card Body -->
+          <div class="card-body text-left mt-0">
+            <!-- Star Ranking Column -->
+            <div class="col-lg-12 col-sm-6 d-flex justify-content-center" style="height:3rem">
+              <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
+            </div>
+              <!-- Description Column -->
+              <div class="col-lg-12 col-sm-6">
+                <p class="card-text mb-0 d-flex justify-content-center text-center align-items-center" style="font-size: 0.9rem; line-height: 1.4;height: 4rem;">
+                  <%= render_slot(@description_block) %>
+                </p>
+              </div>
+
+            <!-- Row pour le prix et le bouton Réserver -->
+            <div class="row">
+              <div class="col-lg-12 d-flex text-align-center align-items-center">
+                <.display_price price={@price} />
+              </div>
             </div>
 
-          <!-- Row pour le prix et le bouton Réserver -->
-          <div class="row">
-            <div class="col-lg-12 d-flex text-align-center align-items-center">
-              <.display_price price={@price} />
-            </div>
           </div>
-
-        </div>
       </div>
     </a>
   """
 end
 
+  defp first_two_char(str) do
+    String.slice(str, 0, 2)
+  end
 
   defp display_price(assigns)  do
     ~H"""

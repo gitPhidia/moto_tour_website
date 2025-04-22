@@ -99,10 +99,10 @@
     </div>
 
   <!-- Troisième row : Grille de produits avec des cards -->
-  <div itemscope class="row" style="margin-bottom: 0px;width: 90%;">
+  <div itemscope class="row" style="margin-bottom: 0px;width: 100%;">
     <%= for circuit <- @circuits do %>
   <!-- Card 1 -->
-    <div class="col-lg-4 mb-4 align-items-start">
+    <div class="col-lg-3 mb-4 align-items-start">
       <.card
         image={Routes.static_path(@conn,"/assets/images/section/circuit_image/" <> circuit.photo)}
         rate_count={circuit.difficulté}

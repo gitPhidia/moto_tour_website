@@ -6,8 +6,8 @@ defmodule MotoTourWeb.Card do
     <a href={@link}>
       <div class="card h-100 w-100 blog-entry" style="background-color: #F6F4F4;">
         <!-- Image Section -->
-        <div href={@link} class="d-flex align-items-start card-img-top img-fluid"  style={"background-image: url(" <>  @image <> "); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;"}>
-          <div class="meta-date text-center p-2">
+        <div class="d-flex align-items-start card-img-top img-fluid"  style={"background-image: url(" <>  @image <> "); background-size: cover; background-position: center; background-repeat: no-repeat; color: #333;"}>
+          <div class="meta-date text-center p-2" style="background-color: orange;">
             <span class="mos">Durée</span>
             <span class="day"><%= first_two_char(@duree) %></span>
             <span class="yr">jours</span>
@@ -17,7 +17,7 @@ defmodule MotoTourWeb.Card do
 
         <!-- Orange Bar Section (Title) -->
         <div class="card-title-bar text-center py-1" style="color: #fff;">
-          <h3 class="card-title m-0" style="font-size: 1.25rem;font-weight: normal; color: #333;"><%= render_slot(@nom_block) %></h3>
+          <h3 class="card-title m-0" style="font-size: 1.25rem;font-weight: normal;"><%= render_slot(@nom_block) %></h3>
         </div>
 
           <!-- Card Body -->
@@ -28,7 +28,7 @@ defmodule MotoTourWeb.Card do
             </div>
               <!-- Description Column -->
               <div class="col-lg-12 col-sm-6">
-                <p class="card-text mb-0 d-flex justify-content-center text-center align-items-center" style="font-size: 0.9rem; line-height: 1.4;height: 4rem;">
+                <p class="card-text mb-0 d-flex justify-content-center text-center align-items-center" style="font-size: 0.9rem; line-height: 1.4;height: 5rem;">
                   <%= render_slot(@description_block) %>
                 </p>
               </div>

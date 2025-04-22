@@ -419,3 +419,9 @@ ALTER TABLE video
 ADD COLUMN index integer;
 
 mix phx.gen.schema Videos video lien:string titre:string principal:boolean
+
+ALTER TABLE video
+ADD COLUMN duree text;
+
+ALTER TABLE video
+ADD COLUMN createur text;

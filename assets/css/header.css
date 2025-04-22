@@ -70,7 +70,7 @@
   }
 
   .hero-section div {
-    margin-top: 100px; /* Ajustement supplémentaire pour les très petits écrans */
+    margin-top: 0px; /* Ajustement supplémentaire pour les très petits écrans */
   }
 }
 
@@ -87,10 +87,6 @@
     height: auto; /* Permet à la hauteur de s'ajuster au contenu */
     background-attachment: scroll; /* Désactive l'effet de parallaxe */
   }
-
-  .hero-section div {
-    margin-top: 150px; /* Réduit l'espacement sur mobile */
-  }
 }
 
 @media (max-width: 576px) { /* iPhone et petits appareils */
@@ -100,7 +96,6 @@
   }
 
   .hero-section div {
-    margin-top: 100px; /* Réduit encore plus pour les très petits écrans */
     text-align: center; /* Centre le texte pour une meilleure lisibilité */
   }
 

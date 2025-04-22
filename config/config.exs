@@ -12,15 +12,6 @@ config :moto_tour,
 
 # Configures the endpoint
 config :moto_tour, MotoTourWeb.Endpoint,
-  compress: true,
-  compress_level: 6,
-  compress_types: [
-    "text/html",
-    "text/css",
-    "application/javascript",
-    "application/json",
-    "text/plain"
-  ],
   url: [host: "localhost"],
   render_errors: [view: MotoTourWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: MotoTour.PubSub,

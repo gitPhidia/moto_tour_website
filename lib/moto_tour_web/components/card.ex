@@ -17,14 +17,14 @@ defmodule MotoTourWeb.Card do
 
         <!-- Orange Bar Section (Title) -->
         <div class="card-title-bar text-center py-1" style="color: #fff;">
-          <h3 class="card-title m-0" style="font-size: 1.25rem;font-weight: normal;"><%= render_slot(@nom_block) %></h3>
+          <h3 class="card-title m-0" style="font-size: 1.25rem;font-weight: normal;"><.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/></h3>
         </div>
 
           <!-- Card Body -->
           <div class="card-body text-left mt-0">
             <!-- Star Ranking Column -->
-            <div class="col-lg-12 col-sm-6 d-flex justify-content-center" style="height:3rem">
-              <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
+            <div class="col-lg-12 col-sm-12 d-flex justify-content-center">
+              <h5><strong><%= render_slot(@nom_block) %></strong></h5>
             </div>
               <!-- Description Column -->
               <div class="col-lg-12 col-sm-6">

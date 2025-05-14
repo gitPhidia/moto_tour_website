@@ -109,3 +109,21 @@
 }
 
 
+.product-menu {
+  padding-left: 1.5rem;      /* Valeur mobile par défaut */
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .product-menu {
+    padding-left: 4rem;      /* Plus large sur tablette et + */
+    margin-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-menu {
+    padding-left: 6rem;      /* Encore plus d'espace sur les grands écrans */
+    margin-bottom: 5rem;
+  }
+}

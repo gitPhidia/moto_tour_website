@@ -285,7 +285,7 @@ end
       <!-- liste des crircuits -->
       <div class="row">
         <div class="col-md-12 mt-md-4 mt-5">
-          <div class="product-menu text-center d-flex justify-content-center">
+          <div class="product text-center d-flex justify-content-center">
             <nav aria-label="navigation">
               <ul class="paginationlink d-flex flex-wrap justify-content-center">
                 <%= for circuit <- @circuits do %>
@@ -382,42 +382,49 @@ end
               <!-- Liste des boutons pour chaque card -->
               <div class="product-menu">
                 <nav>
-                  <ul class="circuitpage d-flex justify-content-center list-unstyled">
+                  <ul class="circuitpage flex-column flex-md-row align-items-center text-center justify-content-center list-unstyled">
                     <li>
-                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 1, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
-                              phx-click="change_content" phx-value-param={c.id}>
+                      <button class={"page-lien d-flex flex-column text-center justify-content-center #{if @active_content == 1, do: "active", else: ""}"}
+                          style="font-size: 14px; height: 3.5rem; width: 7rem;"
+                          phx-click="change_content" phx-value-param={c.id}>
                         <i class="fa fa-map"></i>
                         <strong>Destination</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 2, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
-                              phx-click="change_liste" phx-value-param={c.id}>
+                      <button class={"page-lien d-flex flex-column text-center justify-content-center #{if @active_content == 2, do: "active", else: ""}"}
+                          style="font-size: 14px; height: 3.5rem; width: 7rem;"
+                          phx-click="change_liste" phx-value-param={c.id}>
                         <i class="fa fa-road"></i>
                         <strong>Itinéraire</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 4, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
-                              phx-click="change_tarif" phx-value-param={c.id}>
+                      <button class={"page-lien d-flex flex-column text-center justify-content-center #{if @active_content == 4, do: "active", else: ""}"}
+                          style="font-size: 14px; height: 3.5rem; width: 7rem;"
+                          phx-click="change_tarif" phx-value-param={c.id}>
                         <i class="fa fa-euro-sign"></i>
                         <strong>Tarifs</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien d-flex flex-column justify-content-center #{if @active_content == 5, do: "active", else: ""}"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
-                              phx-click="change_photo" phx-value-param={c.id}>
+                      <button class={"page-lien d-flex flex-column text-center justify-content-center #{if @active_content == 5, do: "active", else: ""}"}
+                          style="font-size: 14px; height: 3.5rem; width: 7rem;"
+                          phx-click="change_photo" phx-value-param={c.id}>
                         <i class="fa fa-picture-o"></i>
                         <strong>Photos</strong>
                       </button>
                     </li>
                     <li>
-                      <button class={"page-lien d-flex flex-column justify-content-center"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
-                              phx-click="go_to_contact" phx-value-param={c.id}>
-                        <i class="fa fa-envelope"></i><strong>Contact</strong>
+                      <button class="page-lien d-flex flex-column text-center justify-content-center"
+                          style="font-size: 14px; height: 3.5rem; width: 7rem;"
+                          phx-click="go_to_contact" phx-value-param={c.id}>
+                        <i class="fa fa-envelope"></i>
+                        <strong>Contact</strong>
                       </button>
                     </li>
                   </ul>
+
                 </nav>
               </div>
 

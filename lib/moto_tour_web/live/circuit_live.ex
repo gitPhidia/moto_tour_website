@@ -83,6 +83,10 @@ end
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html), active_content: 5)}
   end
 
+  def handle_event("go_to_contact", _params, socket) do
+    {:noreply, push_redirect(socket, to: Routes.questions_path(socket, :new))}
+  end
+
   # montre la card: l'image et le tab de destination
   def handle_event("show_card", %{"card" => card}, socket) do
     cards= Circuits.single_circuit(card)
@@ -405,6 +409,12 @@ end
                               phx-click="change_photo" phx-value-param={c.id}>
                         <i class="fa fa-picture-o"></i>
                         <strong>Photos</strong>
+                      </button>
+                    </li>
+                    <li>
+                      <button class={"page-lien d-flex flex-column justify-content-center"} style="font-size: 14px; height: 3.5rem; width: 7rem;"
+                              phx-click="go_to_contact" phx-value-param={c.id}>
+                        <i class="fa fa-envelope"></i><strong>Contact</strong>
                       </button>
                     </li>
                   </ul>

@@ -8,29 +8,25 @@
   <%= form_for @changeset, Routes.questions_path(@conn, :create), fn f -> %>
     <div class="row mb-3">
       <div class="col-12">
-        <%= label f, :nom, "Nom", class: "form-label" %>
-        <%= text_input f, :nom, class: "form-control" %>
+        <%= text_input f, :nom, class: "form-control", placeholder: "nom" %>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col-12">
-        <%= label f, :email, "E-mail", class: "form-label" %>
-        <%= email_input f, :email, class: "form-control" %>
+        <%= email_input f, :email, class: "form-control", placeholder: "email" %>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col-12">
-        <%= label f, :telephone, "Téléphone", class: "form-label" %>
-        <%= text_input f, :telephone, class: "form-control" %>
+        <%= text_input f, :telephone, class: "form-control", placeholder: "téléphone" %>
       </div>
     </div>
 
     <div class="row mb-4">
       <div class="col-12">
-        <%= label f, :message, "Message", class: "form-label" %>
-        <%= textarea f, :message, class: "form-control", rows: 6 %>
+        <%= textarea f, :message, class: "form-control", placeholder: "message", rows: 6 %>
       </div>
     </div>
 

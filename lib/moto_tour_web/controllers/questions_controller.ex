@@ -25,7 +25,7 @@ defmodule MotoTourWeb.QuestionsController do
         |> redirect(to: Routes.questions_path(conn, :new))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "contact.html", changeset: changeset)
+        render(conn, "contact.html",changeset: changeset)
     end
   end
 

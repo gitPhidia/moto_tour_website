@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!-- Meta description dynamique -->
+    <meta name="description" content={assigns[:meta_description] || ""}/>
+
+    <!-- Vérification Google -->
+    <meta name="google-site-verification" content="P-W0ubGRy46mO6HJ3NbCY1anIV_puaohUaWpWDhrmvg" />
+
+    <!-- CSRF et titre dynamique -->
+    <%= csrf_meta_tag() %>
+    <%= live_title_tag assigns[:page_title] || "", suffix: "" %>
+
+    <!-- Open Graph (SEO et partage sur réseaux sociaux) -->
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content={assigns[:meta_titre] || ""}>
+    <meta property="og:description" content="Madagascar est un pays montagneux mais aussi avec des parties désertiques, pour notre plus grand plaisir. Idéal pour circuit enduro en moto">
+    <meta property="og:url" content="https://moto-madagascar.com/circuit">
+    <meta property="og:site_name" content="Location et circuits moto à Madagascar">
+    <meta property="og:image" content="https://moto-madagascar.com/assets/images/section/circuit_image/733575AF-6794-45CF-9537-D31899E1B530.jpeg">
+
+    <!-- Styles et scripts -->
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+
+    <!-- URL Canonique -->
+    <link rel="canonical" href="https://moto-madagascar.com/">
+
+    <!-- Favicon -->
+    <link rel="icon" sizes="32x32" type="image/png" href={Routes.static_path(@conn, "/assets/images/section/circuit_image/cropped-favicon-mtl-32x32.png")}>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVB7PRRJ4R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LVB7PRRJ4R');
+    </script>
+  </head>
+  
+<body class="d-flex flex-column min-vh-100">
+  
+<nav class="navbar navbar-expand-lg fixed-top " style="height:1.2rem;">
+  <div class="container-fluid bg-white">
+    <!-- Navbar Toggler (for mobile view) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link mb-5" href={Routes.page_path(@conn, :index)} style="height:10px;"><i class="fa fa-home"></i> <strong>Accueil</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mb-5" href={Routes.live_path(@conn, MotoTourWeb.CircuitLive)} style="height:10px;"><i class="fa fa-motorcycle"></i> <strong>Circuits enduro</strong></a>
+        </li> 
+        <li class="nav-item">
+          <a class="nav-link mb-5" href={Routes.page_path(@conn, :propos)} style="height:10px;"><i class="fa fa-exclamation"></i> <strong>A propos</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mb-5" href={Routes.questions_path(@conn, :new)} style="height:10px;"><i class="fa fa-envelope"></i> <strong>Contact</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mb-5" href={Routes.live_path(@conn, MotoTourWeb.VideoLive)} style="height:10px;"><i class="fa fa-video-camera"></i> <strong>Vidéos</strong></a>
+        </li>
+      </ul>
+    </div>
+      <%= render "_user_menu.html", assigns %>
+  </div>
+      
+</nav>
+<style>
+    .content_area {
+        padding-bottom: 40px;
+    }
+    @media (min-width: 992px) {
+        .content-area {
+        padding-bottom: 120px;
+        }
+    }
+</style>
+<script>
+    function adjustFooter() {
+    const footer = document.querySelector("footer");
+    if (window.innerWidth < 768) {
+        footer.classList.remove("fixed-bottom");
+    } else {
+        footer.classList.add("fixed-bottom");
+    }
+    }
+
+    window.addEventListener("load", adjustFooter);
+    window.addEventListener("resize", adjustFooter);
+</script>
+
+<div class="mt-4 mb-5 content-area">
+  <%= @inner_content %>
+</div>
+
+<footer class="footer fixed-bottom bg-dark text-white">
+    <!-- <div class="container"> -->
+      <div class="row">
+        <!-- Section : Icon -->
+        <div class="col-md-3 d-flex justify-content-center" style="transform:scale(1,1)">
+          <a class="navbar-brand" href="/">
+            <img class="img-fluid mt-2" src={Routes.static_path(@conn, "/assets/images/section/logo.webp")} loading="lazy" alt="Logo Moto Parcours" style="width:20rem">
+          </a>
+        </div>
+
+        <!-- Section : a propos -->
+        <div class="col-md-5">
+          <h4 style="font-size: 1.5em;">À propos</h4>
+          <p>Notre équipe franco-malgache, composée de guides moto et mécaniciens spécialisés, vous fera partager leur passion pour ce pays.
+
+            N’attendez pas !<a href="https://www.facebook.com/MotoTourMada" class="text-white text-decoration-none"><u> Rejoignez-nous !</u></a><br>
+            &copy; 2025 Moto Tour Madagascar. Tous droits réservés. |
+              <a href="https://mgbi.mg/" class="text-white text-decoration-none">Site créé par <u>mgbi</u></a>
+            </p>
+        </div>
+
+        <!-- Section : Contact -->
+        <div class="col-md-4">
+          <h4 style="font-size: 1.5em;">Contact</h4>
+          <ul class="list-unstyled">
+            <li><i class="fas fa-map-marker-alt"></i> Ankadifotsy, Làlana Ratsima James
+              Antananarivo – Madagascar.
+              Ouvert de 9H à 17H</li>
+            <li><i class="fa fa-whatsapp"></i> +261 32 11 028 52 </li>
+            <li><i class="fas fa-envelope"></i> madatraces@gmail.com </li>
+          </ul>
+        </div>
+      </div>
+       
+
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    document.addEventListener("click", function (event) {
+      var navbar = document.getElementById("navbarNav");
+      var toggler = document.querySelector(".navbar-toggler");
+
+      // Vérifie si l'élément cliqué est à l'intérieur du menu ou du bouton toggle
+      if (!navbar.contains(event.target) && !toggler.contains(event.target)) {
+        var bsCollapse = new bootstrap.Collapse(navbar, {
+          toggle: false
+        });
+        bsCollapse.hide();
+      }
+    });
+  </script>
+
+  </body>
+</html>

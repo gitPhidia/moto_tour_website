@@ -11,6 +11,8 @@ defmodule MotoTourWeb.CircuitLive do
   alias MotoTour.Nontarif
   alias MotoTour.Nontarifs
   alias MotoTour.Nav
+  alias MotoTour.Content
+  alias MotoTour.Content.Questions
 
   def mount(%{"id" => id}, _session, socket) do
 
@@ -83,8 +85,52 @@ end
     {:noreply, assign(socket, show_card_second: true, card_content: raw(second_card_html), active_content: 5)}
   end
 
-  def handle_event("go_to_contact", _params, socket) do
-    {:noreply, push_redirect(socket, to: Routes.questions_path(socket, :new))}
+  def handle_event("to_contact", _params, socket) do
+  second_card_html =
+    """
+    <form id="question" phx-submit="submit_question">
+      <div class="col-12 d-flex flex-column text-center justify-content-center">
+        <div class="form-group">
+          <input class="input_text w-100" name="nom" type="text" placeholder="Nom" />
+        </div>
+        <div class="form-group">
+          <input class="input_text w-100" name="email" type="text" placeholder="E-mail" />
+        </div>
+        <div class="form-group">
+          <input class="input_text w-100" name="telephone" type="text" placeholder="Téléphone" />
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="message" placeholder="Message" rows="5"></textarea>
+        </div>
+        <div class="col-12">
+          <button class="btn" type="submit" style="padding: 5px 10px; color: white; border: none; border-radius: 5px;">
+            Envoyer un message
+          </button>
+        </div>
+      </div>
+    </form>
+    """
+    {:noreply, assign(socket, card_content: raw(second_card_html), active_content: 6)}
+  end
+
+  def handle_event("submit_question", %{"nom" => nom, "email" => email, "telephone" => telephone, "message" => message}, socket) do
+    attrs = %{
+      "nom" => nom,
+      "email" => email,
+      "telephone" => telephone,
+      "message" => message
+    }
+
+    case Content.create_questions(attrs) do
+      {:ok, _question} ->
+        {:noreply,
+        socket
+        |> put_flash(:info, "Message envoyé avec succès !")
+        |> push_redirect(to: Routes.live_path(socket, MotoTourWeb.CircuitLive))}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+    end
   end
 
   # montre la card: l'image et le tab de destination
@@ -171,6 +217,7 @@ end
     assign(socket, card_content: %{}, show_card_second: false)
   end
 
+  # toogle les itineraire
   def handle_event("toggle_all", _params, socket) do
     # Alterner la valeur de `collapse_all` entre true et false
     new_collapse_all = not socket.assigns.collapse_all
@@ -416,15 +463,15 @@ end
                       </button>
                     </li>
                     <li>
-                      <button class="page-lien d-flex flex-column text-center justify-content-center"
+                      <button class={"page-lien d-flex flex-column text-center justify-content-center #{if @active_content == 6, do: "active", else: ""}"}
                           style="font-size: 14px; height: 3.5rem; width: 7rem;"
-                          phx-click="go_to_contact" phx-value-param={c.id}>
+                          phx-click="to_contact">
                         <i class="fa fa-envelope"></i>
                         <strong>Contact</strong>
                       </button>
+
                     </li>
                   </ul>
-
                 </nav>
               </div>
 

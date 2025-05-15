@@ -14,6 +14,17 @@ defmodule MotoTourWeb.Router do
     plug Plug.CSRFProtection
   end
 
+  pipeline :circuit do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, {MotoTourWeb.LayoutView, :rootcircuit}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+    plug Plug.CSRFProtection
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -39,13 +50,21 @@ defmodule MotoTourWeb.Router do
     get "/", PageController, :index
     get "/propos", PageController, :propos
     live "/circuit/:id", CircuitLive
-    live "/circuit", CircuitLive
+    # live "/circuit", CircuitLive
     live "/videolive", VideoLive
     get "/robots.txt", PageController, :robots
-    resources "/question", QuestionsController, only: [:new, :create]
+    # resources "/question", QuestionsController, only: [:new, :create]
     get "/sitemap.xml", PageController, :sitemap
 
   end
+
+  scope "/", MotoTourWeb do
+    pipe_through :circuit
+
+    live "/circuit", CircuitLive
+    resources "/question", QuestionsController, only: [:new, :create]
+  end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", MotoTourWeb do

@@ -51,7 +51,6 @@ defmodule MotoTourWeb.Router do
     get "/propos", PageController, :propos
     live "/circuit/:id", CircuitLive
     # live "/circuit", CircuitLive
-    live "/videolive", VideoLive
     get "/robots.txt", PageController, :robots
     # resources "/question", QuestionsController, only: [:new, :create]
     get "/sitemap.xml", PageController, :sitemap
@@ -62,6 +61,7 @@ defmodule MotoTourWeb.Router do
     pipe_through :circuit
 
     live "/circuit", CircuitLive
+    live "/videolive", VideoLive
     resources "/question", QuestionsController, only: [:new, :create]
   end
 

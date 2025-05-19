@@ -66,7 +66,7 @@ defmodule MotoTourWeb.VideoLive do
       }
     }
     </style>
-    <div class="section px-3 px-md-5 py-4">
+    <div class="section px-3 px-md-5">
       <h1 class="text-center mt-3 mt-md-0" style="font-size: clamp(1.5rem, 5vw, 2rem); word-wrap: break-word;">
         Aventures en Moto à Madagascar
       </h1>

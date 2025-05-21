@@ -1,24 +1,46 @@
-<div class="container">
+<!-- <div class="container"> -->
   <h3>Liste des Questions</h3>
 
   <table>
     <thead>
       <tr>
+        <th>Date</th>
         <th>Telephone</th>
         <th>Nom</th>
         <th>Email</th>
         <th>Message</th>
-
         <th></th>
       </tr>
     </thead>
     <tbody>
       <%= for questions <- @question do %>
         <tr>
+          <td><%= Calendar.strftime(questions.inserted_at, "%d/%m/%Y à %Hh%M") %></td>
           <td><%= questions.telephone %></td>
           <td><%= questions.nom %></td>
           <td><%= questions.email %></td>
-          <td><%= questions.message %></td>
+          <!-- <td><%= questions.message %></td> -->
+          <td><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{questions.id}"}>
+            <i class="fa fa-eye"></i>
+          </a></td>
+
+          <!-- Modal -->
+          <div class="modal fade" id={"exampleModal#{questions.id}"} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Contenu du message</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p><%= questions.message %></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <td>
             <span><%= link "Supprimer", to: Routes.questions_path(@conn, :delete, questions), method: :delete, data: [confirm: "Are you sure?"] %></span>
@@ -27,4 +49,5 @@
       <% end %>
     </tbody>
   </table>
-</div>
+
+<!-- </div> -->

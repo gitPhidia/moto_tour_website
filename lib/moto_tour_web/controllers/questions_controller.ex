@@ -14,14 +14,14 @@ defmodule MotoTourWeb.QuestionsController do
 
   def index(conn, _params) do
     question = Content.list_question(0)
-    count = round(Content.count_question()/2)
+    count = round(Content.count_question()/10)
     render(conn, "index.html", count: count, question: question, current: 0)
   end
 
   def index_page(conn, %{"page" => page}) do
     page = String.to_integer(page)
     question = Content.list_question(page)
-    count = round(Content.count_question()/2)
+    count = round(Content.count_question()/10)
     render(conn, "index.html", count: count, question: question, current: page)
   end
 

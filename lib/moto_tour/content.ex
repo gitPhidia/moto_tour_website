@@ -11,7 +11,7 @@ defmodule MotoTour.Content do
    def list_question(page) do
     from(q in Questions,
       order_by: [desc: q.inserted_at],
-      limit: 2,
+      limit: 10,
       offset: ^page)
       |> Repo.all()
   end

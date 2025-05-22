@@ -5,8 +5,8 @@
     <thead>
       <tr>
         <th>Date</th>
-        <th>Telephone</th>
-        <th>Nom</th>
+        <th style="width: 100px;">Telephone</th>
+        <th style="width: 100px;">Nom</th>
         <th>Email</th>
         <th>Message</th>
         <th></th>
@@ -17,7 +17,7 @@
         <tr>
           <td><%= Calendar.strftime(questions.inserted_at, "%d/%m/%Y à %Hh%M") %></td>
           <td><%= questions.telephone %></td>
-          <td><%= questions.nom %></td>
+          <td style="width: 100px;"><%= questions.nom %></td>
           <td><%= questions.email %></td>
           <!-- <td><%= questions.message %></td> -->
           <td><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{questions.id}"}>
@@ -50,4 +50,25 @@
     </tbody>
   </table>
 
+  <span class="mt-3 d-flex">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href={if @current-1 > 0, do: Routes.questions_path(@conn, :index_page, @current-1), else: "#"} aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <%= for i <- 1..@count do %>
+          <li class="page-item"><a class={"page-link #{if i-1 == @current, do: "active", else: ""}"}  data-bs-toggle="tooltip" data-bs-placement="top" href={Routes.questions_path(@conn, :index_page, i-1)}><%= i %></a></li>
+        <%= end %>
+        <li class="page-item">
+          <a class="page-link" href={if @current+1 < @count, do: Routes.questions_path(@conn, :index_page, @current+1), else: "#"} aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </span>
 <!-- </div> -->

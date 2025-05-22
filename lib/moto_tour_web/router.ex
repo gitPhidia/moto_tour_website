@@ -49,8 +49,6 @@ defmodule MotoTourWeb.Router do
 
     get "/", PageController, :index
     get "/propos", PageController, :propos
-    live "/circuit/:id", CircuitLive
-    # live "/circuit", CircuitLive
     get "/robots.txt", PageController, :robots
     # resources "/question", QuestionsController, only: [:new, :create]
     get "/sitemap.xml", PageController, :sitemap
@@ -61,6 +59,7 @@ defmodule MotoTourWeb.Router do
     pipe_through :circuit
 
     live "/circuit", CircuitLive
+    live "/circuit/:id", CircuitLive
     live "/videolive", VideoLive
     resources "/question", QuestionsController, only: [:new, :create]
   end
@@ -151,6 +150,7 @@ defmodule MotoTourWeb.Router do
 
     # resources "/question", QuestionsController, only: [:index, :show, :edit, :delete, :update]
     resources "/admin/question", QuestionsController, only: [:index, :show, :edit, :delete, :update]
+    get "/admin/question_index/:page", QuestionsController, :index_page
 
     get "/admin/circuit_enduro", PageController, :bcircuit
     get "/admin/users/settings", UserSettingsController, :edit

@@ -8,17 +8,17 @@ defmodule MotoTour.Content do
 
   alias MotoTour.Content.Questions
 
-  @doc """
-  Returns the list of question.
+   def list_question(page) do
+    from(q in Questions,
+      order_by: [desc: q.inserted_at],
+      limit: 2,
+      offset: ^page)
+      |> Repo.all()
+  end
 
-  ## Examples
-
-      iex> list_question()
-      [%Questions{}, ...]
-
-  """
-  def list_question do
-    Repo.all(Questions)
+  def count_question() do
+    query = from(q in Questions, select: count(q.id))
+    Repo.one(query)
   end
 
   @doc """

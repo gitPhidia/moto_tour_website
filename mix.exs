@@ -49,7 +49,11 @@ defmodule MotoTour.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:pbkdf2_elixir, "~> 2.0"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:waffle, "~> 1.1"},
+      {:waffle_ecto, "~> 0.0.11"},
+      {:csv, "~> 3.0"},
+      {:mogrify, "~> 0.9.2"}
     ]
   end
 

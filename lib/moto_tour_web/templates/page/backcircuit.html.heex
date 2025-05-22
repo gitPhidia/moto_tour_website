@@ -1,77 +1,72 @@
-<div>
-    <div class="row">
+<div class="card info-card sales-card">
+  <main role="main" class="col-12">
+    <div class="table-responsive">
+      <table class="table table-sm table-bordered table-hover align-middle w-100">
+        <thead class="table-light text-center text-nowrap">
+          <tr>
+            <th>Nom du circuit</th>
+            <th>Tarif</th>
+            <th>Participants</th>
+            <th>Motos</th>
+            <th>Difficulté</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= for c <- @circuit do %>
+          <tr class="text-center text-nowrap">
+            <td>
+              <a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}>
+                <%= c.nom %>
+              </a>
+            </td>
+            <td><%= c.tarifs %> €</td>
+            <td><%= if c.participant == nil, do: "illimité", else: c.participant %></td>
+            <td><%= c.moto %></td>
+            <td><%= c.difficulté %></td>
+            <td class="text-truncate" style="max-width: 250px;"><%= c.desc_card %></td>
+            <td><%= if c.archiver, do: "Archivé", else: "Actif" %></td>
+            <td>
+              <a data-bs-toggle="tooltip" title="Modifier" href={Routes.circuits_path(@conn, :edit, c.id)}>
+                <i class="fa fa-pencil"></i>
+              </a>
+              <a data-bs-toggle="tooltip" title="Archiver" data-confirm="Voulez-vous archiver ce circuit ?" href={Routes.circuits_path(@conn, :archiver, c.id)} class="ms-3">
+                <i class="fa fa-archive"></i>
+              </a>
+            </td>
+          </tr>
 
-        <main role="main" class="col-md-11 ml-sm-auto col-lg-12 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
-            <!-- <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
+          <!-- Modal -->
+          <div class="modal fade" id={"exampleModal#{c.id}"} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"><%= c.nom %></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <h6>Remarque sur le circuit</h6>
+                  <p>"<%= c.remarque %>"</p>
+                  <h6>Sites marquants</h6>
+                  <div><%= raw(c.details) %></div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
               </div>
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                This week
-              </button>
-            </div> -->
+            </div>
           </div>
-            
-            <h3>Circuit <a class="btn" href={Routes.circuits_path(@conn, :ajoutc)}><i class="fa fa-plus"></i> ajouter</a></h3>
-            
-          <div class="table-responsive">
-            <table class="table table-striped table-sm" style="border: 1px solid">
-              <thead>
-                <tr>
-                  <th>nom du circuit</th>
-                  <th>tarifs</th>
-                  <th>participant</th>
-                  <th>date de reservation</th>
-                  <th>difficulté</th>
-                  <th>date de creation</th>
-                  <th>action</th>
-                </tr>
-              </thead>
-              <tbody>
+        <% end %>
+        </tbody>
+      </table>
 
-              <%= for c <- @circuit do %>
-                <tr>
-                  <td><a href="" data-bs-toggle="modal" data-bs-target={"#exampleModal#{c.id}"}><%= c.nom %></a></td>
-                  <td><%= c.tarifs %> €</td>
-                  <td><%= c.participant %></td>
-                  <td><%= c.moto %></td>
-                  <td><%= c.difficulté %></td>
-                  <td><%= c.inserted_at %></td>
-                  <td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-archive"></i></button></td>
-                </tr>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id={"exampleModal#{c.id}"} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content" style="width:800px">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Titre du Modal</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <h6>citcuit "quote"</h6>
-                        <div class="modal-body">
-                          "<%= c.remarque%>"
-                        </div>
-                        <h6>prestation</h6>
-                        <div class="modal-body">
-                          <%= raw(c.details) %>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-              <%= end %>
-              </tbody>
-            </table>
-
-          </div>
-        </main>
+      <div class="mt-3">
+        <a href={Routes.circuits_path(@conn, :ajoutc)} class="btn btn-primary">
+          <i class="fa fa-plus me-1"></i> Ajouter un Circuit
+        </a>
+      </div>
     </div>
+  </main>
 </div>

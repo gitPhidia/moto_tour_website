@@ -4,16 +4,18 @@ defmodule MotoTour.Circuit do
 
   schema "circuits" do
     field :nom, :string
-    field :participant, :integer
+    field :participant, :string
     field :details, :string
-    field :tarifs, :decimal
+    field :tarifs, :string
     field :durée, :string
     field :moto, :string
-    field :difficulté, :string
+    field :difficulté, :integer
     field :photo, :string
     field :remarque, :string
     field :desc_card, :string
-    has_many :reservations, MotoTour.Reservation, foreign_key: :idcircuit
+    field :archiver, :boolean
+    field :assistance, :boolean, default: false
+    has_many :reservations, MotoTour.Reservation, foreign_key: :idcircuit, on_delete: :delete_all
 
     timestamps()
   end
@@ -21,7 +23,7 @@ defmodule MotoTour.Circuit do
   @doc false
   def changeset(circuit, attrs) do
     circuit
-    |> cast(attrs, [:nom,:tarifs, :durée, :participant, :moto, :difficulté, :photo, :details, :remarque,:desc_card])
-    |> validate_required([:nom,:tarifs, :durée, :participant, :moto, :difficulté, :photo, :details, :remarque,:desc_card])
+    |> cast(attrs, [:nom,:tarifs, :durée, :participant, :moto, :difficulté, :photo, :details, :remarque, :desc_card, :assistance])
+    |> validate_required([:nom, :tarifs, :durée, :difficulté, :desc_card])
   end
 end

@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h5>Modifier une video</h5>
+  <%= form_for @changeset, Routes.videos_path(@conn, :update, @video), [method: :put], fn f -> %>
+    <a data-bs-toggle="tooltip" data-bs-placement="top" href={Routes.videos_path(@conn,:ajout)}>Retour</a>
+      <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, une erreur s'est produite!</p>
+      </div>
+    <% end %>
+      <div class="form-group" style="display: flex; align-items: center;">
+        <label style="width: 100px;display: none;">Lien:</label>
+        <%= text_input f, :lien, style: "display: none;" %>
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center;">
+        <label style="width: 100px;">Titre:</label>
+        <%= text_input f, :titre %>
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center;">
+        <label style="width: 100px;">Durée:</label>
+        <%= text_input f, :duree %>
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center;">
+        <label style="width: 100px;">Créateur:</label>
+        <%= text_input f, :createur %>
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center;">
+        <label style="width: 100px;">Index:</label>
+        <%= number_input f, :index, min: 1 %>
+      </div>
+
+    <div>
+      <%= submit "Enregistrer", style: "flex: 1;margin-left:90%;margin-top: 10px;padding: 5px 10px; background-color: blue; color: white; border: none; border-radius: 5px;" %>
+    </div>
+  <% end %>
+</div>

@@ -11,6 +11,18 @@ defmodule MotoTourWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug Plug.CSRFProtection
+  end
+
+  pipeline :circuit do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, {MotoTourWeb.LayoutView, :rootcircuit}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+    plug Plug.CSRFProtection
   end
 
   pipeline :api do
@@ -36,14 +48,22 @@ defmodule MotoTourWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/liste", PageController, :liste
     get "/propos", PageController, :propos
-    get "/contact", PageController, :contact
-    # Route pour la LiveView Home
-    live "/home", HomeLive
-    live "/circuit", CircuitLive
-    live "/menu_card", MenuCardLive
+    get "/robots.txt", PageController, :robots
+    # resources "/question", QuestionsController, only: [:new, :create]
+    get "/sitemap.xml", PageController, :sitemap
+
   end
+
+  scope "/", MotoTourWeb do
+    pipe_through :circuit
+
+    live "/circuit", CircuitLive
+    live "/circuit/:id", CircuitLive
+    live "/videolive", VideoLive
+    resources "/question", QuestionsController, only: [:new, :create]
+  end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", MotoTourWeb do
@@ -91,24 +111,71 @@ defmodule MotoTourWeb.Router do
   scope "/", MotoTourWeb do
     pipe_through [:browser, :require_authenticated_user, :admin]
 
-    # get "/menu", PageController, :menu
-    live "/menu", BackLive
-    get "/ajout_circuit", CircuitsController, :ajoutc
-    post "/save_circuit", CircuitsController, :create
+    # circuit
+    # live "/menu", BackLive
+    get "/admin/menu", PageController, :bcircuit
+    get "/admin/ajout_circuit", CircuitsController, :ajoutc
+    post "/admin/save_circuit", CircuitsController, :create
+    get "/admin/edit/:id", CircuitsController, :edit
+    put "/admin/update/:id", CircuitsController, :update
+    delete "/admin/delete/:id", CircuitsController, :delete
+    get "/admin/deshboard", CircuitsController, :deshboard
+    get "/admin/update-archive/:id", CircuitsController, :archiver
 
-    get "/index", ReservationController, :index
+    # reservation
+    get "/admin/index", ReservationController, :index
 
-    resources "/question", QuestionsController, only: [:new, :create, :index, :show, :edit, :delete, :update]
-    get "/circuit_enduro", PageController, :bcircuit
-    get "/users/settings", UserSettingsController, :edit
-    put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
-    get "/users/reset_password", UserResetPasswordController, :new
-    post "/users/reset_password", UserResetPasswordController, :create
-    get "/users/reset_password/:token", UserResetPasswordController, :edit
-    put "/users/reset_password/:token", UserResetPasswordController, :update
+    # itineraire
+    get "/admin/itineraire/:id", ItineraireController, :liste
+    get "/admin/itineraire", ItineraireController, :index
+    get "/admin/itineraire_edit/:id", ItineraireController, :edit
+    get "/admin/itineraire_ajout/:id", ItineraireController, :ajout
+    post "/admin/itineraire_create", ItineraireController, :create
+    put "/admin/itineraire_up/:id", ItineraireController, :update
+    delete "/admin/itineraire_del/:id", ItineraireController, :delete
+    live "/admin/newitineraire/:id", AjoutLive
+    live "/admin/edititineraire/:id", EditLive
+
+    # photo
+    # resources "/photo", PhotoController, [:new, :create, :index, :show, :edit, :delete, :update]
+    get "/admin/photo/:id", PhotoController, :detail
+    get "/admin/photo_new/:id", PhotoController, :new
+    post "/admin/save_photo", PhotoController, :create
+    get "/admin/index_photo", PhotoController, :index
+    get "/admin/photo_show/:id", PhotoController, :show
+    get "/admin/phoot_edit/:id", PhotoController, :edit
+    put "/admin/photo_maj", PhotoController, :update
+    delete "/admin/photo_del/:id", PhotoController, :delete
+    post "/admin/update-checkboxes", PhotoController, :principal
+
+    # resources "/question", QuestionsController, only: [:index, :show, :edit, :delete, :update]
+    resources "/admin/question", QuestionsController, only: [:index, :show, :edit, :delete, :update]
+    get "/admin/question_index/:page", QuestionsController, :index_page
+
+    get "/admin/circuit_enduro", PageController, :bcircuit
+    get "/admin/users/settings", UserSettingsController, :edit
+    put "/admin/users/settings", UserSettingsController, :update
+    get "/admin/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+    get "/admin/users/register", UserRegistrationController, :new
+    post "/admin/users/register", UserRegistrationController, :create
+    get "/admin/users/reset_password", UserResetPasswordController, :new
+    post "/admin/users/reset_password", UserResetPasswordController, :create
+    get "/admin/users/reset_password/:token", UserResetPasswordController, :edit
+    put "/admin/users/reset_password/:token", UserResetPasswordController, :update
+
+    live "/admin/tarif/:id", TarifLive
+    get "/admin/prestation/:id", TarifController, :edit
+    put "/admin/prestation_up/:id", TarifController, :update
+
+    get "/admin/nonprestation/:id", NontarifController, :edit
+    put "/admin/nonprestation_up/:id", NontarifController, :update
+
+    get "/admin/video/ajout", VideosController, :ajout
+    post "/admin/video/create", VideosController, :create
+    post "/admin/video/update-checkboxes", VideosController, :principal
+    get "/admin/video_del/:id", VideosController, :supprimer
+    get "/admin/video_edit/:id", VideosController, :edit
+    put "/admin/video_update/:id", VideosController, :update
   end
 
   scope "/", MotoTourWeb do

@@ -1,0 +1,38 @@
+<div class="container my-2 mt-5">
+<br>
+  <p class="lead">
+    Pour réserver un circuit ou pour toute demande d’information, n’hésitez pas à nous contacter, notre équipe se fera un plaisir de vous répondre le plus rapidement possible.
+    Vous pouvez nous contacter par mail en remplissant ce formulaire ou en nous téléphonant à un des numéros indiqués sur cette page. Veuillez remplir ce formulaire en complétant tous les champs requis. Nous vous contacterons dès que possible.
+  </p>
+
+  <%= form_for @changeset, Routes.questions_path(@conn, :create), fn f -> %>
+    <div class="row mb-3">
+      <div class="col-12">
+        <%= text_input f, :nom, class: "form-control", placeholder: "nom" %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <%= email_input f, :email, class: "form-control", placeholder: "email" %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <%= text_input f, :telephone, class: "form-control", placeholder: "téléphone" %>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-12">
+        <%= textarea f, :message, class: "form-control", placeholder: "message", rows: 6 %>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <%= submit "Envoyer un message", class: "btn" %>
+    </div>
+
+  <% end %>
+</div>

@@ -3,10 +3,10 @@ import Config
 # Configure your database
 config :moto_tour, MotoTour.Repo,
   username: "postgres",
-  password: "pgadmin",
+  password: "MGbi@262**",
   hostname: "localhost",
   database: "moto_tour_dev",
-  port: 5432,
+  port: 5433,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -20,7 +20,7 @@ config :moto_tour, MotoTour.Repo,
 config :moto_tour, MotoTourWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4004],
+  http: [ip: {0, 0, 0, 0}, port: 4003],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,

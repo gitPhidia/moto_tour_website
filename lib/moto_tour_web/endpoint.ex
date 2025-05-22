@@ -19,7 +19,7 @@ defmodule MotoTourWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :moto_tour,
-    gzip: false,
+    gzip: true,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -47,4 +47,15 @@ defmodule MotoTourWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug MotoTourWeb.Router
+
+  plug Plug.Compression, level: 6
+  plug Plug.Compression, content_types: ["text/html", "text/css", "application/javascript", "text/plain", "application/json"]
+
+  plug Plug.Static,
+  at: "/",
+  from: :moto_tour,
+  gzip: true,
+  headers: %{"cache-control" => "public, max-age=31536000"}, # 1 an
+  cache_control_for_etags: "public, max-age=31536000"
+
 end

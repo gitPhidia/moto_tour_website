@@ -1,0 +1,94 @@
+
+  <div class="container">
+    <h5>Liste des Photos du circuit <%= @id.circuit_nom %></h5>
+
+    <span><%= link "Nouvelle photo", to: Routes.photo_path(@conn, :new, @id.idcircuit) %></span>
+
+    <table class="table table-sm" style="border: 1px solid">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%= for photo <- @photos do %>
+        <tr>
+          <td style="width: 20rem"><img src={ Routes.static_path(@conn, "/assets/images/section/circuit_image/"<> photo.photo) } class="img-fluid rounded w-100" style="height:30rem;"></td>
+          <td style="width: 10rem">
+            <div>
+            <span>
+            <%= link "Supprimer", to: Routes.photo_path(@conn, :delete, photo.id), method: :delete, data: [confirm: "vous êtes sûr?"], style: "padding: 20px;" %></span>
+              <label for={"scale_#{photo.id}"}><input type="checkbox" 
+                id={"scale_#{photo.id}"} 
+                name="scales" 
+                class="scale-checkbox" 
+                data-id-circuit={photo.idcircuit}
+                checked={photo.principal}
+                onclick="toggleCheckboxes(this); updateCheckboxValues();" />
+              Principal</label>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <script>
+      function toggleCheckboxes(clickedCheckbox) {
+      // Sélectionner tous les checkboxes avec la classe "scale-checkbox"
+      const checkboxes = document.querySelectorAll('.scale-checkbox');
+      checkboxes.forEach(checkbox => {
+        // Désactiver tous les autres checkboxes
+        if (checkbox !== clickedCheckbox) {
+          checkbox.checked = false;
+        }
+      });
+    }
+
+    function getCsrfToken() {
+      // Récupérer le token CSRF du meta tag
+      const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+      return csrfToken;
+    }
+
+    function updateCheckboxValues() {
+      // Identifier la checkbox cliquée
+      const clickedCheckbox = document.querySelector('.scale-checkbox:checked'); // Seule la checkbox cochée sera envoyée
+
+      if (!clickedCheckbox) return; // Si aucune checkbox n'est cochée, ne rien faire
+
+      // Extraire les données de la checkbox sélectionnée
+      const data = [{
+        id: clickedCheckbox.id.split('_')[1], // Extraire l'ID dynamique (après "scale_")
+        idcircuit: clickedCheckbox.getAttribute('data-id-circuit'), // Récupérer l'id_circuit
+        principal: clickedCheckbox.checked // Statut du checkbox
+      }];
+
+      // Envoyer les données au serveur via AJAX
+      fetch('/admin/update-checkboxes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-csrf-token': getCsrfToken() // Assurez-vous d'inclure le jeton CSRF
+        },
+        body: JSON.stringify({ checkboxes: data }) // Inclure les données collectées
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors de la mise à jour des données');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Mise à jour réussie :', data);
+        alert('Les données ont été mises à jour avec succès');
+      })
+      .catch(error => {
+        console.error('Erreur AJAX :', error);
+        alert('Une erreur est survenue lors de la mise à jour.');
+      });
+    }
+
+    </script>
+  </div>

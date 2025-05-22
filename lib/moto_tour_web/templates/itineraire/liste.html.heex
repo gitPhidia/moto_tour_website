@@ -1,0 +1,35 @@
+<div class="mt-2">
+<h5> Liste des étapes dans le circuit <%= @circuit.nom %> </h5><a href={Routes.live_path(@conn, MotoTourWeb.AjoutLive, @circuit.id)}><button style="padding: 5px 10px; background-color: #0d6efd; color: white; border: none; border-radius: 5px;"><i class="fa fa-plus"></i> ajouter</button></a>
+    <div id='accordion'>
+    <%= for i <- @itineraire do %>
+        <div class='card'>
+          <div class='card-header' id='headingOne'>
+              <div class='row'>
+                <div class='col-md-9'>
+                  <a data-toggle='collapse' data-target={"#collapse#{i.id}"} aria-expanded='true' aria-controls={"collapse#{i.id}"}>
+                    <h6 class='mb-0'>
+                      jour <%= i.numero %> : <%= i.depart %> - <%= i.arriver %> : <%= i.distance %>
+                    </h6>
+                  </a>
+                </div>
+                <div class='col-md-2 mt-1'>
+                  <a data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier l'itineraire" href={Routes.live_path(@conn, MotoTourWeb.EditLive, i.id)}><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                  <span><button><%= link "Supprimer", to: Routes.itineraire_path(@conn, :delete, i.id), method: :delete, data: [confirm: "vous êtes sûr?"] %></button></span>
+                </div>
+                <div class='col-md-1 mt-1'>
+                  <a data-toggle='collapse' data-target={"#collapse#{i.id}"} aria-expanded='true' aria-controls={"collapse#{i.id}"}>
+                    <i class='fa fa-angle-down' aria-hidden='true'></i>
+                  </a>
+                </div>
+              </div>
+
+            <div id={"collapse#{i.id}"} class='collapse' aria-labelledby={"heading#{i.id}"} data-parent='#accordion'>
+              <div class='card-body'>
+                <%= i.remarque %>
+              </div>
+            </div>
+          </div>
+        </div>
+    <%= end %>
+    </div>
+</div>

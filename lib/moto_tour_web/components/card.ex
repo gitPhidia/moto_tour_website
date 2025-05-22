@@ -1,56 +1,58 @@
 defmodule MotoTourWeb.Card do
   use Phoenix.Component
 
-
-
   def card(assigns) do
   ~H"""
-    <div class="card h-100" style="background-color: #F6F4F4;">
-      <!-- Image Section -->
-      <img src={ @image } class="card-img-top img-fluid" alt="Image du produit Produit 1">
-
-      <!-- Orange Bar Section (Title) -->
-      <div class="card-title-bar text-center py-2" style="background-color: orange; color: white;">
-        <h5 class="card-title m-0" style="font-size: 1.25rem;"><a href={@link}><%= render_slot(@nom_block) %></a></h5>
-      </div>
-
-      <!-- Card Body -->
-      <div class="card-body text-left mt-0">
-        <div class="row mb-3"> <!-- Row pour la description et le ranking -->
-          <!-- Description Column -->
-          <div class="col-12 col-sm-6">
-            <p class="card-text mb-0" style="font-size: 0.9rem; line-height: 1.4;">
-               <%= render_slot(@description_block) %>
-            </p>
-          </div>
-
-          <!-- Star Ranking Column -->
-          <div class="col-12 col-sm-6 d-flex justify-content-end" style="height:6rem">
-            <.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/>
+    <a href={@link}>
+      <div class="card h-100 w-100 blog-entry" style="background-color: #F6F4F4;">
+        <!-- Image Section -->
+        <div class="d-flex align-items-start card-img-top img-fluid"  style={"background-image: url(" <>  @image <> "); background-size: cover; background-position: center; background-repeat: no-repeat; color: #333;"}>
+          <div class="meta-date text-center p-2" style="background-color: orange;">
+            <span class="mos">Durée</span>
+            <span class="day"><%= first_two_char(@duree) %></span>
+            <span class="yr">jours</span>
           </div>
         </div>
+        <!-- <img src={ @image } class="card-img-top img-fluid" alt="Image des circuits"> -->
 
-        <!-- Row pour le prix et le bouton Réserver -->
-        <div class="row mb-2">
-          <div class="col-6 d-flex align-items-center">
-            <.display_price price={@price} />
-          </div>
-          <div class="col-6 d-flex justify-content-end">
-            <a href={@link} class="btn btn-success btn-sm" style="font-size: 0.9rem; padding: 6px 12px; border-radius: 0; outline: none; border: none;">
-              Réserver
-            </a>
-          </div>
+        <!-- Orange Bar Section (Title) -->
+        <div class="card-title-bar text-center py-1" style="color: #fff;">
+          <h3 class="card-title m-0" style="font-size: 1.25rem;font-weight: normal;"><.display_rating rate_count={@rate_count} max_rating_count={@max_rate_count}/></h3>
         </div>
 
+          <!-- Card Body -->
+          <div class="card-body text-left mt-0">
+            <!-- Star Ranking Column -->
+            <div class="col-lg-12 col-sm-12 d-flex justify-content-center">
+              <h5><strong><%= render_slot(@nom_block) %></strong></h5>
+            </div>
+              <!-- Description Column -->
+              <div class="col-lg-12 col-sm-6">
+                <p class="card-text mb-0 d-flex justify-content-center text-center align-items-center" style="font-size: 0.9rem; line-height: 1.4;height: 5rem;">
+                  <%= render_slot(@description_block) %>
+                </p>
+              </div>
+
+            <!-- Row pour le prix et le bouton Réserver -->
+            <div class="row">
+              <div class="col-lg-12 d-flex text-align-center align-items-center">
+                <.display_price price={@price} />
+              </div>
+            </div>
+
+          </div>
       </div>
-    </div>
+    </a>
   """
 end
 
+  defp first_two_char(str) do
+    String.slice(str, 0, 2)
+  end
 
   defp display_price(assigns)  do
     ~H"""
-        <p class="card-price mb-0 test" style="font-size: 1.1rem; font-weight: bold;">
+        <p class="card-price mb-0 test d-flex text-align-end align-items-end" style="font-size: 1.7rem; font-weight: bold;margin-left:30%;">
           <%= @price %>,00 €
         </p>
     """
@@ -61,21 +63,18 @@ end
       <div class="star-rating" style="font-size: 1.5rem; color: gold;">
         <!-- Calculer le nombre d'étoiles pleines à afficher (ne jamais dépasser max_rating_count) -->
         <%= for _ <- 1..min(@rate_count, @max_rating_count) do %>
-          ★
+          <img src="/assets/images/section/circuit_image/chilli-pepper-icon.svg" alt="Difficulté circuits" style="width: 24px; height: 30px;">
         <% end %>
 
         <!-- Affichage des étoiles vides pour compléter jusqu'à max_rating_count -->
         <!-- il faut s'assurer que rate_count ne depasse pas max_rate_count !-->
         <%= if(@rate_count < @max_rating_count) do %>
           <%= for _ <- (min(@rate_count, @max_rating_count) + 1)..@max_rating_count do %>
-            ☆
+          <img src="/assets/images/section/circuit_image/chili-vegetable-icon.svg" alt="Difficulté circuits" style="width: 24px; height: 30px; opacity: 0.3;">
           <% end %>
         <% end %>
       </div>
     """
   end
-
-
-
 
 end
